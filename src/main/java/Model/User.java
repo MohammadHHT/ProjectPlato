@@ -26,6 +26,10 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public void daysGone() {
+        //TODO
+    }
+
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
