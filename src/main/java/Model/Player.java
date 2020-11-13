@@ -23,4 +23,52 @@ public class Player extends User {
         this.friends = new ArrayList<Player>();
         this.friendRequest = new ArrayList<Player>();
     }
+
+    public void addNewPlayer(Player player) {
+        //TODO
+    }
+
+    public void addNewFriend(Player player) {
+        //TODO
+    }
+
+    public void setFriendRequest(ArrayList<Player> friendRequest) {
+        this.friendRequest = friendRequest;
+    }
+
+    public void setPlatoAge(Date platoAge) {
+        this.platoAge = platoAge;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
+    public void setScore(long score) {
+        this.score = score;
+    }
+
+    public Date getPlatoAge() {
+        return platoAge;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public long getScore() {
+        return score;
+    }
+
+    public static ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public ArrayList<Player> getFriends() {
+        return friends;
+    }
+
+    public ArrayList<Player> getFriendRequest() {
+        return friendRequest;
+    }
 }
