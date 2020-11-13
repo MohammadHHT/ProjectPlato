@@ -11,4 +11,37 @@ public class Game {
         games = new ArrayList<Game>();
     }
 
+    //TODO Constructor
+
+    public void run(){
+        //TODO
+    }
+
+    public void setScore(){
+        //TODO
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
+    }
+
+    public void setGameID(String gameID) {
+        this.gameID = gameID;
+    }
+
+    public static void setGames(ArrayList<Game> games) {
+        Game.games = games;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public String getGameID() {
+        return gameID;
+    }
+
+    public static ArrayList<Game> getGames() {
+        return games;
+    }
 }
