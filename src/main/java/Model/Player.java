@@ -37,6 +37,10 @@ public class Player extends User {
         //TODO
     }
 
+    public void addNewSuggestion(Suggestion suggestion) {
+        //TODO
+    }
+
     public void setFriendRequest(ArrayList<Player> friendRequest) {
         this.friendRequest = friendRequest;
     }
