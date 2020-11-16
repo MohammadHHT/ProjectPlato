@@ -26,4 +26,16 @@ public class PlayerController {
     public void addFriend(String name) {
         //TODO
     }
+
+    public void viewPlatoStatistics() {
+        //TODO
+    }
+
+    public void gameHistory() {
+        //TODO
+    }
+
+    public void gameStatistics(String gameName) {
+        //TODO
+    }
 }
