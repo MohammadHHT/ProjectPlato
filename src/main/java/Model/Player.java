@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Player extends User {
-    private Date platoAge;
+    private int platoAge;
     private double money;
     private long score;
     private static ArrayList<Player> players;
@@ -36,7 +36,7 @@ public class Player extends User {
         this.friendRequest = friendRequest;
     }
 
-    public void setPlatoAge(Date platoAge) {
+    public void setPlatoAge(int platoAge) {
         this.platoAge = platoAge;
     }
 
@@ -48,7 +48,7 @@ public class Player extends User {
         this.score = score;
     }
 
-    public Date getPlatoAge() {
+    public int getPlatoAge() {
         return platoAge;
     }
 
