@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Player extends User {
     private int platoAge;
@@ -11,7 +10,7 @@ public class Player extends User {
     private ArrayList<Player> friends;
     private ArrayList<Player> friendRequest;
     private ArrayList<Game> favoriteGames;
-    //TODO gamesLog
+    private GameLog gameLog;
 
     static {
         players = new ArrayList<Player>();
@@ -22,6 +21,7 @@ public class Player extends User {
         this.money = 0;
         this.score = 0;
         this.platoAge = 0;
+        this.gameLog = new GameLog();
         this.friends = new ArrayList<Player>();
         this.friendRequest = new ArrayList<Player>();
         this.favoriteGames = new ArrayList<Game>();
