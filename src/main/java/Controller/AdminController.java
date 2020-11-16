@@ -1,21 +1,8 @@
 package Controller;
 
-import Model.Admin;
 import Model.Event;
 
 public class AdminController {
-
-    public void createAccount(Admin admin) {
-        //TODO
-    }
-
-    public void logIn(String userName, String password) {
-        //TODO
-    }
-
-    public void logOut() {
-        //TODO
-    }
 
     public void addEvent(Event event) {
         //TODO
