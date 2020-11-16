@@ -15,12 +15,12 @@ public class Event {
         events = new ArrayList<Event>();
     }
 
-    public Event(Game gameName, Date startDate, Date endDate, long eventScore, long eventID) {
+    public Event(Game gameName, Date startDate, Date endDate, long eventScore) {
         this.gameName = gameName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.eventScore = eventScore;
-        this.eventID = eventID;
+        //EventID
     }
 
     public void addNewEvent(){
