@@ -10,6 +10,7 @@ public class Player extends User {
     private static ArrayList<Player> players;
     private ArrayList<Player> friends;
     private ArrayList<Player> friendRequest;
+    private ArrayList<Game> favoriteGames;
     //TODO gamesLog
 
     static {
@@ -23,6 +24,7 @@ public class Player extends User {
         this.platoAge = 0;
         this.friends = new ArrayList<Player>();
         this.friendRequest = new ArrayList<Player>();
+        this.favoriteGames = new ArrayList<Game>();
     }
 
     public void addNewPlayer(Player player) {
@@ -49,6 +51,10 @@ public class Player extends User {
         this.score = score;
     }
 
+    public void setFavoriteGames(ArrayList<Game> favoriteGames) {
+        this.favoriteGames = favoriteGames;
+    }
+
     public int getPlatoAge() {
         return platoAge;
     }
@@ -71,5 +77,9 @@ public class Player extends User {
 
     public ArrayList<Player> getFriendRequest() {
         return friendRequest;
+    }
+
+    public ArrayList<Game> getFavoriteGames() {
+        return favoriteGames;
     }
 }
