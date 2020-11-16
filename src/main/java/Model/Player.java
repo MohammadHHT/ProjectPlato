@@ -11,6 +11,7 @@ public class Player extends User {
     private ArrayList<Player> friendRequest;
     private ArrayList<Game> favoriteGames;
     private ArrayList<Suggestion> suggestions;
+    private ArrayList<Message> inbox;
     private GameLog gameLog;
 
     static {
@@ -27,6 +28,7 @@ public class Player extends User {
         this.friendRequest = new ArrayList<Player>();
         this.favoriteGames = new ArrayList<Game>();
         this.suggestions = new ArrayList<Suggestion>();
+        this.inbox = new ArrayList<Message>();
     }
 
     public void addNewPlayer(Player player) {
@@ -38,6 +40,10 @@ public class Player extends User {
     }
 
     public void addNewSuggestion(Suggestion suggestion) {
+        //TODO
+    }
+
+    public void addNewMessage(Message message) {
         //TODO
     }
 
