@@ -8,4 +8,12 @@ public class Suggestion {
         this.player = player;
         this.gameName = gameName;
     }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
 }
