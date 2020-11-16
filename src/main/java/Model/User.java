@@ -16,14 +16,14 @@ public class User {
         users = new ArrayList<User>();
     }
 
-    public User(String firstname, String lastname, String username, long userID, String password, String email, String phoneNumber) {
+    public User(String firstname, String lastname, String username, String password, String email, String phoneNumber) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
-        this.userID = userID;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        //userID
     }
 
     public void daysGone() {
