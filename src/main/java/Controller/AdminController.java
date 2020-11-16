@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Admin;
+import Model.Event;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 public class AdminController {
 
@@ -9,6 +11,26 @@ public class AdminController {
     }
 
     public void logIn(String userName, String password) {
+        //TODO
+    }
+
+    public void logOut() {
+        //TODO
+    }
+
+    public void addEvent(Event event) {
+        //TODO
+    }
+
+    public void viewEvent() {
+        //TODO
+    }
+
+    public void editEvent(String eventID, String field, String newValue) {
+        //TODO
+    }
+
+    public void removeEvent(String eventID) {
         //TODO
     }
 }
