@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Admin;
 import Model.Event;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 public class AdminController {
 
