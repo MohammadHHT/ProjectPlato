@@ -20,6 +20,7 @@ public class Player extends User {
         super(firstname, lastname, username, password, email, phoneNumber);
         this.money = 0;
         this.score = 0;
+        this.platoAge = 0;
         this.friends = new ArrayList<Player>();
         this.friendRequest = new ArrayList<Player>();
     }
