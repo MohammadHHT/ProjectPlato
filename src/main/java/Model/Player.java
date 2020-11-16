@@ -35,6 +35,8 @@ public class Player extends User {
         //TODO
     }
 
+    //TODO add process to accept or decline friend
+
     public void addNewFriend(Player player) {
         //TODO
     }
