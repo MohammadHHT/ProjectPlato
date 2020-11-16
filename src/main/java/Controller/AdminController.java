@@ -33,4 +33,16 @@ public class AdminController {
     public void removeEvent(String eventID) {
         //TODO
     }
+
+    public void addSuggestion(String userName, String gameName) {
+        //TODO
+    }
+
+    public void viewSuggestion() {
+        //TODO
+    }
+
+    public void removeSuggestion(String suggestionID) {
+        //TODO
+    }
 }
