@@ -45,4 +45,12 @@ public class AdminController {
     public void removeSuggestion(String suggestionID) {
         //TODO
     }
+
+    public void viewUsers() {
+        //TODO
+    }
+
+    public void viewUserProfile(String userName) {
+        //TODO
+    }
 }
