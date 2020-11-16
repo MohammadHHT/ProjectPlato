@@ -16,8 +16,8 @@ public class Player extends User {
         players = new ArrayList<Player>();
     }
 
-    public Player(String firstname, String lastname, String username, long userID, String password, String email, String phoneNumber) {
-        super(firstname, lastname, username, userID, password, email, phoneNumber);
+    public Player(String firstname, String lastname, String username, String password, String email, String phoneNumber) {
+        super(firstname, lastname, username, password, email, phoneNumber);
         this.money = 0;
         this.score = 0;
         this.friends = new ArrayList<Player>();
