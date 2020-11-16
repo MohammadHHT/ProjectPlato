@@ -41,6 +41,10 @@ public class Player extends User {
         //TODO
     }
 
+    public void removeFriend(Player player) {
+        //TODO
+    }
+
     public void addNewSuggestion(Suggestion suggestion) {
         //TODO
     }
