@@ -16,10 +16,7 @@ public class Suggestion {
         this.player = player;
         this.gameName = gameName;
         //suggestionID
-    }
-
-    public void addNewSuggestion(Suggestion suggestion) {
-        //TODO
+        allSuggestion.add(this);
     }
 
     public static ArrayList<Suggestion> getAllSuggestion() {

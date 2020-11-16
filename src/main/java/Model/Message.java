@@ -18,10 +18,7 @@ public class Message {
         this.message = message;
         //LocalDateTime
         //massageID
-    }
-
-    public void addNewMessage(Message message) {
-        //TODO
+        allMessages.add(this);
     }
 
     public static ArrayList<Message> getAllMessages() {
