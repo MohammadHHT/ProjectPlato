@@ -38,4 +38,28 @@ public class PlayerController {
     public void gameStatistics(String gameName) {
         //TODO
     }
+
+    public void showFriends() {
+        //TODO
+    }
+
+    public void removeFriend(String userName) {
+        //TODO
+    }
+
+    public void viewUserProfile(String userName) {
+        //TODO
+    }
+
+    public void showFriendRequests() {
+        //TODO
+    }
+
+    public void acceptRequests(String userName) {
+        //TODO
+    }
+
+    public void declineRequests(String userName) {
+        //TODO
+    }
 }
