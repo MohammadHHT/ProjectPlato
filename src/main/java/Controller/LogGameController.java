@@ -1,11 +1,15 @@
 package Controller;
 
-public class LogController {
+public class LogGameController {
 
     public void showScoreboard() {
         //TODO
     }
-    
+
+    public void details() {
+        //TODO
+    }
+
     public int showNumOfWins() {
         //TODO
     }
