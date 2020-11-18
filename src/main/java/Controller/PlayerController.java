@@ -6,35 +6,35 @@ import Model.User;
 
 public class PlayerController {
 
-    public void showPoints() {
+    public void showPoints(User user) {
         //TODO
     }
 
-    public void viewFavoriteGames() {
+    public void viewFavoriteGames(User user) {
         //TODO
     }
 
-    public void viewPlatoMessages() {
+    public void viewPlatoMessages(User user) {
         //TODO
     }
 
-    public void viewLastPlayed() {
+    public void viewLastPlayed(User user) {
         //TODO
     }
 
-    public void viewAdminSuggestions() {
+    public void viewAdminSuggestions(User user) {
         //TODO
     }
 
-    public void addFriend(String name) {
+    public void addFriend(User user, String name) {
         //TODO
     }
 
-    public void viewPlatoStatistics() {
+    public void viewPlatoStatistics(User user) {
         //TODO
     }
 
-    public void gameHistory() {
+    public void gameHistory(User user) {
         //TODO
     }
 
