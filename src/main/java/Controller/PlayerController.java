@@ -62,12 +62,4 @@ public class PlayerController {
     public void declineRequests(String userName) {
         //TODO
     }
-
-    public void showScoreboard() {
-        //TODO
-    }
-
-    public void details() {
-        //TODO
-    }
 }
