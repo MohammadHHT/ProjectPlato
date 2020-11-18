@@ -25,4 +25,12 @@ public class GameController {
     public void addToFavorites() {
         //TODO
     }
+
+    public void runGame() {
+        //TODO
+    }
+
+    public void showPoints() {
+        //TODO
+    }
 }
