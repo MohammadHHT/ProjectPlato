@@ -17,4 +17,12 @@ public class GameController {
     public int showWinsCount() {
         //TODO
     }
+
+    public int showPlayedCount() {
+        //TODO
+    }
+
+    public void addToFavorites() {
+        //TODO
+    }
 }
