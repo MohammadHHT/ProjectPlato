@@ -1,6 +1,7 @@
 package Controller;
 
 
+import Model.Player;
 import Model.User;
 
 public class PlayerController {
@@ -37,19 +38,19 @@ public class PlayerController {
         //TODO
     }
 
-    public void gameStatistics(String gameName) {
+    public void gameStatistics(User user, String gameName) {
         //TODO
     }
 
-    public void showFriends() {
+    public void showFriends(User user) {
         //TODO
     }
 
-    public void removeFriend(String userName) {
+    public void removeFriend(User user, String userName) {
         //TODO
     }
 
-    public void viewUserProfile(String userName) {
+    public void viewUserProfile(User user, String userName) {
         //TODO
     }
 
