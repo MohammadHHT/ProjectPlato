@@ -1,6 +1,8 @@
 package Controller;
 
 
+import Model.User;
+
 public class PlayerController {
 
     public void showPoints() {
@@ -51,15 +53,15 @@ public class PlayerController {
         //TODO
     }
 
-    public void showFriendRequests() {
+    public void showFriendRequests(User user) {
         //TODO
     }
 
-    public void acceptRequests(String userName) {
+    public void acceptRequests(User user, String userName) {
         //TODO
     }
 
-    public void declineRequests(String userName) {
+    public void declineRequests(User user, String userName) {
         //TODO
     }
 }
