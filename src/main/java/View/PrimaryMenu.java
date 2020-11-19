@@ -27,5 +27,5 @@ public class PrimaryMenu extends Menu {
 
     public void showLastGame(User user) {}
 
-    public boolean addFriend(User user, String friend) { return true; }
+    public void addFriend(User user, String friend) {}
 }
