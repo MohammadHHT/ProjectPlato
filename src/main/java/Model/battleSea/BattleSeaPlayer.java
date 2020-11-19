@@ -11,5 +11,9 @@ public class BattleSeaPlayer {
         return true;
     }
 
+    public void plantBomb (int x, int y) {
+        //TODO
+    }
+
 
 }
