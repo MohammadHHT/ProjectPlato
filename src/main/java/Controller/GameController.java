@@ -15,10 +15,12 @@ public class GameController {
     }
 
     public int showWinsCount() {
+        return 0;
         //TODO
     }
 
     public int showPlayedCount() {
+        return 0;
         //TODO
     }
 
