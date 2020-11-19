@@ -11,6 +11,18 @@ public class Bomb {
         this.isDestroyed = isDestroyed;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public boolean isDestroyed() {
+        return isDestroyed;
+    }
+
     public Bomb plantBomb(int x, int y, BattleSeaPlayer planter) {
         return null;
     }
@@ -18,6 +30,4 @@ public class Bomb {
     public boolean isDestroyed (BattleSeaPlayer planter) {
         return true;
     }
-
-
 }
