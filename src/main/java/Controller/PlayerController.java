@@ -1,7 +1,5 @@
 package Controller;
 
-
-import Model.Player;
 import Model.User;
 
 public class PlayerController {
