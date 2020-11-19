@@ -19,16 +19,13 @@ public class AccountMenu extends Menu {
     public void viewInfo(User user) {
     }
 
-    public boolean changePassword(User user, String before, String after) {
-        return true;
+    public void changePassword(User user, String before, String after) {
     }
 
-    public boolean editField(User user, String field, String content) {
-        return true;
+    public void editField(User user, String field, String content) {
     }
 
-    public boolean editField(User user, Image avatar) {
-        return true;
+    public void editField(User user, Image avatar) {
     }
 
     public void getStatistic(User user) {
