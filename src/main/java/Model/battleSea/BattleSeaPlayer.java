@@ -19,5 +19,15 @@ public class BattleSeaPlayer {
         return null;
     }
 
+    public ArrayList<Bomb> getBombsPlanted() {
+        return bombsPlanted;
+    }
 
+    public int[][] getPlayerBoard() {
+        return null;
+    }
+
+    public int[][] getCompetitorBoard() {
+        return null;
+    }
 }
