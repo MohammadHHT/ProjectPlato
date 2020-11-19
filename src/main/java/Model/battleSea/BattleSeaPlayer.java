@@ -15,5 +15,9 @@ public class BattleSeaPlayer {
         //TODO
     }
 
+    public Bomb getBomb (int x, int y) {
+        return null;
+    }
+
 
 }
