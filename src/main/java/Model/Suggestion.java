@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 public class Suggestion {
-    private long suggestionID;
+    private String suggestionID;
     private String playerID;
     private String gameName;
     private static ArrayList<Suggestion> allSuggestion;
@@ -23,8 +23,8 @@ public class Suggestion {
         return allSuggestion;
     }
 
-    public long getSuggestionID() {
-        return suggestionID;
+    public String getSuggestionID() {
+        return null;
     }
 
     public String getGameName() {

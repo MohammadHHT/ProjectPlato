@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 public class Message {
-    private long massageID;
+    private String massageID;
     private String playerID;
     private String message;
     // can not import LocalDateTime!!
@@ -33,7 +33,7 @@ public class Message {
         return message;
     }
 
-    public long getMassageID() {
-        return massageID;
+    public String getMassageID() {
+        return null;
     }
 }

@@ -8,7 +8,7 @@ public class Event {
     private Date startDate;
     private Date endDate;
     private long eventScore;
-    private long eventID;
+    private String eventID;
     private static ArrayList<Event> events;
 
     static {
@@ -47,7 +47,7 @@ public class Event {
         this.eventScore = eventScore;
     }
 
-    public void setEventID(long eventID) {
+    public void setEventID(String eventID) {
         this.eventID = eventID;
     }
 
@@ -71,8 +71,8 @@ public class Event {
         return eventScore;
     }
 
-    public long getEventID() {
-        return eventID;
+    public String getEventID() {
+        return null;
     }
 
     public static ArrayList<Event> getEvents() {
