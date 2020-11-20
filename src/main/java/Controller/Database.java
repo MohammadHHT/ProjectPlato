@@ -50,4 +50,44 @@ public class Database {
     public static void addAllAccounts(GameLog gameLog) {
         allGameLogs.add(gameLog);
     }
+
+    public static User getUserByUsername(String username) {
+        for (User user : allUsers) {
+            if (user.getUsername().equals(username))
+                return user;
+        }
+        return null;
+    }
+
+    public static Game getGameByGameID(String gameID) {
+        for (Game game : allGames) {
+            if (game.getGameID().equals(gameID))
+                return game;
+        }
+        return null;
+    }
+
+    public static Suggestion getSuggestionBySuggestionID(String suggestionID) {
+        for (Suggestion suggestion : allSuggestions) {
+            if (suggestion.getSuggestionID().equals(suggestionID))
+                return suggestion;
+        }
+        return null;
+    }
+
+    public static Message getMessageByMessageID(String messageID) {
+        for (Message message : allMessages) {
+            if (message.getMessage().equals(messageID))
+                return message;
+        }
+        return null;
+    }
+
+    public static GameLog getGameLogByGameLogID(String gameLogID) {
+        for (GameLog gameLog : allGameLogs) {
+            if (gameLog.getLogID().equals(gameLog))
+                return gameLog;
+        }
+        return null;
+    }
 }
