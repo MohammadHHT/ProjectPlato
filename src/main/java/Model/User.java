@@ -6,7 +6,7 @@ public class User {
     private String firstname;
     private String lastname;
     private String username;
-    private long userID;
+    private String userID;
     private String password;
     private String email;
     private String phoneNumber;
@@ -66,8 +66,8 @@ public class User {
         return username;
     }
 
-    public long getUserID() {
-        return userID;
+    public String getUserID() {
+        return null;
     }
 
     public String getPassword() {
