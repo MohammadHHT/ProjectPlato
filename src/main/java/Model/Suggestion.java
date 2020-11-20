@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Suggestion {
     private long suggestionID;
-    private Player player;
+    private String playerID;
     private String gameName;
     private static ArrayList<Suggestion> allSuggestion;
 
@@ -12,8 +12,8 @@ public class Suggestion {
         allSuggestion = new ArrayList<Suggestion>();
     }
 
-    public Suggestion(Player player, String gameName) {
-        this.player = player;
+    public Suggestion(String playerID, String gameName) {
+        this.playerID = playerID;
         this.gameName = gameName;
         //suggestionID
         allSuggestion.add(this);
@@ -31,7 +31,7 @@ public class Suggestion {
         return gameName;
     }
 
-    public Player getPlayer() {
-        return player;
+    public String getPlayerID() {
+        return null;
     }
 }
