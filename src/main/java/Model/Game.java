@@ -13,7 +13,7 @@ public class Game {
 
     public Game(String gameName, String gameID) {
         this.gameName = gameName;
-        this.gameID = gameID;
+        //gameID
     }
 
     public void run(){
