@@ -2,35 +2,39 @@ package Controller;
 
 public class GameController {
 
-    public void showScoreboard() {
+    public void showScoreboard(String gameName) {
         //TODO
     }
 
-    public void details() {
+    public void details(String gameName) {
         //TODO
     }
 
-    public void showLog() {
+    public void showLog(String gameName) {
         //TODO
     }
 
-    public int showWinsCount() {
+    public int showWinsCount(String gameName) {
+        return 0;
         //TODO
     }
 
-    public int showPlayedCount() {
+    public int showPlayedCount(String gameName) {
+        return 0;
         //TODO
     }
 
-    public void addToFavorites() {
+    public String  addToFavorites(String gameName) {
+        return ";)";
         //TODO
     }
 
-    public void runGame() {
+    public void runGame(String gameName) {
         //TODO
     }
 
-    public void showPoints() {
+    public long showPoints(String gameName) {
+        return 0;
         //TODO
     }
 }

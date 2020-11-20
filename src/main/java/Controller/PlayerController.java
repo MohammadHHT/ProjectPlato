@@ -1,66 +1,69 @@
 package Controller;
 
-import Model.User;
-
 public class PlayerController {
 
-    public void showPoints(User user) {
+    public long showPoints(String gameName) {
+        return 0;
         //TODO
     }
 
-    public void viewFavoriteGames(User user) {
+    public void viewFavoriteGames(String userName) {
         //TODO
     }
 
-    public void viewPlatoMessages(User user) {
+    public void viewPlatoMessages(String userName) {
         //TODO
     }
 
-    public void viewLastPlayed(User user) {
+    public void viewLastPlayed(String userName) {
         //TODO
     }
 
-    public void viewAdminSuggestions(User user) {
+    public void viewAdminSuggestions(String userName) {
         //TODO
     }
 
-    public void addFriend(User user, String name) {
+    public String addFriend(String userName, String name) {
+        return ";)";
         //TODO
     }
 
-    public void viewPlatoStatistics(User user) {
+    public void viewPlatoStatistics(String userName) {
         //TODO
     }
 
-    public void gameHistory(User user) {
+    public void gameHistory(String userName) {
         //TODO
     }
 
-    public void gameStatistics(User user, String gameName) {
+    public void gameStatistics(String userName, String gameName) {
         //TODO
     }
 
-    public void showFriends(User user) {
+    public void showFriends(String userName) {
         //TODO
     }
 
-    public void removeFriend(User user, String userName) {
+    public String removeFriend(String userName, String userNameOfApplicant) {
+        return ";)";
         //TODO
     }
 
-    public void viewUserProfile(User user, String userName) {
+    public void viewUserProfile(String userName, String userNameOfIntendedUser) {
         //TODO
     }
 
-    public void showFriendRequests(User user) {
+    public void showFriendRequests(String userName) {
         //TODO
     }
 
-    public void acceptRequests(User user, String userName) {
+    public String acceptRequests(String userName, String userNameOfApplicant) {
+        return ";)";
         //TODO
     }
 
-    public void declineRequests(User user, String userName) {
+    public String declineRequests(String userName, String userNameOfApplicant) {
+        return ";)";
         //TODO
     }
 }
