@@ -30,4 +30,12 @@ public class BattleSeaPlayer {
     public int[][] getCompetitorBoard() {
         return null;
     }
+
+    public void checkWinner() {
+        //TODO
+    }
+
+    public void resetGame() {
+        //TODO
+    }
 }
