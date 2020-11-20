@@ -11,7 +11,10 @@ public class Game {
         games = new ArrayList<Game>();
     }
 
-    //TODO Constructor
+    public Game(String gameName, String gameID) {
+        this.gameName = gameName;
+        this.gameID = gameID;
+    }
 
     public void run(){
         //TODO
