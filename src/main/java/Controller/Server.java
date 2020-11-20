@@ -9,19 +9,19 @@ public class Server {
         return server;
     }
 
-    public void recieve(String content) {
-
+    public void receive(String content) {
+        //TODO
     }
 
-    public void recieve(String type, String content) {
-
+    public void receive(String type, String content) {
+        //TODO
     }
 
     public void send(String content) {
-
+        //TODO
     }
 
     public void send(String type, String content) {
-
+        //TODO
     }
 }
