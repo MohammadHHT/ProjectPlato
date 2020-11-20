@@ -11,7 +11,18 @@ public class GameLog {
     private long takenScore;
     private static ArrayList<GameLog> gameLogs;
 
-    //TODO Constructor
+    static {
+        gameLogs = new ArrayList<GameLog>();
+    }
+
+    public GameLog() {
+        this.numberOfTimesPlayed = 0;
+        this.numberOfWins = 0;
+        this.numberOfDefeat = 0;
+        this.level = 0;
+        this.takenScore = 0;
+        //logID
+    }
 
     public void setNumberOfTimesPlayed(int numberOfTimesPlayed) {
         this.numberOfTimesPlayed = numberOfTimesPlayed;

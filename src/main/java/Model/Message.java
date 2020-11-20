@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Message {
     private long massageID;
-    private Player player;
+    private String playerID;
     private String message;
     // can not import LocalDateTime!!
     private static ArrayList<Message> allMessages;
@@ -13,8 +13,8 @@ public class Message {
         allMessages = new ArrayList<Message>();
     }
 
-    public Message(Player player, String message) {
-        this.player = player;
+    public Message(String playerID, String message) {
+        this.playerID = playerID;
         this.message = message;
         //LocalDateTime
         //massageID
@@ -25,8 +25,8 @@ public class Message {
         return allMessages;
     }
 
-    public Player getPlayer() {
-        return player;
+    public String getPlayerID() {
+        return null;
     }
 
     public String getMessage() {

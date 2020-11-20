@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Event {
-    private Game gameName;
+    private String gameName;
     private Date startDate;
     private Date endDate;
     private long eventScore;
@@ -15,7 +15,7 @@ public class Event {
         events = new ArrayList<Event>();
     }
 
-    public Event(Game gameName, Date startDate, Date endDate, long eventScore) {
+    public Event(String gameName, Date startDate, Date endDate, long eventScore) {
         this.gameName = gameName;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -31,7 +31,7 @@ public class Event {
         //TODO
     }
 
-    public void setGameName(Game gameName) {
+    public void setGameName(String gameName) {
         this.gameName = gameName;
     }
 
@@ -55,8 +55,8 @@ public class Event {
         Event.events = events;
     }
 
-    public Game getGameName() {
-        return gameName;
+    public String getGameName() {
+        return null;
     }
 
     public Date getStartDate() {
