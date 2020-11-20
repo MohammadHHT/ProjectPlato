@@ -85,7 +85,7 @@ public class Database {
 
     public static GameLog getGameLogByGameLogID(String gameLogID) {
         for (GameLog gameLog : allGameLogs) {
-            if (gameLog.getLogID().equals(gameLog))
+            if (gameLog.getLogID().equals(gameLogID))
                 return gameLog;
         }
         return null;
