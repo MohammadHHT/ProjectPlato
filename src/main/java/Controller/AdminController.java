@@ -1,10 +1,11 @@
 package Controller;
 
-import Model.Event;
+import java.util.Date;
 
 public class AdminController {
 
-    public void addEvent(Event event) {
+    public String addEvent(String gameName, Date startDate, Date endDate, long eventScore) {
+        return ";)";
         //TODO
     }
 
@@ -12,15 +13,18 @@ public class AdminController {
         //TODO
     }
 
-    public void editEvent(String eventID, String field, String newValue) {
+    public String editEvent(String eventID, String field, String newValue) {
+        return ";)";
         //TODO
     }
 
-    public void removeEvent(String eventID) {
+    public String removeEvent(String eventID) {
+        return ";)";
         //TODO
     }
 
-    public void addSuggestion(String userName, String gameName) {
+    public String addSuggestion(String userName, String gameName) {
+        return ";)";
         //TODO
     }
 
@@ -28,7 +32,8 @@ public class AdminController {
         //TODO
     }
 
-    public void removeSuggestion(String suggestionID) {
+    public String removeSuggestion(String suggestionID) {
+        return ";)";
         //TODO
     }
 
