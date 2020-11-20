@@ -1,13 +1,12 @@
 package View;
 
-import Model.User;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 abstract class Menu {
-    private static ArrayList<Menu> tree = new ArrayList<Menu>();
-    private static User user;
+    protected static ArrayList<Menu> tree = new ArrayList<>();
 
-    public static User getUser() { return user; }
+    protected static Scanner scanner = new Scanner(System.in);
 
-    void stepBack() {}
+    public abstract void run();
 }

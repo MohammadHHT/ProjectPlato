@@ -2,17 +2,10 @@ package View;
 
 import java.util.Date;
 
-public class BotMenu {
-    private static BotMenu botMenu;
+public class BotMenu extends Menu {
+    private static final BotMenu botMenu = new BotMenu();
 
     private BotMenu() {
-    }
-
-    public static BotMenu getInstance() {
-        if (botMenu == null) {
-            return new BotMenu();
-        }
-        return botMenu;
     }
 
     public void addEvent(String game, Date start, Date finish, int score) {}

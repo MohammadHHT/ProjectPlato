@@ -4,15 +4,12 @@ import Model.User;
 import javafx.scene.image.Image;
 
 public class AccountMenu extends Menu {
-    private static AccountMenu accountMenu;
+    private static final AccountMenu accountMenu = new AccountMenu();
 
     private AccountMenu() {
     }
 
-    public static AccountMenu getInstance() {
-        if (accountMenu == null) {
-            return new AccountMenu();
-        }
+    public static AccountMenu getAccountMenu() {
         return accountMenu;
     }
 

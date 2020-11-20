@@ -3,15 +3,12 @@ package View;
 import Model.User;
 
 public class PrimaryMenu extends Menu {
-    private static PrimaryMenu primaryMenu;
+    private static final PrimaryMenu primaryMenu = new PrimaryMenu();
 
     private PrimaryMenu() {
     }
 
-    public static PrimaryMenu getInstance() {
-        if (primaryMenu == null) {
-            return new PrimaryMenu();
-        }
+    public static PrimaryMenu getPrimaryMenu() {
         return primaryMenu;
     }
 
@@ -28,4 +25,9 @@ public class PrimaryMenu extends Menu {
     public void showLastGame(User user) {}
 
     public void addFriend(User user, String friend) {}
+
+    @Override
+    public void run() {
+
+    }
 }
