@@ -6,4 +6,8 @@ public class Board {
     private void drawBoard() {
         //TODO
     }
+
+    public void checkState() {
+        //TODO
+    }
 }

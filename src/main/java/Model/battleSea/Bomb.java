@@ -30,4 +30,8 @@ public class Bomb {
     public boolean isDestroyed (BattleSeaPlayer planter) {
         return true;
     }
+
+    public void checkState() {
+        //TODO
+    }
 }
