@@ -4,31 +4,25 @@ import Model.User;
 import javafx.scene.image.Image;
 
 public class AccountMenu extends Menu {
-    private static AccountMenu accountMenu;
+    private static final AccountMenu accountMenu = new AccountMenu();
 
     private AccountMenu() {
     }
 
-    public static AccountMenu getInstance() {
-        if (accountMenu == null) {
-            return new AccountMenu();
-        }
+    public static AccountMenu getAccountMenu() {
         return accountMenu;
     }
 
     public void viewInfo(User user) {
     }
 
-    public boolean changePassword(User user, String before, String after) {
-        return true;
+    public void changePassword(User user, String before, String after) {
     }
 
-    public boolean editField(User user, String field, String content) {
-        return true;
+    public void editField(User user, String field, String content) {
     }
 
-    public boolean editField(User user, Image avatar) {
-        return true;
+    public void editField(User user, Image avatar) {
     }
 
     public void getStatistic(User user) {

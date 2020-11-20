@@ -1,20 +1,24 @@
 package Controller;
 
-
 import Model.User;
 
 public class AccountManager {
+    private static final AccountManager accountManager = new AccountManager();
+
+    private AccountManager() {
+    }
+
     private User loggedInUser = null;
 
     public User getLoggedInUser() {
         return loggedInUser;
     }
 
-    public void register(String type, String firstName, String lastName, String userName, String password, String email, String phoneNumber) {
+    public void register(String firstName, String lastName, String username, String password, String email, String phone) {
         //TODO
     }
 
-    public void logIn(String userName, String password) {
+    public void logIn(String username, String password) {
         //TODO
     }
 
@@ -30,7 +34,7 @@ public class AccountManager {
         //TODO
     }
 
-    public void deleteAccount(String userName) {
+    public void deleteAccount(String username) {
         //TODO
     }
 }
