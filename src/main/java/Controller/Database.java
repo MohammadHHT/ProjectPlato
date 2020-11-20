@@ -31,5 +31,23 @@ public class Database {
         return allGameLogs;
     }
 
+    public static void addAllUsers(User user) {
+        allUsers.add(user);
+    }
 
+    public static void addAllGames(Game game) {
+        allGames.add(game);
+    }
+
+    public static void addAllSuggestions(Suggestion suggestion) {
+        allSuggestions.add(suggestion);
+    }
+
+    public static void addAllMessages(Message message) {
+        allMessages.add(message);
+    }
+
+    public static void addAllAccounts(GameLog gameLog) {
+        allGameLogs.add(gameLog);
+    }
 }
