@@ -19,7 +19,21 @@ public class AccountManager {
     }
 
     public void logIn(String username, String password) {
-        //TODO
+        if (loggedInUser != null) {
+            System.out.println("You have already logged in!");
+        } else {
+            User user = Database.getUserByUsername(username);
+            if (user == null) {
+                System.out.println("No user with this info!");
+            } else {
+                if (!user.getPassword().contains(password)) {
+                    System.out.println("Wrong password!");
+                } else {
+                    loggedInUser = user;
+                    System.out.println("Welcome " + user.getUsername());
+                }
+            }
+        }
     }
 
     public void logOut() {
