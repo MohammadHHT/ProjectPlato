@@ -50,7 +50,9 @@ public class AccountManager {
     }
 
     public void viewPersonalInfo() {
-        //TODO
+        User user = loggedInUser;
+        System.out.println(user.getFirstname() + " " + user.getLastname() + "\n"
+                + user.getUsername() + " " + user.getEmail() + " " + user.getPhoneNumber());
     }
 
     public void deleteAccount(String username) {
