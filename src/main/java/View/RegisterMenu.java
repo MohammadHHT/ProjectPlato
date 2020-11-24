@@ -32,9 +32,9 @@ public class RegisterMenu extends Menu {
                                             if (getEmail()) {
                                                 while (true) {
                                                     if (getPhone()) {
-                                                        Client.getClient().send("register", firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
+                                                        Client.getClient().send("register " + firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
                                                         if (Client.getClient().getResponse().equals("successfully registered")) {
-                                                            PrimaryMenu.getPrimaryMenu().run();
+                                                            next();
                                                         }
                                                         break Out;
                                                     }
@@ -52,7 +52,7 @@ public class RegisterMenu extends Menu {
     }
 
     private boolean getFirstName() {
-        System.out.print("firstname: >");
+        System.out.print("First Name: >");
         String tmp = scanner.nextLine().trim();
         if (tmp.matches("[a-zA-Z]+")) {
             firstName = tmp;
@@ -64,7 +64,7 @@ public class RegisterMenu extends Menu {
     }
 
     private boolean getLastName() {
-        System.out.print("lastname: >");
+        System.out.print("Last Name: >");
         String tmp = scanner.nextLine().trim();
         if (tmp.matches("[a-zA-Z]+")) {
             lastName = tmp;
@@ -76,7 +76,7 @@ public class RegisterMenu extends Menu {
     }
 
     private boolean getUsername() {
-        System.out.print("username: >");
+        System.out.print("Username: >");
         String tmp = scanner.nextLine().trim();
         if (tmp.matches("\\w+")) {
             if (tmp.length() >= 3) {
@@ -92,7 +92,7 @@ public class RegisterMenu extends Menu {
     }
 
     private boolean getPassword() {
-        System.out.print("password: >");
+        System.out.print("Password: >");
         String tmp = scanner.nextLine().trim();
         if (tmp.matches("\\w+")) {
             if (tmp.length() >= 6) {
@@ -108,7 +108,7 @@ public class RegisterMenu extends Menu {
     }
 
     private boolean getEmail() {
-        System.out.print("email: >");
+        System.out.print("Email: >");
         String tmp = scanner.nextLine().trim();
         if (tmp.matches("^\\w+@\\w+\\.(com|ir)$")) {
             email = tmp;
@@ -120,18 +120,24 @@ public class RegisterMenu extends Menu {
     }
 
     private boolean getPhone() {
-        System.out.print("phone: >");
+        System.out.print("Phone Number: >");
         String tmp = scanner.nextLine().trim();
         if (tmp.matches("\\+\\d+")) {
             if (tmp.length() == 13) {
                 phone = tmp;
                 return true;
             } else {
-                System.err.println("Phone must be exactly 12 digits");
+                System.err.println("Phone Number must be exactly 12 digits");
             }
         } else {
-            System.err.println("Phone number includes numbers only");
+            System.err.println("Phone Number includes numbers only");
         }
         return false;
+    }
+
+    @Override
+    public void next() {
+        pop();
+        PrimaryMenu.getPrimaryMenu().run();
     }
 }

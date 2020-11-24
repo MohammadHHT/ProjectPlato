@@ -3,6 +3,8 @@ package Controller;
 public class Server {
     private static final Server server = new Server();
 
+    private String response;
+
     private Server() {}
 
     public static Server getServer() {
@@ -13,15 +15,7 @@ public class Server {
         //TODO
     }
 
-    public void receive(String type, String content) {
-        //TODO
-    }
-
     public void send(String content) {
-        //TODO
-    }
-
-    public void send(String type, String content) {
         //TODO
     }
 }

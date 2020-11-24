@@ -1,4 +1,4 @@
-package Model.battleSea;
+package Model.BattleSea;
 
 import java.util.ArrayList;
 
