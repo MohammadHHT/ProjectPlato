@@ -37,7 +37,12 @@ public class AccountManager {
     }
 
     public void logOut() {
-        //TODO
+        if (loggedInUser == null) {
+            System.out.println("You haven't already logged in!");
+        } else {
+            loggedInUser = null;
+            System.out.println("You logged out successfully!");
+        }
     }
 
     public void editPersonalInfo(String field, String newValue) {
