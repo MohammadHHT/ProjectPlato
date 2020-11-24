@@ -55,7 +55,17 @@ public class AccountManager {
                 + user.getUsername() + " " + user.getEmail() + " " + user.getPhoneNumber());
     }
 
-    public void deleteAccount(String username) {
-        //TODO
+    public void deleteAccount(String username, String password) {
+        User user = Database.getUserByUsername(username);
+        if (user == null) {
+            System.out.println("No user with this info!");
+        } else {
+            if (!user.getPassword().contains(password)) {
+                System.out.println("Wrong password!");
+            } else {
+                Database.allUsers.remove(user);
+                System.out.println("Your account has removed successfully!");
+            }
+        }
     }
 }
