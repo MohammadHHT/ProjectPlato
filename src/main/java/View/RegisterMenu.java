@@ -32,7 +32,7 @@ public class RegisterMenu extends Menu {
                                             if (getEmail()) {
                                                 while (true) {
                                                     if (getPhone()) {
-                                                        Client.getClient().send("register " + firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
+                                                        Client.getClient().send("User register " + firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
                                                         if (Client.getClient().getResponse().equals("successfully registered")) {
                                                             next();
                                                         }

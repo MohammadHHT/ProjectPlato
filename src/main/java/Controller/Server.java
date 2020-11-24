@@ -1,9 +1,9 @@
 package Controller;
 
+import Controller.Command.Command;
+
 public class Server {
     private static final Server server = new Server();
-
-    private String response;
 
     private Server() {}
 
@@ -12,7 +12,7 @@ public class Server {
     }
 
     public void receive(String content) {
-        //TODO
+        Command.getCommand().resolveCommand(content.trim().split(" "));
     }
 
     public void send(String content) {
