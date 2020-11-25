@@ -86,6 +86,8 @@ public class AccountManager {
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
+            } else {
+                System.out.println("INVALID FIELD!");
             }
         }
     }
