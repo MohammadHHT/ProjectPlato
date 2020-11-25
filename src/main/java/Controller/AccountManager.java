@@ -46,7 +46,48 @@ public class AccountManager {
     }
 
     public void editPersonalInfo(String field, String newValue) {
-        //TODO
+        if (loggedInUser == null) {
+            System.out.println("First log in your account...");
+        } else {
+            User user = loggedInUser;
+            if (field.equalsIgnoreCase("first name")) {
+                try {
+                    user.setFirstname(newValue);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (field.equalsIgnoreCase("last name")) {
+                try {
+                    user.setLastname(newValue);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (field.equalsIgnoreCase("username")) {
+                try {
+                    user.setUsername(newValue);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (field.equalsIgnoreCase("email")) {
+                try {
+                    user.setEmail(newValue);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (field.equalsIgnoreCase("phone number")) {
+                try {
+                    user.setPhoneNumber(newValue);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (field.equalsIgnoreCase("password")) {
+                try {
+                    user.setPassword(newValue);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
     }
 
     public void viewPersonalInfo() {
