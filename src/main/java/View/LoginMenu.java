@@ -64,7 +64,6 @@ public class LoginMenu extends Menu {
     }
 
     public void next() {
-        pop();
         if (nextMenu == 1) {
             PrimaryMenu.getPrimaryMenu().run();
         } else {
