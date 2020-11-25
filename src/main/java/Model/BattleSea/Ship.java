@@ -1,4 +1,4 @@
-package Model.battleSea;
+package Model.BattleSea;
 
 public class Ship {
     private int width;

@@ -1,5 +1,7 @@
 package Controller;
 
+import Controller.Command.Command;
+
 public class Server {
     private static final Server server = new Server();
 
@@ -10,18 +12,10 @@ public class Server {
     }
 
     public void receive(String content) {
-        //TODO
-    }
-
-    public void receive(String type, String content) {
-        //TODO
+        Command.getCommand().resolveCommand(content.trim().split(" "));
     }
 
     public void send(String content) {
-        //TODO
-    }
-
-    public void send(String type, String content) {
         //TODO
     }
 }

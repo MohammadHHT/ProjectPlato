@@ -1,12 +1,21 @@
 package View;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 abstract class Menu {
-    protected static ArrayList<Menu> tree = new ArrayList<>();
-
+    private static Stack<Menu> menus = new Stack<>();
     protected static Scanner scanner = new Scanner(System.in);
 
+    protected void push(Menu menu) {
+        menus.push(menu);
+    }
+
+    protected void pop() {
+        menus.pop();
+    }
+
     public abstract void run();
+
+    public abstract void next();
 }

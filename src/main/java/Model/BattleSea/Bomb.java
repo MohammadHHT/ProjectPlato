@@ -1,4 +1,4 @@
-package Model.battleSea;
+package Model.BattleSea;
 
 public class Bomb {
     private int x;
