@@ -14,8 +14,17 @@ public class AccountManager {
         return loggedInUser;
     }
 
-    public void register(String firstName, String lastName, String username, String password, String email, String phone) {
-        //TODO
+    public void register(String firstName, String lastName, String username, String password, String email, String phoneNumber) {
+        boolean hasExitAdmin = false;
+        if (hasExitAdmin) {
+            System.out.println("There is no Admin!\\s" +
+                    "Make sure you have created an Admin account first.");
+            try {
+                Database.addAllUsers(new User(firstName, lastName, username, password, email, phoneNumber));
+            } catch (Exception e) {
+                //TODO
+            }
+        }
     }
 
     public void logIn(String username, String password) {
