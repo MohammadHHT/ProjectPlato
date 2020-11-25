@@ -21,7 +21,7 @@ public class Client {
         Server.getServer().receive(content);
     }
 
-    public void recieve(String content) {
+    public void receive(String content) {
 
     }
 }
