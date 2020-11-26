@@ -7,4 +7,8 @@ public class FileManager {
         //TODO
     }
 
+    public static void loadUsersFromFile(String place) {
+        //TODO
+    }
+
 }
