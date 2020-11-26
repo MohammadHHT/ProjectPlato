@@ -11,4 +11,8 @@ public class FileManager {
         //TODO
     }
 
+    public static void saveUsersOnFile() {
+        //TODO
+    }
+
 }
