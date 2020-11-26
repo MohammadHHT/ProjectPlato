@@ -51,6 +51,8 @@ public class FileManager {
                 admin.add(user);
             }
         }
+        saveArrayOnFile(admin, "Accounts\\Admin");
+        saveArrayOnFile(player, "Accounts\\Player");
     }
 
     private static void saveArrayOnFile(ArrayList<Object> array, String name) {
