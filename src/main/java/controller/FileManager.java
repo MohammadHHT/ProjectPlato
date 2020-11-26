@@ -22,7 +22,7 @@ public class FileManager {
 
     public static void loadUsersFromFile(String place) {
         Gson gson = new Gson();
-        File file = new File("Data\\Accounts\\"+place+".json");
+        File file = new File("resource\\Accounts\\"+place+".json");
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new FileReader(file));
@@ -57,7 +57,7 @@ public class FileManager {
     }
 
     private static void saveArrayOnFile(ArrayList<Object> array, String name) {
-        File file = new File("Data\\" + name + ".json");
+        File file = new File("resource\\" + name + ".json");
         file.getParentFile().mkdirs();
         FileWriter fileWriter = null;
         try {
