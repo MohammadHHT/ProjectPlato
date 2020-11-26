@@ -41,7 +41,15 @@ public class FileManager {
     }
 
     public static void saveUsersOnFile() {
-        //TODO
+        ArrayList<Object> admin = new ArrayList<Object>();
+        ArrayList<Object> player = new ArrayList<Object>();
+        for (User user: allUsers) {
+            if (user instanceof Player) {
+                player.add(user);
+            } else if (user instanceof Admin) {
+                admin.add(user);
+            }
+        }
     }
 
 
