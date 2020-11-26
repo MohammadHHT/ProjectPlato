@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -53,7 +54,18 @@ public class FileManager {
     }
 
     private static void saveArrayOnFile(ArrayList<Object> array, String name) {
-        //TODO
+        File file = new File("Data\\" + name + ".json");
+        file.getParentFile().mkdirs();
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(file);
+            Gson gson = new Gson();
+            String json = gson.toJson(array);
+            fileWriter.write(json);
+            fileWriter.flush();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
