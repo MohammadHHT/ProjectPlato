@@ -52,6 +52,10 @@ public class FileManager {
         }
     }
 
+    private static void saveArrayOnFile(ArrayList<Object> array, String name) {
+        //TODO
+    }
+
 
 
 }
