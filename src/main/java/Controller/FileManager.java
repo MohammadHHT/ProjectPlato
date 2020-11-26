@@ -16,7 +16,8 @@ import java.util.ArrayList;
 
 public class FileManager {
     public static void initialize(){
-        //TODO
+        loadUsersFromFile("Admin");
+        loadUsersFromFile("Player");
     }
 
     public static void loadUsersFromFile(String place) {
