@@ -1,5 +1,6 @@
 package controller;
 
+import exception.InvalidInputException;
 import model.User;
 
 public class AccountManager {
@@ -14,15 +15,15 @@ public class AccountManager {
         return loggedInUser;
     }
 
-    public void register(String firstName, String lastName, String username, String password, String email, String phoneNumber) {
-        boolean hasExitAdmin = false;
-        if (hasExitAdmin) {
-            System.out.println("There is no Admin!\\s" +
-                    "Make sure you have created an Admin account first.");
+    public void register(String firstName, String lastName, String username, String password, String email, String phoneNumber) throws InvalidInputException {
+        if (Database.getUserByUsername(username) != null) {
+            System.out.println("An account already exists with this username!");
+        } else {
             try {
                 Database.addAllUsers(new User(firstName, lastName, username, password, email, phoneNumber));
+                System.out.println("Account created successfully");
             } catch (Exception e) {
-                //TODO
+                throw new InvalidInputException();
             }
         }
     }
