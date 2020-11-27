@@ -1,6 +1,9 @@
 package controller;
 
 import exception.InvalidInputException;
+import exception.UsernameIsAlreadyTakenException;
+import model.Admin;
+import model.Player;
 import model.User;
 
 public class AccountManager {
@@ -15,12 +18,21 @@ public class AccountManager {
         return loggedInUser;
     }
 
-    public void register(String firstName, String lastName, String username, String password, String email, String phoneNumber) throws InvalidInputException {
+    public void register(String firstName, String lastName, String username, String password, String email, String phoneNumber) throws InvalidInputException, UsernameIsAlreadyTakenException {
+        int hasExistAdmin = 0;
+        if (hasExistAdmin > 0) {
+            System.out.println("Please create a admin account to start!");
+            try {
+                Database.addAllUsers(new Admin(firstName, lastName, username, password, email, phoneNumber));
+            } catch (Exception e) {
+                throw new InvalidInputException();
+            }
+        }
         if (Database.getUserByUsername(username) != null) {
-            System.out.println("An account already exists with this username!");
+            throw new UsernameIsAlreadyTakenException();
         } else {
             try {
-                Database.addAllUsers(new User(firstName, lastName, username, password, email, phoneNumber));
+                Database.addAllUsers(new Player(firstName, lastName, username, password, email, phoneNumber));
                 System.out.println("Account created successfully");
             } catch (Exception e) {
                 throw new InvalidInputException();
