@@ -64,7 +64,13 @@ public class PlayerController {
     }
 
     public void showFriends(String userName) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Player friend : player.getFriends()) {
+                    System.out.println(friend.getUsername());
+                }
+            }
+        }
     }
 
     public String removeFriend(String userName, String userNameOfApplicant) {
@@ -77,7 +83,14 @@ public class PlayerController {
     }
 
     public void showFriendRequests(String userName) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Player friendshipSeeker : player.getFriendRequest()) {
+                    System.out.println(friendshipSeeker.getUsername());
+                }
+                break;
+            }
+        }
     }
 
     public String acceptRequests(String userName, String userNameOfApplicant) {
