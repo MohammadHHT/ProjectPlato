@@ -9,7 +9,8 @@ import java.util.Date;
 
 public class AdminController {
 
-    public String addEvent(String gameName, Date startDate, Date endDate, long eventScore) throws InvalidGameNameException, InvalidDateException {
+    public String addEvent(String gameName, Date startDate, Date endDate, long eventScore) throws
+            InvalidGameNameException, InvalidDateException {
         for (Game allGame : Database.getAllGames()) {
             if (!allGame.getGameName().equals(gameName))
                 throw new InvalidGameNameException();
@@ -22,7 +23,14 @@ public class AdminController {
     }
 
     public void viewEvent() {
-        //TODO
+        for (Event allEvent : Database.getAllEvents()) {
+            if (allEvent.getStartDate().before(allEvent.getEndDate())) {
+                System.out.println("Game name: " + allEvent.getGameName() + "\n" +
+                        "Event ID: " + allEvent.getEventID() + "\n" +
+                        allEvent.getStartDate() + "to" + allEvent.getEndDate() + "\n" +
+                        "Score" + allEvent.getEventScore());
+            }
+        }
     }
 
     public String editEvent(String eventID, String field, String newValue) {
