@@ -103,4 +103,8 @@ public class Player extends User {
     public ArrayList<Message> getInbox() {
         return inbox;
     }
+
+    public ArrayList<Suggestion> getSuggestions() {
+        return suggestions;
+    }
 }

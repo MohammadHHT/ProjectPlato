@@ -1,9 +1,6 @@
 package controller;
 
-import model.Game;
-import model.Message;
-import model.Player;
-import model.User;
+import model.*;
 
 public class PlayerController {
 
@@ -39,7 +36,14 @@ public class PlayerController {
     }
 
     public void viewAdminSuggestions(String userName) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Suggestion suggestion : player.getSuggestions()) {
+                    System.out.println(suggestion.getGameName());
+                }
+                break;
+            }
+        }
     }
 
     public String addFriend(String userName, String name) {
