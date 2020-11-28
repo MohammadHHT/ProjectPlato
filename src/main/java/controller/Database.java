@@ -99,4 +99,12 @@ public class Database {
         }
         return null;
     }
+
+    public static Event getEventByEventID(String EventID) {
+        for (Event event : allEvents) {
+            if (event.getEventID().equals(EventID))
+                return event;
+        }
+        return null;
+    }
 }
