@@ -95,5 +95,8 @@ public class Database {
         FileManager.saveUsersOnFile();
     }
 
-
+    public static void initialize() {
+        allUsers = new ArrayList<>();
+        FileManager.initialize();
+    }
 }
