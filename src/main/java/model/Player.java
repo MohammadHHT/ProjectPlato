@@ -41,7 +41,7 @@ public class Player extends User {
     }
 
     public void removeFriend(Player player) {
-        //TODO
+        friends.remove(player);
     }
 
     public void addNewSuggestion(Suggestion suggestion) {

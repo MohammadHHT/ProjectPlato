@@ -73,9 +73,17 @@ public class PlayerController {
         }
     }
 
-    public String removeFriend(String userName, String userNameOfApplicant) {
-        return ";)";
-        //TODO
+    public void removeFriend(String userName, String userNameOfApplicant) {
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userNameOfApplicant)) {
+                for (Player friend : Player.getPlayers()) {
+                    if (friend.getUsername().equals(userName)) {
+                        player.removeFriend(friend);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public void viewUserProfile(String userName, String userNameOfIntendedUser) {
