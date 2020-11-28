@@ -98,5 +98,7 @@ public class Database {
     public static void initialize() {
         allUsers = new ArrayList<>();
         FileManager.initialize();
+
+        //TODO check Admin exist or not!
     }
 }
