@@ -1,6 +1,7 @@
 package controller;
 
 import model.Game;
+import model.Message;
 import model.Player;
 import model.User;
 
@@ -15,7 +16,7 @@ public class PlayerController {
         for (Player player : Player.getPlayers()) {
             if (player.getUsername().equals(userName)) {
                 for (Game favoriteGame : player.getFavoriteGames()) {
-                    System.out.println(favoriteGame);
+                    System.out.println(favoriteGame.getGameName());
                 }
                 break;
             }
@@ -23,7 +24,14 @@ public class PlayerController {
     }
 
     public void viewPlatoMessages(String userName) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Message inbox : player.getInbox()) {
+                    System.out.println(inbox.getMessage());
+                }
+                break;
+            }
+        }
     }
 
     public void viewLastPlayed(String userName) {

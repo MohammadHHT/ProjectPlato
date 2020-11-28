@@ -99,4 +99,8 @@ public class Player extends User {
     public ArrayList<Game> getFavoriteGames() {
         return favoriteGames;
     }
+
+    public ArrayList<Message> getInbox() {
+        return inbox;
+    }
 }
