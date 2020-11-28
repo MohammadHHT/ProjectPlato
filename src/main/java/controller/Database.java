@@ -90,4 +90,10 @@ public class Database {
         }
         return null;
     }
+
+    public static void writeDataOnFile() {
+        FileManager.saveUsersOnFile();
+    }
+
+
 }
