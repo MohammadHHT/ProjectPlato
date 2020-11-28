@@ -1,12 +1,13 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Event {
     private String gameName;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private long eventScore;
     private String eventID;
     private static ArrayList<Event> events;
@@ -15,7 +16,7 @@ public class Event {
         events = new ArrayList<Event>();
     }
 
-    public Event(String gameName, Date startDate, Date endDate, long eventScore) {
+    public Event(String gameName, LocalDate startDate, LocalDate endDate, long eventScore) {
         this.gameName = gameName;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -35,11 +36,11 @@ public class Event {
         this.gameName = gameName;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -59,11 +60,11 @@ public class Event {
         return null;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
