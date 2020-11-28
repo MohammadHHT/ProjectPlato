@@ -1,5 +1,9 @@
 package controller;
 
+import model.Game;
+import model.Player;
+import model.User;
+
 public class PlayerController {
 
     public long showPoints(String gameName) {
@@ -8,7 +12,14 @@ public class PlayerController {
     }
 
     public void viewFavoriteGames(String userName) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Game favoriteGame : player.getFavoriteGames()) {
+                    System.out.println(favoriteGame);
+                }
+                break;
+            }
+        }
     }
 
     public void viewPlatoMessages(String userName) {
