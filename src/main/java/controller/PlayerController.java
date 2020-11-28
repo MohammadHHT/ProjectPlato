@@ -87,7 +87,15 @@ public class PlayerController {
     }
 
     public void viewUserProfile(String userName, String userNameOfIntendedUser) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                System.out.println("Player name= " + player.getFirstname() + " " + player.getLastname());
+                System.out.println("Plato Age= " + player.getPlatoAge());
+                System.out.println("E-mail= " + player.getEmail());
+                System.out.println("Score= " + player.getScore());
+                //TODO show number of wins & lose
+            }
+        }
     }
 
     public void showFriendRequests(String userName) {
