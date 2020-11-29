@@ -122,9 +122,19 @@ public class PlayerController {
         }
     }
 
-    public String acceptRequests(String userName, String userNameOfApplicant) {
-        return ";)";
-        //TODO
+    public void acceptRequests(String userName, String friendUserName) {
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Player friend : Player.getPlayers()) {
+                    if (friend.getUsername().equals(friendUserName)) {
+                        friend.getFriendRequest().remove(player);
+                        friend.getFriends().add(player);
+                        player.getFriends().add(friend);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public String declineRequests(String userName, String userNameOfApplicant) {
