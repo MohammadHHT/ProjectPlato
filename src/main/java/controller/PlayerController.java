@@ -137,7 +137,7 @@ public class PlayerController {
         }
     }
 
-    public String declineRequests(String userName, String userNameOfApplicant) {
+    public void declineRequests(String userName, String userNameOfApplicant) {
         for (Player player : Player.getPlayers()) {
             if (player.getUsername().equals(userName)) {
                 for (Player friend : Player.getPlayers()) {
