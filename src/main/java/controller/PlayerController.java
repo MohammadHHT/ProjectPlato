@@ -55,9 +55,7 @@ public class PlayerController {
         for (Player player : Player.getPlayers()) {
             if (player.getUsername().equals(userName)) {
                 for (Player friend : player.getFriends()) {
-                    if (friend.getUsername().equals(friendUserName)) {
-                        throw new ThisUserIsAlreadyYourFriendException();
-                    } else {
+                    if (!(friend.getUsername().equals(friendUserName))) {
                         friend.getFriendRequest().add(player);
                         break;
                     }
