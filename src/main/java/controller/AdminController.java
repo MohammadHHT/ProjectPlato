@@ -1,10 +1,14 @@
 package controller;
 
+import exception.EventIDNotFoundException;
+import exception.GameNotFoundException;
 import exception.InvalidDateException;
 import exception.InvalidGameNameException;
 import model.Event;
 import model.Game;
 
+import javax.xml.crypto.Data;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class AdminController {
@@ -33,9 +37,35 @@ public class AdminController {
         }
     }
 
-    public String editEvent(String eventID, String field, String newValue) {
-        return ";)";
-        //TODO
+    public void editEvent(String eventID, String field, String newValue) throws GameNotFoundException,
+            InvalidDateException, EventIDNotFoundException {
+        Event event;
+        if ((event = Database.getEventByEventID(eventID)) != null) {
+            if (field.equalsIgnoreCase("Game name")){
+                for (Game game : Database.getAllGames()) {
+                    if (!game.getGameName().equals(newValue))
+                        throw new GameNotFoundException();
+                        event.setGameName(newValue);
+                        System.out.println("Successfully changed to a new value");
+                }
+            } else if (field.equalsIgnoreCase("Start data")) {
+                if (LocalDate.parse(newValue).isBefore(LocalDate.now()) ||
+                        LocalDate.parse(newValue).isAfter(event.getEndDate()) ||
+                        !newValue.matches("\\d{4}, \\d{2}, \\d{2}"))
+                        throw new InvalidDateException();
+                        event.setStartDate(LocalDate.parse(newValue));
+                        System.out.println("Successfully changed to a new value");
+            } else if (field.equalsIgnoreCase("End date")) {
+                if (LocalDate.parse(newValue).isBefore(event.getStartDate()) ||
+                        !newValue.matches("\\d{4}, \\d{2}, \\d{2}"))
+                    throw new InvalidDateException();
+                event.setEndDate(LocalDate.parse(newValue));
+                System.out.println("Successfully changed to a new value");
+            } else if (field.equalsIgnoreCase("Score")) {
+                event.setEventScore(Long.parseLong(newValue));
+                System.out.println("Successfully changed to a new value");
+            }
+        } else throw new EventIDNotFoundException();
     }
 
     public String removeEvent(String eventID) {
