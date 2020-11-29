@@ -1,5 +1,6 @@
 package controller;
 
+import exception.ThisUserIsAlreadyYourFriendException;
 import exception.UsernameNotFoundException;
 import model.*;
 
@@ -50,9 +51,19 @@ public class PlayerController {
         }
     }
 
-    public String addFriend(String userName, String name) {
-        return ";)";
-        //TODO
+    public void addFriend(String userName, String friendUserName) throws ThisUserIsAlreadyYourFriendException {
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Player friend : player.getFriends()) {
+                    if (friend.getUsername().equals(friendUserName)) {
+                        throw new ThisUserIsAlreadyYourFriendException();
+                    } else {
+                        friend.getFriendRequest().add(player);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public void viewPlatoStatistics(String userName) {
