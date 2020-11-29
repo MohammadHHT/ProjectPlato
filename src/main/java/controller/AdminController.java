@@ -114,7 +114,17 @@ public class AdminController {
         }
     }
 
-    public void viewUserProfile(String userName) {
-        //TODO
+    public void viewUserProfile(String userName) throws UsernameNotFoundException {
+        if (Database.getUserByUsername(userName) == null)
+            throw new UsernameNotFoundException();
+        for (User user : Database.getAllUsers()) {
+            if (user instanceof Player && user.getUsername().equals(userName)) {
+                System.out.println(user.getFirstname() + " " + user.getLastname() + "\n"
+                + user.getUsername() + "\n"
+                + user.getEmail() + " " + user.getPhoneNumber() + "\n"
+                + ((Player) user).getScore() + " " + ((Player) user).getFavoriteGames());
+            }
+            break;
+        }
     }
 }
