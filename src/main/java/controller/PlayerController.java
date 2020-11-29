@@ -24,7 +24,7 @@ public class PlayerController {
         }
     }
 
-    public void viewPlatoMessages(String userName) {
+    public void viewPlatoMessages(String userName) throws UsernameNotFoundException {
         for (Player player : Player.getPlayers()) {
             if (player.getUsername().equals(userName)) {
                 for (Message inbox : player.getInbox()) {
