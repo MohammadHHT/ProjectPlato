@@ -41,7 +41,7 @@ public class Player extends User {
     }
 
     public void removeFriend(Player player) {
-        //TODO
+        friends.remove(player);
     }
 
     public void addNewSuggestion(Suggestion suggestion) {
@@ -98,5 +98,13 @@ public class Player extends User {
 
     public ArrayList<Game> getFavoriteGames() {
         return favoriteGames;
+    }
+
+    public ArrayList<Message> getInbox() {
+        return inbox;
+    }
+
+    public ArrayList<Suggestion> getSuggestions() {
+        return suggestions;
     }
 }

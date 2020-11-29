@@ -1,5 +1,7 @@
 package controller;
 
+import model.*;
+
 public class PlayerController {
 
     public long showPoints(String gameName) {
@@ -8,11 +10,25 @@ public class PlayerController {
     }
 
     public void viewFavoriteGames(String userName) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Game favoriteGame : player.getFavoriteGames()) {
+                    System.out.println(favoriteGame.getGameName());
+                }
+                break;
+            }
+        }
     }
 
     public void viewPlatoMessages(String userName) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Message inbox : player.getInbox()) {
+                    System.out.println(inbox.getMessage());
+                }
+                break;
+            }
+        }
     }
 
     public void viewLastPlayed(String userName) {
@@ -20,7 +36,14 @@ public class PlayerController {
     }
 
     public void viewAdminSuggestions(String userName) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Suggestion suggestion : player.getSuggestions()) {
+                    System.out.println(suggestion.getGameName());
+                }
+                break;
+            }
+        }
     }
 
     public String addFriend(String userName, String name) {
@@ -41,20 +64,49 @@ public class PlayerController {
     }
 
     public void showFriends(String userName) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Player friend : player.getFriends()) {
+                    System.out.println(friend.getUsername());
+                }
+            }
+        }
     }
 
-    public String removeFriend(String userName, String userNameOfApplicant) {
-        return ";)";
-        //TODO
+    public void removeFriend(String userName, String userNameOfApplicant) {
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userNameOfApplicant)) {
+                for (Player friend : Player.getPlayers()) {
+                    if (friend.getUsername().equals(userName)) {
+                        player.removeFriend(friend);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public void viewUserProfile(String userName, String userNameOfIntendedUser) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                System.out.println("Player name= " + player.getFirstname() + " " + player.getLastname());
+                System.out.println("Plato Age= " + player.getPlatoAge());
+                System.out.println("E-mail= " + player.getEmail());
+                System.out.println("Score= " + player.getScore());
+                //TODO show number of wins & lose
+            }
+        }
     }
 
     public void showFriendRequests(String userName) {
-        //TODO
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Player friendshipSeeker : player.getFriendRequest()) {
+                    System.out.println(friendshipSeeker.getUsername());
+                }
+                break;
+            }
+        }
     }
 
     public String acceptRequests(String userName, String userNameOfApplicant) {

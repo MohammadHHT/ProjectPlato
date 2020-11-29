@@ -10,7 +10,6 @@ public class Database {
     static ArrayList<Suggestion> allSuggestions = new ArrayList<>();
     static ArrayList<Message> allMessages = new ArrayList<>();
     static ArrayList<GameLog> allGameLogs = new ArrayList<>();
-    static ArrayList<Event> allEvents = new ArrayList<>();
 
     public static ArrayList<User> getAllUsers() {
         return allUsers;
@@ -32,10 +31,6 @@ public class Database {
         return allGameLogs;
     }
 
-    public static ArrayList<Event> getAllEvents() {
-        return allEvents;
-    }
-
     public static void addAllUsers(User user) {
         allUsers.add(user);
     }
@@ -52,12 +47,8 @@ public class Database {
         allMessages.add(message);
     }
 
-    public static void addAllGameLogs(GameLog gameLog) {
+    public static void addAllAccounts(GameLog gameLog) {
         allGameLogs.add(gameLog);
-    }
-
-    public static void addAllEvents(Event event) {
-        allEvents.add(event);
     }
 
     public static User getUserByUsername(String username) {
@@ -96,14 +87,6 @@ public class Database {
         for (GameLog gameLog : allGameLogs) {
             if (gameLog.getLogID().equals(gameLogID))
                 return gameLog;
-        }
-        return null;
-    }
-
-    public static Event getEventByEventID(String EventID) {
-        for (Event event : allEvents) {
-            if (event.getEventID().equals(EventID))
-                return event;
         }
         return null;
     }
