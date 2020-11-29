@@ -1,11 +1,7 @@
 package controller;
 
-import exception.EventIDNotFoundException;
-import exception.GameNotFoundException;
-import exception.InvalidDateException;
-import exception.InvalidGameNameException;
-import model.Event;
-import model.Game;
+import exception.*;
+import model.*;
 
 import java.time.LocalDate;
 
@@ -77,9 +73,20 @@ public class AdminController {
         }
     }
 
-    public String addSuggestion(String userName, String gameName) {
-        return ";)";
-        //TODO
+    public void addSuggestion(String userName, String gameName) throws UsernameNotFoundException,
+            ThisGameHasAlreadyBeenSuggested {
+        if (Database.getUserByUsername(userName) == null)
+            throw new UsernameNotFoundException();
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Suggestion suggestion : player.getSuggestions()) {
+                    if (!suggestion.getGameName().equals(gameName)) {
+                        Database.addAllSuggestions(new Suggestion(userName, gameName));
+                    } else
+                        throw new ThisGameHasAlreadyBeenSuggested();
+                }
+            }
+        }
     }
 
     public void viewSuggestion() {
