@@ -90,7 +90,9 @@ public class AdminController {
     }
 
     public void viewSuggestion() {
-        //TODO
+        for (Suggestion suggestion : Database.getAllSuggestions()) {
+            System.out.println(suggestion.getPlayerID() + ": " + suggestion.getGameName());
+        }
     }
 
     public String removeSuggestion(String suggestionID) {
