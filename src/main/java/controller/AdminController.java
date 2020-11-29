@@ -95,9 +95,15 @@ public class AdminController {
         }
     }
 
-    public String removeSuggestion(String suggestionID) {
-        return ";)";
-        //TODO
+    public void removeSuggestion(String suggestionID) throws SuggestionIDNotFoundException {
+        if (Database.getSuggestionBySuggestionID(suggestionID) == null)
+            throw new SuggestionIDNotFoundException();
+        for (Suggestion suggestion : Database.getAllSuggestions()) {
+            if (suggestion.getSuggestionID().equals(suggestionID)) {
+                Database.allSuggestions.remove(suggestion);
+                System.out.println("Suggestion with " + suggestionID + " ID deleted successfully.");
+            }
+        }
     }
 
     public void viewUsers() {
