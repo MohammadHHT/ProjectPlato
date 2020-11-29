@@ -13,7 +13,7 @@ public class PlayerController {
         }
     }
 
-    public void viewFavoriteGames(String userName) {
+    public void viewFavoriteGames(String userName) throws UsernameNotFoundException {
         for (Player player : Player.getPlayers()) {
             if (player.getUsername().equals(userName)) {
                 for (Game favoriteGame : player.getFavoriteGames()) {
