@@ -1,15 +1,20 @@
 package controller;
 
+import exception.ThisUserIsAlreadyYourFriendException;
+import exception.UsernameNotFoundException;
 import model.*;
 
 public class PlayerController {
 
-    public long showPoints(String gameName) {
-        return 0;
-        //TODO
+    public void showPoints(String userName) throws UsernameNotFoundException {
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                System.out.println(player.getScore());
+            }
+        }
     }
 
-    public void viewFavoriteGames(String userName) {
+    public void viewFavoriteGames(String userName) throws UsernameNotFoundException {
         for (Player player : Player.getPlayers()) {
             if (player.getUsername().equals(userName)) {
                 for (Game favoriteGame : player.getFavoriteGames()) {
@@ -20,7 +25,7 @@ public class PlayerController {
         }
     }
 
-    public void viewPlatoMessages(String userName) {
+    public void viewPlatoMessages(String userName) throws UsernameNotFoundException {
         for (Player player : Player.getPlayers()) {
             if (player.getUsername().equals(userName)) {
                 for (Message inbox : player.getInbox()) {
@@ -35,7 +40,7 @@ public class PlayerController {
         //TODO
     }
 
-    public void viewAdminSuggestions(String userName) {
+    public void viewAdminSuggestions(String userName) throws UsernameNotFoundException {
         for (Player player : Player.getPlayers()) {
             if (player.getUsername().equals(userName)) {
                 for (Suggestion suggestion : player.getSuggestions()) {
@@ -46,9 +51,17 @@ public class PlayerController {
         }
     }
 
-    public String addFriend(String userName, String name) {
-        return ";)";
-        //TODO
+    public void addFriend(String userName, String friendUserName) throws ThisUserIsAlreadyYourFriendException {
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Player friend : player.getFriends()) {
+                    if (!(friend.getUsername().equals(friendUserName))) {
+                        friend.getFriendRequest().add(player);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public void viewPlatoStatistics(String userName) {
@@ -109,13 +122,31 @@ public class PlayerController {
         }
     }
 
-    public String acceptRequests(String userName, String userNameOfApplicant) {
-        return ";)";
-        //TODO
+    public void acceptRequests(String userName, String friendUserName) {
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Player friend : Player.getPlayers()) {
+                    if (friend.getUsername().equals(friendUserName)) {
+                        friend.getFriendRequest().remove(player);
+                        friend.getFriends().add(player);
+                        player.getFriends().add(friend);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
-    public String declineRequests(String userName, String userNameOfApplicant) {
-        return ";)";
-        //TODO
+    public void declineRequests(String userName, String userNameOfApplicant) {
+        for (Player player : Player.getPlayers()) {
+            if (player.getUsername().equals(userName)) {
+                for (Player friend : Player.getPlayers()) {
+                    if (friend.getUsername().equals(userNameOfApplicant)) {
+                        friend.getFriendRequest().remove(player);
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
