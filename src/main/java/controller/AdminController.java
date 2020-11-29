@@ -107,7 +107,11 @@ public class AdminController {
     }
 
     public void viewUsers() {
-        //TODO
+        for (User user : Database.getAllUsers()) {
+            if (user instanceof Player) {
+                System.out.println(user.getUsername());
+            }
+        }
     }
 
     public void viewUserProfile(String userName) {
