@@ -39,7 +39,7 @@ public class PlayerController {
         //TODO
     }
 
-    public void viewAdminSuggestions(String userName) {
+    public void viewAdminSuggestions(String userName) throws UsernameNotFoundException {
         for (Player player : Player.getPlayers()) {
             if (player.getUsername().equals(userName)) {
                 for (Suggestion suggestion : player.getSuggestions()) {
