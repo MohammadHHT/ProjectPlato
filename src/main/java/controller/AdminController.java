@@ -7,19 +7,17 @@ import exception.InvalidGameNameException;
 import model.Event;
 import model.Game;
 
-import javax.xml.crypto.Data;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class AdminController {
 
-    public String addEvent(String gameName, Date startDate, Date endDate, long eventScore) throws
+    public String addEvent(String gameName, LocalDate startDate, LocalDate endDate, long eventScore) throws
             InvalidGameNameException, InvalidDateException {
         for (Game allGame : Database.getAllGames()) {
             if (!allGame.getGameName().equals(gameName))
                 throw new InvalidGameNameException();
         }
-        if (startDate.after(endDate) || endDate.before(startDate))
+        if (startDate.isAfter(endDate) || endDate.isBefore(startDate))
             throw new InvalidDateException();
             Event event = new Event(gameName, startDate, endDate, eventScore);
             Database.addAllEvents(event);
@@ -28,7 +26,7 @@ public class AdminController {
 
     public void viewEvent() {
         for (Event allEvent : Database.getAllEvents()) {
-            if (allEvent.getStartDate().before(allEvent.getEndDate())) {
+            if (allEvent.getStartDate().isBefore(allEvent.getEndDate())) {
                 System.out.println("Game name: " + allEvent.getGameName() + "\n" +
                         "Event ID: " + allEvent.getEventID() + "\n" +
                         allEvent.getStartDate() + "to" + allEvent.getEndDate() + "\n" +
@@ -46,7 +44,7 @@ public class AdminController {
                     if (!game.getGameName().equals(newValue))
                         throw new GameNotFoundException();
                         event.setGameName(newValue);
-                        System.out.println("Successfully changed to a new value");
+                        System.out.println("Successfully changed to a new value.");
                 }
             } else if (field.equalsIgnoreCase("Start data")) {
                 if (LocalDate.parse(newValue).isBefore(LocalDate.now()) ||
@@ -54,23 +52,29 @@ public class AdminController {
                         !newValue.matches("\\d{4}, \\d{2}, \\d{2}"))
                         throw new InvalidDateException();
                         event.setStartDate(LocalDate.parse(newValue));
-                        System.out.println("Successfully changed to a new value");
+                        System.out.println("Successfully changed to a new value.");
             } else if (field.equalsIgnoreCase("End date")) {
                 if (LocalDate.parse(newValue).isBefore(event.getStartDate()) ||
                         !newValue.matches("\\d{4}, \\d{2}, \\d{2}"))
                     throw new InvalidDateException();
                 event.setEndDate(LocalDate.parse(newValue));
-                System.out.println("Successfully changed to a new value");
+                System.out.println("Successfully changed to a new value.");
             } else if (field.equalsIgnoreCase("Score")) {
                 event.setEventScore(Long.parseLong(newValue));
-                System.out.println("Successfully changed to a new value");
+                System.out.println("Successfully changed to a new value.");
             }
         } else throw new EventIDNotFoundException();
     }
 
-    public String removeEvent(String eventID) {
-        return ";)";
-        //TODO
+    public void removeEvent(String eventID) throws EventIDNotFoundException {
+        if (Database.getEventByEventID(eventID) == null)
+            throw new EventIDNotFoundException();
+        for (Event event : Database.getAllEvents()) {
+            if (event.getEventID().equals(eventID)) {
+                Database.allEvents.remove(event);
+                System.out.println("Event with " + eventID + " ID deleted successfully.");
+            }
+        }
     }
 
     public String addSuggestion(String userName, String gameName) {
