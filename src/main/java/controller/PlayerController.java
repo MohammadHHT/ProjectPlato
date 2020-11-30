@@ -54,12 +54,8 @@ public class PlayerController {
     }
 
     public void showFriends(String userName) {
-        for (Player player : Player.getPlayers()) {
-            if (player.getUsername().equals(userName)) {
-                for (Player friend : player.getFriends()) {
-                    System.out.println(friend.getUsername());
-                }
-            }
+        for (Player friend : Player.getPlayers().get(userName).getFriends()) {
+            System.out.println(friend.getUsername());
         }
     }
 
