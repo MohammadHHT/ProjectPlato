@@ -87,15 +87,8 @@ public class PlayerController {
     }
 
     public void declineRequests(String userName, String userNameOfApplicant) {
-        for (Player player : Player.getPlayers()) {
-            if (player.getUsername().equals(userName)) {
-                for (Player friend : Player.getPlayers()) {
-                    if (friend.getUsername().equals(userNameOfApplicant)) {
-                        friend.getFriendRequest().remove(player);
-                        break;
-                    }
-                }
-            }
+        if (Player.getPlayers().get(userName).getFriendRequest().containsKey(userNameOfApplicant)) {
+            Player.getPlayers().get(userName).getFriendRequest().remove(userNameOfApplicant);
         }
     }
 }
