@@ -73,13 +73,8 @@ public class PlayerController {
     }
 
     public void showFriendRequests(String userName) {
-        for (Player player : Player.getPlayers()) {
-            if (player.getUsername().equals(userName)) {
-                for (Player friendshipSeeker : player.getFriendRequest()) {
-                    System.out.println(friendshipSeeker.getUsername());
-                }
-                break;
-            }
+        for (Map.Entry<String, Player> entry : Player.getPlayers().get(userName).getFriendRequest().entrySet()) {
+            System.out.println(entry.getValue().getUsername());
         }
     }
 
