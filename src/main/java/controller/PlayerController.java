@@ -55,15 +55,8 @@ public class PlayerController {
     }
 
     public void removeFriend(String userName, String userNameOfApplicant) {
-        for (Player player : Player.getPlayers()) {
-            if (player.getUsername().equals(userNameOfApplicant)) {
-                for (Player friend : Player.getPlayers()) {
-                    if (friend.getUsername().equals(userName)) {
-                        player.removeFriend(friend);
-                        break;
-                    }
-                }
-            }
+        if (Player.getPlayers().get(userName).getFriends().containsKey(userNameOfApplicant)) {
+            Player.getPlayers().get(userName).getFriends().remove(userNameOfApplicant);
         }
     }
 
