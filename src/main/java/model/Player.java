@@ -11,8 +11,8 @@ public class Player extends User {
     private ArrayList<Player> friends;
     private ArrayList<Player> friendRequest;
     private ArrayList<Game> favoriteGames;
-    private ArrayList<Suggestion> suggestions;
-    private ArrayList<Message> inbox;
+    private ArrayList<String> suggestions;
+    private ArrayList<String> inbox;
 //    private long gameLogID;
 
     static {
