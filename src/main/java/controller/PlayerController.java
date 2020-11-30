@@ -1,6 +1,7 @@
 package controller;
 
 import exception.ThisUserIsAlreadyYourFriendException;
+import exception.ThisUserIsNotYourFriendException;
 import exception.UsernameNotFoundException;
 import model.*;
 
@@ -72,24 +73,32 @@ public class PlayerController {
         }
     }
 
-    public void removeFriend(String userName, String userNameOfApplicant) throws UsernameNotFoundException {
+    public void removeFriend(String userName, String userNameOfApplicant) throws UsernameNotFoundException, ThisUserIsNotYourFriendException {
         if (Player.getPlayers().containsKey(userName) && Player.getPlayers().containsKey(userNameOfApplicant)) {
             if (Player.getPlayers().get(userName).getFriends().containsKey(userNameOfApplicant)) {
                 Player.getPlayers().get(userName).getFriends().remove(userNameOfApplicant);
+            } else {
+                throw new ThisUserIsNotYourFriendException();
             }
         } else {
             throw new UsernameNotFoundException();
         }
     }
 
-    public void viewUserProfile(String userName, String userNameOfIntendedUser) {
-        if (Player.getPlayers().get(userName).getFriends().containsKey(userNameOfIntendedUser)) {
-            Player player = Player.getPlayers().get(userNameOfIntendedUser);
-            System.out.println("Player name= " + player.getFirstname() + " " + player.getLastname());
-            System.out.println("Plato Age= " + player.getPlatoAge());
-            System.out.println("E-mail= " + player.getEmail());
-            System.out.println("Score= " + player.getScore());
-            //TODO show number of wins & lose
+    public void viewUserProfile(String userName, String userNameOfIntendedUser) throws UsernameNotFoundException, ThisUserIsNotYourFriendException {
+        if (Player.getPlayers().containsKey(userName) && Player.getPlayers().containsKey(userNameOfIntendedUser)) {
+            if (Player.getPlayers().get(userName).getFriends().containsKey(userNameOfIntendedUser)) {
+                Player player = Player.getPlayers().get(userNameOfIntendedUser);
+                System.out.println("Player name= " + player.getFirstname() + " " + player.getLastname());
+                System.out.println("Plato Age= " + player.getPlatoAge());
+                System.out.println("E-mail= " + player.getEmail());
+                System.out.println("Score= " + player.getScore());
+                //TODO show number of wins & lose
+            } else {
+                throw new ThisUserIsNotYourFriendException();
+            }
+        } else {
+            throw new UsernameNotFoundException();
         }
     }
 
