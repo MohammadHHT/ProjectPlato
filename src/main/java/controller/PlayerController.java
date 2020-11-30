@@ -79,17 +79,10 @@ public class PlayerController {
     }
 
     public void acceptRequests(String userName, String friendUserName) {
-        for (Player player : Player.getPlayers()) {
-            if (player.getUsername().equals(userName)) {
-                for (Player friend : Player.getPlayers()) {
-                    if (friend.getUsername().equals(friendUserName)) {
-                        friend.getFriendRequest().remove(player);
-                        friend.getFriends().add(player);
-                        player.getFriends().add(friend);
-                        break;
-                    }
-                }
-            }
+        if (Player.getPlayers().get(userName).getFriendRequest().containsKey(friendUserName)) {
+            Player.getPlayers().get(userName).getFriendRequest().remove(friendUserName);
+            Player.getPlayers().get(userName).getFriends().put(friendUserName, Player.getPlayers().get(friendUserName));
+            Player.getPlayers().get(friendUserName).getFriends().put(userName, Player.getPlayers().get(userName));
         }
     }
 
