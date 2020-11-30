@@ -1,5 +1,6 @@
 package controller;
 
+import exception.RequestNotFoundException;
 import exception.ThisUserIsAlreadyYourFriendException;
 import exception.ThisUserIsNotYourFriendException;
 import exception.UsernameNotFoundException;
@@ -112,11 +113,17 @@ public class PlayerController {
         }
     }
 
-    public void acceptRequests(String userName, String friendUserName) {
-        if (Player.getPlayers().get(userName).getFriendRequest().containsKey(friendUserName)) {
-            Player.getPlayers().get(userName).getFriendRequest().remove(friendUserName);
-            Player.getPlayers().get(userName).getFriends().put(friendUserName, Player.getPlayers().get(friendUserName));
-            Player.getPlayers().get(friendUserName).getFriends().put(userName, Player.getPlayers().get(userName));
+    public void acceptRequests(String userName, String friendUserName) throws UsernameNotFoundException, RequestNotFoundException {
+        if (Player.getPlayers().containsKey(userName) && Player.getPlayers().containsKey(friendUserName)) {
+            if (Player.getPlayers().get(userName).getFriendRequest().containsKey(friendUserName)) {
+                Player.getPlayers().get(userName).getFriendRequest().remove(friendUserName);
+                Player.getPlayers().get(userName).getFriends().put(friendUserName, Player.getPlayers().get(friendUserName));
+                Player.getPlayers().get(friendUserName).getFriends().put(userName, Player.getPlayers().get(userName));
+            } else {
+                throw new RequestNotFoundException();
+            }
+        } else {
+            throw new UsernameNotFoundException();
         }
     }
 
