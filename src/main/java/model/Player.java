@@ -8,8 +8,8 @@ public class Player extends User {
     private double money;
     private long score;
     private static HashMap<String, Player> players;
-    private ArrayList<Player> friends;
-    private ArrayList<Player> friendRequest;
+    private HashMap<String, Player> friends;
+    private HashMap<String, Player> friendRequest;
     private ArrayList<Game> favoriteGames;
     private ArrayList<String> suggestions;
     private ArrayList<String> inbox;
@@ -24,8 +24,8 @@ public class Player extends User {
         this.money = 0;
         this.score = 0;
         this.platoAge = 0;
-        this.friends = new ArrayList<Player>();
-        this.friendRequest = new ArrayList<Player>();
+        this.friends = new HashMap<String, Player>();
+        this.friendRequest = new HashMap<String, Player>();
         this.favoriteGames = new ArrayList<Game>();
         this.suggestions = new ArrayList<String>();
         this.inbox = new ArrayList<String>();
@@ -53,10 +53,6 @@ public class Player extends User {
 
     public void addNewMessage(Message message) {
         //TODO
-    }
-
-    public void setFriendRequest(ArrayList<Player> friendRequest) {
-        this.friendRequest = friendRequest;
     }
 
     public void setPlatoAge(int platoAge) {
@@ -91,11 +87,11 @@ public class Player extends User {
         return players;
     }
 
-    public ArrayList<Player> getFriends() {
+    public HashMap<String, Player> getFriends() {
         return friends;
     }
 
-    public ArrayList<Player> getFriendRequest() {
+    public HashMap<String, Player> getFriendRequest() {
         return friendRequest;
     }
 

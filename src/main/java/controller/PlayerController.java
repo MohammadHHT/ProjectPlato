@@ -4,6 +4,8 @@ import exception.ThisUserIsAlreadyYourFriendException;
 import exception.UsernameNotFoundException;
 import model.*;
 
+import java.util.Map;
+
 public class PlayerController {
 
     public void showPoints(String userName) throws UsernameNotFoundException {
@@ -54,8 +56,8 @@ public class PlayerController {
     }
 
     public void showFriends(String userName) {
-        for (Player friend : Player.getPlayers().get(userName).getFriends()) {
-            System.out.println(friend.getUsername());
+        for (Map.Entry<String, Player> entry : Player.getPlayers().get(userName).getFriends().entrySet()) {
+            System.out.println(entry.getValue().getUsername());
         }
     }
 
