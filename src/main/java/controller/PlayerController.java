@@ -38,9 +38,15 @@ public class PlayerController {
         //TODO
     }
 
-    public void addFriend(String userName, String friendUserName) throws ThisUserIsAlreadyYourFriendException {
-        if (!(Player.getPlayers().get(userName).getFriends().containsKey(friendUserName))) {
-            Player.getPlayers().get(userName).getFriendRequest().put(friendUserName, Player.getPlayers().get(friendUserName));
+    public void addFriend(String userName, String friendUserName) throws UsernameNotFoundException, ThisUserIsAlreadyYourFriendException {
+        if (Player.getPlayers().containsKey(userName) && Player.getPlayers().containsKey(friendUserName)) {
+            if (!(Player.getPlayers().get(userName).getFriends().containsKey(friendUserName))) {
+                Player.getPlayers().get(userName).getFriendRequest().put(friendUserName, Player.getPlayers().get(friendUserName));
+            } else {
+                throw new ThisUserIsAlreadyYourFriendException();
+            }
+        } else {
+            throw new UsernameNotFoundException();
         }
     }
 
