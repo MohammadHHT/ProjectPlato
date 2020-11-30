@@ -31,15 +31,8 @@ public class PlayerController {
     }
 
     public void addFriend(String userName, String friendUserName) throws ThisUserIsAlreadyYourFriendException {
-        for (Player player : Player.getPlayers()) {
-            if (player.getUsername().equals(userName)) {
-                for (Player friend : player.getFriends()) {
-                    if (!(friend.getUsername().equals(friendUserName))) {
-                        friend.getFriendRequest().add(player);
-                        break;
-                    }
-                }
-            }
+        if (!(Player.getPlayers().get(userName).getFriends().containsKey(friendUserName))) {
+            Player.getPlayers().get(userName).getFriendRequest().put(friendUserName, Player.getPlayers().get(friendUserName));
         }
     }
 
