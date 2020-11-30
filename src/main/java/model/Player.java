@@ -1,21 +1,22 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player extends User {
     private int platoAge;
     private double money;
     private long score;
-    private static ArrayList<Player> players;
-    private ArrayList<Player> friends;
-    private ArrayList<Player> friendRequest;
+    private static HashMap<String, Player> players;
+    private HashMap<String, Player> friends;
+    private HashMap<String, Player> friendRequest;
     private ArrayList<Game> favoriteGames;
-    private ArrayList<Suggestion> suggestions;
-    private ArrayList<Message> inbox;
+    private ArrayList<String> suggestions;
+    private ArrayList<String> inbox;
 //    private long gameLogID;
 
     static {
-        players = new ArrayList<Player>();
+        players = new HashMap<String, Player>();
     }
 
     public Player(String firstname, String lastname, String username, String password, String email, String phoneNumber) {
@@ -23,12 +24,14 @@ public class Player extends User {
         this.money = 0;
         this.score = 0;
         this.platoAge = 0;
-        this.friends = new ArrayList<Player>();
-        this.friendRequest = new ArrayList<Player>();
+        this.friends = new HashMap<String, Player>();
+        this.friendRequest = new HashMap<String, Player>();
         this.favoriteGames = new ArrayList<Game>();
-        this.suggestions = new ArrayList<Suggestion>();
-        this.inbox = new ArrayList<Message>();
+        this.suggestions = new ArrayList<String>();
+        this.inbox = new ArrayList<String>();
     }
+
+
 
     public void addNewPlayer(Player player) {
         //TODO
@@ -50,10 +53,6 @@ public class Player extends User {
 
     public void addNewMessage(Message message) {
         //TODO
-    }
-
-    public void setFriendRequest(ArrayList<Player> friendRequest) {
-        this.friendRequest = friendRequest;
     }
 
     public void setPlatoAge(int platoAge) {
@@ -84,15 +83,15 @@ public class Player extends User {
         return score;
     }
 
-    public static ArrayList<Player> getPlayers() {
+    public static HashMap<String, Player> getPlayers() {
         return players;
     }
 
-    public ArrayList<Player> getFriends() {
+    public HashMap<String, Player> getFriends() {
         return friends;
     }
 
-    public ArrayList<Player> getFriendRequest() {
+    public HashMap<String, Player> getFriendRequest() {
         return friendRequest;
     }
 
@@ -100,11 +99,11 @@ public class Player extends User {
         return favoriteGames;
     }
 
-    public ArrayList<Message> getInbox() {
+    public ArrayList<String> getInbox() {
         return inbox;
     }
 
-    public ArrayList<Suggestion> getSuggestions() {
+    public ArrayList<String> getSuggestions() {
         return suggestions;
     }
 }

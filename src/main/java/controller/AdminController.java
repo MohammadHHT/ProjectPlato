@@ -12,7 +12,6 @@ public class AdminController {
         for (Game allGame : Database.getAllGames()) {
             if (!allGame.getGameName().equals(gameName))
                 throw new InvalidGameNameException();
-            break;
         }
         if (startDate.isAfter(endDate) || endDate.isBefore(startDate))
             throw new InvalidDateException();
@@ -36,30 +35,29 @@ public class AdminController {
             InvalidDateException, EventIDNotFoundException {
         Event event;
         if ((event = Database.getEventByEventID(eventID)) != null) {
-            if (field.equalsIgnoreCase("Game name")) {
+            if (field.equalsIgnoreCase("Game name")){
                 for (Game game : Database.getAllGames()) {
                     if (!game.getGameName().equals(newValue))
                         throw new GameNotFoundException();
-                        break;
+                        event.setGameName(newValue);
+                        System.out.println("Successfully changed to a new value.");
                 }
-                event.setGameName(newValue);
-                System.out.println("Changed to new value successfully.");
             } else if (field.equalsIgnoreCase("Start data")) {
                 if (LocalDate.parse(newValue).isBefore(LocalDate.now()) ||
                         LocalDate.parse(newValue).isAfter(event.getEndDate()) ||
                         !newValue.matches("\\d{4}, \\d{2}, \\d{2}"))
                         throw new InvalidDateException();
                         event.setStartDate(LocalDate.parse(newValue));
-                        System.out.println("Changed to new value successfully.");
+                        System.out.println("Successfully changed to a new value.");
             } else if (field.equalsIgnoreCase("End date")) {
                 if (LocalDate.parse(newValue).isBefore(event.getStartDate()) ||
                         !newValue.matches("\\d{4}, \\d{2}, \\d{2}"))
                     throw new InvalidDateException();
-                    event.setEndDate(LocalDate.parse(newValue));
-                    System.out.println("Changed to new value successfully.");
+                event.setEndDate(LocalDate.parse(newValue));
+                System.out.println("Successfully changed to a new value.");
             } else if (field.equalsIgnoreCase("Score")) {
                 event.setEventScore(Long.parseLong(newValue));
-                System.out.println("Changed to new value successfully.");
+                System.out.println("Successfully changed to a new value.");
             }
         } else throw new EventIDNotFoundException();
     }
@@ -83,10 +81,9 @@ public class AdminController {
             if (player.getUsername().equals(userName)) {
                 for (Suggestion suggestion : player.getSuggestions()) {
                     if (!suggestion.getGameName().equals(gameName)) {
-                        player.addNewSuggestion(suggestion);
+                        Database.addAllSuggestions(new Suggestion(userName, gameName));
                     } else
                         throw new ThisGameHasAlreadyBeenSuggested();
-                    break;
                 }
             }
         }
@@ -106,7 +103,6 @@ public class AdminController {
                 Database.allSuggestions.remove(suggestion);
                 System.out.println("Suggestion with " + suggestionID + " ID deleted successfully.");
             }
-            break;
         }
     }
 
