@@ -62,9 +62,13 @@ public class PlayerController {
         //TODO
     }
 
-    public void showFriends(String userName) {
-        for (Map.Entry<String, Player> entry : Player.getPlayers().get(userName).getFriends().entrySet()) {
-            System.out.println(entry.getValue().getUsername());
+    public void showFriends(String userName) throws UsernameNotFoundException {
+        if (Player.getPlayers().containsKey(userName)) {
+            for (Map.Entry<String, Player> entry : Player.getPlayers().get(userName).getFriends().entrySet()) {
+                System.out.println(entry.getValue().getUsername());
+            }
+        } else {
+            throw new UsernameNotFoundException();
         }
     }
 
