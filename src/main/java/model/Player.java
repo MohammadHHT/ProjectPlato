@@ -1,12 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player extends User {
     private int platoAge;
     private double money;
     private long score;
-    private static ArrayList<Player> players;
+    private static HashMap<String, Player> players;
     private ArrayList<Player> friends;
     private ArrayList<Player> friendRequest;
     private ArrayList<Game> favoriteGames;
@@ -15,7 +16,7 @@ public class Player extends User {
 //    private long gameLogID;
 
     static {
-        players = new ArrayList<Player>();
+        players = new HashMap<String, Player>();
     }
 
     public Player(String firstname, String lastname, String username, String password, String email, String phoneNumber) {
@@ -29,6 +30,8 @@ public class Player extends User {
         this.suggestions = new ArrayList<Suggestion>();
         this.inbox = new ArrayList<Message>();
     }
+
+
 
     public void addNewPlayer(Player player) {
         //TODO
@@ -84,7 +87,7 @@ public class Player extends User {
         return score;
     }
 
-    public static ArrayList<Player> getPlayers() {
+    public static HashMap<String, Player> getPlayers() {
         return players;
     }
 
