@@ -27,8 +27,8 @@ public class Player extends User {
         this.friends = new ArrayList<Player>();
         this.friendRequest = new ArrayList<Player>();
         this.favoriteGames = new ArrayList<Game>();
-        this.suggestions = new ArrayList<Suggestion>();
-        this.inbox = new ArrayList<Message>();
+        this.suggestions = new ArrayList<String>();
+        this.inbox = new ArrayList<String>();
     }
 
 
@@ -103,11 +103,11 @@ public class Player extends User {
         return favoriteGames;
     }
 
-    public ArrayList<Message> getInbox() {
+    public ArrayList<String> getInbox() {
         return inbox;
     }
 
-    public ArrayList<Suggestion> getSuggestions() {
+    public ArrayList<String> getSuggestions() {
         return suggestions;
     }
 }

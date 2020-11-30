@@ -17,14 +17,7 @@ public class PlayerController {
     }
 
     public void viewPlatoMessages(String userName) throws UsernameNotFoundException {
-        for (Player player : Player.getPlayers()) {
-            if (player.getUsername().equals(userName)) {
-                for (Message inbox : player.getInbox()) {
-                    System.out.println(inbox.getMessage());
-                }
-                break;
-            }
-        }
+        //TODO
     }
 
     public void viewLastPlayed(String userName) {
@@ -32,14 +25,7 @@ public class PlayerController {
     }
 
     public void viewAdminSuggestions(String userName) throws UsernameNotFoundException {
-        for (Player player : Player.getPlayers()) {
-            if (player.getUsername().equals(userName)) {
-                for (Suggestion suggestion : player.getSuggestions()) {
-                    System.out.println(suggestion.getGameName());
-                }
-                break;
-            }
-        }
+        //TODO
     }
 
     public void addFriend(String userName, String friendUserName) throws ThisUserIsAlreadyYourFriendException {
