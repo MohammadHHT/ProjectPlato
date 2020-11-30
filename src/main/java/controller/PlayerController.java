@@ -102,9 +102,13 @@ public class PlayerController {
         }
     }
 
-    public void showFriendRequests(String userName) {
-        for (Map.Entry<String, Player> entry : Player.getPlayers().get(userName).getFriendRequest().entrySet()) {
-            System.out.println(entry.getValue().getUsername());
+    public void showFriendRequests(String userName) throws UsernameNotFoundException {
+        if (Player.getPlayers().containsKey(userName)) {
+            for (Map.Entry<String, Player> entry : Player.getPlayers().get(userName).getFriendRequest().entrySet()) {
+                System.out.println(entry.getValue().getUsername());
+            }
+        } else {
+            throw new UsernameNotFoundException();
         }
     }
 
