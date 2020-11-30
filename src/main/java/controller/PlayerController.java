@@ -9,7 +9,11 @@ import java.util.Map;
 public class PlayerController {
 
     public void showPoints(String userName) throws UsernameNotFoundException {
-        System.out.println(Player.getPlayers().get(userName).getScore());
+        if (Player.getPlayers().containsKey(userName)) {
+            System.out.println(Player.getPlayers().get(userName).getScore());
+        } else {
+            throw new UsernameNotFoundException();
+        }
     }
 
     public void viewFavoriteGames(String userName) throws UsernameNotFoundException {
