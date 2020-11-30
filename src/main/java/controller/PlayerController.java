@@ -127,9 +127,15 @@ public class PlayerController {
         }
     }
 
-    public void declineRequests(String userName, String userNameOfApplicant) {
-        if (Player.getPlayers().get(userName).getFriendRequest().containsKey(userNameOfApplicant)) {
-            Player.getPlayers().get(userName).getFriendRequest().remove(userNameOfApplicant);
+    public void declineRequests(String userName, String userNameOfApplicant) throws UsernameNotFoundException, RequestNotFoundException {
+        if (Player.getPlayers().containsKey(userName) && Player.getPlayers().containsKey(userNameOfApplicant)) {
+            if (Player.getPlayers().get(userName).getFriendRequest().containsKey(userNameOfApplicant)) {
+                Player.getPlayers().get(userName).getFriendRequest().remove(userNameOfApplicant);
+            } else {
+                throw new RequestNotFoundException();
+            }
+        } else {
+            throw new UsernameNotFoundException();
         }
     }
 }
