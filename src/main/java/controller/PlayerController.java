@@ -7,11 +7,7 @@ import model.*;
 public class PlayerController {
 
     public void showPoints(String userName) throws UsernameNotFoundException {
-        for (Player player : Player.getPlayers()) {
-            if (player.getUsername().equals(userName)) {
-                System.out.println(player.getScore());
-            }
-        }
+        System.out.println(Player.getPlayers().get(userName).getScore());
     }
 
     public void viewFavoriteGames(String userName) throws UsernameNotFoundException {
