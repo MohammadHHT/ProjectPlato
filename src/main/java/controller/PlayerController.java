@@ -72,9 +72,13 @@ public class PlayerController {
         }
     }
 
-    public void removeFriend(String userName, String userNameOfApplicant) {
-        if (Player.getPlayers().get(userName).getFriends().containsKey(userNameOfApplicant)) {
-            Player.getPlayers().get(userName).getFriends().remove(userNameOfApplicant);
+    public void removeFriend(String userName, String userNameOfApplicant) throws UsernameNotFoundException {
+        if (Player.getPlayers().containsKey(userName) && Player.getPlayers().containsKey(userNameOfApplicant)) {
+            if (Player.getPlayers().get(userName).getFriends().containsKey(userNameOfApplicant)) {
+                Player.getPlayers().get(userName).getFriends().remove(userNameOfApplicant);
+            }
+        } else {
+            throw new UsernameNotFoundException();
         }
     }
 
