@@ -1,25 +1,26 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Suggestion {
     private int suggestionID;
     private String playerID;
     private String gameName;
-    private static ArrayList<Suggestion> allSuggestion;
+    private static HashMap<Integer, Suggestion> allSuggestion;
 
     static {
-        allSuggestion = new ArrayList<Suggestion>();
+        allSuggestion = new HashMap<Integer, Suggestion>();
     }
 
     public Suggestion(String playerID, String gameName) {
         this.playerID = playerID;
         this.gameName = gameName;
         //suggestionID
-        allSuggestion.add(this);
+        allSuggestion.put(suggestionID, this);
     }
 
-    public static ArrayList<Suggestion> getAllSuggestion() {
+    public static HashMap<Integer, Suggestion> getAllSuggestion() {
         return allSuggestion;
     }
 

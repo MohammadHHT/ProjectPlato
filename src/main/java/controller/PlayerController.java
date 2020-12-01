@@ -68,6 +68,25 @@ public class PlayerController {
     }
 
     public void viewAdminSuggestions(String userName) throws UsernameNotFoundException {
+        if (Player.getPlayers().containsKey(userName)) {
+            for (String suggestion : Player.getPlayers().get(userName).getSuggestions()) {
+                System.out.println(Suggestion.getAllSuggestion().get(Integer.parseInt(suggestion)));
+            }
+        } else {
+            throw new UsernameNotFoundException();
+        }
+
+    }
+
+    public void viewPlatoStatistics(String userName) {
+        //TODO
+    }
+
+    public void gameHistory(String userName) {
+        //TODO
+    }
+
+    public void gameStatistics(String userName, String gameName) {
         //TODO
     }
 
@@ -81,18 +100,6 @@ public class PlayerController {
         } else {
             throw new UsernameNotFoundException();
         }
-    }
-
-    public void viewPlatoStatistics(String userName) {
-        //TODO
-    }
-
-    public void gameHistory(String userName) {
-        //TODO
-    }
-
-    public void gameStatistics(String userName, String gameName) {
-        //TODO
     }
 
     public void showFriends(String userName) throws UsernameNotFoundException {
@@ -117,24 +124,7 @@ public class PlayerController {
         }
     }
 
-    public void viewUserProfile(String userName, String userNameOfIntendedUser) throws UsernameNotFoundException, ThisUserIsNotYourFriendException {
-        if (Player.getPlayers().containsKey(userName) && Player.getPlayers().containsKey(userNameOfIntendedUser)) {
-            if (Player.getPlayers().get(userName).getFriends().containsKey(userNameOfIntendedUser)) {
-                Player player = Player.getPlayers().get(userNameOfIntendedUser);
-                System.out.println("Player name= " + player.getFirstname() + " " + player.getLastname());
-                System.out.println("Plato Age= " + player.getPlatoAge());
-                System.out.println("E-mail= " + player.getEmail());
-                System.out.println("Score= " + player.getScore());
-                //TODO show number of wins & lose
-            } else {
-                throw new ThisUserIsNotYourFriendException();
-            }
-        } else {
-            throw new UsernameNotFoundException();
-        }
-    }
-
-    public void showFriendRequests(String userName) throws UsernameNotFoundException {
+    public void showFriendsRequests(String userName) throws UsernameNotFoundException {
         if (Player.getPlayers().containsKey(userName)) {
             for (Map.Entry<String, Player> entry : Player.getPlayers().get(userName).getFriendRequest().entrySet()) {
                 System.out.println(entry.getValue().getUsername());
@@ -164,6 +154,23 @@ public class PlayerController {
                 Player.getPlayers().get(userName).getFriendRequest().remove(userNameOfApplicant);
             } else {
                 throw new RequestNotFoundException();
+            }
+        } else {
+            throw new UsernameNotFoundException();
+        }
+    }
+
+    public void viewFriendProfile(String userName, String userNameOfIntendedUser) throws UsernameNotFoundException, ThisUserIsNotYourFriendException {
+        if (Player.getPlayers().containsKey(userName) && Player.getPlayers().containsKey(userNameOfIntendedUser)) {
+            if (Player.getPlayers().get(userName).getFriends().containsKey(userNameOfIntendedUser)) {
+                Player player = Player.getPlayers().get(userNameOfIntendedUser);
+                System.out.println("Player name= " + player.getFirstname() + " " + player.getLastname());
+                System.out.println("Plato Age= " + player.getPlatoAge());
+                System.out.println("E-mail= " + player.getEmail());
+                System.out.println("Score= " + player.getScore());
+                //TODO show number of wins & lose
+            } else {
+                throw new ThisUserIsNotYourFriendException();
             }
         } else {
             throw new UsernameNotFoundException();
