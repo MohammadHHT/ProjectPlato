@@ -73,21 +73,23 @@ public class AdminController {
         }
     }
 
-    public void addSuggestion(String userName, String gameName) throws UsernameNotFoundException,
+    public void addSuggestion(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException,
             ThisGameHasAlreadyBeenSuggested {
-        if (Database.getUserByUsername(userName) == null)
-            throw new UsernameNotFoundException();
-//        for (Player player : Player.getPlayers()) {
-//            if (player.getUsername().equals(userName)) {
-//                for (Suggestion suggestion : player.getSuggestions()) {
-//                    if (!suggestion.getGameName().equals(gameName)) {
-//                        Database.addAllSuggestions(new Suggestion(userName, gameName));
-//                    } else
-//                        throw new ThisGameHasAlreadyBeenSuggested();
-//                }
-//            }
-//        }
-        //TODO Suggestion & Message class have problem!
+        if (Player.getPlayers().containsKey(userName)) {
+            if (Game.getGamesName().contains(gameName)) {
+                Suggestion suggestion = new Suggestion(userName, gameName);
+                if (!(Player.getPlayers().get(userName).getSuggestions()
+                        .contains(String.valueOf(suggestion.getSuggestionID())))) {
+                    Player.getPlayers().get(userName).getSuggestions().add(String.valueOf(suggestion.getSuggestionID()));
+                } else {
+                    throw new ThisGameHasAlreadyBeenSuggested();
+                }
+            } else {
+               throw new GameNotFoundException();
+            }
+        } else {
+             throw new UsernameNotFoundException();
+        }
     }
 
     public void viewSuggestion() {

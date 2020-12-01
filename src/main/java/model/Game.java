@@ -7,14 +7,17 @@ public class Game {
     private String gameName;
     private int gameID;
     private static HashMap<Integer, Game> games;
+    private static ArrayList<String> gamesName;
 
     static {
         games = new HashMap<Integer, Game>();
+        gamesName = new ArrayList<String>();
     }
 
     public Game(String gameName, String gameID) {
         this.gameName = gameName;
         //gameID
+        gamesName.add(gameName);
     }
 
     public void run(){
@@ -43,5 +46,9 @@ public class Game {
 
     public static HashMap<Integer, Game> getGames() {
         return games;
+    }
+
+    public static ArrayList<String> getGamesName() {
+        return gamesName;
     }
 }
