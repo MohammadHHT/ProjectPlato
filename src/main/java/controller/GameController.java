@@ -1,5 +1,10 @@
 package controller;
 
+import exception.GameNotFoundException;
+import model.Game;
+import model.GameLog;
+import model.Player;
+
 public class GameController {
 
     public void showScoreboard(String gameName) {
@@ -24,9 +29,15 @@ public class GameController {
         //TODO
     }
 
-    public String  addToFavorites(String gameName) {
-        return ";)";
-        //TODO
+    public void addToFavorites(String userName, String gameName) throws GameNotFoundException {
+        for (Game game : Game.getGames()) {
+            if (game.getGameName().equals(gameName)) {
+                if (Player.getPlayers().containsKey(userName)) {
+                    Player.getPlayers().get(userName).getFavoriteGames().add(game);
+                }
+            } else
+                throw new GameNotFoundException();
+        }
     }
 
     public void runGame(String gameName) {
