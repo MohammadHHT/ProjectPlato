@@ -66,7 +66,7 @@ public class AdminController {
         if (Database.getEventByEventID(eventID) == null)
             throw new EventIDNotFoundException();
         for (Event event : Database.getAllEvents()) {
-            if (event.getEventID().equals(eventID)) {
+            if (event.getEventID() == Integer.parseInt(eventID)) {
                 Database.allEvents.remove(event);
                 System.out.println("Event with " + eventID + " ID deleted successfully.");
             }

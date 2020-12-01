@@ -102,7 +102,7 @@ public class Database {
 
     public static Event getEventByEventID(String eventId) {
         for (Event event : allEvents) {
-            if (event.getEventID().equals(eventId))
+            if (event.getEventID() == Integer.parseInt(eventId))
                 return event;
         }
         return null;

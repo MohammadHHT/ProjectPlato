@@ -28,6 +28,10 @@ public class PlayerController {
         }
     }
 
+    public void joinEvent(String userName, String eventID) {
+        //TODO
+    }
+
     public void viewPlatoMessages(String userName) throws UsernameNotFoundException {
         //TODO
     }

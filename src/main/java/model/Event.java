@@ -9,7 +9,7 @@ public class Event {
     private LocalDate startDate;
     private LocalDate endDate;
     private long eventScore;
-    private String eventID;
+    private int eventID;
     private static ArrayList<Event> events;
 
     static {
@@ -48,7 +48,7 @@ public class Event {
         this.eventScore = eventScore;
     }
 
-    public void setEventID(String eventID) {
+    public void setEventID(int eventID) {
         this.eventID = eventID;
     }
 
@@ -72,8 +72,8 @@ public class Event {
         return eventScore;
     }
 
-    public String getEventID() {
-        return null;
+    public int getEventID() {
+        return eventID;
     }
 
     public static ArrayList<Event> getEvents() {
