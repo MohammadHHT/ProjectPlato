@@ -25,8 +25,16 @@ public class PlayerController {
         }
     }
 
-    public void addFavoriteGame(String userName, String gameName) {
-
+    public void addFavoriteGame(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException {
+        if (Player.getPlayers().containsKey(userName)) {
+            if (Game.getGames().containsKey(Integer.parseInt(gameName))) {
+                Player.getPlayers().get(userName).getFavoriteGames().add(Game.getGames().get(Integer.parseInt(gameName)));
+            } else {
+                throw new GameNotFoundException();
+            }
+        } else {
+            throw new UsernameNotFoundException();
+        }
     }
 
     public void joinEvent(String userName, String eventID, String gameName) throws EventIDNotFoundException {

@@ -1,14 +1,15 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game {
     private String gameName;
     private int gameID;
-    private static ArrayList<Game> games;
+    private static HashMap<Integer, Game> games;
 
     static {
-        games = new ArrayList<Game>();
+        games = new HashMap<Integer, Game>();
     }
 
     public Game(String gameName, String gameID) {
@@ -32,10 +33,6 @@ public class Game {
         this.gameID = gameID;
     }
 
-    public static void setGames(ArrayList<Game> games) {
-        Game.games = games;
-    }
-
     public String getGameName() {
         return gameName;
     }
@@ -44,7 +41,7 @@ public class Game {
         return gameID;
     }
 
-    public static ArrayList<Game> getGames() {
+    public static HashMap<Integer, Game> getGames() {
         return games;
     }
 }
