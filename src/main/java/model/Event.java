@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class Event {
     private String gameName;
@@ -10,10 +11,10 @@ public class Event {
     private LocalDate endDate;
     private long eventScore;
     private int eventID;
-    private static ArrayList<Event> events;
+    private static HashMap<Integer, Event> events;
 
     static {
-        events = new ArrayList<Event>();
+        events = new HashMap<Integer, Event>();
     }
 
     public Event(String gameName, LocalDate startDate, LocalDate endDate, long eventScore) {
@@ -52,10 +53,6 @@ public class Event {
         this.eventID = eventID;
     }
 
-    public static void setEvents(ArrayList<Event> events) {
-        Event.events = events;
-    }
-
     public String getGameName() {
         return null;
     }
@@ -76,7 +73,7 @@ public class Event {
         return eventID;
     }
 
-    public static ArrayList<Event> getEvents() {
+    public static HashMap<Integer, Event> getEvents() {
         return events;
     }
 }

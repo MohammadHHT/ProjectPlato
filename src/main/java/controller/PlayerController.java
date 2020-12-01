@@ -1,9 +1,6 @@
 package controller;
 
-import exception.RequestNotFoundException;
-import exception.ThisUserIsAlreadyYourFriendException;
-import exception.ThisUserIsNotYourFriendException;
-import exception.UsernameNotFoundException;
+import exception.*;
 import model.*;
 
 import java.util.Map;
@@ -28,8 +25,14 @@ public class PlayerController {
         }
     }
 
-    public void joinEvent(String userName, String eventID) {
-        //TODO
+    public void joinEvent(String userName, String eventID, String gameName) throws EventIDNotFoundException {
+        if (Event.getEvents().containsKey(Integer.parseInt(eventID))) {
+            GameController.runGameForEvent(userName, Event.getEvents().get(Integer.parseInt(eventID)).getEventScore(),
+                    gameName);
+        } else {
+            throw new EventIDNotFoundException();
+        }
+
     }
 
     public void viewPlatoMessages(String userName) throws UsernameNotFoundException {
