@@ -60,7 +60,13 @@ public class PlayerController {
     }
 
     public void viewPlatoMessages(String userName) throws UsernameNotFoundException {
-        //TODO
+        if (Player.getPlayers().containsKey(userName)) {
+            for (String inbox : Player.getPlayers().get(userName).getInbox()) {
+                System.out.println(Message.getAllMessages().get(Integer.parseInt(inbox)));
+            }
+        } else {
+            throw new UsernameNotFoundException();
+        }
     }
 
     public void viewLastPlayed(String userName) {
