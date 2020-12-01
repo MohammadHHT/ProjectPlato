@@ -112,6 +112,8 @@ public class AccountManager {
                 System.out.println("INVALID FIELD!");
             }
         }
+
+        //TODO after changes happened, the new info must save in Database.
     }
 
     public void viewPersonalInfo() {
