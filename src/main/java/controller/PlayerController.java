@@ -37,6 +37,10 @@ public class PlayerController {
         }
     }
 
+    public void deleteFavoriteGame(String username, String gameName) {
+
+    }
+
     public void joinEvent(String userName, String eventID, String gameName) throws EventIDNotFoundException {
         if (Event.getEvents().containsKey(Integer.parseInt(eventID))) {
             GameController.runGameForEvent(userName, Event.getEvents().get(Integer.parseInt(eventID)).getEventScore(),
