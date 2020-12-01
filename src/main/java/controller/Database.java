@@ -70,7 +70,7 @@ public class Database {
 
     public static Game getGameByGameID(String gameID) {
         for (Game game : allGames) {
-            if (game.getGameID().equals(gameID))
+            if (game.getGameID() == (Integer.parseInt(gameID)))
                 return game;
         }
         return null;
@@ -78,7 +78,7 @@ public class Database {
 
     public static Suggestion getSuggestionBySuggestionID(String suggestionID) {
         for (Suggestion suggestion : allSuggestions) {
-            if (suggestion.getSuggestionID().equals(suggestionID))
+            if (suggestion.getSuggestionID() == (Integer.parseInt(suggestionID)))
                 return suggestion;
         }
         return null;
@@ -94,7 +94,7 @@ public class Database {
 
     public static GameLog getGameLogByGameLogID(String gameLogID) {
         for (GameLog gameLog : allGameLogs) {
-            if (gameLog.getLogID().equals(gameLogID))
+            if (gameLog.getLogID() == (Integer.parseInt(gameLogID)))
                 return gameLog;
         }
         return null;

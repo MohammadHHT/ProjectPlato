@@ -100,7 +100,7 @@ public class AdminController {
         if (Database.getSuggestionBySuggestionID(suggestionID) == null)
             throw new SuggestionIDNotFoundException();
         for (Suggestion suggestion : Database.getAllSuggestions()) {
-            if (suggestion.getSuggestionID().equals(suggestionID)) {
+            if (suggestion.getSuggestionID() == (Integer.parseInt(suggestionID))) {
                 Database.allSuggestions.remove(suggestion);
                 System.out.println("Suggestion with " + suggestionID + " ID deleted successfully.");
             }

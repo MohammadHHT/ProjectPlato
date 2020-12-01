@@ -7,7 +7,7 @@ public class GameLog {
     private int numberOfWins;
     private int numberOfDefeat;
     private int level;
-    private String logID;
+    private int logID;
     private long takenScore;
     private static ArrayList<GameLog> gameLogs;
 
@@ -32,7 +32,7 @@ public class GameLog {
         this.numberOfWins = numberOfWins;
     }
 
-    public void setLogID(String logID) {
+    public void setLogID(int logID) {
         this.logID = logID;
     }
 
@@ -64,8 +64,8 @@ public class GameLog {
         return gameLogs;
     }
 
-    public String getLogID() {
-        return null;
+    public int getLogID() {
+        return 0;
     }
 
     public long getTakenScore() {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Game {
     private String gameName;
-    private String gameID;
+    private int gameID;
     private static ArrayList<Game> games;
 
     static {
@@ -28,7 +28,7 @@ public class Game {
         this.gameName = gameName;
     }
 
-    public void setGameID(String gameID) {
+    public void setGameID(int gameID) {
         this.gameID = gameID;
     }
 
@@ -40,7 +40,7 @@ public class Game {
         return gameName;
     }
 
-    public String getGameID() {
+    public int getGameID() {
         return gameID;
     }
 
