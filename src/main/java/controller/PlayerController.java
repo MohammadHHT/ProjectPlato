@@ -37,8 +37,16 @@ public class PlayerController {
         }
     }
 
-    public void deleteFavoriteGame(String username, String gameName) {
-
+    public void deleteFavoriteGame(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException {
+        if (Player.getPlayers().containsKey(userName)) {
+            if (Game.getGames().containsKey(Integer.parseInt(gameName))) {
+                Player.getPlayers().get(userName).getFavoriteGames().remove(Game.getGames().get(Integer.parseInt(gameName)));
+            } else {
+                throw new GameNotFoundException();
+            }
+        } else {
+            throw new UsernameNotFoundException();
+        }
     }
 
     public void joinEvent(String userName, String eventID, String gameName) throws EventIDNotFoundException {
