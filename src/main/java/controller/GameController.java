@@ -1,6 +1,7 @@
 package controller;
 
 import exception.GameNotFoundException;
+import exception.UsernameNotFoundException;
 import model.Game;
 import model.GameLog;
 import model.Player;
@@ -53,8 +54,12 @@ public class GameController {
         //TODO
     }
 
-    public long showPoints(String gameName) {
-        return 0;
-        //TODO
+    public void showPoints(String userName, String logID) throws UsernameNotFoundException {
+        if (Player.getPlayers().containsKey(userName)) {
+            if (Player.getPlayers().get(userName).getGameLogs().contains(logID)) {
+                System.out.println(GameLog.getAllGameLogs().get(Integer.parseInt(logID)).getTakenScore());
+            }
+        } else
+            throw new UsernameNotFoundException();
     }
 }
