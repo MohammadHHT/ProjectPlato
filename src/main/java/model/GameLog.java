@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameLog {
     private int numberOfTimesPlayed;
@@ -9,10 +10,10 @@ public class GameLog {
     private int level;
     private int logID;
     private long takenScore;
-    private static ArrayList<GameLog> gameLogs;
+    private static HashMap<Integer, GameLog> allGameLogs;
 
     static {
-        gameLogs = new ArrayList<GameLog>();
+        allGameLogs = new HashMap<Integer, GameLog>();
     }
 
     public GameLog() {
@@ -22,6 +23,7 @@ public class GameLog {
         this.level = 0;
         this.takenScore = 0;
         //logID
+        allGameLogs.put(logID, this);
     }
 
     public void setNumberOfTimesPlayed(int numberOfTimesPlayed) {
@@ -40,10 +42,6 @@ public class GameLog {
         this.takenScore = takenScore;
     }
 
-    public static void setGameLogs(ArrayList<GameLog> gameLogs) {
-        GameLog.gameLogs = gameLogs;
-    }
-
     public void setNumberOfDefeat(int numberOfDefeat) {
         this.numberOfDefeat = numberOfDefeat;
     }
@@ -60,8 +58,8 @@ public class GameLog {
         return numberOfTimesPlayed;
     }
 
-    public static ArrayList<GameLog> getGameLogs() {
-        return gameLogs;
+    public static HashMap<Integer, GameLog> getAllGameLogs() {
+        return allGameLogs;
     }
 
     public int getLogID() {

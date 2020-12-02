@@ -13,7 +13,7 @@ public class Player extends User {
     private ArrayList<Game> favoriteGames;
     private ArrayList<String> suggestions;
     private ArrayList<String> inbox;
-//    private long gameLogID;
+    private ArrayList<String> gameLogs;
 
     static {
         players = new HashMap<String, Player>();
@@ -29,6 +29,7 @@ public class Player extends User {
         this.favoriteGames = new ArrayList<Game>();
         this.suggestions = new ArrayList<String>();
         this.inbox = new ArrayList<String>();
+        this.gameLogs = new ArrayList<String>();
     }
 
 
@@ -105,5 +106,9 @@ public class Player extends User {
 
     public ArrayList<String> getSuggestions() {
         return suggestions;
+    }
+
+    public ArrayList<String> getGameLogs() {
+        return gameLogs;
     }
 }
