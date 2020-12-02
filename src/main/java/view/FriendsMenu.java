@@ -23,31 +23,38 @@ public class FriendsMenu extends Menu {
     }
 
     private void showFriends() {
-        //todo
+        Client.getClient().send("user showFriends");
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void remove(String username) {
-        //todo
+        Client.getClient().send("user removeFriend " + username);
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void viewUserProfile(String username) {
-        //todo
+        Client.getClient().send("user viewFriendProfile " + username);
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void add(String username) {
-        //todo
+        Client.getClient().send("user addFriend " + username);
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void showFriendRequests() {
-        //todo
+        Client.getClient().send("user showFriendRequests");
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void accept(String username) {
-        //todo
+        Client.getClient().send("user acceptFriend " + username);
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void decline(String username) {
-        //todo
+        Client.getClient().send("user declineFriend " + username);
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void commandProcessor(String command) {

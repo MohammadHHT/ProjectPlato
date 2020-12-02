@@ -66,26 +66,29 @@ public class AdminController {
         if (Database.getEventByEventID(eventID) == null)
             throw new EventIDNotFoundException();
         for (Event event : Database.getAllEvents()) {
-            if (event.getEventID().equals(eventID)) {
+            if (event.getEventID() == Integer.parseInt(eventID)) {
                 Database.allEvents.remove(event);
                 System.out.println("Event with " + eventID + " ID deleted successfully.");
             }
         }
     }
 
-    public void addSuggestion(String userName, String gameName) throws UsernameNotFoundException,
+    public void addSuggestion(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException,
             ThisGameHasAlreadyBeenSuggested {
-        if (Database.getUserByUsername(userName) == null)
-            throw new UsernameNotFoundException();
-        for (Player player : Player.getPlayers()) {
-            if (player.getUsername().equals(userName)) {
-                for (Suggestion suggestion : player.getSuggestions()) {
-                    if (!suggestion.getGameName().equals(gameName)) {
-                        Database.addAllSuggestions(new Suggestion(userName, gameName));
-                    } else
-                        throw new ThisGameHasAlreadyBeenSuggested();
+        if (Player.getPlayers().containsKey(userName)) {
+            if (Game.getGamesName().contains(gameName)) {
+                Suggestion suggestion = new Suggestion(userName, gameName);
+                if (!(Player.getPlayers().get(userName).getSuggestions()
+                        .contains(String.valueOf(suggestion.getSuggestionID())))) {
+                    Player.getPlayers().get(userName).getSuggestions().add(String.valueOf(suggestion.getSuggestionID()));
+                } else {
+                    throw new ThisGameHasAlreadyBeenSuggested();
                 }
+            } else {
+               throw new GameNotFoundException();
             }
+        } else {
+             throw new UsernameNotFoundException();
         }
     }
 
@@ -99,7 +102,7 @@ public class AdminController {
         if (Database.getSuggestionBySuggestionID(suggestionID) == null)
             throw new SuggestionIDNotFoundException();
         for (Suggestion suggestion : Database.getAllSuggestions()) {
-            if (suggestion.getSuggestionID().equals(suggestionID)) {
+            if (suggestion.getSuggestionID() == (Integer.parseInt(suggestionID))) {
                 Database.allSuggestions.remove(suggestion);
                 System.out.println("Suggestion with " + suggestionID + " ID deleted successfully.");
             }

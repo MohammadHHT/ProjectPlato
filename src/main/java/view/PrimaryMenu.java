@@ -30,4 +30,9 @@ public class PrimaryMenu extends Menu {
     public void run() {
 
     }
+
+    @Override
+    public void next() {
+
+    }
 }

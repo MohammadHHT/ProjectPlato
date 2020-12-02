@@ -9,6 +9,9 @@ public class UserCommands implements ResolveCommand {
         return userCommands;
     }
 
+    // user commands can be :register, login, delete, 
+    // showFriends, removeFriend, viewFriendProfile, addFriend, showFriendRequests, acceptFriend, declineFriend
+
     @Override
     public void resolveCommand(String[] tokens) {
         if (tokens[1].equals("register")) {

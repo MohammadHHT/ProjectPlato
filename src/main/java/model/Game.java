@@ -1,19 +1,23 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game {
     private String gameName;
-    private String gameID;
-    private static ArrayList<Game> games;
+    private int gameID;
+    private static HashMap<Integer, Game> games;
+    private static ArrayList<String> gamesName;
 
     static {
-        games = new ArrayList<Game>();
+        games = new HashMap<Integer, Game>();
+        gamesName = new ArrayList<String>();
     }
 
     public Game(String gameName, String gameID) {
         this.gameName = gameName;
         //gameID
+        gamesName.add(gameName);
     }
 
     public void run(){
@@ -28,23 +32,23 @@ public class Game {
         this.gameName = gameName;
     }
 
-    public void setGameID(String gameID) {
+    public void setGameID(int gameID) {
         this.gameID = gameID;
-    }
-
-    public static void setGames(ArrayList<Game> games) {
-        Game.games = games;
     }
 
     public String getGameName() {
         return gameName;
     }
 
-    public String getGameID() {
+    public int getGameID() {
         return gameID;
     }
 
-    public static ArrayList<Game> getGames() {
+    public static HashMap<Integer, Game> getGames() {
         return games;
+    }
+
+    public static ArrayList<String> getGamesName() {
+        return gamesName;
     }
 }

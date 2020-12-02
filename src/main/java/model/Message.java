@@ -1,39 +1,40 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Message {
-    private String massageID;
-    private String playerID;
+    private int massageID;
+    private int playerID;
     private String message;
     // can not import LocalDateTime!!
-    private static ArrayList<Message> allMessages;
+    private static HashMap<Integer, Message> allMessages;
 
     static {
-        allMessages = new ArrayList<Message>();
+        allMessages = new HashMap<Integer, Message>();
     }
 
-    public Message(String playerID, String message) {
+    public Message(int playerID, String message) {
         this.playerID = playerID;
         this.message = message;
         //LocalDateTime
         //massageID
-        allMessages.add(this);
+        allMessages.put(massageID, this);
     }
 
-    public static ArrayList<Message> getAllMessages() {
+    public static HashMap<Integer, Message> getAllMessages() {
         return allMessages;
     }
 
-    public String getPlayerID() {
-        return null;
+    public int getPlayerID() {
+        return 0;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public String getMassageID() {
-        return null;
+    public int getMassageID() {
+        return 0;
     }
 }
