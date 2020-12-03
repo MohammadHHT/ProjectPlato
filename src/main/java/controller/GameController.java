@@ -39,8 +39,34 @@ public class GameController {
         //TODO
     }
 
-    public void showLog(String gameName) {
-        //TODO
+    public void showLog(String userName, String gameName) {
+        if (gameName.equalsIgnoreCase("Dots And Boxes")) {
+            if (Player.getPlayers().containsKey(userName)) {
+                System.out.println("Level: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
+                        get(userName).getGameLogs().get(0))).getLevel() + "\n" +
+                        "Score: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
+                        get(userName).getGameLogs().get(0))).getTakenScore() + "\n" +
+                        "Wins: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
+                        get(userName).getGameLogs().get(0))).getNumberOfWins() + "\n" +
+                        "Defeats: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
+                        get(userName).getGameLogs().get(0))).getNumberOfDefeat() + "\n" +
+                        "Number of played: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
+                        get(userName).getGameLogs().get(0))).getNumberOfTimesPlayed());
+            }
+        } else if (gameName.equalsIgnoreCase("Sea Battle")) {
+            if (Player.getPlayers().containsKey(userName)) {
+                System.out.println("Level: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
+                        get(userName).getGameLogs().get(1))).getLevel() + "\n" +
+                        "Score: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
+                        get(userName).getGameLogs().get(1))).getTakenScore() + "\n" +
+                        "Wins: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
+                        get(userName).getGameLogs().get(1))).getNumberOfWins() + "\n" +
+                        "Defeats: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
+                        get(userName).getGameLogs().get(1))).getNumberOfDefeat() + "\n" +
+                        "Number of played: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
+                        get(userName).getGameLogs().get(1))).getNumberOfTimesPlayed());
+            }
+        }
     }
 
     public int showWinsCount(String gameName) {
