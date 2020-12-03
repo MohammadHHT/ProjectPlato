@@ -94,9 +94,22 @@ public class GameController {
         }
     }
 
-    public int showPlayedCount(String gameName) {
-        return 0;
-        //TODO
+    public void showPlayedCount(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException {
+        if (Player.getPlayers().containsKey(userName)) {
+            if (gameName.equalsIgnoreCase("Dots And Boxes")) {
+                System.out.println("Number of played in " + gameName + " game: " +
+                        GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().get(userName)
+                                .getGameLogs().get(0))).getNumberOfTimesPlayed());
+            } else if (gameName.equalsIgnoreCase("Sea Battle")) {
+                System.out.println("Number of played in " + gameName + " game: " +
+                        GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().get(userName)
+                                .getGameLogs().get(1))).getNumberOfTimesPlayed());
+            } else {
+                throw new GameNotFoundException();
+            }
+        } else {
+            throw new UsernameNotFoundException();
+        }
     }
 
     public void runGame(String gameName) {
