@@ -112,16 +112,11 @@ public class GameController {
         }
     }
 
-    public void runGame(String gameName) {
+    public static void runGame(String userName, String gameName) {
         //TODO
     }
-
 
     public static void runGameForEvent(String userName, long EventScore, String gameName) {
-        //TODO
-    }
-
-    public static void runGameFromSuggestion(String userName, String gameName) {
         //TODO
     }
 

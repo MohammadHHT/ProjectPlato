@@ -72,7 +72,7 @@ public class PlayerController {
     public void playSuggestedGame(String userName, String suggestionID) throws UsernameNotFoundException, SuggestionIDNotFoundException {
         if (Player.getPlayers().containsKey(userName)) {
             if (Suggestion.getAllSuggestion().containsKey(Integer.parseInt(suggestionID))) {
-                GameController.runGameFromSuggestion(Player.getPlayers().get(userName).getUsername(),
+                GameController.runGame(Player.getPlayers().get(userName).getUsername(),
                         Suggestion.getAllSuggestion().get(Integer.parseInt(suggestionID)).getGameName());
             } else {
                 throw new SuggestionIDNotFoundException();
