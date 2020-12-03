@@ -4,6 +4,7 @@ import exception.GameNotFoundException;
 import exception.UsernameNotFoundException;
 import model.GameLog;
 import model.Player;
+import model.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class GameController {
         //TODO
     }
 
-    public void showLog(String userName, String gameName) {
+    public void showLog(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException {
         if (gameName.equalsIgnoreCase("Dots And Boxes")) {
             if (Player.getPlayers().containsKey(userName)) {
                 System.out.println("Level: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
@@ -52,6 +53,8 @@ public class GameController {
                         get(userName).getGameLogs().get(0))).getNumberOfDefeat() + "\n" +
                         "Number of played: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
                         get(userName).getGameLogs().get(0))).getNumberOfTimesPlayed());
+            } else {
+                throw new UsernameNotFoundException();
             }
         } else if (gameName.equalsIgnoreCase("Sea Battle")) {
             if (Player.getPlayers().containsKey(userName)) {
@@ -65,13 +68,30 @@ public class GameController {
                         get(userName).getGameLogs().get(1))).getNumberOfDefeat() + "\n" +
                         "Number of played: " + GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().
                         get(userName).getGameLogs().get(1))).getNumberOfTimesPlayed());
+            } else {
+                throw new UsernameNotFoundException();
             }
+        } else {
+            throw new GameNotFoundException();
         }
     }
 
-    public int showWinsCount(String gameName) {
-        return 0;
-        //TODO
+    public void showWinsCount(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException {
+        if (Player.getPlayers().containsKey(userName)) {
+            if (gameName.equalsIgnoreCase("Dots And Boxes")) {
+                System.out.println("Number of Wins in " + gameName + " game: " +
+                        GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().get(userName)
+                                .getGameLogs().get(0))).getNumberOfWins());
+            } else if (gameName.equalsIgnoreCase("Sea Battle")) {
+                System.out.println("Number of Wins in " + gameName + " game: " +
+                        GameLog.getAllGameLogs().get(Integer.parseInt(Player.getPlayers().get(userName)
+                                .getGameLogs().get(1))).getNumberOfWins());
+            } else {
+                throw new GameNotFoundException();
+            }
+        } else {
+            throw new UsernameNotFoundException();
+        }
     }
 
     public int showPlayedCount(String gameName) {
