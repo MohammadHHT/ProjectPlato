@@ -8,31 +8,38 @@ import model.User;
 
 public class AccountManager {
     private static final AccountManager accountManager = new AccountManager();
+    static boolean hasExistAdmin = false;
 
     private AccountManager() {
     }
 
-    private User loggedInUser = null;
+    private Admin loggedInAdmin = null;
+    private Player loggedInPlayer = null;
 
-    public User getLoggedInUser() {
-        return loggedInUser;
+    public Admin getLoggedInAdmin() {
+        return loggedInAdmin;
     }
 
-    public void register(String firstName, String lastName, String username, String password, String email, String phoneNumber) throws InvalidInputException, UsernameIsAlreadyTakenException {
-        int hasExistAdmin = 0;
-        if (hasExistAdmin > 0) {
-            System.out.println("Please create a admin account to start!");
+    public Player getLoggedInPlayer() {
+        return loggedInPlayer;
+    }
+
+    public void register(String firstName, String lastName, String username, String password, String email, String phoneNumber) throws
+            InvalidInputException, UsernameIsAlreadyTakenException {
+        if (!hasExistAdmin) {
+            System.out.println("Please create a admin account to start.");
             try {
-                Database.addAllUsers(new Admin(firstName, lastName, username, password, email, phoneNumber));
+                new Admin(firstName, lastName, username, password, email, phoneNumber);
+                hasExistAdmin = true;
             } catch (Exception e) {
                 throw new InvalidInputException();
             }
         }
-        if (Database.getUserByUsername(username) != null) {
+        if (Player.getPlayers().containsKey(username)) {
             throw new UsernameIsAlreadyTakenException();
         } else {
             try {
-                Database.addAllUsers(new Player(firstName, lastName, username, password, email, phoneNumber));
+                Player.getPlayers().put(username, new Player(firstName, lastName, username, password, email, phoneNumber));
                 System.out.println("Account created successfully");
             } catch (Exception e) {
                 throw new InvalidInputException();
@@ -41,17 +48,17 @@ public class AccountManager {
     }
 
     public void logIn(String username, String password) {
-        if (loggedInUser != null) {
+        if (loggedInAdmin != null || loggedInPlayer != null) {
             System.out.println("You have already logged in!");
         } else {
-            User user = Database.getUserByUsername(username);
-            if (user == null) {
+            Admin admin = Admin.getAdmin();
+            Player player = Player.getPlayers().get(username);
+            if (player == null) {
                 System.out.println("No user with this info!");
             } else {
-                if (!user.getPassword().contains(password)) {
+                if (!admin.getPassword().equals(password) || !player.getPassword().equals(password)) {
                     System.out.println("Wrong password!");
                 } else {
-                    loggedInUser = user;
                     System.out.println("Welcome " + user.getUsername());
                 }
             }
