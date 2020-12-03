@@ -7,6 +7,7 @@ import model.Player;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class GameController {
 
@@ -25,7 +26,13 @@ public class GameController {
         } else {
             throw new GameNotFoundException();
         }
-        //TODO sorting
+        TreeMap<String, Long> sorted = new TreeMap<>();
+        sorted.putAll(allPlayersScore);
+        sorted.entrySet().stream()
+                .sorted(Map.Entry.<String, Long> comparingByValue().reversed())
+                .forEach(n -> {
+                    System.out.println(n.getKey() + " " + n.getValue());
+                });
     }
 
     public void details(String gameName) {
