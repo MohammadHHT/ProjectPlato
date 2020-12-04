@@ -4,6 +4,7 @@ import exception.*;
 import model.*;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 public class AdminController {
 
@@ -17,7 +18,16 @@ public class AdminController {
         return "The event was created successfully.";
     }
 
-    public void viewEvent() {
+    public void viewEvent() throws ExpiredEventException {
+        for (Map.Entry<Integer, Event> entry : Event.getEvents().entrySet()) {
+            if (entry.getValue().getStartDate().isBefore(entry.getValue().getEndDate())) {
+                System.out.println("Game name: " + entry.getValue().getGameName() + "\n" +
+                        "Event ID: " + entry.getValue().getEventID() + "\n" +
+                        entry.getValue().getStartDate() + "to" + entry.getValue().getEndDate() + "\n" +
+                        "Score" + entry.getValue().getEventScore());
+            } else
+                throw new ExpiredEventException();
+        }
         for (Event allEvent : Database.getAllEvents()) {
             if (allEvent.getStartDate().isBefore(allEvent.getEndDate())) {
                 System.out.println("Game name: " + allEvent.getGameName() + "\n" +
