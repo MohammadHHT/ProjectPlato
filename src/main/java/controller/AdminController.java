@@ -9,15 +9,12 @@ public class AdminController {
 
     public String addEvent(String gameName, LocalDate startDate, LocalDate endDate, long eventScore) throws
             InvalidGameNameException, InvalidDateException {
-        for (Game allGame : Database.getAllGames()) {
-            if (!allGame.getGameName().equals(gameName))
-                throw new InvalidGameNameException();
-        }
+        if (!(Game.getGamesName().contains(gameName)))
+            throw new InvalidGameNameException();
         if (startDate.isAfter(endDate) || endDate.isBefore(startDate))
             throw new InvalidDateException();
-            Event event = new Event(gameName, startDate, endDate, eventScore);
-            Database.addAllEvents(event);
-            return "The event was created successfully.";
+        new Event(gameName, startDate, endDate, eventScore);
+        return "The event was created successfully.";
     }
 
     public void viewEvent() {
