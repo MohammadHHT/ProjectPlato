@@ -23,6 +23,7 @@ public class Event {
         this.endDate = endDate;
         this.eventScore = eventScore;
         //EventID
+        events.put(eventID, this);
     }
 
     public void addNewEvent(){
