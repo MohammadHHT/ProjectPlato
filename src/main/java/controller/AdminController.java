@@ -103,24 +103,19 @@ public class AdminController {
     }
 
     public void viewUsers() {
-        for (User user : Database.getAllUsers()) {
-            if (user instanceof Player) {
-                System.out.println(user.getUsername());
-            }
+        for (Map.Entry<String, Player> entry : Player.getPlayers().entrySet()) {
+            System.out.println("Username: " + entry.getValue().getUsername());
         }
     }
 
     public void viewUserProfile(String userName) throws UsernameNotFoundException {
-        if (Database.getUserByUsername(userName) == null)
+        if (Player.getPlayers().containsKey(userName)) {
+            Player player = Player.getPlayers().get(userName);
+            System.out.println(player.getFirstname() + " " + player.getLastname() + "\n"
+                    + player.getUsername() + "\n"
+                    + player.getEmail() + " " + player.getPhoneNumber() + "\n"
+                    + player.getScore() + " " + player.getFavoriteGames());
+        } else
             throw new UsernameNotFoundException();
-        for (User user : Database.getAllUsers()) {
-            if (user instanceof Player && user.getUsername().equals(userName)) {
-                System.out.println(user.getFirstname() + " " + user.getLastname() + "\n"
-                + user.getUsername() + "\n"
-                + user.getEmail() + " " + user.getPhoneNumber() + "\n"
-                + ((Player) user).getScore() + " " + ((Player) user).getFavoriteGames());
-            }
-            break;
-        }
     }
 }
