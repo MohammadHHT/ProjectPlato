@@ -95,14 +95,11 @@ public class AdminController {
     }
 
     public void removeSuggestion(String suggestionID) throws SuggestionIDNotFoundException {
-        if (Database.getSuggestionBySuggestionID(suggestionID) == null)
+        if (Suggestion.getAllSuggestion().containsKey(Integer.parseInt(suggestionID))) {
+            Suggestion.getAllSuggestion().remove(Integer.parseInt(suggestionID));
+            System.out.println("Suggestion with " + suggestionID + " ID deleted successfully.");
+        } else
             throw new SuggestionIDNotFoundException();
-        for (Suggestion suggestion : Database.getAllSuggestions()) {
-            if (suggestion.getSuggestionID() == (Integer.parseInt(suggestionID))) {
-                Database.allSuggestions.remove(suggestion);
-                System.out.println("Suggestion with " + suggestionID + " ID deleted successfully.");
-            }
-        }
     }
 
     public void viewUsers() {
