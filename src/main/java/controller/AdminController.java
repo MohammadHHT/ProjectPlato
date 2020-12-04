@@ -3,6 +3,7 @@ package controller;
 import exception.*;
 import model.*;
 
+import javax.naming.InsufficientResourcesException;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -28,27 +29,18 @@ public class AdminController {
             } else
                 throw new ExpiredEventException();
         }
-        for (Event allEvent : Database.getAllEvents()) {
-            if (allEvent.getStartDate().isBefore(allEvent.getEndDate())) {
-                System.out.println("Game name: " + allEvent.getGameName() + "\n" +
-                        "Event ID: " + allEvent.getEventID() + "\n" +
-                        allEvent.getStartDate() + "to" + allEvent.getEndDate() + "\n" +
-                        "Score" + allEvent.getEventScore());
-            }
-        }
     }
 
     public void editEvent(String eventID, String field, String newValue) throws GameNotFoundException,
             InvalidDateException, EventIDNotFoundException {
-        Event event;
-        if ((event = Database.getEventByEventID(eventID)) != null) {
+        Event event = Event.getEvents().get(Integer.parseInt(eventID));
+        if (Event.getEvents().containsKey(Integer.parseInt(eventID))) {
             if (field.equalsIgnoreCase("Game name")){
-                for (Game game : Database.getAllGames()) {
-                    if (!game.getGameName().equals(newValue))
-                        throw new GameNotFoundException();
-                        event.setGameName(newValue);
-                        System.out.println("Successfully changed to a new value.");
-                }
+                if (Game.getGamesName().contains(newValue)) {
+                    event.setGameName(newValue);
+                    System.out.println("Successfully changed to a new value.");
+                } else
+                    throw new GameNotFoundException();
             } else if (field.equalsIgnoreCase("Start data")) {
                 if (LocalDate.parse(newValue).isBefore(LocalDate.now()) ||
                         LocalDate.parse(newValue).isAfter(event.getEndDate()) ||
@@ -66,7 +58,8 @@ public class AdminController {
                 event.setEventScore(Long.parseLong(newValue));
                 System.out.println("Successfully changed to a new value.");
             }
-        } else throw new EventIDNotFoundException();
+        } else
+            throw new EventIDNotFoundException();
     }
 
     public void removeEvent(String eventID) throws EventIDNotFoundException {
