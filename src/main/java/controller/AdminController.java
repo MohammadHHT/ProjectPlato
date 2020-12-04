@@ -89,8 +89,8 @@ public class AdminController {
     }
 
     public void viewSuggestion() {
-        for (Suggestion suggestion : Database.getAllSuggestions()) {
-            System.out.println(suggestion.getPlayerID() + ": " + suggestion.getGameName());
+        for (Map.Entry<Integer, Suggestion> entry : Suggestion.getAllSuggestion().entrySet()) {
+            System.out.println(entry.getValue().getPlayerID() + ": " + entry.getValue().getGameName());
         }
     }
 
