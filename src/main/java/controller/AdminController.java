@@ -63,14 +63,10 @@ public class AdminController {
     }
 
     public void removeEvent(String eventID) throws EventIDNotFoundException {
-        if (Database.getEventByEventID(eventID) == null)
+        if (!(Event.getEvents().containsKey(Integer.parseInt(eventID))))
             throw new EventIDNotFoundException();
-        for (Event event : Database.getAllEvents()) {
-            if (event.getEventID() == Integer.parseInt(eventID)) {
-                Database.allEvents.remove(event);
-                System.out.println("Event with " + eventID + " ID deleted successfully.");
-            }
-        }
+        Event.getEvents().remove(Integer.parseInt(eventID));
+        System.out.println("Event with " + eventID + " ID deleted successfully.");
     }
 
     public void addSuggestion(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException,
