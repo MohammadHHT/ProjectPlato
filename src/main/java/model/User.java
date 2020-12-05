@@ -1,41 +1,50 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 public class User {
-    private String firstname;
-    private String lastname;
-    private String username;
+    private static HashMap<String, User> users;
+
     private int userID;
+    private String firstName;
+    private String lastName;
+    private String username;
     private String password;
     private String email;
     private String phoneNumber;
-    private static ArrayList<User> users;
 
     static {
-        users = new ArrayList<User>();
+        users = new HashMap<>();
     }
 
-    public User(String firstname, String lastname, String username, String password, String email, String phoneNumber) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber) {
+        users.put(username, this);
+        userID = IDGenerator();
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        //userID
+    }
+
+    private int IDGenerator() {
+        Random random = new Random();
+        return (username.charAt(0) % 100) + ((username.charAt(1) % 100) * 100) + ((username.charAt(2) % 100) * 10000) + (random.nextInt(10000) * 1000000);
     }
 
     public void daysGone() {
         //TODO
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setUsername(String username) {
@@ -54,12 +63,12 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getUsername() {
@@ -67,7 +76,7 @@ public class User {
     }
 
     public int getUserID() {
-        return 0;
+        return userID;
     }
 
     public String getPassword() {
@@ -82,7 +91,7 @@ public class User {
         return phoneNumber;
     }
 
-    public static ArrayList<User> getUsers() {
+    public static HashMap<String, User> getUsers() {
         return users;
     }
 }

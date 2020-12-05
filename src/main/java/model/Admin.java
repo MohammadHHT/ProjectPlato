@@ -1,14 +1,16 @@
 package model;
 
-public class Admin extends User {
+import java.util.HashMap;
 
-    private static Admin admin;
-    public Admin(String firstname, String lastname, String username, String password, String email, String phoneNumber) {
-        super(firstname, lastname, username, password, email, phoneNumber);
-        admin = this;
+public class Admin extends User {
+    private static HashMap<String, Admin> admins;
+
+    public Admin(String firstName, String lastName, String username, String password, String email, String phoneNumber) {
+        super(firstName, lastName, username, password, email, phoneNumber);
+        admins.put(username, this);
     }
 
-    public static Admin getAdmin() {
-        return admin;
+    public static HashMap<String, Admin> getAdmins() {
+        return admins;
     }
 }

@@ -22,6 +22,6 @@ public class Client {
     }
 
     public void receive(String content) {
-
+        response = content;
     }
 }

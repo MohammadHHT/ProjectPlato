@@ -1,6 +1,7 @@
 package controller;
 
 import controller.Command.Command;
+import view.Client;
 
 public class Server {
     private static final Server server = new Server();
@@ -16,6 +17,6 @@ public class Server {
     }
 
     public void send(String content) {
-        //TODO
+        Client.getClient().receive(content);
     }
 }

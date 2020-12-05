@@ -19,7 +19,6 @@ public class RegisterMenu extends Menu {
 
     @Override
     public void run() {
-        Out:
         while (true) {
             if (getFirstName()) {
                 while (true) {
@@ -36,7 +35,7 @@ public class RegisterMenu extends Menu {
                                                         if (Client.getClient().getResponse().equals("successfully registered")) {
                                                             next();
                                                         }
-                                                        break Out;
+                                                        return;
                                                     }
                                                 }
                                             }

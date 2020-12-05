@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player extends User {
+    private static HashMap<String, Player> players;
+
     private int platoAge;
     private double money;
     private long score;
-    private static HashMap<String, Player> players;
     private HashMap<String, Player> friends;
     private HashMap<String, Player> friendRequest;
     private ArrayList<Game> favoriteGames;
@@ -16,26 +17,21 @@ public class Player extends User {
     private ArrayList<String> gameLogs;
 
     static {
-        players = new HashMap<String, Player>();
+        players = new HashMap<>();
     }
 
-    public Player(String firstname, String lastname, String username, String password, String email, String phoneNumber) {
-        super(firstname, lastname, username, password, email, phoneNumber);
+    public Player(String firstName, String lastName, String username, String password, String email, String phoneNumber) {
+        super(firstName, lastName, username, password, email, phoneNumber);
+        players.put(username, this);
         this.money = 0;
         this.score = 0;
         this.platoAge = 0;
-        this.friends = new HashMap<String, Player>();
-        this.friendRequest = new HashMap<String, Player>();
-        this.favoriteGames = new ArrayList<Game>();
-        this.suggestions = new ArrayList<String>();
-        this.inbox = new ArrayList<String>();
-        this.gameLogs = new ArrayList<String>();
-    }
-
-
-
-    public void addNewPlayer(Player player) {
-        //TODO
+        this.friends = new HashMap<>();
+        this.friendRequest = new HashMap<>();
+        this.favoriteGames = new ArrayList<>();
+        this.suggestions = new ArrayList<>();
+        this.inbox = new ArrayList<>();
+        this.gameLogs = new ArrayList<>();
     }
 
     //TODO add process to accept or decline friend

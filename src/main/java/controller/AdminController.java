@@ -110,7 +110,7 @@ public class AdminController {
     public void viewUserProfile(String userName) throws UsernameNotFoundException {
         if (Player.getPlayers().containsKey(userName)) {
             Player player = Player.getPlayers().get(userName);
-            System.out.println(player.getFirstname() + " " + player.getLastname() + "\n"
+            System.out.println(player.getFirstName() + " " + player.getLastName() + "\n"
                     + player.getUsername() + "\n"
                     + player.getEmail() + " " + player.getPhoneNumber() + "\n"
                     + player.getScore() + " " + player.getFavoriteGames());

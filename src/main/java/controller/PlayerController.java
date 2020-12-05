@@ -183,7 +183,7 @@ public class PlayerController {
         if (Player.getPlayers().containsKey(userName) && Player.getPlayers().containsKey(userNameOfIntendedUser)) {
             if (Player.getPlayers().get(userName).getFriends().containsKey(userNameOfIntendedUser)) {
                 Player player = Player.getPlayers().get(userNameOfIntendedUser);
-                System.out.println("Player name= " + player.getFirstname() + " " + player.getLastname());
+                System.out.println("Player name= " + player.getFirstName() + " " + player.getLastName());
                 System.out.println("Plato Age= " + player.getPlatoAge());
                 System.out.println("E-mail= " + player.getEmail());
                 System.out.println("Score= " + player.getScore());

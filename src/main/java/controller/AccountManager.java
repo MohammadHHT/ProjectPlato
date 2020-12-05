@@ -1,76 +1,69 @@
 package controller;
 
-import exception.InvalidInputException;
-import exception.UsernameIsAlreadyTakenException;
+import exception.*;
 import model.Admin;
 import model.Player;
 import model.User;
 
+import javax.jws.soap.SOAPBinding;
+
 public class AccountManager {
     private static final AccountManager accountManager = new AccountManager();
-    static boolean hasExistAdmin = false;
+
+    private User loggedInUser = null;
 
     private AccountManager() {
     }
 
-    private Admin loggedInAdmin = null;
-    private Player loggedInPlayer = null;
-
-    public Admin getLoggedInAdmin() {
-        return loggedInAdmin;
+    public static AccountManager getAccountManager() {
+        return accountManager;
     }
 
-    public Player getLoggedInPlayer() {
-        return loggedInPlayer;
+    public User getLoggedInUser() {
+        return loggedInUser;
     }
 
-    public void register(String firstName, String lastName, String username, String password, String email, String phoneNumber) throws
-            InvalidInputException, UsernameIsAlreadyTakenException {
-        if (!hasExistAdmin) {
-            System.out.println("Please create a admin account to start.");
-            try {
-                new Admin(firstName, lastName, username, password, email, phoneNumber);
-                hasExistAdmin = true;
-            } catch (Exception e) {
-                throw new InvalidInputException();
-            }
-        }
-        if (Player.getPlayers().containsKey(username)) {
+    public void register(String firstName, String lastName, String username, String password, String email, String phoneNumber) throws UsernameIsAlreadyTakenException {
+        if (User.getUsers().containsKey(username)) {
             throw new UsernameIsAlreadyTakenException();
         } else {
-            try {
-                Player.getPlayers().put(username, new Player(firstName, lastName, username, password, email, phoneNumber));
-                System.out.println("Account created successfully");
-            } catch (Exception e) {
-                throw new InvalidInputException();
-            }
-        }
-    }
-
-    public void logIn(String username, String password) {
-        if (loggedInAdmin != null || loggedInPlayer != null) {
-            System.out.println("You have already logged in!");
-        } else {
-            Admin admin = Admin.getAdmin();
-            Player player = Player.getPlayers().get(username);
-            if (player == null) {
-                System.out.println("No user with this info!");
+            if (User.getUsers().size() == 0) {
+                loggedInUser = new Admin(firstName, lastName, username, password, email, phoneNumber);
             } else {
-                if (!admin.getPassword().equals(password) || !player.getPassword().equals(password)) {
-                    System.out.println("Wrong password!");
-                } else {
-                    System.out.println("Welcome " + user.getUsername());
-                }
+                loggedInUser = new Player(firstName, lastName, username, password, email, phoneNumber);
             }
         }
     }
 
-    public void logOut() {
-        if (loggedInUser == null) {
-            System.out.println("You haven't already logged in!");
+    public void login(String username, String password) throws AlreadyLoggedIn, UsernameNotFoundException, IncorrectPasswordException {
+        if (loggedInUser != null) {
+            throw new AlreadyLoggedIn();
+        } else if (!User.getUsers().containsKey(username)) {
+            throw new UsernameNotFoundException();
+        } else if (!User.getUsers().get(username).getPassword().equals(password)) {
+            throw new IncorrectPasswordException();
         } else {
-            loggedInUser = null;
-            System.out.println("You logged out successfully!");
+            loggedInUser = User.getUsers().get(username);
+        }
+    }
+
+    public void logout() {
+        loggedInUser = null;
+    }
+
+    public void deleteAccount(String username, String password) throws UsernameNotFoundException, IncorrectPasswordException {
+        if (!User.getUsers().containsKey(username)) {
+            throw new UsernameNotFoundException();
+        } else if (!User.getUsers().get(username).getPassword().equals(password)) {
+            throw new IncorrectPasswordException();
+        } else {
+            User user = User.getUsers().get(username);
+            if (user instanceof Player) {
+                Player.getPlayers().remove(username);
+            } else {
+                Admin.getAdmins().remove(username);
+            }
+            User.getUsers().remove(username);
         }
     }
 
@@ -81,13 +74,13 @@ public class AccountManager {
             User user = loggedInUser;
             if (field.equalsIgnoreCase("first name")) {
                 try {
-                    user.setFirstname(newValue);
+                    user.setFirstName(newValue);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
             } else if (field.equalsIgnoreCase("last name")) {
                 try {
-                    user.setLastname(newValue);
+                    user.setLastName(newValue);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -125,21 +118,7 @@ public class AccountManager {
 
     public void viewPersonalInfo() {
         User user = loggedInUser;
-        System.out.println(user.getFirstname() + " " + user.getLastname() + "\n"
+        System.out.println(user.getFirstName() + " " + user.getLastName() + "\n"
                 + user.getUsername() + " " + user.getEmail() + " " + user.getPhoneNumber());
-    }
-
-    public void deleteAccount(String username, String password) {
-        User user = Database.getUserByUsername(username);
-        if (user == null) {
-            System.out.println("No user with this info!");
-        } else {
-            if (!user.getPassword().contains(password)) {
-                System.out.println("Wrong password!");
-            } else {
-                Database.allUsers.remove(user);
-                System.out.println("Your account has removed successfully!");
-            }
-        }
     }
 }
