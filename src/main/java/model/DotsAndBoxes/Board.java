@@ -35,7 +35,7 @@ public class Board {
         return turn;
     }
 
-    public boolean hasEdgeOcuppied(int x, int y) {
+    public boolean hasEdgeOccupied(int x, int y) {
         for (Edge edge : edges) {
             if (edge.x == x && edge.y == y) {
                 return true;

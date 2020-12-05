@@ -3,7 +3,7 @@ package view;
 
 public class FriendsMenu extends Menu {
 
-    private int nextMenu;
+    private boolean back;
 
     @Override
     public void run() {
@@ -11,10 +11,10 @@ public class FriendsMenu extends Menu {
         while (true) {
             command = scanner.nextLine();
             if (command.equalsIgnoreCase("view account menu")) {
-                nextMenu = 0;
+                back = false;
                 break;
             } else if (command.equalsIgnoreCase("back")) {
-                nextMenu = 1;
+                back = true;
                 break;
             } else
                 commandProcessor(command);
