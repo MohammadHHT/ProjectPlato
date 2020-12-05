@@ -1,19 +1,19 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameLog {
+    private static HashMap<Integer, GameLog> allGameLogs;
+
     private int numberOfTimesPlayed;
     private int numberOfWins;
     private int numberOfDefeat;
     private int level;
     private int logID;
     private long takenScore;
-    private static HashMap<Integer, GameLog> allGameLogs;
 
     static {
-        allGameLogs = new HashMap<Integer, GameLog>();
+        allGameLogs = new HashMap<>();
     }
 
     public GameLog() {

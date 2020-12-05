@@ -32,7 +32,7 @@ public class RegisterMenu extends Menu {
                                                 while (true) {
                                                     if (getPhone()) {
                                                         Client.getClient().send("User register " + firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
-                                                        if (Client.getClient().getResponse().equals("successfully registered")) {
+                                                        if (Client.getClient().getResponse().equals("Admin logged in") || Client.getClient().getResponse().equals("Player logged in")) {
                                                             next();
                                                         }
                                                         return;
@@ -136,7 +136,9 @@ public class RegisterMenu extends Menu {
 
     @Override
     public void next() {
+        Menu.username = username;
         pop();
-        PrimaryMenu.getPrimaryMenu().run();
+        push(PlayerMenu.getPlayerMenu());
+        PlayerMenu.getPlayerMenu().run();
     }
 }

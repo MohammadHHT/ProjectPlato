@@ -4,8 +4,15 @@ import java.util.Scanner;
 import java.util.Stack;
 
 abstract class Menu {
-    private static Stack<Menu> menus = new Stack<>();
-    protected static Scanner scanner = new Scanner(System.in);
+    private static Stack<Menu> menus;
+    protected static Scanner scanner;
+    protected static String username;
+
+    static  {
+        menus = new Stack<>();
+        scanner = new Scanner(System.in);
+        username = null;
+    }
 
     protected void push(Menu menu) {
         menus.push(menu);

@@ -11,7 +11,7 @@ public class Player extends User {
     private long score;
     private HashMap<String, Player> friends;
     private HashMap<String, Player> friendRequest;
-    private ArrayList<Game> favoriteGames;
+    private ArrayList<String> favoriteGames;
     private ArrayList<String> suggestions;
     private ArrayList<String> inbox;
     private ArrayList<String> gameLogs;
@@ -64,7 +64,7 @@ public class Player extends User {
         this.score = score;
     }
 
-    public void setFavoriteGames(ArrayList<Game> favoriteGames) {
+    public void setFavoriteGames(ArrayList<String> favoriteGames) {
         this.favoriteGames = favoriteGames;
     }
 
@@ -92,7 +92,7 @@ public class Player extends User {
         return friendRequest;
     }
 
-    public ArrayList<Game> getFavoriteGames() {
+    public ArrayList<String> getFavoriteGames() {
         return favoriteGames;
     }
 

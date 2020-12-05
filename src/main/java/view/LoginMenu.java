@@ -65,7 +65,7 @@ public class LoginMenu extends Menu {
 
     public void next() {
         if (nextMenu == 1) {
-            PrimaryMenu.getPrimaryMenu().run();
+            PlayerPrimaryMenu.getPrimaryMenu().run();
         } else {
             RegisterMenu.getRegisterMenu().run();
         }
