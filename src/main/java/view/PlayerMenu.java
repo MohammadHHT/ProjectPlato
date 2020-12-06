@@ -54,25 +54,32 @@ public class PlayerMenu extends Menu implements Back {
         while (true) {
             switch (scanner.nextLine()) {
                 case "showPoint":
+                    showPoint();
                     break;
                 case "showFavoriteGames":
+                    showFavoriteGames();
                     break;
                 case "showAdminMessages":
+                    showAdminMessages();
                     break;
                 case "showAdminSuggestions":
+                    showAdminSuggestions();
                     break;
                 case "playSuggested":
+                    playSuggested();
                     break;
                 case "showLastGame":
+                    showLastGame();
                     break;
                 case "addFriend":
+                    addFriend();
                     break;
                 case "accountMenu":
                     next(AccountMenu.getAccountMenu());
-                    break;
+                    return;
                 case "gameMenu":
                     next(GameMenu.getGameMenu());
-                    break;
+                    return;
                 default:
                     System.err.println("Incorrect command");
                     break;
@@ -82,6 +89,7 @@ public class PlayerMenu extends Menu implements Back {
 
     @Override
     public void next(Menu menu) {
-
+        push(menu);
+        menu.run();
     }
 }

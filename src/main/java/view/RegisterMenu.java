@@ -32,8 +32,10 @@ public class RegisterMenu extends Menu {
                                                 while (true) {
                                                     if (getPhone()) {
                                                         Client.getClient().send("User register " + firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
-                                                        if (Client.getClient().getResponse().equals("Admin logged in") || Client.getClient().getResponse().equals("Player logged in")) {
+                                                        if (Client.getClient().getResponse().equals("Player logged in")) {
                                                             next(PlayerMenu.getPlayerMenu());
+                                                        } else {
+                                                            next(AdminMenu.getAdminMenu());
                                                         }
                                                         return;
                                                     }

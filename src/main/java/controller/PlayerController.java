@@ -39,7 +39,7 @@ public class PlayerController {
 
     public void showLastPlayed(String username) {
         Player player = Player.getPlayers().get(username);
-        if (player.getGameLogs().get(player.getGameLogs().size() - 1))
+        if (player.getGameLogs().get(player.getGameLogs().size() - 1));
     }
 
     public void addFavoriteGame(String username, String gameName) throws UsernameNotFoundException, GameNotFoundException {
