@@ -3,6 +3,7 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.Admin;
+import model.GameLog;
 import model.Player;
 import model.User;
 
@@ -42,6 +43,18 @@ public class FileManager {
         for (Player player : players) {
             User.addUser(player);
             Player.addPlayer(player);
+        }
+    }
+
+    public static void loadGameLog() {
+        Gson gson = new Gson();
+        Scanner scanner = FileManager.openFileToRead("resources\\gameLog.json");
+        String data = scanner.nextLine();
+        Type foundListType = new TypeToken<ArrayList<GameLog>>(){}.getType();
+        ArrayList<GameLog> gameLogs = gson.fromJson(data, foundListType);
+        scanner.close();
+        for (GameLog gameLog : gameLogs) {
+            GameLog.addGameLog(gameLog);
         }
     }
 
