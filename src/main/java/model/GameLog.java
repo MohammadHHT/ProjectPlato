@@ -26,6 +26,9 @@ public class GameLog {
         allGameLogs.put(logID, this);
     }
 
+    public static void addGameLog(GameLog gameLog) {
+        allGameLogs.put(gameLog.getLogID(), gameLog);
+    }
     public void setNumberOfTimesPlayed(int numberOfTimesPlayed) {
         this.numberOfTimesPlayed = numberOfTimesPlayed;
     }
