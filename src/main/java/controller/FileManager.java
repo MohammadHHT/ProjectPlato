@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.Map;
 import java.util.Scanner;
 
 public class FileManager {
@@ -21,6 +22,82 @@ public class FileManager {
         FileManager.loadSuggestion();
         FileManager.loadMessage();
     }
+
+    public static void writeDataOnFile() {
+        FileManager.writeUser();
+        FileManager.writeGameLog();
+        FileManager.writeEvent();
+        FileManager.writeSuggestion();
+        FileManager.writeMessage();
+    }
+
+    public static void writeUser() {
+        Gson gson = new Gson();
+        ArrayList<Admin> admins = new ArrayList<>();
+        ArrayList<Player> players = new ArrayList<>();
+
+        for (Map.Entry<String, User> entry : User.getUsers().entrySet()) {
+            if (entry.getValue() instanceof Admin)
+                admins.add((Admin) entry.getValue());
+            else if (entry.getValue() instanceof Player)
+                players.add((Player) entry.getValue());
+        }
+
+        Formatter formatter = FileManager.openFileToWrite("resources\\admin.json");
+        formatter.format(gson.toJson(admins));
+        formatter.close();
+        formatter.format(gson.toJson(players));
+        formatter.close();
+    }
+
+    public static void writeGameLog() {
+        Gson gson = new Gson();
+        ArrayList<GameLog> gameLogs = new ArrayList<>();
+
+        for (Map.Entry<Integer, GameLog> entry : GameLog.getAllGameLogs().entrySet()) {
+            gameLogs.add(entry.getValue());
+        }
+
+        Formatter formatter = FileManager.openFileToWrite("resources\\gameLog.json");
+        formatter.format(gson.toJson(gameLogs));
+    }
+
+    public static void writeEvent() {
+        Gson gson = new Gson();
+        ArrayList<Event> events = new ArrayList<>();
+
+        for (Map.Entry<Integer, Event> entry : Event.getEvents().entrySet()) {
+            events.add(entry.getValue());
+        }
+
+        Formatter formatter = FileManager.openFileToWrite("resources\\event.json");
+        formatter.format(gson.toJson(events));
+    }
+
+    public static void writeSuggestion() {
+        Gson gson = new Gson();
+        ArrayList<Suggestion> suggestions = new ArrayList<>();
+
+        for (Map.Entry<Integer, Suggestion> entry : Suggestion.getAllSuggestion().entrySet()) {
+            suggestions.add(entry.getValue());
+        }
+
+        Formatter formatter = FileManager.openFileToWrite("resources\\suggestion.json");
+        formatter.format(gson.toJson(suggestions));
+    }
+
+    public static void writeMessage() {
+        Gson gson = new Gson();
+        ArrayList<Message> messages = new ArrayList<>();
+
+        for (Map.Entry<Integer, Message> entry : Message.getAllMessages().entrySet()) {
+            messages.add(entry.getValue());
+        }
+
+        Formatter formatter = FileManager.openFileToWrite("resources\\message.json");
+        formatter.format(gson.toJson(messages));
+    }
+
 
     public static void loadAdmin() {
         Gson gson = new Gson();
