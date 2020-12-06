@@ -39,6 +39,10 @@ public class User {
         //TODO
     }
 
+    public static void addUser(User user) {
+        users.put(user.getUsername(), user);
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }

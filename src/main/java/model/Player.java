@@ -52,6 +52,10 @@ public class Player extends User {
         //TODO
     }
 
+    public static void addPlayer(Player player) {
+        players.put(player.getUsername(), player);
+    }
+
     public void setPlatoAge(int platoAge) {
         this.platoAge = platoAge;
     }
