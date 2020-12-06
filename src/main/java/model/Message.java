@@ -22,6 +22,10 @@ public class Message {
         allMessages.put(massageID, this);
     }
 
+    public static void addMessage(Message message) {
+        allMessages.put(message.getMassageID(), message);
+    }
+
     public static HashMap<Integer, Message> getAllMessages() {
         return allMessages;
     }
