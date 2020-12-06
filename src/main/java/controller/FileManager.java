@@ -2,10 +2,7 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import model.Admin;
-import model.GameLog;
-import model.Player;
-import model.User;
+import model.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +16,8 @@ public class FileManager {
     public static void initialize() {
         FileManager.loadAdmin();
         FileManager.loadPlayer();
+        FileManager.loadGameLog();
+        FileManager.loadEvent();
     }
 
     public static void loadAdmin() {
@@ -55,6 +54,18 @@ public class FileManager {
         scanner.close();
         for (GameLog gameLog : gameLogs) {
             GameLog.addGameLog(gameLog);
+        }
+    }
+
+    public static void loadEvent() {
+        Gson gson = new Gson();
+        Scanner scanner = FileManager.openFileToRead("resources\\event.json");
+        String data = scanner.nextLine();
+        Type foundListType = new TypeToken<ArrayList<Event>>(){}.getType();
+        ArrayList<Event> events = gson.fromJson(data, foundListType);
+        scanner.close();
+        for (Event event : events) {
+            Event.addEvent(event);
         }
     }
 
