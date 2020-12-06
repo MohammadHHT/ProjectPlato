@@ -32,7 +32,7 @@ public class AdminMenu extends Menu {
     }
 
     @Override
-    public void next() {
+    public void next(Menu menu) {
 
     }
 }

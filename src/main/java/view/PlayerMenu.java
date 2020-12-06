@@ -1,6 +1,6 @@
 package view;
 
-public class PlayerMenu extends Menu {
+public class PlayerMenu extends Menu implements Back {
     private static final PlayerMenu playerMenu = new PlayerMenu();
 
     private PlayerMenu() {
@@ -27,7 +27,9 @@ public class PlayerMenu extends Menu {
     }
 
     public void playSuggested() {
-        Client.getClient().send("User playSuggested " + username);
+        System.out.print("Game Name: >");
+        String game = scanner.nextLine();
+        Client.getClient().send("User playSuggested " + username + " " + game);
     }
 
     public void showLastGame() {
@@ -49,11 +51,37 @@ public class PlayerMenu extends Menu {
 
     @Override
     public void run() {
-
+        while (true) {
+            switch (scanner.nextLine()) {
+                case "showPoint":
+                    break;
+                case "showFavoriteGames":
+                    break;
+                case "showAdminMessages":
+                    break;
+                case "showAdminSuggestions":
+                    break;
+                case "playSuggested":
+                    break;
+                case "showLastGame":
+                    break;
+                case "addFriend":
+                    break;
+                case "accountMenu":
+                    next(AccountMenu.getAccountMenu());
+                    break;
+                case "gameMenu":
+                    next(GameMenu.getGameMenu());
+                    break;
+                default:
+                    System.err.println("Incorrect command");
+                    break;
+            }
+        }
     }
 
     @Override
-    public void next() {
+    public void next(Menu menu) {
 
     }
 }

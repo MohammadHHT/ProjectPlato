@@ -11,4 +11,13 @@ public class GameMenu extends Menu {
     }
 
 
+    @Override
+    public void run() {
+
+    }
+
+    @Override
+    public void next(Menu menu) {
+
+    }
 }

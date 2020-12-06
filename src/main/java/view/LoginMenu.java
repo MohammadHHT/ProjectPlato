@@ -63,7 +63,8 @@ public class LoginMenu extends Menu {
         Client.getClient().send("user login " + username + " " + password);
     }
 
-    public void next() {
+    @Override
+    public void next(Menu menu) {
         if (nextMenu == 1) {
             PlayerPrimaryMenu.getPrimaryMenu().run();
         } else {
