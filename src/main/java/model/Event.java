@@ -26,6 +26,10 @@ public class Event {
         events.put(eventID, this);
     }
 
+    public static void addEvent(Event event) {
+        events.put(event.getEventID(), event);
+    }
+
     public void addNewEvent(){
         //TODO
     }
