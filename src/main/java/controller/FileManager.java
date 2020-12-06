@@ -69,6 +69,18 @@ public class FileManager {
         }
     }
 
+    public static void loadSuggestion() {
+        Gson gson = new Gson();
+        Scanner scanner = FileManager.openFileToRead("resources\\suggestion.json");
+        String data = scanner.nextLine();
+        Type foundListType = new TypeToken<ArrayList<Suggestion>>(){}.getType();
+        ArrayList<Suggestion> suggestions = gson.fromJson(data, foundListType);
+        scanner.close();
+        for (Suggestion suggestion : suggestions) {
+            Suggestion.addSuggestion(suggestion);
+        }
+    }
+
     public static Formatter openFileToWrite(String address) {
         Formatter formatter = null;
         try {
