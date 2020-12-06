@@ -20,6 +20,10 @@ public class Suggestion {
         allSuggestion.put(suggestionID, this);
     }
 
+    public static void addSuggestion(Suggestion suggestion) {
+        allSuggestion.put(suggestion.getSuggestionID(), suggestion);
+    }
+
     public static HashMap<Integer, Suggestion> getAllSuggestion() {
         return allSuggestion;
     }
