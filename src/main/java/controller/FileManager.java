@@ -18,6 +18,8 @@ public class FileManager {
         FileManager.loadPlayer();
         FileManager.loadGameLog();
         FileManager.loadEvent();
+        FileManager.loadSuggestion();
+        FileManager.loadMessage();
     }
 
     public static void loadAdmin() {
@@ -78,6 +80,18 @@ public class FileManager {
         scanner.close();
         for (Suggestion suggestion : suggestions) {
             Suggestion.addSuggestion(suggestion);
+        }
+    }
+
+    public static void loadMessage() {
+        Gson gson = new Gson();
+        Scanner scanner = FileManager.openFileToRead("resources\\message.json");
+        String data = scanner.nextLine();
+        Type foundListType = new TypeToken<ArrayList<Message>>(){}.getType();
+        ArrayList<Message> messages = gson.fromJson(data, foundListType);
+        scanner.close();
+        for (Message message : messages) {
+            Message.addMessage(message);
         }
     }
 
