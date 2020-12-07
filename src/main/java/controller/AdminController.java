@@ -68,7 +68,7 @@ public class AdminController {
         System.out.println("Event with " + eventID + " ID deleted successfully.");
     }
 
-    public void addSuggestion(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException,
+    public void addSuggestion(String userName, String gameName) throws UsernameNotFound, GameNotFoundException,
             ThisGameHasAlreadyBeenSuggested {
         if (Player.getPlayers().containsKey(userName)) {
             if (Game.getGamesName().contains(gameName)) {
@@ -83,7 +83,7 @@ public class AdminController {
                throw new GameNotFoundException();
             }
         } else {
-             throw new UsernameNotFoundException();
+             throw new UsernameNotFound();
         }
     }
 
@@ -107,7 +107,7 @@ public class AdminController {
         }
     }
 
-    public void viewUserProfile(String userName) throws UsernameNotFoundException {
+    public void viewUserProfile(String userName) throws UsernameNotFound {
         if (Player.getPlayers().containsKey(userName)) {
             Player player = Player.getPlayers().get(userName);
             System.out.println(player.getFirstName() + " " + player.getLastName() + "\n"
@@ -115,6 +115,6 @@ public class AdminController {
                     + player.getEmail() + " " + player.getPhoneNumber() + "\n"
                     + player.getScore() + " " + player.getFavoriteGames());
         } else
-            throw new UsernameNotFoundException();
+            throw new UsernameNotFound();
     }
 }

@@ -61,6 +61,10 @@ public class GameLog {
         this.level = level;
     }
 
+    public String getGame() {
+        return game;
+    }
+
     public int getNumberOfWins() {
         return numberOfWins;
     }

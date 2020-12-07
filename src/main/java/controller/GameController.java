@@ -1,7 +1,7 @@
 package controller;
 
 import exception.GameNotFoundException;
-import exception.UsernameNotFoundException;
+import exception.UsernameNotFound;
 import model.GameLog;
 import model.Player;
 
@@ -39,7 +39,7 @@ public class GameController {
         //TODO
     }
 
-    public void showLog(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException {
+    public void showLog(String userName, String gameName) throws UsernameNotFound, GameNotFoundException {
         if (gameName.equalsIgnoreCase("Dots And Boxes")) {
             if (Player.getPlayers().containsKey(userName)) {
                 System.out.println("Level: " + GameLog.getGameLogs().get(Integer.parseInt(Player.getPlayers().
@@ -53,7 +53,7 @@ public class GameController {
                         "Number of played: " + GameLog.getGameLogs().get(Integer.parseInt(Player.getPlayers().
                         get(userName).getGameLogs().get(0))).getNumberOfTimesPlayed());
             } else {
-                throw new UsernameNotFoundException();
+                throw new UsernameNotFound();
             }
         } else if (gameName.equalsIgnoreCase("Sea Battle")) {
             if (Player.getPlayers().containsKey(userName)) {
@@ -68,14 +68,14 @@ public class GameController {
                         "Number of played: " + GameLog.getGameLogs().get(Integer.parseInt(Player.getPlayers().
                         get(userName).getGameLogs().get(1))).getNumberOfTimesPlayed());
             } else {
-                throw new UsernameNotFoundException();
+                throw new UsernameNotFound();
             }
         } else {
             throw new GameNotFoundException();
         }
     }
 
-    public void showWinsCount(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException {
+    public void showWinsCount(String userName, String gameName) throws UsernameNotFound, GameNotFoundException {
         if (Player.getPlayers().containsKey(userName)) {
             if (gameName.equalsIgnoreCase("Dots And Boxes")) {
                 System.out.println("Number of Wins in " + gameName + " game: " +
@@ -89,11 +89,11 @@ public class GameController {
                 throw new GameNotFoundException();
             }
         } else {
-            throw new UsernameNotFoundException();
+            throw new UsernameNotFound();
         }
     }
 
-    public void showPlayedCount(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException {
+    public void showPlayedCount(String userName, String gameName) throws UsernameNotFound, GameNotFoundException {
         if (Player.getPlayers().containsKey(userName)) {
             if (gameName.equalsIgnoreCase("Dots And Boxes")) {
                 System.out.println("Number of played in " + gameName + " game: " +
@@ -107,7 +107,7 @@ public class GameController {
                 throw new GameNotFoundException();
             }
         } else {
-            throw new UsernameNotFoundException();
+            throw new UsernameNotFound();
         }
     }
 
@@ -119,12 +119,12 @@ public class GameController {
         //TODO
     }
 
-    public void showPoints(String userName, String logID) throws UsernameNotFoundException {
+    public void showPoints(String userName, String logID) throws UsernameNotFound {
         if (Player.getPlayers().containsKey(userName)) {
             if (Player.getPlayers().get(userName).getGameLogs().contains(logID)) {
                 System.out.println(GameLog.getGameLogs().get(Integer.parseInt(logID)).getTakenScore());
             }
         } else
-            throw new UsernameNotFoundException();
+            throw new UsernameNotFound();
     }
 }

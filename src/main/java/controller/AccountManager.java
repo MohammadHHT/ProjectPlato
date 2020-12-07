@@ -5,12 +5,8 @@ import model.Admin;
 import model.Player;
 import model.User;
 
-import javax.jws.soap.SOAPBinding;
-
 public class AccountManager {
     private static final AccountManager accountManager = new AccountManager();
-
-    private User loggedInUser = null;
 
     private AccountManager() {
     }
@@ -19,43 +15,39 @@ public class AccountManager {
         return accountManager;
     }
 
-    public User getLoggedInUser() {
-        return loggedInUser;
+    public String register(String firstName, String lastName, String username, String password, String email, String phoneNumber) throws UsernameIsAlreadyTaken {
+        if (!User.getUsers().containsKey(username)) {
+            if (User.getUsers().size() == 0) {
+                new Admin(firstName, lastName, username, password, email, phoneNumber);
+                return "Admin registered";
+            } else {
+                new Player(firstName, lastName, username, password, email, phoneNumber);
+                return "Player registered";
+            }
+        } else {
+            throw new UsernameIsAlreadyTaken();
+        }
     }
 
-    public void register(String firstName, String lastName, String username, String password, String email, String phoneNumber) throws UsernameIsAlreadyTakenException {
-        if (User.getUsers().containsKey(username)) {
-            throw new UsernameIsAlreadyTakenException();
+    public String login(String username, String password) throws UsernameNotFound, IncorrectPassword {
+        if (!User.getUsers().containsKey(username)) {
+            throw new UsernameNotFound();
+        } else if (!User.getUsers().get(username).getPassword().equals(password)) {
+            throw new IncorrectPassword();
         } else {
-            if (User.getUsers().size() == 0) {
-                loggedInUser = new Admin(firstName, lastName, username, password, email, phoneNumber);
+            if (User.getUsers().get(username) instanceof Admin) {
+                return "Admin logged in";
             } else {
-                loggedInUser = new Player(firstName, lastName, username, password, email, phoneNumber);
+                return "Player logged in";
             }
         }
     }
 
-    public void login(String username, String password) throws AlreadyLoggedIn, UsernameNotFoundException, IncorrectPasswordException {
-        if (loggedInUser != null) {
-            throw new AlreadyLoggedIn();
-        } else if (!User.getUsers().containsKey(username)) {
-            throw new UsernameNotFoundException();
-        } else if (!User.getUsers().get(username).getPassword().equals(password)) {
-            throw new IncorrectPasswordException();
-        } else {
-            loggedInUser = User.getUsers().get(username);
-        }
-    }
-
-    public void logout() {
-        loggedInUser = null;
-    }
-
-    public void deleteAccount(String username, String password) throws UsernameNotFoundException, IncorrectPasswordException {
+    public void deleteAccount(String username, String password) throws UsernameNotFound, IncorrectPassword {
         if (!User.getUsers().containsKey(username)) {
-            throw new UsernameNotFoundException();
+            throw new UsernameNotFound();
         } else if (!User.getUsers().get(username).getPassword().equals(password)) {
-            throw new IncorrectPasswordException();
+            throw new IncorrectPassword();
         } else {
             User user = User.getUsers().get(username);
             if (user instanceof Player) {
@@ -67,7 +59,22 @@ public class AccountManager {
         }
     }
 
-    public void editPersonalInfo(String field, String newValue) {
+    public String showInfo(String username) {
+        User user = User.getUsers().get(username);
+        return user.getFirstName() + " " + user.getLastName() + " "
+                + user.getUsername() + " " + user.getEmail() + " " + user.getPhoneNumber();
+    }
+
+    public void changePassword(String username, String old, String next) throws IncorrectPassword {
+        User user = User.getUsers().get(username);
+        if (user.getPassword().equals(old)) {
+            user.setPassword(next);
+        } else {
+            throw new IncorrectPassword();
+        }
+    }
+
+    public void editField(String field, String value) {
         if (loggedInUser == null) {
             System.out.println("First log in your account...");
         } else {
@@ -114,11 +121,5 @@ public class AccountManager {
         }
 
         //TODO after changes happened, the new info must save in Database.
-    }
-
-    public void viewPersonalInfo() {
-        User user = loggedInUser;
-        System.out.println(user.getFirstName() + " " + user.getLastName() + "\n"
-                + user.getUsername() + " " + user.getEmail() + " " + user.getPhoneNumber());
     }
 }
