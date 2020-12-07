@@ -30,11 +30,28 @@ public class PlayerController {
     }
 
     public String showAdminMessages(String username) {
-        String tmp = "";
+        StringBuilder tmp = new StringBuilder();
         for (String inbox : Player.getPlayers().get(username).getInbox()) {
-            tmp += inbox + " ";
+            tmp.append(inbox).append(" ");
+        }
+        return tmp.toString().trim();
+    }
+
+    public String showAdminSuggestions(String username) {
+        ArrayList<Long> suggestions = Player.getPlayers().get(username).getSuggestions();
+        String tmp = "";
+        for (Long s : suggestions) {
+            tmp += Suggestion.getSuggestions().get(s).getGameName() + " ";
         }
         return tmp.trim();
+    }
+
+    public void playSuggestedGame(String username, String game) throws GameNotFoundException {
+        if (game.equals("BattleSea") || game.equals("DotsAndBoxes")) {
+
+        } else {
+            throw new GameNotFoundException();
+        }
     }
 
     public void showLastPlayed(String username) {
@@ -72,30 +89,6 @@ public class PlayerController {
                     gameName);
         } else {
             throw new EventIDNotFoundException();
-        }
-
-    }
-
-    public void playSuggestedGame(String username, String suggestionID) throws UsernameNotFoundException, SuggestionIDNotFoundException {
-        if (Player.getPlayers().containsKey(username)) {
-            if (Suggestion.getAllSuggestion().containsKey(Integer.parseInt(suggestionID))) {
-                GameController.runGame(Player.getPlayers().get(username).getUsername(),
-                        Suggestion.getAllSuggestion().get(Integer.parseInt(suggestionID)).getGameName());
-            } else {
-                throw new SuggestionIDNotFoundException();
-            }
-        } else {
-            throw new UsernameNotFoundException();
-        }
-    }
-
-    public void viewAdminSuggestions(String username) throws UsernameNotFoundException {
-        if (Player.getPlayers().containsKey(username)) {
-            for (String suggestion : Player.getPlayers().get(username).getSuggestions()) {
-                System.out.println(Suggestion.getAllSuggestion().get(Integer.parseInt(suggestion)));
-            }
-        } else {
-            throw new UsernameNotFoundException();
         }
 
     }

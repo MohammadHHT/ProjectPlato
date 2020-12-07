@@ -54,7 +54,7 @@ public class FileManager {
         Gson gson = new Gson();
         ArrayList<GameLog> gameLogs = new ArrayList<>();
 
-        for (Map.Entry<Integer, GameLog> entry : GameLog.getAllGameLogs().entrySet()) {
+        for (Map.Entry<Integer, GameLog> entry : GameLog.getGameLogs().entrySet()) {
             gameLogs.add(entry.getValue());
         }
 
@@ -78,7 +78,7 @@ public class FileManager {
         Gson gson = new Gson();
         ArrayList<Suggestion> suggestions = new ArrayList<>();
 
-        for (Map.Entry<Integer, Suggestion> entry : Suggestion.getAllSuggestion().entrySet()) {
+        for (Map.Entry<Integer, Suggestion> entry : Suggestion.getSuggestions().entrySet()) {
             suggestions.add(entry.getValue());
         }
 
@@ -104,11 +104,10 @@ public class FileManager {
         Scanner scanner = FileManager.openFileToRead("resources\\admin.json");
         String data = scanner.nextLine();
         Type foundListType = new TypeToken<ArrayList<Admin>>(){}.getType();
-        ArrayList<Admin> admins = gson.fromJson(data, foundListType);
+        ArrayList<User> admins = gson.fromJson(data, foundListType);
         scanner.close();
-        for (Admin admin : admins) {
-            User.addUser(admin);
-        }
+        User.addUsers(admins);
+        Admin.addAdmins(admins);
     }
 
     public static void loadPlayer() {
@@ -116,12 +115,10 @@ public class FileManager {
         Scanner scanner = FileManager.openFileToRead("resources\\player.json");
         String data = scanner.nextLine();
         Type foundListType = new TypeToken<ArrayList<Player>>(){}.getType();
-        ArrayList<Player> players = gson.fromJson(data, foundListType);
+        ArrayList<User> players = gson.fromJson(data, foundListType);
         scanner.close();
-        for (Player player : players) {
-            User.addUser(player);
-            Player.addPlayer(player);
-        }
+        User.addUsers(players);
+        Player.addPlayers(players);
     }
 
     public static void loadGameLog() {
@@ -155,9 +152,7 @@ public class FileManager {
         Type foundListType = new TypeToken<ArrayList<Suggestion>>(){}.getType();
         ArrayList<Suggestion> suggestions = gson.fromJson(data, foundListType);
         scanner.close();
-        for (Suggestion suggestion : suggestions) {
-            Suggestion.addSuggestion(suggestion);
-        }
+        Suggestion.addSuggestions(suggestions);
     }
 
     public static void loadMessage() {

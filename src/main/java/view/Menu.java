@@ -3,7 +3,7 @@ package view;
 import java.util.Scanner;
 import java.util.Stack;
 
-abstract class Menu {
+public abstract class Menu {
     protected static Stack<Menu> menus;
     protected static Scanner scanner;
     protected static String username;

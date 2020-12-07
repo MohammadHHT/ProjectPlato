@@ -12,7 +12,7 @@ public class Player extends User {
     private HashMap<String, Player> friends;
     private HashMap<String, Player> friendRequest;
     private ArrayList<String> favoriteGames;
-    private ArrayList<String> suggestions;
+    private ArrayList<Long> suggestions;
     private ArrayList<String> inbox;
     private ArrayList<String> gameLogs;
 
@@ -44,16 +44,18 @@ public class Player extends User {
         friends.remove(player);
     }
 
-    public void addNewSuggestion(Suggestion suggestion) {
+    public void addSuggestion(long suggestionID) {
+        suggestions.add(suggestionID);
+    }
+
+    public void addMessage(Message message) {
         //TODO
     }
 
-    public void addNewMessage(Message message) {
-        //TODO
-    }
-
-    public static void addPlayer(Player player) {
-        players.put(player.getUsername(), player);
+    public static void addPlayers(ArrayList<User> players) {
+        for (User p : players) {
+            Player.players.put(p.getUsername(), (Player) p);
+        }
     }
 
     public void setPlatoAge(int platoAge) {
@@ -104,7 +106,7 @@ public class Player extends User {
         return inbox;
     }
 
-    public ArrayList<String> getSuggestions() {
+    public ArrayList<Long> getSuggestions() {
         return suggestions;
     }
 

@@ -19,9 +19,9 @@ public class UserCommands implements ResolveCommand {
 
     @Override
     public void resolveCommand(String[] tokens) throws Exception {
-        if (tokens[1].equals("register")) {
+        if (tokens[1].equals("register") || tokens[1].equals("delete")) {
             RegisterCommand.getRegisterCommand().execute(tokens);
-        } else if (tokens[1].equals("login") || tokens[1].equals("logout") || tokens[1].equals("delete")) {
+        } else if (tokens[1].equals("login") || tokens[1].equals("logout")) {
             LoginCommand.getLoginCommand().execute(tokens);
         } else if (tokens[1].equals("showPoint") || tokens[1].equals("showFavoriteGames") || tokens[1].equals("showAdminMessages") || tokens[1].equals("showAdminSuggestions") ||
                 tokens[1].equals("playSuggested") || tokens[1].equals("showLastGame") || tokens[1].equals("addFriend")) {
@@ -41,11 +41,19 @@ public class UserCommands implements ResolveCommand {
 
         @Override
         public void execute(String[] tokens) throws Exception {
-            AccountManager.getAccountManager().register(tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7]);
-            if (AccountManager.getAccountManager().getLoggedInUser() instanceof Admin) {
-                done("Admin logged in");
-            } else {
-                done("Player logged in");
+            switch (tokens[1]) {
+                case "register":
+                    AccountManager.getAccountManager().register(tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7]);
+                    if (AccountManager.getAccountManager().getLoggedInUser() instanceof Admin) {
+                        done("Admin logged in");
+                    } else {
+                        done("Player logged in");
+                    }
+                    break;
+                case "delete":
+                    AccountManager.getAccountManager().deleteAccount(tokens[2], tokens[3]);
+                    done("Account deleted");
+                    break;
             }
         }
     }
@@ -73,11 +81,7 @@ public class UserCommands implements ResolveCommand {
                     break;
                 case "logout":
                     AccountManager.getAccountManager().logout();
-                    done("logged out");
-                    break;
-                case "delete":
-                    AccountManager.getAccountManager().deleteAccount(tokens[2], tokens[3]);
-                    done("Account deleted");
+                    done("Logged out");
                     break;
             }
         }
@@ -94,7 +98,7 @@ public class UserCommands implements ResolveCommand {
         }
 
         @Override
-        public void execute(String[] tokens) {
+        public void execute(String[] tokens) throws Exception {
             switch (tokens[1]) {
                 case "showPoint":
                     done(PlayerController.getPlayerController().showPoints(tokens[2]));
@@ -106,10 +110,11 @@ public class UserCommands implements ResolveCommand {
                     done(PlayerController.getPlayerController().showAdminMessages(tokens[2]));
                     break;
                 case "showAdminSuggestions":
-
+                    done(PlayerController.getPlayerController().showAdminSuggestions(tokens[2]));
                     break;
                 case "playSuggested":
-
+                    PlayerController.getPlayerController().playSuggestedGame(tokens[2], tokens[3]);
+                    done("Game begins");
                     break;
                 case "showLastGame":
 

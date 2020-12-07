@@ -2,30 +2,34 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Suggestion {
-    private int suggestionID;
-    private String playerID;
+    private static HashMap<Long, Suggestion> suggestions;
+
+    private long suggestionID;
     private String gameName;
-    private static HashMap<Integer, Suggestion> allSuggestion;
 
     static {
-        allSuggestion = new HashMap<Integer, Suggestion>();
+        suggestions = new HashMap<>();
     }
 
-    public Suggestion(String playerID, String gameName) {
-        this.playerID = playerID;
+    public Suggestion(String username, String gameName) {
+        suggestionID = IDGenerator();
+        suggestions.put(suggestionID, this);
         this.gameName = gameName;
-        //suggestionID
-        allSuggestion.put(suggestionID, this);
+        ((Player) User.getUsers().get(username)).addSuggestion(this.suggestionID);
     }
 
-    public static void addSuggestion(Suggestion suggestion) {
-        allSuggestion.put(suggestion.getSuggestionID(), suggestion);
+    private long IDGenerator() {
+        Random random = new Random();
+        return random.nextLong();
     }
 
-    public static HashMap<Integer, Suggestion> getAllSuggestion() {
-        return allSuggestion;
+    public static void addSuggestions(ArrayList<Suggestion> suggestions) {
+        for (Suggestion s : suggestions) {
+            Suggestion.suggestions.put(s.suggestionID, s);
+        }
     }
 
     public int getSuggestionID() {
@@ -36,7 +40,7 @@ public class Suggestion {
         return gameName;
     }
 
-    public String getPlayerID() {
-        return null;
+    public static HashMap<Long, Suggestion> getSuggestions() {
+        return suggestions;
     }
 }

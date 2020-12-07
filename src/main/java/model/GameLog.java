@@ -1,34 +1,41 @@
 package model;
 
 import java.util.HashMap;
+import java.util.Random;
 
 public class GameLog {
-    private static HashMap<Integer, GameLog> allGameLogs;
+    private static HashMap<Long, GameLog> gameLogs;
 
+    private long logID;
     private int numberOfTimesPlayed;
     private int numberOfWins;
-    private int numberOfDefeat;
+    private int numberOfDefeats;
     private int level;
-    private int logID;
     private long takenScore;
 
     static {
-        allGameLogs = new HashMap<>();
+        gameLogs = new HashMap<>();
     }
 
     public GameLog() {
+        logID = IDGenerator();
+        gameLogs.put(logID, this);
         this.numberOfTimesPlayed = 0;
         this.numberOfWins = 0;
-        this.numberOfDefeat = 0;
+        this.numberOfDefeats = 0;
         this.level = 0;
         this.takenScore = 0;
-        //logID
-        allGameLogs.put(logID, this);
+    }
+
+    private long IDGenerator() {
+        Random random = new Random();
+        return random.nextLong();
     }
 
     public static void addGameLog(GameLog gameLog) {
-        allGameLogs.put(gameLog.getLogID(), gameLog);
+        gameLogs.put(gameLog.getLogID(), gameLog);
     }
+
     public void setNumberOfTimesPlayed(int numberOfTimesPlayed) {
         this.numberOfTimesPlayed = numberOfTimesPlayed;
     }
@@ -46,7 +53,7 @@ public class GameLog {
     }
 
     public void setNumberOfDefeat(int numberOfDefeat) {
-        this.numberOfDefeat = numberOfDefeat;
+        this.numberOfDefeats = numberOfDefeat;
     }
 
     public void setLevel(int level) {
@@ -61,12 +68,12 @@ public class GameLog {
         return numberOfTimesPlayed;
     }
 
-    public static HashMap<Integer, GameLog> getAllGameLogs() {
-        return allGameLogs;
+    public static HashMap<Long, GameLog> getGameLogs() {
+        return gameLogs;
     }
 
-    public int getLogID() {
-        return 0;
+    public long getLogID() {
+        return logID;
     }
 
     public long getTakenScore() {
@@ -74,7 +81,7 @@ public class GameLog {
     }
 
     public int getNumberOfDefeat() {
-        return numberOfDefeat;
+        return numberOfDefeats;
     }
 
     public int getLevel() {

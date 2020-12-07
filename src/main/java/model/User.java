@@ -7,7 +7,7 @@ import java.util.Random;
 public class User {
     private static HashMap<String, User> users;
 
-    private int userID;
+    private long userID;
     private String firstName;
     private String lastName;
     private String username;
@@ -20,8 +20,8 @@ public class User {
     }
 
     public User(String firstName, String lastName, String username, String password, String email, String phoneNumber) {
-        users.put(username, this);
         userID = IDGenerator();
+        users.put(username, this);
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -30,7 +30,7 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    private int IDGenerator() {
+    private long IDGenerator() {
         Random random = new Random();
         return (username.charAt(0) % 100) + ((username.charAt(1) % 100) * 100) + ((username.charAt(2) % 100) * 10000) + (random.nextInt(10000) * 1000000);
     }
@@ -39,8 +39,10 @@ public class User {
         //TODO
     }
 
-    public static void addUser(User user) {
-        users.put(user.getUsername(), user);
+    public static void addUsers(ArrayList<User> users) {
+        for (User u : users) {
+            User.users.put(u.username, u);
+        }
     }
 
     public void setFirstName(String firstName) {
@@ -79,7 +81,7 @@ public class User {
         return username;
     }
 
-    public int getUserID() {
+    public long getUserID() {
         return userID;
     }
 

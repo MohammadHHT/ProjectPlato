@@ -88,14 +88,14 @@ public class AdminController {
     }
 
     public void viewSuggestion() {
-        for (Map.Entry<Integer, Suggestion> entry : Suggestion.getAllSuggestion().entrySet()) {
+        for (Map.Entry<Integer, Suggestion> entry : Suggestion.getSuggestions().entrySet()) {
             System.out.println(entry.getValue().getPlayerID() + ": " + entry.getValue().getGameName());
         }
     }
 
     public void removeSuggestion(String suggestionID) throws SuggestionIDNotFoundException {
-        if (Suggestion.getAllSuggestion().containsKey(Integer.parseInt(suggestionID))) {
-            Suggestion.getAllSuggestion().remove(Integer.parseInt(suggestionID));
+        if (Suggestion.getSuggestions().containsKey(Integer.parseInt(suggestionID))) {
+            Suggestion.getSuggestions().remove(Integer.parseInt(suggestionID));
             System.out.println("Suggestion with " + suggestionID + " ID deleted successfully.");
         } else
             throw new SuggestionIDNotFoundException();

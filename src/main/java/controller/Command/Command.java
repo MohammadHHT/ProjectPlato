@@ -20,7 +20,7 @@ public class Command implements ResolveCommand {
                 UserCommands.getUserCommands().resolveCommand(tokens);
             }
         } catch (Exception e) {
-            Server.getServer().send(e.getMessage());
+            Server.getServer().send("Exception " + e.getMessage());
         }
     }
 }
