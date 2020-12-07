@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -7,6 +8,7 @@ public class GameLog {
     private static HashMap<Long, GameLog> gameLogs;
 
     private long logID;
+    private String game;
     private int numberOfTimesPlayed;
     private int numberOfWins;
     private int numberOfDefeats;
@@ -17,9 +19,10 @@ public class GameLog {
         gameLogs = new HashMap<>();
     }
 
-    public GameLog() {
+    public GameLog(String game) {
         logID = IDGenerator();
         gameLogs.put(logID, this);
+        this.game = game;
         this.numberOfTimesPlayed = 0;
         this.numberOfWins = 0;
         this.numberOfDefeats = 0;
@@ -32,8 +35,10 @@ public class GameLog {
         return random.nextLong();
     }
 
-    public static void addGameLog(GameLog gameLog) {
-        gameLogs.put(gameLog.getLogID(), gameLog);
+    public static void addGameLogs(ArrayList<GameLog> gamelogs) {
+        for (GameLog g : gamelogs) {
+            GameLog.gameLogs.put(g.logID, g);
+        }
     }
 
     public void setNumberOfTimesPlayed(int numberOfTimesPlayed) {
@@ -42,10 +47,6 @@ public class GameLog {
 
     public void setNumberOfWins(int numberOfWins) {
         this.numberOfWins = numberOfWins;
-    }
-
-    public void setLogID(int logID) {
-        this.logID = logID;
     }
 
     public void setTakenScore(long takenScore) {
@@ -68,10 +69,6 @@ public class GameLog {
         return numberOfTimesPlayed;
     }
 
-    public static HashMap<Long, GameLog> getGameLogs() {
-        return gameLogs;
-    }
-
     public long getLogID() {
         return logID;
     }
@@ -86,5 +83,9 @@ public class GameLog {
 
     public int getLevel() {
         return level;
+    }
+
+    public static HashMap<Long, GameLog> getGameLogs() {
+        return gameLogs;
     }
 }

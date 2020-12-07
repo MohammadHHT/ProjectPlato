@@ -14,9 +14,6 @@ public class UserCommands implements ResolveCommand {
         return userCommands;
     }
 
-    // user commands can be :register, login, delete, 
-    // showFriends, removeFriend, viewFriendProfile, addFriend, showFriendRequests, acceptFriend, declineFriend and ...
-
     @Override
     public void resolveCommand(String[] tokens) throws Exception {
         if (tokens[1].equals("register") || tokens[1].equals("delete")) {
@@ -113,11 +110,11 @@ public class UserCommands implements ResolveCommand {
                     done(PlayerController.getPlayerController().showAdminSuggestions(tokens[2]));
                     break;
                 case "playSuggested":
-                    PlayerController.getPlayerController().playSuggestedGame(tokens[2], tokens[3]);
+                    PlayerController.getPlayerController().playSuggested(tokens[2], tokens[3]);
                     done("Game begins");
                     break;
                 case "showLastGame":
-
+                    PlayerController.getPlayerController().showLastGame(tokens[2]);
                     break;
                 case "addFriend":
 

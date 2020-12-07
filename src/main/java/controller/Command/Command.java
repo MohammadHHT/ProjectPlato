@@ -12,7 +12,6 @@ public class Command implements ResolveCommand {
         return command;
     }
 
-    //Determines command is related to users commands or games commands ...
     @Override
     public void resolveCommand(String[] tokens) {
         try {

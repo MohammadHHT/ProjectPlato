@@ -46,15 +46,15 @@ public class PlayerController {
         return tmp.trim();
     }
 
-    public void playSuggestedGame(String username, String game) throws GameNotFoundException {
+    public void playSuggested(String username, String game) throws GameNotFoundException {
         if (game.equals("BattleSea") || game.equals("DotsAndBoxes")) {
-
+            //TODO
         } else {
             throw new GameNotFoundException();
         }
     }
 
-    public void showLastPlayed(String username) {
+    public void showLastGame(String username) {
         Player player = Player.getPlayers().get(username);
         if (player.getGameLogs().get(player.getGameLogs().size() - 1));
     }
