@@ -78,7 +78,7 @@ public class FileManager {
         Gson gson = new Gson();
         ArrayList<Suggestion> suggestions = new ArrayList<>();
 
-        for (Map.Entry<Integer, Suggestion> entry : Suggestion.getSuggestions().entrySet()) {
+        for (Map.Entry<Long, Suggestion> entry : Suggestion.getSuggestions().entrySet()) {
             suggestions.add(entry.getValue());
         }
 
