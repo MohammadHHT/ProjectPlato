@@ -35,4 +35,20 @@ public class Ship {
                     "It must be -1(Unset), 0(Horizontal), or 1(Vertical)");
         this.direction = direction;
     }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getDirection() {
+        return direction;
+    }
 }
