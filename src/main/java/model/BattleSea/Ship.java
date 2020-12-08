@@ -23,4 +23,15 @@ public class Ship {
     public boolean isDirectionSet() {
         return direction == Unset;
     }
+
+    public void setLocation(int row, int column) {
+        this.row = row;
+        this.column = column;
+    }
+
+    public void setDirection(int direction) {
+        if (direction != Unset && direction != Horizontal && direction != Vertical)
+            throw new IllegalArgumentException("Invalid direction.\n" +
+                    "It must be -1(Unset), 0(Horizontal), or 1(Vertical)");
+    }
 }
