@@ -10,33 +10,33 @@ public class PlayerMenu extends Menu implements Back {
         return playerMenu;
     }
 
-    public void showPoint() {
+    private void showPoint() {
         Client.getClient().send("User showPoint " + username);
     }
 
-    public void showFavoriteGames() {
+    private void showFavoriteGames() {
         Client.getClient().send("User showFavoriteGames " + username);
     }
 
-    public void showAdminMessages() {
+    private void showAdminMessages() {
         Client.getClient().send("User showAdminMessages " + username);
     }
 
-    public void showAdminSuggestions() {
+    private void showAdminSuggestions() {
         Client.getClient().send("User showAdminSuggestions " + username);
     }
 
-    public void playSuggested() {
+    private void playSuggested() {
         System.out.print("Game Name: >");
         String game = scanner.nextLine();
         Client.getClient().send("User playSuggested " + username + " " + game);
     }
 
-    public void showLastGame() {
+    private void showLastGame() {
         Client.getClient().send("User showLastGame " + username);
     }
 
-    public void addFriend() {
+    private void addFriend() {
         System.out.print("Friend Username: >");
         String friend;
         String tmp = scanner.nextLine().trim();

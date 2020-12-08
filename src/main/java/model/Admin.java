@@ -6,8 +6,12 @@ import java.util.HashMap;
 public class Admin extends User {
     private static HashMap<String, Admin> admins;
 
-    public Admin(String firstName, String lastName, String username, String password, String email, String phoneNumber) {
-        super(firstName, lastName, username, password, email, phoneNumber);
+    static {
+        admins = new HashMap<>();
+    }
+
+    public Admin(String firstName, String lastName, String username, String password, String email, String phone) {
+        super(firstName, lastName, username, password, email, phone);
         admins.put(username, this);
     }
 

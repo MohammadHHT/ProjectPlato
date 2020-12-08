@@ -12,11 +12,11 @@ public class AccountMenu extends Menu implements Back {
         return accountMenu;
     }
 
-    public void showInfo() {
+    private void showInfo() {
         Client.getClient().send("User showInfo " + username);
     }
 
-    public void changePassword() {
+    private void changePassword() {
         String old, next;
         System.out.print("Old password: >");
         old = scanner.nextLine().trim();
@@ -36,16 +36,99 @@ public class AccountMenu extends Menu implements Back {
         Client.getClient().send("User changePassword " + username + " " + old + " " + next);
     }
 
-    public void editField(User user, String field, String content) {
+    private void editField() {
+        String field = "", tmp, value = "";
+        System.out.print("Field Name: >");
+        tmp = scanner.nextLine().trim();
+        switch (tmp) {
+            case "username":
+            case "email":
+            case "phone":
+                field = tmp;
+                break;
+        }
+        if (field.length() > 0) {
+            switch (field) {
+                case "username":
+                    value = getUsername();
+                    break;
+                case "email":
+                    value = getEmail();
+                    break;
+                case "phone":
+                    value = getPhone();
+                    break;
+            }
+            if (value != null) {
+                Client.getClient().send("User editField " + username + " " + field + " " + value);
+                if (field.equals("email")) {
+                    username = value;
+                }
+            } else {
+                editField();
+            }
+        } else {
+            System.err.println("There is no field with this label");
+        }
     }
 
-    public void showStatistics(User user) {
+    private String getUsername() {
+        System.out.print("New Username: >");
+        String tmp = scanner.nextLine().trim();
+        if (tmp.matches("\\w+")) {
+            if (tmp.length() >= 3) {
+                return tmp;
+            } else {
+                System.err.println("Username must be at least 3 characters");
+                return null;
+            }
+        } else {
+            System.err.println("Username includes alphanumeric characters only");
+            return null;
+        }
     }
 
-    public void showHistory(User user) {
+    private String getEmail() {
+        System.out.print("New Email: >");
+        String tmp = scanner.nextLine().trim();
+        if (tmp.matches("^\\w+@\\w+\\.(com|ir)$")) {
+            return tmp;
+        } else {
+            System.err.println("Email is incorrect");
+            return null;
+        }
     }
 
-    public void logout() {
+    private String getPhone() {
+        System.out.print("New Phone Number: >");
+        String tmp = scanner.nextLine().trim();
+        if (tmp.matches("\\+\\d+")) {
+            if (tmp.length() == 13) {
+                return tmp;
+            } else {
+                System.err.println("Phone Number must be exactly 12 numbers(plus +)");
+                return null;
+            }
+        } else {
+            System.err.println("Phone Number includes numbers only");
+            return null;
+        }
+    }
+
+    private void showStatistics() {
+        Client.getClient().send("User showStatistics " + username);
+    }
+
+    private void showHistory() {
+        //TODO
+    }
+
+    private void gameStatistics() {
+        //TODO
+    }
+
+    private void logout() {
+        username = null;
     }
 
     @Override
@@ -66,6 +149,9 @@ public class AccountMenu extends Menu implements Back {
                     break;
                 case "showHistory":
                     showHistory();
+                    break;
+                case "gameStatistics":
+                    gameStatistics();
                     break;
                 case "logout":
                     logout();

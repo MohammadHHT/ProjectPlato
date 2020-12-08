@@ -12,7 +12,6 @@ public class GameLog {
     private int numberOfTimesPlayed;
     private int numberOfWins;
     private int numberOfDefeats;
-    private int level;
     private long takenScore;
 
     static {
@@ -26,7 +25,6 @@ public class GameLog {
         this.numberOfTimesPlayed = 0;
         this.numberOfWins = 0;
         this.numberOfDefeats = 0;
-        this.level = 0;
         this.takenScore = 0;
     }
 
@@ -57,10 +55,6 @@ public class GameLog {
         this.numberOfDefeats = numberOfDefeat;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
     public String getGame() {
         return game;
     }
@@ -83,10 +77,6 @@ public class GameLog {
 
     public int getNumberOfDefeat() {
         return numberOfDefeats;
-    }
-
-    public int getLevel() {
-        return level;
     }
 
     public static HashMap<Long, GameLog> getGameLogs() {

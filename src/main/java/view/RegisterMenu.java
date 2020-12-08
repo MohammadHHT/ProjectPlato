@@ -128,7 +128,7 @@ public class RegisterMenu extends Menu {
                 phone = tmp;
                 return true;
             } else {
-                System.err.println("Phone Number must be exactly 12 digits");
+                System.err.println("Phone Number must be exactly 12 numbers(plus +)");
             }
         } else {
             System.err.println("Phone Number includes numbers only");

@@ -1,9 +1,7 @@
 package controller.Command;
 
-import controller.AccountManager;
+import controller.AccountController;
 import controller.PlayerController;
-import model.Admin;
-import model.Player;
 
 public class UserCommands implements ResolveCommand {
     private static final UserCommands userCommands = new UserCommands();
@@ -40,14 +38,14 @@ public class UserCommands implements ResolveCommand {
         public void execute(String[] tokens) throws Exception {
             switch (tokens[1]) {
                 case "register":
-                    done(AccountManager.getAccountManager().register(tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7]));
+                    done(AccountController.getAccountController().register(tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7]));
                     break;
                 case "delete":
-                    AccountManager.getAccountManager().deleteAccount(tokens[2], tokens[3]);
+                    AccountController.getAccountController().delete(tokens[2], tokens[3]);
                     done("Deleted");
                     break;
                 case "login":
-                    done(AccountManager.getAccountManager().login(tokens[2], tokens[3]));
+                    done(AccountController.getAccountController().login(tokens[2], tokens[3]));
                     break;
             }
         }
@@ -67,21 +65,24 @@ public class UserCommands implements ResolveCommand {
         public void execute(String[] tokens) throws Exception {
             switch (tokens[1]) {
                 case "showInfo":
-                    done(AccountManager.getAccountManager().showInfo(tokens[2]));
+                    done(AccountController.getAccountController().showInfo(tokens[2]));
                     break;
                 case "changePassword":
-                    AccountManager.getAccountManager().changePassword(tokens[2], tokens[3], tokens[4]);
+                    AccountController.getAccountController().changePassword(tokens[2], tokens[3], tokens[4]);
                     done("Changed");
                     break;
                 case "editField":
-                    done(PlayerController.getPlayerController().showAdminMessages(tokens[2]));
+                    AccountController.getAccountController().editField(tokens[2], tokens[3], tokens[4]);
+                    done("Edited");
                     break;
                 case "showStatistics":
-                    done(PlayerController.getPlayerController().showAdminSuggestions(tokens[2]));
+                    done(AccountController.getAccountController().showStatistics(tokens[2]));
                     break;
                 case "showHistory":
-                    PlayerController.getPlayerController().playSuggested(tokens[2], tokens[3]);
-                    done("Began");
+                    //TODO
+                    break;
+                case "gameStatistics":
+                    //TODO
                     break;
             }
         }

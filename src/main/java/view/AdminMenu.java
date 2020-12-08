@@ -12,7 +12,7 @@ public class AdminMenu extends Menu implements Back {
         return adminMenu;
     }
 
-    public void addEvent() {
+    private void addEvent() {
         System.out.print("Game Name: >");
         String game = scanner.nextLine();
 
@@ -54,21 +54,21 @@ public class AdminMenu extends Menu implements Back {
         Client.getClient().send("User addEvent " + username + " " + game + " " + syear + " " + smonth + " " + sday + " " + fyear + " " + fmonth + " " + fday + " " + score);
     }
 
-    public void showEvents() {}
+    private void showEvents() {}
 
-    public void editEvent(String eventID, String field, String content) {}
+    private void editEvent(String eventID, String field, String content) {}
 
-    public void removeEvent(String eventID) {}
+    private void removeEvent(String eventID) {}
 
-    public void suggest(String user, String game) {}
+    private void suggest(String user, String game) {}
 
-    public void showSuggestions() {}
+    private void showSuggestions() {}
 
-    public void removeSuggestion(String suggestionID) {}
+    private void removeSuggestion(String suggestionID) {}
 
-    public void showUsers() {}
+    private void showUsers() {}
 
-    public void showUserProfile(String user) {}
+    private void showUserProfile(String user) {}
 
     @Override
     public void run() {

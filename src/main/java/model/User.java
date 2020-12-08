@@ -13,13 +13,13 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private String phoneNumber;
+    private String phone;
 
     static {
         users = new HashMap<>();
     }
 
-    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber) {
+    public User(String firstName, String lastName, String username, String password, String email, String phone) {
         userID = IDGenerator();
         users.put(username, this);
         this.firstName = firstName;
@@ -27,7 +27,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.phone = phone;
     }
 
     private long IDGenerator() {
@@ -65,8 +65,8 @@ public class User {
         this.email = email;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getFirstName() {
@@ -93,8 +93,8 @@ public class User {
         return email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
     public static HashMap<String, User> getUsers() {

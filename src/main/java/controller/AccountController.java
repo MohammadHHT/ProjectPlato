@@ -2,17 +2,18 @@ package controller;
 
 import exception.*;
 import model.Admin;
+import model.GameLog;
 import model.Player;
 import model.User;
 
-public class AccountManager {
-    private static final AccountManager accountManager = new AccountManager();
+public class AccountController {
+    private static final AccountController accountController = new AccountController();
 
-    private AccountManager() {
+    private AccountController() {
     }
 
-    public static AccountManager getAccountManager() {
-        return accountManager;
+    public static AccountController getAccountController() {
+        return accountController;
     }
 
     public String register(String firstName, String lastName, String username, String password, String email, String phoneNumber) throws UsernameIsAlreadyTaken {
@@ -43,7 +44,7 @@ public class AccountManager {
         }
     }
 
-    public void deleteAccount(String username, String password) throws UsernameNotFound, IncorrectPassword {
+    public void delete(String username, String password) throws UsernameNotFound, IncorrectPassword {
         if (!User.getUsers().containsKey(username)) {
             throw new UsernameNotFound();
         } else if (!User.getUsers().get(username).getPassword().equals(password)) {
@@ -62,7 +63,7 @@ public class AccountManager {
     public String showInfo(String username) {
         User user = User.getUsers().get(username);
         return user.getFirstName() + " " + user.getLastName() + " "
-                + user.getUsername() + " " + user.getEmail() + " " + user.getPhoneNumber();
+                + user.getUsername() + " " + user.getEmail() + " " + user.getPhone();
     }
 
     public void changePassword(String username, String old, String next) throws IncorrectPassword {
@@ -74,52 +75,34 @@ public class AccountManager {
         }
     }
 
-    public void editField(String field, String value) {
-        if (loggedInUser == null) {
-            System.out.println("First log in your account...");
-        } else {
-            User user = loggedInUser;
-            if (field.equalsIgnoreCase("first name")) {
-                try {
-                    user.setFirstName(newValue);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            } else if (field.equalsIgnoreCase("last name")) {
-                try {
-                    user.setLastName(newValue);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            } else if (field.equalsIgnoreCase("username")) {
-                try {
-                    user.setUsername(newValue);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            } else if (field.equalsIgnoreCase("email")) {
-                try {
-                    user.setEmail(newValue);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            } else if (field.equalsIgnoreCase("phone number")) {
-                try {
-                    user.setPhoneNumber(newValue);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            } else if (field.equalsIgnoreCase("password")) {
-                try {
-                    user.setPassword(newValue);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            } else {
-                System.out.println("INVALID FIELD!");
-            }
+    public void editField(String username, String field, String value) {
+        User user = User.getUsers().get(username);
+        switch (field) {
+            case "username":
+                user.setUsername(value);
+                break;
+            case "email":
+                user.setEmail(value);
+                break;
+            case "phone":
+                user.setPhone(value);
+                break;
         }
-
         //TODO after changes happened, the new info must save in Database.
+    }
+
+    public String showStatistics(String username) {
+        User user = User.getUsers().get(username);
+        if (user instanceof Player) {
+            Player player = (Player) user;
+            String tmp = player.getLevel() + " " + player.getPlatoAge() + " ";
+            int wins = 0;
+            for (int i = 0; i < player.getGameLogs().size(); i++) {
+                wins += GameLog.getGameLogs().get(player.getGameLogs().get(i)).getNumberOfWins();
+            }
+            tmp += wins + " " + player.getFriends().size();
+            return tmp;
+        }
+        return null;
     }
 }

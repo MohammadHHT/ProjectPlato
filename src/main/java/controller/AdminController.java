@@ -112,7 +112,7 @@ public class AdminController {
             Player player = Player.getPlayers().get(userName);
             System.out.println(player.getFirstName() + " " + player.getLastName() + "\n"
                     + player.getUsername() + "\n"
-                    + player.getEmail() + " " + player.getPhoneNumber() + "\n"
+                    + player.getEmail() + " " + player.getPhone() + "\n"
                     + player.getScore() + " " + player.getFavoriteGames());
         } else
             throw new UsernameNotFound();
