@@ -64,7 +64,7 @@ public class PlayerController {
         ArrayList<String> friends = Player.getPlayers().get(username).getFriends();
         if (Player.getPlayers().containsKey(username)) {
             if (!friends.contains(friend)) {
-                friends.add(friend);
+                Player.getPlayers().get(username).getFriends().add(friend);
             } else {
                 throw new AlreadyYourFriend();
             }
@@ -74,7 +74,6 @@ public class PlayerController {
     }
 
     public void addFavoriteGame(String username, String gameName) throws UsernameNotFound, GameNotFoundException {
-        ArrayList<String> favoriteGames = Player.getPlayers().get(username).getFavoriteGames();
         if (Player.getPlayers().containsKey(username)) {
             if (Game.getGamesName().contains(gameName)) {
                 Player.getPlayers().get(username).getFavoriteGames().add(gameName);
@@ -134,8 +133,9 @@ public class PlayerController {
     }
 
     public void removeFriend(String username, String usernameOfApplicant) throws UsernameNotFound, ThisUserIsNotYourFriendException {
+        ArrayList<String> friends = Player.getPlayers().get(username).getFriends();
         if (Player.getPlayers().containsKey(username) && Player.getPlayers().containsKey(usernameOfApplicant)) {
-            if (Player.getPlayers().get(username).getFriends().containsKey(usernameOfApplicant)) {
+            if (friends.contains(usernameOfApplicant)) {
                 Player.getPlayers().get(username).getFriends().remove(usernameOfApplicant);
             } else {
                 throw new ThisUserIsNotYourFriendException();
