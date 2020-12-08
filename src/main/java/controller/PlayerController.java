@@ -145,14 +145,17 @@ public class PlayerController {
         }
     }
 
-    public void showFriendsRequests(String username) throws UsernameNotFound {
+    public String showFriendsRequests(String username) throws UsernameNotFound {
+        ArrayList<String> friendRequest = Player.getPlayers().get(username).getFriendRequest();
+        String tmp = "";
         if (Player.getPlayers().containsKey(username)) {
-            for (Map.Entry<String, Player> entry : Player.getPlayers().get(username).getFriendRequest().entrySet()) {
-                System.out.println(entry.getValue().getUsername());
+            for (String friend : friendRequest) {
+                tmp += Player.getPlayers().get(friend).getUsername();
             }
         } else {
             throw new UsernameNotFound();
         }
+        return tmp.trim();
     }
 
     public void acceptRequests(String username, String friendUserName) throws UsernameNotFound, RequestNotFoundException {
