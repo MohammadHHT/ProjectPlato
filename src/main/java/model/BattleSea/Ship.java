@@ -33,5 +33,6 @@ public class Ship {
         if (direction != Unset && direction != Horizontal && direction != Vertical)
             throw new IllegalArgumentException("Invalid direction.\n" +
                     "It must be -1(Unset), 0(Horizontal), or 1(Vertical)");
+        this.direction = direction;
     }
 }
