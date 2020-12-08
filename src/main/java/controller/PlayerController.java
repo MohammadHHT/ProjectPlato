@@ -61,10 +61,10 @@ public class PlayerController {
     }
 
     public void addFriend(String username, String friend) throws AlreadyYourFriend, UsernameNotFound {
-        Player player = Player.getPlayers().get(friend);
-        if (player != null) {
-            if (!Player.getPlayers().get(username).getFriends().containsKey(friend)) {
-                player.addFriendRequest(username);
+        ArrayList<String> friends = Player.getPlayers().get(username).getFriends();
+        if (Player.getPlayers().containsKey(username)) {
+            if (!friends.contains(friend)) {
+                friends.add(friend);
             } else {
                 throw new AlreadyYourFriend();
             }
@@ -74,9 +74,10 @@ public class PlayerController {
     }
 
     public void addFavoriteGame(String username, String gameName) throws UsernameNotFound, GameNotFoundException {
+        ArrayList<String> favoriteGames = Player.getPlayers().get(username).getFavoriteGames();
         if (Player.getPlayers().containsKey(username)) {
-            if (Game.getGames().containsKey(Integer.parseInt(gameName))) {
-                Player.getPlayers().get(username).getFavoriteGames().add(Game.getGames().get(Integer.parseInt(gameName)));
+            if (Game.getGamesName().contains(gameName)) {
+                Player.getPlayers().get(username).getFavoriteGames().add(gameName);
             } else {
                 throw new GameNotFoundException();
             }
@@ -87,8 +88,8 @@ public class PlayerController {
 
     public void deleteFavoriteGame(String username, String gameName) throws UsernameNotFound, GameNotFoundException {
         if (Player.getPlayers().containsKey(username)) {
-            if (Game.getGames().containsKey(Integer.parseInt(gameName))) {
-                Player.getPlayers().get(username).getFavoriteGames().remove(Game.getGames().get(Integer.parseInt(gameName)));
+            if (Game.getGamesName().contains(gameName)) {
+                Player.getPlayers().get(username).getFavoriteGames().remove(gameName);
             } else {
                 throw new GameNotFoundException();
             }
@@ -119,14 +120,17 @@ public class PlayerController {
         //TODO
     }
 
-    public void showFriends(String username) throws UsernameNotFound {
+    public String showFriends(String username) throws UsernameNotFound {
+        ArrayList<String> friends = Player.getPlayers().get(username).getFriends();
+        String tmp = "";
         if (Player.getPlayers().containsKey(username)) {
-            for (Map.Entry<String, Player> entry : Player.getPlayers().get(username).getFriends().entrySet()) {
-                System.out.println(entry.getValue().getUsername());
+            for (String friend : friends) {
+                tmp += Player.getPlayers().get(friend).getUsername() + " ";
             }
         } else {
             throw new UsernameNotFound();
         }
+        return tmp.trim();
     }
 
     public void removeFriend(String username, String usernameOfApplicant) throws UsernameNotFound, ThisUserIsNotYourFriendException {
