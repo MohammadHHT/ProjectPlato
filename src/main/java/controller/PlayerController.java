@@ -174,8 +174,9 @@ public class PlayerController {
     }
 
     public void declineRequests(String username, String usernameOfApplicant) throws UsernameNotFound, RequestNotFoundException {
+        ArrayList<String> friendRequest = Player.getPlayers().get(username).getFriendRequest();
         if (Player.getPlayers().containsKey(username) && Player.getPlayers().containsKey(usernameOfApplicant)) {
-            if (Player.getPlayers().get(username).getFriendRequest().containsKey(usernameOfApplicant)) {
+            if (friendRequest.contains(usernameOfApplicant)) {
                 Player.getPlayers().get(username).getFriendRequest().remove(usernameOfApplicant);
             } else {
                 throw new RequestNotFoundException();
@@ -186,8 +187,9 @@ public class PlayerController {
     }
 
     public void viewFriendProfile(String username, String usernameOfIntendedUser) throws UsernameNotFound, ThisUserIsNotYourFriendException {
+        ArrayList<String> friends = Player.getPlayers().get(username).getFriends();
         if (Player.getPlayers().containsKey(username) && Player.getPlayers().containsKey(usernameOfIntendedUser)) {
-            if (Player.getPlayers().get(username).getFriends().containsKey(usernameOfIntendedUser)) {
+            if (friends.contains(usernameOfIntendedUser)) {
                 Player player = Player.getPlayers().get(usernameOfIntendedUser);
                 System.out.println("Player name= " + player.getFirstName() + " " + player.getLastName());
                 System.out.println("Plato Age= " + player.getPlatoAge());
