@@ -1,6 +1,7 @@
 package model.BattleSea;
 
 public class Ship {
+    private String shipName;
     private int row;
     private int column;
     private int length;
@@ -9,7 +10,8 @@ public class Ship {
     public static final int Horizontal = 0;
     public static final int Vertical = 1;
 
-    public Ship(int length) {
+    public Ship(String shipName, int length) {
+        this.shipName = shipName;
         this.length = length;
         this.row = -1;
         this.column = -1;
@@ -34,6 +36,10 @@ public class Ship {
             throw new IllegalArgumentException("Invalid direction.\n" +
                     "It must be -1(Unset), 0(Horizontal), or 1(Vertical)");
         this.direction = direction;
+    }
+
+    public String getShipName() {
+        return shipName;
     }
 
     public int getRow() {
