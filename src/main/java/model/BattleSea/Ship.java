@@ -1,10 +1,14 @@
 package model.BattleSea;
 
 public class Ship {
-    private int width;
+    private int row;
+    private int column;
     private int length;
-    private boolean isHorizontal;
-
+    private int direction;
+    public static final int Unset = -1;
+    public static final int Horizontal = 0;
+    public static final int Vertical = 1;
+    
     public Ship(int width, int length, boolean isHorizontal) {
         this.width = width;
         this.length = length;
