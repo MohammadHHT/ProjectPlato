@@ -1,9 +1,14 @@
 package view;
 
 public class LoginMenu extends Menu {
+    private static final LoginMenu loginMenu = new LoginMenu();
 
-    private int nextMenu;
+    private LoginMenu() {
+    }
 
+    public static LoginMenu getLoginMenu() {
+        return loginMenu;
+    }
     @Override
     public void run() {
         String[] commands;

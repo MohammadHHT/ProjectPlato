@@ -7,14 +7,14 @@ public class Player extends User {
     private static HashMap<String, Player> players;
 
     private int platoAge;
+    private int score;
     private double money;
-    private long score;
-    private HashMap<String, Player> friends;
-    private HashMap<String, Player> friendRequest;
+    private ArrayList<String> friends;
+    private ArrayList<String> friendRequest;
     private ArrayList<String> favoriteGames;
     private ArrayList<Long> suggestions;
     private ArrayList<String> inbox;
-    private ArrayList<String> gameLogs;
+    private ArrayList<Long> gameLogs;
 
     static {
         players = new HashMap<>();
@@ -26,8 +26,8 @@ public class Player extends User {
         this.money = 0;
         this.score = 0;
         this.platoAge = 0;
-        this.friends = new HashMap<>();
-        this.friendRequest = new HashMap<>();
+        this.friends = new ArrayList<>();
+        this.friendRequest = new ArrayList<>();
         this.favoriteGames = new ArrayList<>();
         this.suggestions = new ArrayList<>();
         this.inbox = new ArrayList<>();
@@ -36,8 +36,8 @@ public class Player extends User {
 
     //TODO add process to accept or decline friend
 
-    public void addNewFriend(Player player) {
-        //TODO
+    public void addFriendRequest(String playerID) {
+        friendRequest.add(playerID);
     }
 
     public void removeFriend(Player player) {
@@ -110,7 +110,7 @@ public class Player extends User {
         return suggestions;
     }
 
-    public ArrayList<String> getGameLogs() {
+    public ArrayList<Long> getGameLogs() {
         return gameLogs;
     }
 }
