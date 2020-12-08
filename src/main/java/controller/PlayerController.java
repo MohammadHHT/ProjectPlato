@@ -159,11 +159,12 @@ public class PlayerController {
     }
 
     public void acceptRequests(String username, String friendUserName) throws UsernameNotFound, RequestNotFoundException {
+        ArrayList<String> friendRequest = Player.getPlayers().get(username).getFriendRequest();
         if (Player.getPlayers().containsKey(username) && Player.getPlayers().containsKey(friendUserName)) {
-            if (Player.getPlayers().get(username).getFriendRequest().containsKey(friendUserName)) {
+            if (friendRequest.contains(friendUserName)) {
                 Player.getPlayers().get(username).getFriendRequest().remove(friendUserName);
-                Player.getPlayers().get(username).getFriends().put(friendUserName, Player.getPlayers().get(friendUserName));
-                Player.getPlayers().get(friendUserName).getFriends().put(username, Player.getPlayers().get(username));
+                Player.getPlayers().get(username).getFriends().add(friendUserName);
+                Player.getPlayers().get(friendUserName).getFriends().add(username);
             } else {
                 throw new RequestNotFoundException();
             }
