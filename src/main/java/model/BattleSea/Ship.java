@@ -51,4 +51,17 @@ public class Ship {
     public int getDirection() {
         return direction;
     }
+
+    private String directionToString() {
+        if (direction == Unset)
+            return "Unset";
+        else if (direction == Horizontal)
+            return "Horizontal";
+        else
+            return "Vertical";
+    }
+    public String toString() {
+        return "Ship: " + getRow() + ", " + getColumn() +
+                " with length " + getLength() + " and direction " + directionToString();
+    }
 }
