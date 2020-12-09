@@ -154,7 +154,12 @@ public class UserCommands implements ResolveCommand {
                     done(AdminController.getAdminController().showEvents());
                     break;
                 case "editEvent":
-
+                    if (tokens.length == 7) {
+                        AdminController.getAdminController().editEvent(tokens[2], tokens[3], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]));
+                    } else {
+                        AdminController.getAdminController().editEvent(tokens[2], Integer.parseInt(tokens[3]));
+                    }
+                    done("Edited");
                     break;
                 case "removeEvent":
 

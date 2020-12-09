@@ -24,20 +24,15 @@ public class AdminController {
         }
     }
 
-    public String showEvents() throws ExpiredEventException {
-        for (Map.Entry<Integer, Event> entry : Event.getEvents().entrySet()) {
-            if (entry.getValue().getStartDate().isBefore(entry.getValue().getEndDate())) {
-                System.out.println("Game name: " + entry.getValue().getGameName() + "\n" +
-                        "Event ID: " + entry.getValue().getEventID() + "\n" +
-                        entry.getValue().getStartDate() + "to" + entry.getValue().getEndDate() + "\n" +
-                        "Score" + entry.getValue().getEventScore());
-            } else
-                throw new ExpiredEventException();
+    public String showEvents() {
+        StringBuilder tmp = new StringBuilder();
+        for (Event e : Event.getEvents().values()) {
+            tmp.append(e.getEventID()).append(e.getGameName()).append(" ").append(e.getStartDate()).append(" ").append(e.getEndDate()).append(" ").append(e.getEventScore()).append("\n");
         }
+        return tmp.toString().trim();
     }
 
-    public void editEvent(String eventID, String field, String newValue) throws GameNotFoundException,
-            InvalidDateException, EventIDNotFoundException {
+    public void editEvent(String eventID, int score) throws EventIDNotFound {
         Event event = Event.getEvents().get(Integer.parseInt(eventID));
         if (Event.getEvents().containsKey(Integer.parseInt(eventID))) {
             if (field.equalsIgnoreCase("Game name")){
@@ -64,12 +59,16 @@ public class AdminController {
                 System.out.println("Successfully changed to a new value.");
             }
         } else
-            throw new EventIDNotFoundException();
+            throw new EventIDNotFound();
     }
 
-    public void removeEvent(String eventID) throws EventIDNotFoundException {
+    public void editEvent(String eventID, String field, int year, int month, int day) throws EventIDNotFound {
+
+    }
+
+    public void removeEvent(String eventID) throws EventIDNotFound {
         if (!(Event.getEvents().containsKey(Integer.parseInt(eventID))))
-            throw new EventIDNotFoundException();
+            throw new EventIDNotFound();
         Event.getEvents().remove(Integer.parseInt(eventID));
         System.out.println("Event with " + eventID + " ID deleted successfully.");
     }
