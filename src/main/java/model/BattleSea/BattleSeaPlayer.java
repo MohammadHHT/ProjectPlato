@@ -1,41 +1,38 @@
 package model.BattleSea;
 
-import java.util.ArrayList;
-
 public class BattleSeaPlayer {
-    private ArrayList<Bomb> bombsPlanted;
+    private static final int[] shipsLength = {2, 3, 3, 4, 5};
+    private static final char[] shipsName = {'A', 'B', 'C', 'D', 'E'};
+    private static final int numOfShips = 5;
 
-    //TODO constructor
+    public Ship[] ships;
+    public Grid playerGrid;
+    public Grid oppGrid;
 
-    public boolean isBombExist (int x, int y) {
-        return true;
+    public BattleSeaPlayer() {
+        if (numOfShips != 5)
+            throw new IllegalArgumentException("ERROR! Num of ships must be 5.");
+        ships = new Ship[numOfShips];
+        for (int i = 0; i < numOfShips; i++) {
+            Ship tempShip = new Ship(shipsName[i], shipsLength[i]);
+            ships[i] = tempShip;
+        }
+        playerGrid = new Grid();
+        oppGrid = new Grid();
     }
 
-    public void plantBomb (int x, int y) {
-        //TODO
+    public int numOfShipsLeft() {
+        int counter = 5;
+        for (Ship ship : ships) {
+            if (ship.isLocationSet() && ship.isDirectionSet())
+                counter--;
+        }
+        return counter;
     }
 
-    public Bomb getBomb (int x, int y) {
-        return null;
-    }
-
-    public ArrayList<Bomb> getBombsPlanted() {
-        return bombsPlanted;
-    }
-
-    public int[][] getPlayerBoard() {
-        return null;
-    }
-
-    public int[][] getCompetitorBoard() {
-        return null;
-    }
-
-    public void checkWinner() {
-        //TODO
-    }
-
-    public void resetGame() {
-        //TODO
+    public void chooseShipLocation(Ship ship, int row, int column, int direction) {
+        ship.setLocation(row, column);
+        ship.setDirection(direction);
+        playerGrid.addShip(ship);
     }
 }

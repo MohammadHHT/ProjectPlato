@@ -1,57 +1,73 @@
 package model.BattleSea;
 
 public class Ship {
-    private int width;
+    private char shipName;
+    private int row;
+    private int column;
     private int length;
-    private boolean isHorizontal;
+    private int direction;
+    public static final int Unset = -1;
+    public static final int Horizontal = 0;
+    public static final int Vertical = 1;
 
-    public Ship(int width, int length, boolean isHorizontal) {
-        this.width = width;
+    public Ship(char shipName, int length) {
+        this.shipName = shipName;
         this.length = length;
-        this.isHorizontal = isHorizontal;
+        this.row = -1;
+        this.column = -1;
+        this.direction = Unset;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
+    public boolean isLocationSet() {
+        return row != -1 && column != -1;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public boolean isDirectionSet() {
+        return direction == Unset;
     }
 
-    public int getWidth() {
-        return width;
+    public void setLocation(int row, int column) {
+        this.row = row;
+        this.column = column;
     }
 
-    public void setHorizontal(boolean horizontal) {
-        isHorizontal = horizontal;
+    public void setDirection(int direction) {
+        if (direction != Unset && direction != Horizontal && direction != Vertical)
+            throw new IllegalArgumentException("Invalid direction.\n" +
+                    "It must be -1(Unset), 0(Horizontal), or 1(Vertical)");
+        this.direction = direction;
     }
 
-    public boolean isHorizontal() {
-        return isHorizontal;
+    public char getShipName() {
+        return shipName;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
     }
 
     public int getLength() {
         return length;
     }
 
-    public boolean isWreck(BattleSeaPlayer player) {
-        return false;
+    public int getDirection() {
+        return direction;
     }
 
-    public boolean canChangeDirection() {
-        return false;
+    private String directionToString() {
+        if (direction == Unset)
+            return "Unset";
+        else if (direction == Horizontal)
+            return "Horizontal";
+        else
+            return "Vertical";
     }
-
-    public void changeDirection() {
-        //TODO
-    }
-
-    public boolean canMove(int x, int y) {
-        return false;
-    }
-
-    public void move(int x, int y) {
-        //TODO
+    public String toString() {
+        return "Ship: " + getRow() + ", " + getColumn() +
+                " with length " + getLength() + " and direction " + directionToString();
     }
 }
