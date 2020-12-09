@@ -7,18 +7,24 @@ import java.time.LocalDate;
 import java.util.Map;
 
 public class AdminController {
+    private static final AdminController adminController = new AdminController();
 
-    public String addEvent(String gameName, LocalDate startDate, LocalDate endDate, long eventScore) throws
-            InvalidGameNameException, InvalidDateException {
-        if (!(Game.getGamesName().contains(gameName)))
-            throw new InvalidGameNameException();
-        if (startDate.isAfter(endDate) || endDate.isBefore(startDate))
-            throw new InvalidDateException();
-        new Event(gameName, startDate, endDate, eventScore);
-        return "The event was created successfully.";
+    private AdminController() {
     }
 
-    public void viewEvent() throws ExpiredEventException {
+    public static AdminController getAdminController() {
+        return adminController;
+    }
+
+    public void addEvent(String game, int syear, int smonth, int sday, int fyear, int fmonth, int fday, long score) throws InvalidGameNameException {
+        if (game.equals("BattleSea") || game.equals("DotsAndBoxes")) {
+            new Event(game, LocalDate.of(syear, smonth, sday), LocalDate.of(fyear, fmonth, fday), score);
+        } else {
+            throw new InvalidGameNameException();
+        }
+    }
+
+    public String showEvents() throws ExpiredEventException {
         for (Map.Entry<Integer, Event> entry : Event.getEvents().entrySet()) {
             if (entry.getValue().getStartDate().isBefore(entry.getValue().getEndDate())) {
                 System.out.println("Game name: " + entry.getValue().getGameName() + "\n" +

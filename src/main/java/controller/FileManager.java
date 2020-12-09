@@ -138,9 +138,7 @@ public class FileManager {
         Type foundListType = new TypeToken<ArrayList<Event>>(){}.getType();
         ArrayList<Event> events = gson.fromJson(data, foundListType);
         scanner.close();
-        for (Event event : events) {
-            Event.addEvent(event);
-        }
+        Event.addEvents(events);
     }
 
     public static void loadSuggestion() {

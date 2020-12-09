@@ -1,37 +1,39 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 public class Event {
+    private static HashMap<Long, Event> events;
+
     private String gameName;
     private LocalDate startDate;
     private LocalDate endDate;
     private long eventScore;
-    private int eventID;
-    private static HashMap<Integer, Event> events;
+    private long eventID;
 
     static {
-        events = new HashMap<Integer, Event>();
+        events = new HashMap<>();
     }
 
     public Event(String gameName, LocalDate startDate, LocalDate endDate, long eventScore) {
+        eventID = IDGenerator();
+        events.put(eventID, this);
         this.gameName = gameName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.eventScore = eventScore;
-        //EventID
-        events.put(eventID, this);
     }
 
-    public static void addEvent(Event event) {
-        events.put(event.getEventID(), event);
+    private long IDGenerator() {
+        Random random = new Random();
+        return random.nextLong();
     }
 
-    public void addNewEvent(){
-        //TODO
+    public static void addEvents(ArrayList<Event> events) {
+        for (Event e : events) {
+            Event.events.put(e.eventID, e);
+        }
     }
 
     public void deleteEvent(){
@@ -54,10 +56,6 @@ public class Event {
         this.eventScore = eventScore;
     }
 
-    public void setEventID(int eventID) {
-        this.eventID = eventID;
-    }
-
     public String getGameName() {
         return null;
     }
@@ -74,11 +72,11 @@ public class Event {
         return eventScore;
     }
 
-    public int getEventID() {
+    public long getEventID() {
         return eventID;
     }
 
-    public static HashMap<Integer, Event> getEvents() {
+    public static AbstractMap<Long, Event> getEvents() {
         return events;
     }
 }

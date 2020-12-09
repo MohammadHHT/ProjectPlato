@@ -39,28 +39,30 @@ public class AdminMenu extends Menu implements Back {
         scanner.nextLine();
 
         System.out.print("Score: >");
-        int score = scanner.nextInt();
+        long score = scanner.nextInt();
         scanner.nextLine();
 
         LocalDate localDate = LocalDate.now();
         if (localDate.isAfter(LocalDate.of(fyear, fmonth, fday))) {
-            System.err.println("Finish time is passed");
+            System.err.println("Invalid Start or End Date!");
             return;
         } else if (score < 1) {
             System.err.println("Score can not be zero on negative");
             return;
         }
 
-        Client.getClient().send("User addEvent " + username + " " + game + " " + syear + " " + smonth + " " + sday + " " + fyear + " " + fmonth + " " + fday + " " + score);
+        Client.getClient().send("User addEvent " + game + " " + syear + " " + smonth + " " + sday + " " + fyear + " " + fmonth + " " + fday + " " + score);
     }
 
-    private void showEvents() {}
+    private void showEvents() {
+        Client.getClient().send("User showEvents");
+    }
 
     private void editEvent(String eventID, String field, String content) {}
 
     private void removeEvent(String eventID) {}
 
-    private void suggest(String user, String game) {}
+    private void suggest() {}
 
     private void showSuggestions() {}
 
@@ -68,7 +70,7 @@ public class AdminMenu extends Menu implements Back {
 
     private void showUsers() {}
 
-    private void showUserProfile(String user) {}
+    private void showUserProfile() {}
 
     @Override
     public void run() {

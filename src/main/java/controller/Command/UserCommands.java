@@ -1,6 +1,7 @@
 package controller.Command;
 
 import controller.AccountController;
+import controller.AdminController;
 import controller.PlayerController;
 
 public class UserCommands implements ResolveCommand {
@@ -19,6 +20,9 @@ public class UserCommands implements ResolveCommand {
         } else if (tokens[1].equals("showPoint") || tokens[1].equals("showFavoriteGames") || tokens[1].equals("showAdminMessages") || tokens[1].equals("showAdminSuggestions") ||
                 tokens[1].equals("playSuggested") || tokens[1].equals("showLastGame") || tokens[1].equals("addFriend")) {
             PlayerCommand.getPlayerCommand().execute(tokens);
+        } else if (tokens[1].equals("addEvent") || tokens[1].equals("showEvents") || tokens[1].equals("editEvent") || tokens[1].equals("removeEvent") ||
+                tokens[1].equals("suggest") || tokens[1].equals("showSuggestions") || tokens[1].equals("removeSuggestion") || tokens[1].equals("showUsers") || tokens[1].equals("showUserProfile")) {
+            AdminCommand.getAdminCommand().execute(tokens);
         } else if (tokens[1].equals("showInfo") || tokens[1].equals("changePassword") || tokens[1].equals("editField") || tokens[1].equals("showPlatoStatistics") ||
                 tokens[1].equals("showHistory") || tokens[1].equals("showGameStatistics")) {
             AccountCommand.getAccountCommand().execute(tokens);
@@ -143,10 +147,11 @@ public class UserCommands implements ResolveCommand {
         public void execute(String[] tokens) throws Exception {
             switch (tokens[1]) {
                 case "addEvent":
-
+                    AdminController.getAdminController().addEvent(tokens[2], Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]), Integer.parseInt(tokens[8]), Long.parseLong(tokens[9]));
+                    done("Added");
                     break;
                 case "showEvents":
-
+                    done(AdminController.getAdminController().showEvents());
                     break;
                 case "editEvent":
 

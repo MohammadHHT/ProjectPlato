@@ -33,8 +33,8 @@ public class GameLog {
         return random.nextLong();
     }
 
-    public static void addGameLogs(ArrayList<GameLog> gamelogs) {
-        for (GameLog g : gamelogs) {
+    public static void addGameLogs(ArrayList<GameLog> gameLogs) {
+        for (GameLog g : gameLogs) {
             GameLog.gameLogs.put(g.logID, g);
         }
     }
