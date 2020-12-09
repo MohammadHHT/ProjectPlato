@@ -114,11 +114,15 @@ public class Grid {
     private void generalPrintMethod(int type) {
         System.out.println();
 
-        System.out.print("  ");
-        for (int i = 1; i <= NUM_COLS; i++) {
+        System.out.print("   ");
+        for (int i = 0; i < NUM_COLS; i++) {
             System.out.print(i + " ");
         }
         System.out.println();
+
+        for (int i = 0; i < NUM_ROWS; i++) {
+            System.out.println(i);
+        }
 
         // Print rows
         int endLetterForLoop = (NUM_ROWS - 1) + 65;
@@ -128,14 +132,16 @@ public class Grid {
 
             for (int j = 0; j < NUM_COLS; j++) {
                 if (type == 0) {
-                    if (grid[switchCounterToIntegerForArray(i)][j].isUnGuessed())
+                    if (grid[i][j].isUnGuessed())
+                        System.out.print("_ ");
+                    else if (grid[i][j].checkMiss())
                         System.out.print("- ");
-                    else if (grid[switchCounterToIntegerForArray(i)][j].checkMiss())
-                        System.out.print("O ");
-                    else if (grid[switchCounterToIntegerForArray(i)][j].checkHit())
-                        System.out.print("X ");
+                    else if (grid[i][j].checkHit())
+                        System.out.print("+ ");
+                    else if (grid[i][j].isAllHit())
+                        System.out.println("* ");
                 } else if (type == 1) {
-                    if (grid[switchCounterToIntegerForArray(i)][j].hasShip()) {
+                    if (grid[i][j].hasShip()) {
                         // System.out.print("X ");
                         if (grid[switchCounterToIntegerForArray(i)][j].getLengthOfShip() == 2) {
                             System.out.print("D ");
