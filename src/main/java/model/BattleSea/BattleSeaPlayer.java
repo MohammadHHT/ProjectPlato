@@ -1,16 +1,16 @@
 package model.BattleSea;
 
 public class BattleSeaPlayer {
-    private static final int[] shipsLength = {2, 3, 3, 4, 5};
-    private static final char[] shipsName = {'A', 'B', 'C', 'D', 'E'};
-    private static final int numOfShips = 5;
+    private static final int[] shipsLength = {2, 2, 3, 4, 4, 5};
+    private static final char[] shipsName = {'A', 'B', 'C', 'D', 'E', 'F'};
+    private static final int numOfShips = 6;
 
     public Ship[] ships;
     public Grid playerGrid;
     public Grid oppGrid;
 
     public BattleSeaPlayer() {
-        if (numOfShips != 5)
+        if (numOfShips != 6)
             throw new IllegalArgumentException("ERROR! Num of ships must be 5.");
         ships = new Ship[numOfShips];
         for (int i = 0; i < numOfShips; i++) {
@@ -22,7 +22,7 @@ public class BattleSeaPlayer {
     }
 
     public int numOfShipsLeft() {
-        int counter = 5;
+        int counter = 6;
         for (Ship ship : ships) {
             if (ship.isLocationSet() && ship.isDirectionSet())
                 counter--;
