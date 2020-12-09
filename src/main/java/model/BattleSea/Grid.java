@@ -75,36 +75,38 @@ public class Grid {
         generalPrintMethod(2);
     }
 
-    public boolean hasLost() {
-        if (points >= 17)
-            return true;
-        else
-            return false;
+    public boolean hasWin() {
+        return points == 25;
     }
 
     public void addShip(Ship s) {
         int row = s.getRow();
         int col = s.getColumn();
         int length = s.getLength();
+        int width = s.getWidth();
         int dir = s.getDirection();
 
         if (!(s.isDirectionSet()) || !(s.isLocationSet()))
             throw new IllegalArgumentException("ERROR! Direction or Location is unset/default");
 
         // 0 - hor; 1 - ver
-        // Hortizontal
+        // Horizontal
         if (dir == 0) {
-            for (int i = col; i < col+length; i++) {
-                grid[row][i].setShip(true);
-                grid[row][i].setLengthOfShip(length);
-                grid[row][i].setDirectionOfShip(dir);
+            for (int i = row; i < row + width; i++) {
+                for (int j = col; j < col + length; j++) {
+                    grid[i][j].setShip(true);
+                    grid[i][j].setLengthOfShip(length);
+                    grid[i][j].setDirectionOfShip(dir);
+                }
             }
             // Vertical
         } else if (dir == 1) {
-            for (int i = row; i < row+length; i++) {
-                grid[i][col].setShip(true);
-                grid[i][col].setLengthOfShip(length);
-                grid[i][col].setDirectionOfShip(dir);
+            for (int i = col; i < col + row; i++) {
+                for (int j = row; j < row + length; j++) {
+                    grid[j][i].setShip(true);
+                    grid[j][i].setLengthOfShip(length);
+                    grid[j][i].setDirectionOfShip(dir);
+                }
             }
         }
     }
