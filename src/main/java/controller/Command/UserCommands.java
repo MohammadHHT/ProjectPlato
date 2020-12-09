@@ -19,7 +19,8 @@ public class UserCommands implements ResolveCommand {
         } else if (tokens[1].equals("showPoint") || tokens[1].equals("showFavoriteGames") || tokens[1].equals("showAdminMessages") || tokens[1].equals("showAdminSuggestions") ||
                 tokens[1].equals("playSuggested") || tokens[1].equals("showLastGame") || tokens[1].equals("addFriend")) {
             PlayerCommand.getPlayerCommand().execute(tokens);
-        } else if (tokens[1].equals("showInfo") || tokens[1].equals("changePassword") || tokens[1].equals("editField") || tokens[1].equals("showStatistics") || tokens[1].equals("showHistory")) {
+        } else if (tokens[1].equals("showInfo") || tokens[1].equals("changePassword") || tokens[1].equals("editField") || tokens[1].equals("showPlatoStatistics") ||
+                tokens[1].equals("showHistory") || tokens[1].equals("showGameStatistics")) {
             AccountCommand.getAccountCommand().execute(tokens);
         }
     }
@@ -75,14 +76,14 @@ public class UserCommands implements ResolveCommand {
                     AccountController.getAccountController().editField(tokens[2], tokens[3], tokens[4]);
                     done("Edited");
                     break;
-                case "showStatistics":
-                    done(AccountController.getAccountController().showStatistics(tokens[2]));
+                case "showPlatoStatistics":
+                    done(AccountController.getAccountController().showPlatoStatistics(tokens[2]));
                     break;
                 case "showHistory":
-                    //TODO
+                    done(AccountController.getAccountController().showHistory(tokens[2]));
                     break;
-                case "gameStatistics":
-                    //TODO
+                case "showGameStatistics":
+                    done(AccountController.getAccountController().showGameStatistics(tokens[2], tokens[3]));
                     break;
             }
         }

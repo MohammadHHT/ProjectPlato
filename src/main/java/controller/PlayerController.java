@@ -48,7 +48,7 @@ public class PlayerController {
 
     public void playSuggested(String username, String game) throws GameNotFoundException {
         if (game.equals("BattleSea") || game.equals("DotsAndBoxes")) {
-            //TODO
+            //TODO process of starting the game
         } else {
             throw new GameNotFoundException();
         }
@@ -63,7 +63,7 @@ public class PlayerController {
     public void addFriend(String username, String friend) throws AlreadyYourFriend, UsernameNotFound {
         Player player = Player.getPlayers().get(friend);
         if (player != null) {
-            if (!Player.getPlayers().get(username).getFriends().containsKey(friend)) {
+            if (!Player.getPlayers().get(username).getFriends().contains(friend)) {
                 player.addFriendRequest(username);
             } else {
                 throw new AlreadyYourFriend();
@@ -153,10 +153,10 @@ public class PlayerController {
 
     public void acceptRequests(String username, String friendUserName) throws UsernameNotFound, RequestNotFoundException {
         if (Player.getPlayers().containsKey(username) && Player.getPlayers().containsKey(friendUserName)) {
-            if (Player.getPlayers().get(username).getFriendRequest().containsKey(friendUserName)) {
+            if (Player.getPlayers().get(username).getFriendRequest().contains(friendUserName)) {
                 Player.getPlayers().get(username).getFriendRequest().remove(friendUserName);
-                Player.getPlayers().get(username).getFriends().put(friendUserName, Player.getPlayers().get(friendUserName));
-                Player.getPlayers().get(friendUserName).getFriends().put(username, Player.getPlayers().get(username));
+                Player.getPlayers().get(username).getFriends().add(friendUserName);
+                Player.getPlayers().get(friendUserName).getFriends().add(username);
             } else {
                 throw new RequestNotFoundException();
             }

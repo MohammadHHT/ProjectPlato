@@ -91,18 +91,52 @@ public class AccountController {
         //TODO after changes happened, the new info must save in Database.
     }
 
-    public String showStatistics(String username) {
+    public String showPlatoStatistics(String username) {
         User user = User.getUsers().get(username);
         if (user instanceof Player) {
             Player player = (Player) user;
             String tmp = player.getLevel() + " " + player.getPlatoAge() + " ";
             int wins = 0;
-            for (int i = 0; i < player.getGameLogs().size(); i++) {
-                wins += GameLog.getGameLogs().get(player.getGameLogs().get(i)).getNumberOfWins();
+            for (Long gl : player.getGameLogs()) {
+                wins += GameLog.getGameLogs().get(gl).getNumberOfWins();
             }
             tmp += wins + " " + player.getFriends().size();
             return tmp;
         }
         return null;
+    }
+
+    public String showHistory(String username) {
+        User user = User.getUsers().get(username);
+        if (user instanceof Player) {
+            Player player = (Player) user;
+            StringBuilder tmp = new StringBuilder();
+            for (Long gl : player.getGameLogs()) {
+                tmp.append(GameLog.getGameLogs().get(gl).getDate()).append(" ");
+            }
+            return tmp.toString().trim();
+        }
+        return null;
+    }
+
+    public String showGameStatistics(String username, String game) throws GameNotFoundException {
+        if (game.equals("BattleSea") || game.equals("DotsAndBoxes")) {
+            User user = User.getUsers().get(username);
+            if (user instanceof Player) {
+                Player player = (Player) user;
+                String tmp = player.getLevel() + " ";
+                for (Long gl : player.getGameLogs()) {
+                    GameLog gameLog = GameLog.getGameLogs().get(gl);
+                    if (gameLog.getGame().equals(game)) {
+                        tmp += gameLog.getNumberOfTimesPlayed() + " " + gameLog.getNumberOfWins() + " " + gameLog.getNumberOfDefeat();
+                        break;
+                    }
+                }
+                return tmp.trim();
+            }
+            return null;
+        } else {
+            throw new GameNotFoundException();
+        }
     }
 }

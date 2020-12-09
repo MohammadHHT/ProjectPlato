@@ -1,7 +1,5 @@
 package view;
 
-import model.User;
-
 public class AccountMenu extends Menu implements Back {
     private static final AccountMenu accountMenu = new AccountMenu();
 
@@ -115,16 +113,18 @@ public class AccountMenu extends Menu implements Back {
         }
     }
 
-    private void showStatistics() {
-        Client.getClient().send("User showStatistics " + username);
+    private void showPlatoStatistics() {
+        Client.getClient().send("User showPlatoStatistics " + username);
     }
 
     private void showHistory() {
-        //TODO
+        Client.getClient().send("User showHistory " + username);
     }
 
-    private void gameStatistics() {
-        //TODO
+    private void showGameStatistics() {
+        System.out.print("Game Name: >");
+        String game = scanner.nextLine();
+        Client.getClient().send("User showGameStatistics " + username + " " + game);
     }
 
     private void logout() {
@@ -144,14 +144,14 @@ public class AccountMenu extends Menu implements Back {
                 case "editField":
                     editField();
                     break;
-                case "showStatistics":
-                    showStatistics();
+                case "showPlatoStatistics":
+                    showPlatoStatistics();
                     break;
                 case "showHistory":
                     showHistory();
                     break;
-                case "gameStatistics":
-                    gameStatistics();
+                case "showGameStatistics":
+                    showGameStatistics();
                     break;
                 case "logout":
                     logout();
