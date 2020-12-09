@@ -4,7 +4,6 @@ import exception.*;
 import model.*;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class PlayerController {
     private static final PlayerController playerController = new PlayerController();
@@ -97,12 +96,12 @@ public class PlayerController {
         }
     }
 
-    public void joinEvent(String username, String eventID, String gameName) throws EventIDNotFoundException {
+    public void joinEvent(String username, String eventID, String gameName) throws EventIDNotFound {
         if (Event.getEvents().containsKey(Integer.parseInt(eventID))) {
             GameController.runGameForEvent(username, Event.getEvents().get(Integer.parseInt(eventID)).getEventScore(),
                     gameName);
         } else {
-            throw new EventIDNotFoundException();
+            throw new EventIDNotFound();
         }
 
     }

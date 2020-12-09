@@ -7,22 +7,22 @@ public class Event {
     private static HashMap<Long, Event> events;
 
     private String gameName;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private long eventScore;
+    private LocalDate start;
+    private LocalDate end;
+    private long score;
     private long eventID;
 
     static {
         events = new HashMap<>();
     }
 
-    public Event(String gameName, LocalDate startDate, LocalDate endDate, long eventScore) {
+    public Event(String gameName, LocalDate start, LocalDate end, long score) {
         eventID = IDGenerator();
         events.put(eventID, this);
         this.gameName = gameName;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.eventScore = eventScore;
+        this.start = start;
+        this.end = end;
+        this.score = score;
     }
 
     private long IDGenerator() {
@@ -44,39 +44,39 @@ public class Event {
         this.gameName = gameName;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStart(LocalDate start) {
+        this.start = start;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setEventScore(long eventScore) {
-        this.eventScore = eventScore;
+    public void setEnd(LocalDate end) {
+        this.end = end;
     }
 
     public String getGameName() {
         return null;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getStart() {
+        return start;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDate getEnd() {
+        return end;
     }
 
-    public long getEventScore() {
-        return eventScore;
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public long getScore() {
+        return score;
     }
 
     public long getEventID() {
         return eventID;
     }
 
-    public static AbstractMap<Long, Event> getEvents() {
+    public static HashMap<Long, Event> getEvents() {
         return events;
     }
 }

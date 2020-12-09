@@ -61,52 +61,58 @@ public class AdminController {
         }
     }
 
-    public void suggest(String player, String game) throws UsernameNotFound, GameNotFoundException, ThisGameHasAlreadyBeenSuggested {
-        if (Player.getPlayers().containsKey(userName)) {
-            if (Game.getGamesName().contains(gameName)) {
-                Suggestion suggestion = new Suggestion(userName, gameName);
-                if (!(Player.getPlayers().get(userName).getSuggestions()
-                        .contains(String.valueOf(suggestion.getSuggestionID())))) {
-                    Player.getPlayers().get(userName).getSuggestions().add(String.valueOf(suggestion.getSuggestionID()));
-                } else {
-                    throw new ThisGameHasAlreadyBeenSuggested();
+    public void suggest(String player, String game) throws UsernameNotFound, GameNotFoundException, GameAlreadySuggested {
+        if (Player.getPlayers().containsKey(player)) {
+            if (game.equals("BattleSea") || game.equals("DotsAndBoxes")) {
+                for (Long l : Player.getPlayers().get(player).getSuggestions()) {
+                    if (Suggestion.getSuggestions().get(l).getGame().equals(game)) {
+                        throw new GameAlreadySuggested();
+                    }
                 }
+                new Suggestion(player, game);
             } else {
-               throw new GameNotFoundException();
+                throw new GameNotFoundException();
             }
         } else {
-             throw new UsernameNotFound();
-        }
-    }
-
-    public void viewSuggestion() {
-        for (Map.Entry<Integer, Suggestion> entry : Suggestion.getSuggestions().entrySet()) {
-            System.out.println(entry.getValue().getPlayerID() + ": " + entry.getValue().getGameName());
-        }
-    }
-
-    public void removeSuggestion(String suggestionID) throws SuggestionIDNotFoundException {
-        if (Suggestion.getSuggestions().containsKey(Integer.parseInt(suggestionID))) {
-            Suggestion.getSuggestions().remove(Integer.parseInt(suggestionID));
-            System.out.println("Suggestion with " + suggestionID + " ID deleted successfully.");
-        } else
-            throw new SuggestionIDNotFoundException();
-    }
-
-    public void viewUsers() {
-        for (Map.Entry<String, Player> entry : Player.getPlayers().entrySet()) {
-            System.out.println("Username: " + entry.getValue().getUsername());
-        }
-    }
-
-    public void viewUserProfile(String userName) throws UsernameNotFound {
-        if (Player.getPlayers().containsKey(userName)) {
-            Player player = Player.getPlayers().get(userName);
-            System.out.println(player.getFirstName() + " " + player.getLastName() + "\n"
-                    + player.getUsername() + "\n"
-                    + player.getEmail() + " " + player.getPhone() + "\n"
-                    + player.getScore() + " " + player.getFavoriteGames());
-        } else
             throw new UsernameNotFound();
+        }
+    }
+
+    public String showSuggestions() {
+        StringBuilder tmp = new StringBuilder();
+        for (Suggestion s : Suggestion.getSuggestions().values()) {
+            tmp.append(Player.getPlayers().get(s.getPlayer()).getUsername()).append(" ").append(s.getGame()).append("\n");
+        }
+        return tmp.toString().trim();
+    }
+
+    public void removeSuggestion(long sugID) throws SuggestionIDNotFound {
+        if (Suggestion.getSuggestions().containsKey(sugID)) {
+            Player.getPlayers().get(Suggestion.getSuggestions().get(sugID).getPlayer()).getSuggestions().remove(sugID);
+            Suggestion.getSuggestions().remove(sugID);
+        } else
+            throw new SuggestionIDNotFound();
+    }
+
+    public String showUsers() {
+        StringBuilder tmp = new StringBuilder();
+        for (User u : User.getUsers().values()) {
+            tmp.append(u.getUsername()).append(" ");
+        }
+        return tmp.toString().trim();
+    }
+
+    public String showUserProfile(String username) throws UsernameNotFound {
+        if (Player.getPlayers().containsKey(username)) {
+            Player player = Player.getPlayers().get(username);
+            StringBuilder tmp = new StringBuilder();
+            tmp.append(player.getFirstName()).append(" ").append(player.getLastName()).append("\n").append(player.getUsername()).append(" ").append(player.getPassword()).append("\n").append(player.getEmail()).append(" ").append(player.getPhone()).append("\n").append(player.getScore()).append("\n");
+            for (String s : player.getFavoriteGames()) {
+                tmp.append(s).append(" ");
+            }
+            return tmp.toString().trim();
+        } else {
+            throw new UsernameNotFound();
+        }
     }
 }

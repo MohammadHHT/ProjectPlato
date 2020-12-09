@@ -9,6 +9,7 @@ public class LoginMenu extends Menu {
     public static LoginMenu getLoginMenu() {
         return loginMenu;
     }
+
     @Override
     public void run() {
         String[] commands;
