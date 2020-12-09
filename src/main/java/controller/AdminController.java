@@ -27,50 +27,38 @@ public class AdminController {
     public String showEvents() {
         StringBuilder tmp = new StringBuilder();
         for (Event e : Event.getEvents().values()) {
-            tmp.append(e.getEventID()).append(e.getGameName()).append(" ").append(e.getStartDate()).append(" ").append(e.getEndDate()).append(" ").append(e.getEventScore()).append("\n");
+            tmp.append(e.getEventID()).append(e.getGameName()).append(" ").append(e.getStart()).append(" ").append(e.getEnd()).append(" ").append(e.getScore()).append("\n");
         }
         return tmp.toString().trim();
     }
 
-    public void editEvent(String eventID, int score) throws EventIDNotFound {
-        Event event = Event.getEvents().get(Integer.parseInt(eventID));
-        if (Event.getEvents().containsKey(Integer.parseInt(eventID))) {
-            if (field.equalsIgnoreCase("Game name")){
-                if (Game.getGamesName().contains(newValue)) {
-                    event.setGameName(newValue);
-                    System.out.println("Successfully changed to a new value.");
-                } else
-                    throw new GameNotFoundException();
-            } else if (field.equalsIgnoreCase("Start data")) {
-                if (LocalDate.parse(newValue).isBefore(LocalDate.now()) ||
-                        LocalDate.parse(newValue).isAfter(event.getEndDate()) ||
-                        !newValue.matches("\\d{4}, \\d{2}, \\d{2}"))
-                        throw new InvalidDateException();
-                        event.setStartDate(LocalDate.parse(newValue));
-                        System.out.println("Successfully changed to a new value.");
-            } else if (field.equalsIgnoreCase("End date")) {
-                if (LocalDate.parse(newValue).isBefore(event.getStartDate()) ||
-                        !newValue.matches("\\d{4}, \\d{2}, \\d{2}"))
-                    throw new InvalidDateException();
-                event.setEndDate(LocalDate.parse(newValue));
-                System.out.println("Successfully changed to a new value.");
-            } else if (field.equalsIgnoreCase("Score")) {
-                event.setEventScore(Long.parseLong(newValue));
-                System.out.println("Successfully changed to a new value.");
+    public void editEvent(long eventID, int score) throws EventIDNotFound {
+        if (Event.getEvents().containsKey(eventID)) {
+            Event.getEvents().get(eventID).setScore(score);
+        } else {
+            throw new EventIDNotFound();
+        }
+    }
+
+    public void editEvent(long eventID, String field, int year, int month, int day) throws EventIDNotFound {
+        if (Event.getEvents().containsKey(eventID)) {
+            Event event = Event.getEvents().get(eventID);
+            if (field.equals("start")) {
+                event.setStart(LocalDate.of(year, month, day));
+            } else {
+                event.setEnd(LocalDate.of(year, month, day));
             }
-        } else
+        } else {
             throw new EventIDNotFound();
+        }
     }
 
-    public void editEvent(String eventID, String field, int year, int month, int day) throws EventIDNotFound {
-
-    }
-
-    public void removeEvent(String eventID) throws EventIDNotFound {
-        if (!(Event.getEvents().containsKey(Integer.parseInt(eventID))))
+    public void removeEvent(long eventID) throws EventIDNotFound {
+        if (Event.getEvents().containsKey(eventID)) {
+            Event.getEvents().remove(eventID);
+        } else {
             throw new EventIDNotFound();
-        Event.getEvents().remove(Integer.parseInt(eventID));
-        System.out.println("Event with " + eventID + " ID deleted successfully.");
+        }
     }
 
     public void addSuggestion(String userName, String gameName) throws UsernameNotFound, GameNotFoundException,

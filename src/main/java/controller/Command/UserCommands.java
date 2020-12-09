@@ -3,6 +3,7 @@ package controller.Command;
 import controller.AccountController;
 import controller.AdminController;
 import controller.PlayerController;
+import model.Admin;
 
 public class UserCommands implements ResolveCommand {
     private static final UserCommands userCommands = new UserCommands();
@@ -155,14 +156,15 @@ public class UserCommands implements ResolveCommand {
                     break;
                 case "editEvent":
                     if (tokens.length == 7) {
-                        AdminController.getAdminController().editEvent(tokens[2], tokens[3], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]));
+                        AdminController.getAdminController().editEvent(Long.parseLong(tokens[2]), tokens[3], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]));
                     } else {
-                        AdminController.getAdminController().editEvent(tokens[2], Integer.parseInt(tokens[3]));
+                        AdminController.getAdminController().editEvent(Long.parseLong(tokens[2]), Integer.parseInt(tokens[3]));
                     }
                     done("Edited");
                     break;
                 case "removeEvent":
-
+                    AdminController.getAdminController().removeEvent(tokens[2]);
+                    done("Deleted");
                     break;
                 case "suggest":
 
