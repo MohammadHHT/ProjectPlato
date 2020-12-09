@@ -40,7 +40,7 @@ public class Grid {
     }
 
     public boolean alreadyGuessed(int row, int col) {
-        return !grid[row][col].isUnguessed();
+        return !grid[row][col].isUnGuessed();
     }
 
     public void setShip(int row, int col, boolean val) {
@@ -84,7 +84,7 @@ public class Grid {
 
     public void addShip(Ship s) {
         int row = s.getRow();
-        int col = s.getCol();
+        int col = s.getColumn();
         int length = s.getLength();
         int dir = s.getDirection();
 
@@ -126,7 +126,7 @@ public class Grid {
 
             for (int j = 0; j < NUM_COLS; j++) {
                 if (type == 0) {
-                    if (grid[switchCounterToIntegerForArray(i)][j].isUnguessed())
+                    if (grid[switchCounterToIntegerForArray(i)][j].isUnGuessed())
                         System.out.print("- ");
                     else if (grid[switchCounterToIntegerForArray(i)][j].checkMiss())
                         System.out.print("O ");
