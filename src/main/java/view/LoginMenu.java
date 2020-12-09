@@ -10,6 +10,8 @@ public class LoginMenu extends Menu {
         return loginMenu;
     }
 
+    private int nextMenu;
+
     @Override
     public void run() {
         String[] commands;
@@ -50,7 +52,7 @@ public class LoginMenu extends Menu {
         if (nextMenu == 0) {
             register(commands[1], commands[2]);
         } else
-            next();
+            next(PlayerMenu.getPlayerMenu());
     }
 
     private void register(String username, String password) {
@@ -72,7 +74,7 @@ public class LoginMenu extends Menu {
     @Override
     public void next(Menu menu) {
         if (nextMenu == 1) {
-            PlayerPrimaryMenu.getPrimaryMenu().run();
+            PlayerMenu.getPlayerMenu().run();
         } else {
             RegisterMenu.getRegisterMenu().run();
         }

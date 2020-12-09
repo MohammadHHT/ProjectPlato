@@ -3,7 +3,7 @@ package view;
 
 public class FriendsMenu extends Menu {
 
-    private boolean back;
+
 
     @Override
     public void run() {
@@ -11,15 +11,21 @@ public class FriendsMenu extends Menu {
         while (true) {
             command = scanner.nextLine();
             if (command.equalsIgnoreCase("view account menu")) {
-                back = false;
+                next(AccountMenu.getAccountMenu());
                 break;
             } else if (command.equalsIgnoreCase("back")) {
-                back = true;
+                next(Menu.menus.peek());
                 break;
             } else
                 commandProcessor(command);
         }
-        next();
+
+    }
+
+    @Override
+    public void next(Menu menu) {
+        Menu.menus.pop();
+        menu.run();
     }
 
     private void showFriends() {
@@ -96,8 +102,5 @@ public class FriendsMenu extends Menu {
         }
     }
 
-    @Override
-    public void next() {
 
-    }
 }
