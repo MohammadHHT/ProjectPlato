@@ -163,11 +163,12 @@ public class UserCommands implements ResolveCommand {
                     done("Edited");
                     break;
                 case "removeEvent":
-                    AdminController.getAdminController().removeEvent(tokens[2]);
+                    AdminController.getAdminController().removeEvent(Long.parseLong(tokens[2]));
                     done("Deleted");
                     break;
                 case "suggest":
-
+                    AdminController.getAdminController().suggest(tokens[2], tokens[3]);
+                    done("Suggested");
                     break;
                 case "showSuggestions":
 
