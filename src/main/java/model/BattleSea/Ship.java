@@ -5,14 +5,16 @@ public class Ship {
     private int row;
     private int column;
     private int length;
+    private int width;
     private int direction;
     public static final int Unset = -1;
     public static final int Horizontal = 0;
     public static final int Vertical = 1;
 
-    public Ship(char shipName, int length) {
+    public Ship(char shipName, int length, int width) {
         this.shipName = shipName;
         this.length = length;
+        this.width = width;
         this.row = -1;
         this.column = -1;
         this.direction = Unset;
@@ -54,6 +56,10 @@ public class Ship {
         return length;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
     public int getDirection() {
         return direction;
     }
@@ -67,7 +73,10 @@ public class Ship {
             return "Vertical";
     }
     public String toString() {
-        return "Ship: " + getRow() + ", " + getColumn() +
-                " with length " + getLength() + " and direction " + directionToString();
+        return "Ship: " + getShipName() + "\n" +
+                "(" + getRow() + ", " + getColumn() + ") \n" +
+                " length: " + getLength() + "\n" +
+                " width: " + getWidth() + "\n" +
+                " and direction: " + directionToString();
     }
 }

@@ -2,6 +2,7 @@ package model.BattleSea;
 
 public class BattleSeaPlayer {
     private static final int[] shipsLength = {2, 2, 3, 4, 4, 5};
+    private static final int[] shipsWidth = {1, 1, 1, 1, 1, 2};
     private static final char[] shipsName = {'A', 'B', 'C', 'D', 'E', 'F'};
     private static final int numOfShips = 6;
 
@@ -11,10 +12,10 @@ public class BattleSeaPlayer {
 
     public BattleSeaPlayer() {
         if (numOfShips != 6)
-            throw new IllegalArgumentException("ERROR! Num of ships must be 5.");
+            throw new IllegalArgumentException("ERROR! Num of ships must be 6.");
         ships = new Ship[numOfShips];
         for (int i = 0; i < numOfShips; i++) {
-            Ship tempShip = new Ship(shipsName[i], shipsLength[i]);
+            Ship tempShip = new Ship(shipsName[i], shipsLength[i], shipsWidth[i]);
             ships[i] = tempShip;
         }
         playerGrid = new Grid();

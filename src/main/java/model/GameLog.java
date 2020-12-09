@@ -9,22 +9,22 @@ public class GameLog {
 
     private long logID;
     private String game;
-    private int numberOfTimesPlayed;
-    private int numberOfWins;
-    private int numberOfDefeats;
+    private static int numberOfTimesPlayed;
+    private static int numberOfWins;
+    private static int numberOfDefeats;
     private long takenScore;
 
     static {
         gameLogs = new HashMap<>();
+        numberOfTimesPlayed = 0;
+        numberOfWins = 0;
+        numberOfDefeats = 0;
     }
 
     public GameLog(String game) {
         logID = IDGenerator();
         gameLogs.put(logID, this);
         this.game = game;
-        this.numberOfTimesPlayed = 0;
-        this.numberOfWins = 0;
-        this.numberOfDefeats = 0;
         this.takenScore = 0;
     }
 

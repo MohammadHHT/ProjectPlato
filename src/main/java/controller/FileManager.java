@@ -66,7 +66,7 @@ public class FileManager {
         Gson gson = new Gson();
         ArrayList<Event> events = new ArrayList<>();
 
-        for (Map.Entry<Integer, Event> entry : Event.getEvents().entrySet()) {
+        for (Map.Entry<Long, Event> entry : Event.getEvents().entrySet()) {
             events.add(entry.getValue());
         }
 
