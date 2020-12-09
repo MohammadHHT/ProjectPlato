@@ -61,8 +61,7 @@ public class AdminController {
         }
     }
 
-    public void addSuggestion(String userName, String gameName) throws UsernameNotFound, GameNotFoundException,
-            ThisGameHasAlreadyBeenSuggested {
+    public void suggest(String player, String game) throws UsernameNotFound, GameNotFoundException, ThisGameHasAlreadyBeenSuggested {
         if (Player.getPlayers().containsKey(userName)) {
             if (Game.getGamesName().contains(gameName)) {
                 Suggestion suggestion = new Suggestion(userName, gameName);
