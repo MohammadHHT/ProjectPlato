@@ -5,16 +5,19 @@ public class Location {
     public static final int UN_GUESSED = 0;
     public static final int HIT = 1;
     public static final int MISSED = 2;
+    public static final int ALL_HIT = 3;
 
     private boolean hasShip;
     private int status;
     private int lengthOfShip;
+    private char shipName;
     private int directionOfShip;
 
     public Location() {
         status = 0;
         hasShip = false;
         lengthOfShip = -1;
+        shipName = ' ';
         directionOfShip = -1;
     }
 
@@ -28,6 +31,10 @@ public class Location {
 
     public boolean isUnGuessed() {
         return status == UN_GUESSED;
+    }
+
+    public boolean isAllHit() {
+        return status == ALL_HIT;
     }
 
     public void markHit() {
@@ -60,6 +67,14 @@ public class Location {
 
     public void setLengthOfShip(int val) {
         lengthOfShip = val;
+    }
+
+    public void setShipName(char shipName) {
+        this.shipName = shipName;
+    }
+
+    public char getShipName() {
+        return shipName;
     }
 
     public int getDirectionOfShip() {
