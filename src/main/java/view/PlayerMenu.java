@@ -12,7 +12,6 @@ public class PlayerMenu extends Menu implements Back {
 
     private void showPoint() {
         Client.getClient().send("user showPoint " + username);
-
         System.out.println("Score: " + Client.getClient().getResponse());
     }
 

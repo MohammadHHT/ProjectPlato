@@ -100,4 +100,9 @@ public class User {
     public static HashMap<String, User> getUsers() {
         return users;
     }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + "\nUsername: " + username + "\nPassword: " + password + "\nEmail: " + email + "\nPhone: " + phone;
+    }
 }

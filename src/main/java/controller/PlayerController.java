@@ -45,11 +45,11 @@ public class PlayerController {
         return tmp.toString().trim();
     }
 
-    public void playSuggested(String username, String game) throws GameNotFoundException {
+    public void playSuggested(String username, String game) throws GameNotFound {
         if (game.equals("BattleSea") || game.equals("DotsAndBoxes")) {
             //TODO
         } else {
-            throw new GameNotFoundException();
+            throw new GameNotFound();
         }
     }
 
@@ -72,24 +72,26 @@ public class PlayerController {
         }
     }
 
-    public void addFavoriteGame(String username, String gameName) throws UsernameNotFound, GameNotFoundException {
-        if (Player.getPlayers().containsKey(username)) {
+    public void addFavoriteGame(String username, String gameName) throws UsernameNotFound, GameNotFound {
+        Player player = Player.getPlayers().get(username);
+        if (player != null) {
             if (Game.getGames().contains(gameName)) {
-                Player.getPlayers().get(username).getFavoriteGames().add(gameName);
+                player.getFavoriteGames().add(gameName);
             } else {
-                throw new GameNotFoundException();
+                throw new GameNotFound();
             }
         } else {
             throw new UsernameNotFound();
         }
     }
 
-    public void deleteFavoriteGame(String username, String gameName) throws UsernameNotFound, GameNotFoundException {
-        if (Player.getPlayers().containsKey(username)) {
+    public void deleteFavoriteGame(String username, String gameName) throws UsernameNotFound, GameNotFound {
+        Player player = Player.getPlayers().get(username);
+        if (player) {
             if (Game.getGames().contains(gameName)) {
-                Player.getPlayers().get(username).getFavoriteGames().remove(gameName);
+                player.getFavoriteGames().remove(gameName);
             } else {
-                throw new GameNotFoundException();
+                throw new GameNotFound();
             }
         } else {
             throw new UsernameNotFound();

@@ -117,8 +117,10 @@ public class AdminMenu extends Menu implements Back {
                 System.err.println("Score must be positive");
             }
         } else {
-            System.err.println("There is no field with this label");
+            System.err.println("There is no field with this label!");
         }
+
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void removeEvent() {
@@ -126,43 +128,57 @@ public class AdminMenu extends Menu implements Back {
         long eventID = scanner.nextLong();
         scanner.nextLine();
         Client.getClient().send("user removeEvent " + eventID);
+
+        System.out.println(Client.getClient().getResponse());
     }
 
-    private void suggest() {
+    private void addSuggestion() {
         System.out.print("Player Name: >");
         String player = scanner.nextLine().trim();
-        if (player.matches("\\w+")) {
-            if (player.length() >= 3) {
-                System.out.print("Game Name: >");
-                String game = scanner.nextLine().trim();
+        if (player.matches("\\w+") && player.length() >= 3) {
+                System.out.print("Game Name (Battle Sea • Dots And Boxes): >");
+                String game = scanner.nextLine().replaceAll(" ", "");
                 Client.getClient().send("user suggest " + player + " " + game);
-            } else {
-                System.err.println("Username must be at least 3 characters");
-            }
         } else {
-            System.err.println("Username includes alphanumeric characters only");
+            System.err.println("Invalid username!");
         }
+
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void showSuggestions() {
         Client.getClient().send("user showSuggestions");
+
+        if (Client.getClient().getResponse().length() > 0) {
+            System.out.println(Client.getClient().getResponse());
+        } else {
+            System.out.println("Empty");
+        }
     }
 
     private void removeSuggestion() {
         System.out.println("Suggestion ID: >");
-        long sugID = scanner.nextLong();
+        long suggestionID = scanner.nextLong();
         scanner.nextLine();
-        Client.getClient().send("user removeSuggestion " + sugID);
+        Client.getClient().send("user removeSuggestion " + suggestionID);
+
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void showUsers() {
         Client.getClient().send("user showUsers");
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void showUserProfile() {
         System.out.println("User Name: >");
         String user = scanner.nextLine().trim();
-        Client.getClient().send("user showUserProfile " + user);
+        if (user.matches("\\w+") && user.length() >= 3) {
+            Client.getClient().send("user showUserProfile " + user);
+            System.out.println(Client.getClient().getResponse());
+        } else {
+            System.err.println("Invalid username!");
+        }
     }
 
     @Override
@@ -181,8 +197,8 @@ public class AdminMenu extends Menu implements Back {
                 case "remove event":
                     removeEvent();
                     break;
-                case "suggest":
-                    suggest();
+                case "add suggestion":
+                    addSuggestion();
                     break;
                 case "show suggestions":
                     showSuggestions();

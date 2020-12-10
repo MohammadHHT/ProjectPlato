@@ -120,7 +120,7 @@ public class AccountController {
         return null;
     }
 
-    public String showGameStatistics(String username, String game) throws GameNotFoundException {
+    public String showGameStatistics(String username, String game) throws GameNotFound {
         if (game.equals("BattleSea") || game.equals("DotsAndBoxes")) {
             Player player = Player.getPlayers().get(username);
             String tmp = player.getLevel() + "\n";
@@ -131,7 +131,7 @@ public class AccountController {
             }
             return tmp.trim();
         } else {
-            throw new GameNotFoundException();
+            throw new GameNotFound();
         }
     }
 }

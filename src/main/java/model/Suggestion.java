@@ -15,12 +15,12 @@ public class Suggestion {
         suggestions = new HashMap<>();
     }
 
-    public Suggestion(String player, String game) {
+    public Suggestion(Player player, String game) {
         suggestionID = IDGenerator();
         suggestions.put(suggestionID, this);
         this.game = game;
-        this.player = player;
-        Player.getPlayers().get(player).addSuggestion(this.suggestionID);
+        this.player = player.getUsername();
+        player.addSuggestion(this.suggestionID);
     }
 
     private long IDGenerator() {
@@ -32,6 +32,10 @@ public class Suggestion {
         for (Suggestion s : suggestions) {
             Suggestion.suggestions.put(s.suggestionID, s);
         }
+    }
+
+    public long getSuggestionID() {
+        return suggestionID;
     }
 
     public String getGame() {

@@ -195,7 +195,7 @@ public class UserCommands implements ResolveCommand {
                     done("Removed");
                     break;
                 case "suggest":
-                    AdminController.getAdminController().suggest(tokens[2], tokens[3]);
+                    AdminController.getAdminController().addSuggestion(tokens[2], tokens[3]);
                     done("Suggested");
                     break;
                 case "showSuggestions":
