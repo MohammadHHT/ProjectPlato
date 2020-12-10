@@ -21,28 +21,28 @@ public class PlayerController {
 
     public String showFavoriteGames(String username) {
         ArrayList<String> favoriteGames = Player.getPlayers().get(username).getFavoriteGames();
-        String tmp = "";
+        StringBuilder tmp = new StringBuilder();
         for (String s : favoriteGames) {
-            tmp += s + " ";
+            tmp.append(s).append('\n');
         }
-        return tmp.trim();
+        return tmp.toString().trim();
     }
 
     public String showAdminMessages(String username) {
         StringBuilder tmp = new StringBuilder();
-        for (String inbox : Player.getPlayers().get(username).getInbox()) {
-            tmp.append(inbox).append(" ");
+        for (String s : Player.getPlayers().get(username).getInbox()) {
+            tmp.append(s).append('\n');
         }
         return tmp.toString().trim();
     }
 
     public String showAdminSuggestions(String username) {
         ArrayList<Long> suggestions = Player.getPlayers().get(username).getSuggestions();
-        String tmp = "";
-        for (Long s : suggestions) {
-            tmp += Suggestion.getSuggestions().get(s).getGame() + " ";
+        StringBuilder tmp = new StringBuilder();
+        for (Long l : suggestions) {
+            tmp.append(Suggestion.getSuggestions().get(l).getGame()).append('\n');
         }
-        return tmp.trim();
+        return tmp.toString().trim();
     }
 
     public void playSuggested(String username, String game) throws GameNotFoundException {
@@ -60,10 +60,10 @@ public class PlayerController {
     }
 
     public void addFriend(String username, String friend) throws AlreadyYourFriend, UsernameNotFound {
-        ArrayList<String> friends = Player.getPlayers().get(username).getFriends();
-        if (Player.getPlayers().containsKey(username)) {
-            if (!friends.contains(friend)) {
-                Player.getPlayers().get(username).getFriends().add(friend);
+        Player player = Player.getPlayers().get(username);
+        if (player != null) {
+            if (!player.getFriends().contains(friend)) {
+                player.getFriends().add(friend);
             } else {
                 throw new AlreadyYourFriend();
             }
@@ -74,7 +74,7 @@ public class PlayerController {
 
     public void addFavoriteGame(String username, String gameName) throws UsernameNotFound, GameNotFoundException {
         if (Player.getPlayers().containsKey(username)) {
-            if (Game.getGamesName().contains(gameName)) {
+            if (Game.getGames().contains(gameName)) {
                 Player.getPlayers().get(username).getFavoriteGames().add(gameName);
             } else {
                 throw new GameNotFoundException();
@@ -86,7 +86,7 @@ public class PlayerController {
 
     public void deleteFavoriteGame(String username, String gameName) throws UsernameNotFound, GameNotFoundException {
         if (Player.getPlayers().containsKey(username)) {
-            if (Game.getGamesName().contains(gameName)) {
+            if (Game.getGames().contains(gameName)) {
                 Player.getPlayers().get(username).getFavoriteGames().remove(gameName);
             } else {
                 throw new GameNotFoundException();

@@ -13,14 +13,14 @@ public class AccountController {
         return accountController;
     }
 
-    public String register(String firstName, String lastName, String username, String password, String email, String phoneNumber) throws UsernameIsAlreadyTaken {
+    public String register(String firstName, String lastName, String username, String password, String email, String phone) throws UsernameIsAlreadyTaken {
         if (!User.getUsers().containsKey(username)) {
             if (User.getUsers().size() == 0) {
-                new Admin(firstName, lastName, username, password, email, phoneNumber);
-                return "Admin registered";
+                new Admin(firstName, lastName, username, password, email, phone);
+                return "admin";
             } else {
-                new Player(firstName, lastName, username, password, email, phoneNumber);
-                return "Player registered";
+                new Player(firstName, lastName, username, password, email, phone);
+                return "player";
             }
         } else {
             throw new UsernameIsAlreadyTaken();
@@ -98,7 +98,7 @@ public class AccountController {
 
     private int calculateWins(Player player) {
         int wins = 0;
-        for (String s : Game.getGamesName()) {
+        for (String s : Game.getGames()) {
             if (player.getWins().containsKey(s)) {
                 wins += player.getWins().get(s);
             }

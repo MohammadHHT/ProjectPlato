@@ -4,7 +4,6 @@ import exception.*;
 import model.*;
 
 import java.time.LocalDate;
-import java.util.Map;
 
 public class AdminController {
     private static final AdminController adminController = new AdminController();
@@ -16,18 +15,21 @@ public class AdminController {
         return adminController;
     }
 
-    public void addEvent(String game, int syear, int smonth, int sday, int fyear, int fmonth, int fday, long score) throws InvalidGameNameException {
-        if (game.equals("BattleSea") || game.equals("DotsAndBoxes")) {
+    public void addEvent(String game, int syear, int smonth, int sday, int fyear, int fmonth, int fday, long score) throws InvalidGameName {
+        if (game.equalsIgnoreCase("BattleSea") || game.equalsIgnoreCase("DotsAndBoxes")) {
             new Event(game, LocalDate.of(syear, smonth, sday), LocalDate.of(fyear, fmonth, fday), score);
         } else {
-            throw new InvalidGameNameException();
+            throw new InvalidGameName();
         }
     }
 
     public String showEvents() {
         StringBuilder tmp = new StringBuilder();
         for (Event e : Event.getEvents().values()) {
-            tmp.append(e.getEventID()).append(e.getGameName()).append(" ").append(e.getStart()).append(" ").append(e.getEnd()).append(" ").append(e.getScore()).append("\n");
+            tmp.append("ID: ").append(e.getEventID()).append('\n').append("Game: ").append(e.getGameName()).append('\n')
+                    .append("Start: ").append(e.getStart().getYear()).append('-').append(e.getStart().getMonth()).append('-').append(e.getStart().getDayOfMonth()).append('\n')
+                    .append("Finish: ").append(e.getEnd().getYear()).append('-').append(e.getEnd().getMonth()).append('-').append(e.getEnd().getDayOfMonth()).append('\n')
+                    .append("Score: ").append(e.getScore()).append("\n\n");
         }
         return tmp.toString().trim();
     }

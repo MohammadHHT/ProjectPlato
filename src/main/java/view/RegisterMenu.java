@@ -31,11 +31,20 @@ public class RegisterMenu extends Menu {
                                             if (getEmail()) {
                                                 while (true) {
                                                     if (getPhone()) {
-                                                        Client.getClient().send("User register " + firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
-                                                        if (Client.getClient().getResponse().equals("Player logged in")) {
-                                                            next(PlayerMenu.getPlayerMenu());
-                                                        } else {
-                                                            next(AdminMenu.getAdminMenu());
+                                                        Client.getClient().send("user register " + firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
+
+                                                        switch (Client.getClient().getResponse()) {
+                                                            case "player":
+                                                                System.out.println("Player registered successfully");
+                                                                next(PlayerMenu.getPlayerMenu());
+                                                                break;
+                                                            case "admin":
+                                                                System.out.println("Admin registered successfully");
+                                                                next(AdminMenu.getAdminMenu());
+                                                                break;
+                                                            default:
+                                                                System.out.println(Client.getClient().getResponse());
+                                                                break;
                                                         }
                                                         return;
                                                     }
@@ -139,8 +148,13 @@ public class RegisterMenu extends Menu {
     @Override
     public void next(Menu menu) {
         Menu.username = username;
-        pop();
-        push(menu);
+        if (Client.getClient().getResponse().equals("player")) {
+            rank = Rank.PLAYER;
+        } else {
+            rank = Rank.ADMIN;
+        }
+        menus.pop();
+        menus.push(menu);
         menu.run();
     }
 }

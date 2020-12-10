@@ -8,7 +8,8 @@ import model.Admin;
 public class UserCommands implements ResolveCommand {
     private static final UserCommands userCommands = new UserCommands();
 
-    private UserCommands() {}
+    private UserCommands() {
+    }
 
     static UserCommands getUserCommands() {
         return userCommands;
@@ -16,17 +17,40 @@ public class UserCommands implements ResolveCommand {
 
     @Override
     public void resolveCommand(String[] tokens) throws Exception {
-        if (tokens[1].equals("register") || tokens[1].equals("delete") || tokens[1].equals("login")) {
-            RegisterCommand.getRegisterCommand().execute(tokens);
-        } else if (tokens[1].equals("showPoint") || tokens[1].equals("showFavoriteGames") || tokens[1].equals("showAdminMessages") || tokens[1].equals("showAdminSuggestions") ||
-                tokens[1].equals("playSuggested") || tokens[1].equals("showLastGame") || tokens[1].equals("addFriend")) {
-            PlayerCommand.getPlayerCommand().execute(tokens);
-        } else if (tokens[1].equals("addEvent") || tokens[1].equals("showEvents") || tokens[1].equals("editEvent") || tokens[1].equals("removeEvent") ||
-                tokens[1].equals("suggest") || tokens[1].equals("showSuggestions") || tokens[1].equals("removeSuggestion") || tokens[1].equals("showUsers") || tokens[1].equals("showUserProfile")) {
-            AdminCommand.getAdminCommand().execute(tokens);
-        } else if (tokens[1].equals("showInfo") || tokens[1].equals("changePassword") || tokens[1].equals("editField") || tokens[1].equals("showPlatoStatistics") ||
-                tokens[1].equals("showHistory") || tokens[1].equals("showGameStatistics")) {
-            AccountCommand.getAccountCommand().execute(tokens);
+        switch (tokens[1]) {
+            case "register":
+            case "delete":
+            case "login":
+                RegisterCommand.getRegisterCommand().execute(tokens);
+                break;
+            case "showPoint":
+            case "showFavoriteGames":
+            case "showAdminMessages":
+            case "showAdminSuggestions":
+            case "playSuggested":
+            case "showLastGame":
+            case "addFriend":
+                PlayerCommand.getPlayerCommand().execute(tokens);
+                break;
+            case "addEvent":
+            case "showEvents":
+            case "editEvent":
+            case "removeEvent":
+            case "suggest":
+            case "showSuggestions":
+            case "removeSuggestion":
+            case "showUsers":
+            case "showUserProfile":
+                AdminCommand.getAdminCommand().execute(tokens);
+                break;
+            case "showInfo":
+            case "changePassword":
+            case "editField":
+            case "showPlatoStatistics":
+            case "showHistory":
+            case "showGameStatistics":
+                AccountCommand.getAccountCommand().execute(tokens);
+                break;
         }
     }
 
@@ -34,7 +58,8 @@ public class UserCommands implements ResolveCommand {
     private static class RegisterCommand implements ExecuteCommand {
         private static final RegisterCommand registerCommand = new RegisterCommand();
 
-        private RegisterCommand() {}
+        private RegisterCommand() {
+        }
 
         static RegisterCommand getRegisterCommand() {
             return registerCommand;
@@ -61,7 +86,8 @@ public class UserCommands implements ResolveCommand {
     private static class AccountCommand implements ExecuteCommand {
         private static final AccountCommand accountCommand = new AccountCommand();
 
-        private AccountCommand() {}
+        private AccountCommand() {
+        }
 
         static AccountCommand getAccountCommand() {
             return accountCommand;
@@ -98,7 +124,8 @@ public class UserCommands implements ResolveCommand {
     private static class PlayerCommand implements ExecuteCommand {
         private static final PlayerCommand playerCommand = new PlayerCommand();
 
-        private PlayerCommand() {}
+        private PlayerCommand() {
+        }
 
         static PlayerCommand getPlayerCommand() {
             return playerCommand;
@@ -138,7 +165,8 @@ public class UserCommands implements ResolveCommand {
     private static class AdminCommand implements ExecuteCommand {
         private static final AdminCommand adminCommand = new AdminCommand();
 
-        private AdminCommand() {}
+        private AdminCommand() {
+        }
 
         static AdminCommand getAdminCommand() {
             return adminCommand;

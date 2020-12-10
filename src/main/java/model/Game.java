@@ -4,26 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Game {
-    private static HashMap<Integer, Game> games;
-    private final static ArrayList<String> gamesName;
+public abstract class Game {
+    private final static ArrayList<String> games;
 
-    private String gameName;
+    private String game;
     private int gameID;
 
     static {
-        games = new HashMap<>();
-        gamesName = new ArrayList<>(Arrays.asList("BattleSea", "DotsAndBoxes"));
+        games = new ArrayList<>(Arrays.asList("BattleSea", "DotsAndBoxes"));
     }
 
-    public Game(String gameName, String gameID) {
-        this.gameName = gameName;
-        //gameID
-        gamesName.add(gameName);
-    }
-
-    public void run(){
-        //TODO
+    public Game(String game) {
+        this.game = game;
     }
 
     public void setScore(){
@@ -31,7 +23,7 @@ public class Game {
     }
 
     public void setGameName(String gameName) {
-        this.gameName = gameName;
+        this.game = gameName;
     }
 
     public void setGameID(int gameID) {
@@ -39,18 +31,14 @@ public class Game {
     }
 
     public String getGameName() {
-        return gameName;
+        return game;
     }
 
     public int getGameID() {
         return gameID;
     }
 
-    public static HashMap<Integer, Game> getGames() {
+    public static ArrayList<String> getGames() {
         return games;
-    }
-
-    public static ArrayList<String> getGamesName() {
-        return gamesName;
     }
 }

@@ -13,8 +13,8 @@ public class AdminMenu extends Menu implements Back {
     }
 
     private void addEvent() {
-        System.out.print("Game Name: >");
-        String game = scanner.nextLine().trim();
+        System.out.print("Game Name (Battle Sea • Dots And Boxes): >");
+        String game = scanner.nextLine().replaceAll(" ", "");
 
         int syear, smonth, sday;
         System.out.print("Start Year: >");
@@ -46,14 +46,22 @@ public class AdminMenu extends Menu implements Back {
         if (localDate.isAfter(LocalDate.of(syear, smonth, sday)) || localDate.isAfter(LocalDate.of(fyear, fmonth, fday))) {
             System.err.println("Invalid Start or End Date!");
         } else if (score < 1) {
-            System.err.println("Score can not be zero on negative");
+            System.err.println("Score can not be zero on negative!");
         } else {
-            Client.getClient().send("User addEvent " + game + " " + syear + " " + smonth + " " + sday + " " + fyear + " " + fmonth + " " + fday + " " + score);
+            Client.getClient().send("user addEvent " + game + " " + syear + " " + smonth + " " + sday + " " + fyear + " " + fmonth + " " + fday + " " + score);
         }
+
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void showEvents() {
-        Client.getClient().send("User showEvents");
+        Client.getClient().send("user showEvents");
+
+        if (Client.getClient().getResponse().length() > 0) {
+            System.out.println(Client.getClient().getResponse());
+        } else {
+            System.out.println("Empty");
+        }
     }
 
     private void editEvent() {
@@ -79,7 +87,7 @@ public class AdminMenu extends Menu implements Back {
             if (localDate.isAfter(LocalDate.of(syear, smonth, sday))) {
                 System.err.println("Invalid Start Date!");
             } else {
-                Client.getClient().send("User editEvent " + eventID + " " + field + " " + syear + " " + smonth + " " + sday);
+                Client.getClient().send("user editEvent " + eventID + " " + field + " " + syear + " " + smonth + " " + sday);
             }
         } else if (field.equals("finish")) {
             int fyear, fmonth, fday;
@@ -97,14 +105,14 @@ public class AdminMenu extends Menu implements Back {
             if (localDate.isAfter(LocalDate.of(fyear, fmonth, fday))) {
                 System.err.println("Invalid End Date!");
             } else {
-                Client.getClient().send("User editEvent " + eventID + " " + field + " " + fyear + " " + fmonth + " " + fday);
+                Client.getClient().send("user editEvent " + eventID + " " + field + " " + fyear + " " + fmonth + " " + fday);
             }
         } else if (field.equals("score")) {
             System.out.print("New Score: >");
             int score = scanner.nextInt();
             scanner.nextLine();
             if (score > 0) {
-                Client.getClient().send("User editEvent " + eventID + " " + score);
+                Client.getClient().send("user editEvent " + eventID + " " + score);
             } else {
                 System.err.println("Score must be positive");
             }
@@ -117,7 +125,7 @@ public class AdminMenu extends Menu implements Back {
         System.out.println("Event ID: >");
         long eventID = scanner.nextLong();
         scanner.nextLine();
-        Client.getClient().send("User removeEvent " + eventID);
+        Client.getClient().send("user removeEvent " + eventID);
     }
 
     private void suggest() {
@@ -127,7 +135,7 @@ public class AdminMenu extends Menu implements Back {
             if (player.length() >= 3) {
                 System.out.print("Game Name: >");
                 String game = scanner.nextLine().trim();
-                Client.getClient().send("User suggest " + player + " " + game);
+                Client.getClient().send("user suggest " + player + " " + game);
             } else {
                 System.err.println("Username must be at least 3 characters");
             }
@@ -137,58 +145,58 @@ public class AdminMenu extends Menu implements Back {
     }
 
     private void showSuggestions() {
-        Client.getClient().send("User showSuggestions");
+        Client.getClient().send("user showSuggestions");
     }
 
     private void removeSuggestion() {
         System.out.println("Suggestion ID: >");
         long sugID = scanner.nextLong();
         scanner.nextLine();
-        Client.getClient().send("User removeSuggestion " + sugID);
+        Client.getClient().send("user removeSuggestion " + sugID);
     }
 
     private void showUsers() {
-        Client.getClient().send("User showUsers");
+        Client.getClient().send("user showUsers");
     }
 
     private void showUserProfile() {
         System.out.println("User Name: >");
         String user = scanner.nextLine().trim();
-        Client.getClient().send("User showUserProfile " + user);
+        Client.getClient().send("user showUserProfile " + user);
     }
 
     @Override
     public void run() {
         while (true) {
             switch (scanner.nextLine()) {
-                case "addEvent":
+                case "add event":
                     addEvent();
                     break;
-                case "showEvents":
+                case "show events":
                     showEvents();
                     break;
-                case "editEvent":
+                case "edit event":
                     editEvent();
                     break;
-                case "removeEvent":
+                case "remove event":
                     removeEvent();
                     break;
                 case "suggest":
                     suggest();
                     break;
-                case "showSuggestions":
+                case "show suggestions":
                     showSuggestions();
                     break;
-                case "removeSuggestion":
+                case "remove suggestion":
                     removeSuggestion();
                     break;
-                case "showUsers":
+                case "show users":
                     showUsers();
                     return;
-                case "showUserProfile":
+                case "show user profile":
                     showUserProfile();
                     return;
-                case "accountMenu":
+                case "account menu":
                     next(AccountMenu.getAccountMenu());
                     return;
                 default:
@@ -200,7 +208,7 @@ public class AdminMenu extends Menu implements Back {
 
     @Override
     public void next(Menu menu) {
-        push(menu);
+        menus.push(menu);
         menu.run();
     }
 }

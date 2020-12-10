@@ -4,23 +4,14 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public abstract class Menu {
-    protected static Stack<Menu> menus;
-    protected static Scanner scanner;
-    protected static String username;
-
-    static {
-        menus = new Stack<>();
-        scanner = new Scanner(System.in);
-        username = null;
+    enum Rank {
+        ADMIN, PLAYER
     }
 
-    public static void push(Menu menu) {
-        menus.push(menu);
-    }
-
-    public static void pop() {
-        menus.pop();
-    }
+    protected static Stack<Menu> menus = new Stack<>();
+    protected static Scanner scanner = new Scanner(System.in);
+    protected static String username = null;
+    protected static Rank rank = null;
 
     public abstract void run();
 
