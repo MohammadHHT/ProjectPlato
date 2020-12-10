@@ -11,7 +11,8 @@ public class AccountMenu extends Menu implements Back {
     }
 
     private void showInfo() {
-        Client.getClient().send("User showInfo " + username);
+        Client.getClient().send("user showInfo " + username);
+        System.out.println(Client.getClient().getResponse());
     }
 
     private void changePassword() {
@@ -19,112 +20,137 @@ public class AccountMenu extends Menu implements Back {
         System.out.print("Old password: >");
         old = scanner.nextLine().trim();
         System.out.print("New password: >");
-        String tmp = scanner.nextLine().trim();
-        if (tmp.matches("\\w+")) {
-            if (tmp.length() >= 6) {
-                next = tmp;
-            } else {
-                System.err.println("Password must be at least 6 characters");
-                return;
-            }
+        next = scanner.nextLine().trim();
+        if ((old.matches("\\w+") && old.length() >= 6) && (next.matches("\\w+") && next.length() >= 6)) {
+            Client.getClient().send("user changePassword " + username + " " + old + " " + next);
+            System.out.println(Client.getClient().getResponse());
         } else {
-            System.err.println("Password includes alphanumeric characters only");
-            return;
+            System.out.println("Invalid password!");
         }
-        Client.getClient().send("User changePassword " + username + " " + old + " " + next);
     }
 
     private void editField() {
-        String field = "", tmp, value = "";
-        System.out.print("Field Name: >");
-        tmp = scanner.nextLine().trim();
-        switch (tmp) {
+        String field, value;
+        System.out.print("Field Name (first name • last name • username • email • phone): >");
+        field = scanner.nextLine().replaceAll(" ", "");
+        switch (field) {
+            case "firstname":
+                value = getFirstName();
+                break;
+            case "lastname":
+                value = getLastName();
+                break;
             case "username":
+                value = getUsername();
+                break;
             case "email":
+                value = getEmail();
+                break;
             case "phone":
-                field = tmp;
+                value = getPhone();
+                break;
+            default:
+                value = null;
                 break;
         }
-        if (field.length() > 0) {
-            switch (field) {
-                case "username":
-                    value = getUsername();
-                    break;
-                case "email":
-                    value = getEmail();
-                    break;
-                case "phone":
-                    value = getPhone();
-                    break;
-            }
-            if (value != null) {
-                Client.getClient().send("User editField " + username + " " + field + " " + value);
-                if (field.equals("email")) {
-                    username = value;
-                }
+        if (value != null) {
+            if (field.equals("username")) {
+                username = value;
             } else {
-                editField();
+                Client.getClient().send("user editField " + username + " " + field + " " + value);
             }
         } else {
-            System.err.println("There is no field with this label");
+            System.out.println("Wrong input!");
+        }
+    }
+
+    private String getFirstName() {
+        System.out.print("First Name: >");
+        String firstName = scanner.nextLine().trim();
+        if (firstName.matches("[a-zA-Z]+")) {
+            return firstName;
+        } else {
+            System.out.println("Invalid first name");
+            return null;
+        }
+    }
+
+    private String getLastName() {
+        System.out.print("First Name: >");
+        String lastName = scanner.nextLine().trim();
+        if (lastName.matches("[a-zA-Z]+")) {
+            return lastName;
+        } else {
+            System.out.println("Invalid last name");
+            return null;
         }
     }
 
     private String getUsername() {
         System.out.print("New Username: >");
-        String tmp = scanner.nextLine().trim();
-        if (tmp.matches("\\w+")) {
-            if (tmp.length() >= 3) {
-                return tmp;
-            } else {
-                System.err.println("Username must be at least 3 characters");
-                return null;
-            }
+        String username = scanner.nextLine().trim();
+        if (username.matches("\\w+") && username.length() >= 3) {
+            return username;
         } else {
-            System.err.println("Username includes alphanumeric characters only");
+            System.out.println("Invalid username!");
             return null;
         }
     }
 
     private String getEmail() {
         System.out.print("New Email: >");
-        String tmp = scanner.nextLine().trim();
-        if (tmp.matches("^\\w+@\\w+\\.(com|ir)$")) {
-            return tmp;
+        String email = scanner.nextLine().trim();
+        if (email.matches("^\\w+@\\w+\\.(com|ir)$")) {
+            return email;
         } else {
-            System.err.println("Email is incorrect");
+            System.out.println("Invalid email!");
             return null;
         }
     }
 
     private String getPhone() {
         System.out.print("New Phone Number: >");
-        String tmp = scanner.nextLine().trim();
-        if (tmp.matches("\\+\\d+")) {
-            if (tmp.length() == 13) {
-                return tmp;
-            } else {
-                System.err.println("Phone Number must be exactly 12 numbers(plus +)");
-                return null;
-            }
+        String phone = scanner.nextLine().trim();
+        if (phone.matches("\\+\\d+") && phone.length() == 13) {
+            return phone;
         } else {
-            System.err.println("Phone Number includes numbers only");
+            System.out.println("Invalid phone number!");
             return null;
         }
     }
 
     private void showPlatoStatistics() {
-        Client.getClient().send("User showPlatoStatistics " + username);
+        if (rank == Rank.PLAYER) {
+            Client.getClient().send("user showPlatoStatistics " + username);
+            System.out.println(Client.getClient().getResponse());
+        } else {
+            System.out.println("Just players!");
+        }
     }
 
     private void showHistory() {
-        Client.getClient().send("User showHistory " + username);
+        if (rank == Rank.PLAYER) {
+            Client.getClient().send("user showHistory " + username);
+            System.out.println(Client.getClient().getResponse());
+        } else {
+            System.out.println("Just players!");
+        }
     }
 
     private void showGameStatistics() {
-        System.out.print("Game Name: >");
-        String game = scanner.nextLine();
-        Client.getClient().send("User showGameStatistics " + username + " " + game);
+        if (rank == Rank.PLAYER) {
+            System.out.print("Game Name (Battle Sea • Dots And Boxes): >");
+            String game = scanner.nextLine().replaceAll(" ", "");
+            Client.getClient().send("user showGameStatistics " + username + " " + game);
+
+            if (Client.getClient().getResponse().length() > 0) {
+                System.out.println(Client.getClient().getResponse());
+            } else {
+                System.out.println("You've not played the game yet!");
+            }
+        } else {
+            System.out.println("Just players!");
+        }
     }
 
     private void logout() {
@@ -135,22 +161,22 @@ public class AccountMenu extends Menu implements Back {
     public void run() {
         while (true) {
             switch (scanner.nextLine()) {
-                case "showInfo":
+                case "show info":
                     showInfo();
                     break;
-                case "changePassword":
+                case "change password":
                     changePassword();
                     break;
-                case "editField":
+                case "edit field":
                     editField();
                     break;
-                case "showPlatoStatistics":
+                case "show plato statistics":
                     showPlatoStatistics();
                     break;
-                case "showHistory":
+                case "show history":
                     showHistory();
                     break;
-                case "showGameStatistics":
+                case "show game statistics":
                     showGameStatistics();
                     break;
                 case "logout":
@@ -161,7 +187,7 @@ public class AccountMenu extends Menu implements Back {
                     back();
                     return;
                 default:
-                    System.err.println("Incorrect command");
+                    System.out.println("Invalid command!");
                     break;
             }
         }
@@ -169,8 +195,8 @@ public class AccountMenu extends Menu implements Back {
 
     @Override
     public void next(Menu menu) {
-        pop();
-        push(menu);
+        menus.pop();
+        menus.push(menu);
         menu.run();
     }
 }

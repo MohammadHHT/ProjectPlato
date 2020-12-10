@@ -141,4 +141,16 @@ public class Player extends User {
     public HashMap<String, Integer> getDefeats() {
         return defeats;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder tmp = new StringBuilder();
+        tmp.append("Friends: ").append(friends.size()).append("\nWins: ");
+        int n = 0;
+        for (Integer i : wins.values()) {
+            n += i;
+        }
+        tmp.append(n).append("\nPlato Age: ").append(platoAge);
+        return tmp.toString();
+    }
 }

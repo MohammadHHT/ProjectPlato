@@ -15,11 +15,11 @@ public class AdminController {
         return adminController;
     }
 
-    public void addEvent(String game, int syear, int smonth, int sday, int fyear, int fmonth, int fday, long score) throws InvalidGameName {
+    public void addEvent(String game, int syear, int smonth, int sday, int fyear, int fmonth, int fday, long score) throws GameNotFound {
         if (game.equalsIgnoreCase("BattleSea") || game.equalsIgnoreCase("DotsAndBoxes")) {
             new Event(game, LocalDate.of(syear, smonth, sday), LocalDate.of(fyear, fmonth, fday), score);
         } else {
-            throw new InvalidGameName();
+            throw new GameNotFound();
         }
     }
 

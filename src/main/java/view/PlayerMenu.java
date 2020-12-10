@@ -1,6 +1,6 @@
 package view;
 
-public class PlayerMenu extends Menu implements Back {
+public class PlayerMenu extends Menu {
     private static final PlayerMenu playerMenu = new PlayerMenu();
 
     private PlayerMenu() {
@@ -54,7 +54,7 @@ public class PlayerMenu extends Menu implements Back {
         if (game.length() > 0) {
             Client.getClient().send("user playSuggested " + username + " " + game);
         } else {
-            System.err.println("Game name can not be empty!");
+            System.out.println("Game name can not be empty!");
         }
 
         //TODO
@@ -76,7 +76,7 @@ public class PlayerMenu extends Menu implements Back {
         if (friend.matches("\\w+") && friend.length() >= 3) {
             Client.getClient().send("user addFriend " + username + " " + friend);
         } else {
-            System.err.println("Invalid username!");
+            System.out.println("Invalid username!");
         }
 
         System.out.println(Client.getClient().getResponse());
@@ -115,7 +115,7 @@ public class PlayerMenu extends Menu implements Back {
                     next(GameMenu.getGameMenu());
                     return;
                 default:
-                    System.err.println("Incorrect command");
+                    System.out.println("Invalid command!");
                     break;
             }
         }

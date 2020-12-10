@@ -2,7 +2,7 @@ package view;
 
 import java.time.LocalDate;
 
-public class AdminMenu extends Menu implements Back {
+public class AdminMenu extends Menu {
     private static final AdminMenu adminMenu = new AdminMenu();
 
     private AdminMenu() {
@@ -44,9 +44,9 @@ public class AdminMenu extends Menu implements Back {
 
         LocalDate localDate = LocalDate.now();
         if (localDate.isAfter(LocalDate.of(syear, smonth, sday)) || localDate.isAfter(LocalDate.of(fyear, fmonth, fday))) {
-            System.err.println("Invalid Start or End Date!");
+            System.out.println("Invalid Start or End Date!");
         } else if (score < 1) {
-            System.err.println("Score can not be zero on negative!");
+            System.out.println("Score can not be zero on negative!");
         } else {
             Client.getClient().send("user addEvent " + game + " " + syear + " " + smonth + " " + sday + " " + fyear + " " + fmonth + " " + fday + " " + score);
         }
@@ -85,7 +85,7 @@ public class AdminMenu extends Menu implements Back {
 
             LocalDate localDate = LocalDate.now();
             if (localDate.isAfter(LocalDate.of(syear, smonth, sday))) {
-                System.err.println("Invalid Start Date!");
+                System.out.println("Invalid Start Date!");
             } else {
                 Client.getClient().send("user editEvent " + eventID + " " + field + " " + syear + " " + smonth + " " + sday);
             }
@@ -103,7 +103,7 @@ public class AdminMenu extends Menu implements Back {
 
             LocalDate localDate = LocalDate.now();
             if (localDate.isAfter(LocalDate.of(fyear, fmonth, fday))) {
-                System.err.println("Invalid End Date!");
+                System.out.println("Invalid End Date!");
             } else {
                 Client.getClient().send("user editEvent " + eventID + " " + field + " " + fyear + " " + fmonth + " " + fday);
             }
@@ -114,10 +114,10 @@ public class AdminMenu extends Menu implements Back {
             if (score > 0) {
                 Client.getClient().send("user editEvent " + eventID + " " + score);
             } else {
-                System.err.println("Score must be positive");
+                System.out.println("Score must be positive");
             }
         } else {
-            System.err.println("There is no field with this label!");
+            System.out.println("There is no field with this label!");
         }
 
         System.out.println(Client.getClient().getResponse());
@@ -140,7 +140,7 @@ public class AdminMenu extends Menu implements Back {
                 String game = scanner.nextLine().replaceAll(" ", "");
                 Client.getClient().send("user suggest " + player + " " + game);
         } else {
-            System.err.println("Invalid username!");
+            System.out.println("Invalid username!");
         }
 
         System.out.println(Client.getClient().getResponse());
@@ -177,7 +177,7 @@ public class AdminMenu extends Menu implements Back {
             Client.getClient().send("user showUserProfile " + user);
             System.out.println(Client.getClient().getResponse());
         } else {
-            System.err.println("Invalid username!");
+            System.out.println("Invalid username!");
         }
     }
 
@@ -216,7 +216,7 @@ public class AdminMenu extends Menu implements Back {
                     next(AccountMenu.getAccountMenu());
                     return;
                 default:
-                    System.err.println("Incorrect command");
+                    System.out.println("Invalid command!");
                     break;
             }
         }

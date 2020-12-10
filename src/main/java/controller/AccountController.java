@@ -58,9 +58,7 @@ public class AccountController {
     }
 
     public String showInfo(String username) {
-        User user = User.getUsers().get(username);
-        return user.getFirstName() + " " + user.getLastName() + " "
-                + user.getUsername() + " " + user.getEmail() + " " + user.getPhone();
+        return User.getUsers().get(username).toString();
     }
 
     public void changePassword(String username, String old, String next) throws IncorrectPassword {
@@ -75,6 +73,12 @@ public class AccountController {
     public void editField(String username, String field, String value) {
         User user = User.getUsers().get(username);
         switch (field) {
+            case "firstname":
+                user.setFirstName(value);
+                break;
+            case "lastname":
+                user.setLastName(value);
+                break;
             case "username":
                 user.setUsername(value);
                 break;
@@ -88,48 +92,27 @@ public class AccountController {
     }
 
     public String showPlatoStatistics(String username) {
-        User user = User.getUsers().get(username);
-        if (user instanceof Player) {
-            Player player = (Player) user;
-            return player.getLevel() + " " + player.getPlatoAge() + " " + calculateWins(player) + " " + player.getFriends().size();
-        }
-        return null;
-    }
-
-    private int calculateWins(Player player) {
-        int wins = 0;
-        for (String s : Game.getGames()) {
-            if (player.getWins().containsKey(s)) {
-                wins += player.getWins().get(s);
-            }
-        }
-        return wins;
+        return Player.getPlayers().get(username).toString();
     }
 
     public String showHistory(String username) {
-        User user = User.getUsers().get(username);
-        if (user instanceof Player) {
-            Player player = (Player) user;
-            StringBuilder tmp = new StringBuilder();
-            for (Long gl : player.getGameLogs()) {
-                GameLog gameLog = GameLog.getGameLogs().get(gl);
-                tmp.append(gameLog.getGame()).append(" ").append(gameLog.getDate()).append(" ");
-            }
-            return tmp.toString().trim();
+        Player player = Player.getPlayers().get(username);
+        StringBuilder tmp = new StringBuilder();
+        for (Long l : player.getGameLogs()) {
+            GameLog gameLog = GameLog.getGameLogs().get(l);
+            tmp.append(gameLog.getGame()).append(": ").append(gameLog.getDate().getYear()).append('-').append(gameLog.getDate().getMonth()).append('-').append(gameLog.getDate().getDayOfMonth()).append('\n');
         }
-        return null;
+        return tmp.toString().trim();
     }
 
     public String showGameStatistics(String username, String game) throws GameNotFound {
         if (game.equals("BattleSea") || game.equals("DotsAndBoxes")) {
             Player player = Player.getPlayers().get(username);
-            String tmp = player.getLevel() + "\n";
             if (player.getPlays().get(game) != null) {
-                tmp += player.getPlays().get(game) + " " + player.getWins().get(game) + " " + player.getDefeats().get(game);
+                return "Played: " + player.getPlays().get(game) + "\nWon: " + player.getWins().get(game) + "\nDefeated" + player.getDefeats().get(game);
             } else {
-                tmp += 0;
+                return "";
             }
-            return tmp.trim();
         } else {
             throw new GameNotFound();
         }
