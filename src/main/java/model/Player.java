@@ -37,6 +37,9 @@ public class Player extends User {
         this.suggestions = new ArrayList<>();
         this.inbox = new ArrayList<>();
         this.gameLogs = new ArrayList<>();
+        plays = new HashMap<>();
+        wins = new HashMap<>();
+        defeats = new HashMap<>();
     }
 
     //TODO add process to accept or decline friend
