@@ -133,7 +133,7 @@ public class AdminMenu extends Menu {
     }
 
     private void addSuggestion() {
-        System.out.print("Player Name: >");
+        System.out.print("Player Username: >");
         String player = scanner.nextLine().trim();
         if (player.matches("\\w+") && player.length() >= 3) {
                 System.out.print("Game Name (Battle Sea • Dots And Boxes): >");
@@ -171,7 +171,7 @@ public class AdminMenu extends Menu {
     }
 
     private void showUserProfile() {
-        System.out.println("User Name: >");
+        System.out.println("Username: >");
         String user = scanner.nextLine().trim();
         if (user.matches("\\w+") && user.length() >= 3) {
             Client.getClient().send("user showUserProfile " + user);
@@ -184,7 +184,7 @@ public class AdminMenu extends Menu {
     @Override
     public void run() {
         while (true) {
-            switch (scanner.nextLine()) {
+            switch (scanner.nextLine().trim()) {
                 case "add event":
                     addEvent();
                     break;

@@ -160,7 +160,7 @@ public class AccountMenu extends Menu implements Back {
     @Override
     public void run() {
         while (true) {
-            switch (scanner.nextLine()) {
+            switch (scanner.nextLine().trim()) {
                 case "show info":
                     showInfo();
                     break;
@@ -183,6 +183,13 @@ public class AccountMenu extends Menu implements Back {
                     logout();
                     next(LoginMenu.getLoginMenu());
                     return;
+                case "friends menu":
+                    if (rank == Rank.PLAYER) {
+                        next(FriendMenu.getFriendMenu());
+                    } else {
+                        System.out.println("Just players!");
+                    }
+                    break;
                 case "back":
                     back();
                     return;
@@ -195,7 +202,6 @@ public class AccountMenu extends Menu implements Back {
 
     @Override
     public void next(Menu menu) {
-        menus.pop();
         menus.push(menu);
         menu.run();
     }

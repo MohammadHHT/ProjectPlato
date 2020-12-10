@@ -2,6 +2,7 @@ package controller.Command;
 
 import controller.AccountController;
 import controller.AdminController;
+import controller.FriendController;
 import controller.PlayerController;
 import model.Admin;
 
@@ -50,6 +51,13 @@ public class UserCommands implements ResolveCommand {
             case "showHistory":
             case "showGameStatistics":
                 AccountCommand.getAccountCommand().execute(tokens);
+                break;
+            case "showFriends":
+            case "removeFriend":
+            case "showRequests":
+            case "accept":
+            case "decline":
+                FriendCommand.getFriendCommand().execute(tokens);
                 break;
         }
     }
@@ -210,6 +218,42 @@ public class UserCommands implements ResolveCommand {
                     break;
                 case "showUserProfile":
                     done(AdminController.getAdminController().showUserProfile(tokens[2]));
+                    break;
+            }
+        }
+    }
+
+    //FriendCommand nested class
+    private static class FriendCommand implements ExecuteCommand {
+        private static final FriendCommand friendCommand = new FriendCommand();
+
+        private FriendCommand() {
+        }
+
+        static FriendCommand getFriendCommand() {
+            return friendCommand;
+        }
+
+        @Override
+        public void execute(String[] tokens) throws Exception {
+            switch (tokens[1]) {
+                case "showFriends":
+                    done(FriendController.getFriendController().showFriends(tokens[2]));
+                    break;
+                case "removeFriend":
+                    FriendController.getFriendController().removeFriend(tokens[2], tokens[3]);
+                    done("Removed");
+                    break;
+                case "showRequests":
+                    done(FriendController.getFriendController().showRequests(tokens[2]));
+                    break;
+                case "accept":
+                    FriendController.getFriendController().accept(tokens[2], tokens[3]);
+                    done("Accepted");
+                    break;
+                case "decline":
+                    FriendController.getFriendController().decline(tokens[2], tokens[3]);
+                    done("Declined");
                     break;
             }
         }

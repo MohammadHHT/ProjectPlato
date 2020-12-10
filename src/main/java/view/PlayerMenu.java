@@ -49,13 +49,9 @@ public class PlayerMenu extends Menu {
     }
 
     private void playSuggested() {
-        System.out.print("Game Name: >");
-        String game = scanner.nextLine();
-        if (game.length() > 0) {
-            Client.getClient().send("user playSuggested " + username + " " + game);
-        } else {
-            System.out.println("Game name can not be empty!");
-        }
+        System.out.print("Game Name (Battle Sea • Dots And Boxes): >");
+        String game = scanner.nextLine().replaceAll(" ", "");
+        Client.getClient().send("user playSuggested " + username + " " + game);
 
         //TODO
     }
@@ -73,7 +69,7 @@ public class PlayerMenu extends Menu {
     private void addFriend() {
         System.out.print("Friend Username: >");
         String friend = scanner.nextLine().trim();
-        if (friend.matches("\\w+") && friend.length() >= 3) {
+        if (friend.matches("\\w+") && friend.length() >= 3 && !friend.equals(username)) {
             Client.getClient().send("user addFriend " + username + " " + friend);
         } else {
             System.out.println("Invalid username!");
@@ -85,7 +81,7 @@ public class PlayerMenu extends Menu {
     @Override
     public void run() {
         while (true) {
-            switch (scanner.nextLine()) {
+            switch (scanner.nextLine().trim()) {
                 case "show point":
                     showPoint();
                     break;
