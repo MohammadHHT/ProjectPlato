@@ -1,17 +1,19 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Game {
+    private static HashMap<Integer, Game> games;
+    private final static ArrayList<String> gamesName;
+
     private String gameName;
     private int gameID;
-    private static HashMap<Integer, Game> games;
-    private static ArrayList<String> gamesName;
 
     static {
-        games = new HashMap<Integer, Game>();
-        gamesName = new ArrayList<String>();
+        games = new HashMap<>();
+        gamesName = new ArrayList<>(Arrays.asList("BattleSea", "DotsAndBoxes"));
     }
 
     public Game(String gameName, String gameID) {

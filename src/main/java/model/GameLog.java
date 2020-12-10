@@ -1,31 +1,71 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 public class GameLog {
+    public enum Result {
+        WIN, DRAW, DEFEAT
+    }
+
     private static HashMap<Long, GameLog> gameLogs;
 
     private long logID;
     private String game;
-    private static int numberOfTimesPlayed;
-    private static int numberOfWins;
-    private static int numberOfDefeats;
-    private long takenScore;
+    private String host;
+    private LocalDate date;
+    private Result result;            //result of host player
 
     static {
         gameLogs = new HashMap<>();
-        numberOfTimesPlayed = 0;
-        numberOfWins = 0;
-        numberOfDefeats = 0;
     }
 
-    public GameLog(String game) {
+    public GameLog(String game, Player host, Player guest, LocalDate date, Result result) {
         logID = IDGenerator();
         gameLogs.put(logID, this);
         this.game = game;
-        this.takenScore = 0;
+        this.host = host.getUsername();
+        this.date = date;
+        this.result = result;
+
+        switch (result) {
+            case WIN:
+                if (host.getWins().containsKey(game)) {
+                    host.getWins().put(game, host.getWins().get(game) + 1);
+                } else {
+                    host.getWins().put(game, 1);
+                }
+                if (guest.getDefeats().containsKey(game)) {
+                    guest.getDefeats().put(game, guest.getDefeats().get(game) + 1);
+                } else {
+                    guest.getDefeats().put(game, 1);
+                }
+                break;
+            case DEFEAT:
+                if (guest.getWins().containsKey(game)) {
+                    guest.getWins().put(game, guest.getWins().get(game) + 1);
+                } else {
+                    guest.getWins().put(game, 1);
+                }
+                if (host.getDefeats().containsKey(game)) {
+                    host.getDefeats().put(game, host.getDefeats().get(game) + 1);
+                } else {
+                    host.getDefeats().put(game, 1);
+                }
+                break;
+        }
+        if (host.getPlays().containsKey(game)) {
+            host.getPlays().put(game, host.getPlays().get(game) + 1);
+        } else {
+            host.getPlays().put(game, 1);
+        }
+        if (guest.getPlays().containsKey(game)) {
+            guest.getPlays().put(game, guest.getPlays().get(game) + 1);
+        } else {
+            guest.getPlays().put(game, 1);
+        }
     }
 
     private long IDGenerator() {
@@ -39,44 +79,20 @@ public class GameLog {
         }
     }
 
-    public void setNumberOfTimesPlayed(int numberOfTimesPlayed) {
-        this.numberOfTimesPlayed = numberOfTimesPlayed;
-    }
-
-    public void setNumberOfWins(int numberOfWins) {
-        this.numberOfWins = numberOfWins;
-    }
-
-    public void setTakenScore(long takenScore) {
-        this.takenScore = takenScore;
-    }
-
-    public void setNumberOfDefeat(int numberOfDefeat) {
-        this.numberOfDefeats = numberOfDefeat;
-    }
-
     public String getGame() {
         return game;
     }
 
-    public int getNumberOfWins() {
-        return numberOfWins;
+    public String getHost() {
+        return host;
     }
 
-    public int getNumberOfTimesPlayed() {
-        return numberOfTimesPlayed;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public long getLogID() {
-        return logID;
-    }
-
-    public long getTakenScore() {
-        return takenScore;
-    }
-
-    public int getNumberOfDefeat() {
-        return numberOfDefeats;
+    public Result getResult() {
+        return result;
     }
 
     public static HashMap<Long, GameLog> getGameLogs() {

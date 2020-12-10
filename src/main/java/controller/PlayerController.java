@@ -40,7 +40,7 @@ public class PlayerController {
         ArrayList<Long> suggestions = Player.getPlayers().get(username).getSuggestions();
         String tmp = "";
         for (Long s : suggestions) {
-            tmp += Suggestion.getSuggestions().get(s).getGameName() + " ";
+            tmp += Suggestion.getSuggestions().get(s).getGame() + " ";
         }
         return tmp.trim();
     }
@@ -98,7 +98,7 @@ public class PlayerController {
 
     public void joinEvent(String username, String eventID, String gameName) throws EventIDNotFound {
         if (Event.getEvents().containsKey(Integer.parseInt(eventID))) {
-            GameController.runGameForEvent(username, Event.getEvents().get(Integer.parseInt(eventID)).getEventScore(),
+            GameController.runGameForEvent(username, Event.getEvents().get(Integer.parseInt(eventID)).getScore(),
                     gameName);
         } else {
             throw new EventIDNotFound();

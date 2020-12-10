@@ -49,9 +49,9 @@ public class GameController {
                         "Wins: " + GameLog.getGameLogs().get(Integer.parseInt(Player.getPlayers().
                         get(userName).getGameLogs().get(0))).getNumberOfWins() + "\n" +
                         "Defeats: " + GameLog.getGameLogs().get(Integer.parseInt(Player.getPlayers().
-                        get(userName).getGameLogs().get(0))).getNumberOfDefeat() + "\n" +
+                        get(userName).getGameLogs().get(0))).getNumberOfDefeats() + "\n" +
                         "Number of played: " + GameLog.getGameLogs().get(Integer.parseInt(Player.getPlayers().
-                        get(userName).getGameLogs().get(0))).getNumberOfTimesPlayed());
+                        get(userName).getGameLogs().get(0))).getNumberOfPlays());
             } else {
                 throw new UsernameNotFound();
             }
@@ -64,9 +64,9 @@ public class GameController {
                         "Wins: " + GameLog.getGameLogs().get(Integer.parseInt(Player.getPlayers().
                         get(userName).getGameLogs().get(1))).getNumberOfWins() + "\n" +
                         "Defeats: " + GameLog.getGameLogs().get(Integer.parseInt(Player.getPlayers().
-                        get(userName).getGameLogs().get(1))).getNumberOfDefeat() + "\n" +
+                        get(userName).getGameLogs().get(1))).getNumberOfDefeats() + "\n" +
                         "Number of played: " + GameLog.getGameLogs().get(Integer.parseInt(Player.getPlayers().
-                        get(userName).getGameLogs().get(1))).getNumberOfTimesPlayed());
+                        get(userName).getGameLogs().get(1))).getNumberOfPlays());
             } else {
                 throw new UsernameNotFound();
             }
@@ -98,11 +98,11 @@ public class GameController {
             if (gameName.equalsIgnoreCase("Dots And Boxes")) {
                 System.out.println("Number of played in " + gameName + " game: " +
                         GameLog.getGameLogs().get(Integer.parseInt(Player.getPlayers().get(userName)
-                                .getGameLogs().get(0))).getNumberOfTimesPlayed());
+                                .getGameLogs().get(0))).getNumberOfPlays());
             } else if (gameName.equalsIgnoreCase("Sea Battle")) {
                 System.out.println("Number of played in " + gameName + " game: " +
                         GameLog.getGameLogs().get(Integer.parseInt(Player.getPlayers().get(userName)
-                                .getGameLogs().get(1))).getNumberOfTimesPlayed());
+                                .getGameLogs().get(1))).getNumberOfPlays());
             } else {
                 throw new GameNotFoundException();
             }

@@ -1,10 +1,7 @@
 package controller;
 
 import exception.*;
-import model.Admin;
-import model.GameLog;
-import model.Player;
-import model.User;
+import model.*;
 
 public class AccountController {
     private static final AccountController accountController = new AccountController();
@@ -88,22 +85,25 @@ public class AccountController {
                 user.setPhone(value);
                 break;
         }
-        //TODO after changes happened, the new info must save in Database.
     }
 
     public String showPlatoStatistics(String username) {
         User user = User.getUsers().get(username);
         if (user instanceof Player) {
             Player player = (Player) user;
-            String tmp = player.getLevel() + " " + player.getPlatoAge() + " ";
-            int wins = 0;
-            for (Long gl : player.getGameLogs()) {
-                wins += GameLog.getGameLogs().get(gl).getNumberOfWins();
-            }
-            tmp += wins + " " + player.getFriends().size();
-            return tmp;
+            return player.getLevel() + " " + player.getPlatoAge() + " " + calculateWins(player) + " " + player.getFriends().size();
         }
         return null;
+    }
+
+    private int calculateWins(Player player) {
+        int wins = 0;
+        for (String s : Game.getGamesName()) {
+            if (player.getWins().containsKey(s)) {
+                wins += player.getWins().get(s);
+            }
+        }
+        return wins;
     }
 
     public String showHistory(String username) {
@@ -112,7 +112,8 @@ public class AccountController {
             Player player = (Player) user;
             StringBuilder tmp = new StringBuilder();
             for (Long gl : player.getGameLogs()) {
-                tmp.append(GameLog.getGameLogs().get(gl).getDate()).append(" ");
+                GameLog gameLog = GameLog.getGameLogs().get(gl);
+                tmp.append(gameLog.getGame()).append(" ").append(gameLog.getDate()).append(" ");
             }
             return tmp.toString().trim();
         }
@@ -121,20 +122,14 @@ public class AccountController {
 
     public String showGameStatistics(String username, String game) throws GameNotFoundException {
         if (game.equals("BattleSea") || game.equals("DotsAndBoxes")) {
-            User user = User.getUsers().get(username);
-            if (user instanceof Player) {
-                Player player = (Player) user;
-                String tmp = player.getLevel() + " ";
-                for (Long gl : player.getGameLogs()) {
-                    GameLog gameLog = GameLog.getGameLogs().get(gl);
-                    if (gameLog.getGame().equals(game)) {
-                        tmp += gameLog.getNumberOfTimesPlayed() + " " + gameLog.getNumberOfWins() + " " + gameLog.getNumberOfDefeat();
-                        break;
-                    }
-                }
-                return tmp.trim();
+            Player player = Player.getPlayers().get(username);
+            String tmp = player.getLevel() + "\n";
+            if (player.getPlays().get(game) != null) {
+                tmp += player.getPlays().get(game) + " " + player.getWins().get(game) + " " + player.getDefeats().get(game);
+            } else {
+                tmp += 0;
             }
-            return null;
+            return tmp.trim();
         } else {
             throw new GameNotFoundException();
         }

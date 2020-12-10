@@ -16,6 +16,9 @@ public class Player extends User {
     private ArrayList<Long> suggestions;
     private ArrayList<String> inbox;
     private ArrayList<Long> gameLogs;
+    private HashMap<String, Integer> plays;                    //String:game name e.g:DotsAndBoxes    Integer: numbers of times played
+    private HashMap<String, Integer> wins;
+    private HashMap<String, Integer> defeats;
 
     static {
         players = new HashMap<>();
@@ -122,5 +125,17 @@ public class Player extends User {
 
     public ArrayList<Long> getGameLogs() {
         return gameLogs;
+    }
+
+    public HashMap<String, Integer> getPlays() {
+        return plays;
+    }
+
+    public HashMap<String, Integer> getWins() {
+        return wins;
+    }
+
+    public HashMap<String, Integer> getDefeats() {
+        return defeats;
     }
 }
