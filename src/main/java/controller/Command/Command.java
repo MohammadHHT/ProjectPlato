@@ -17,6 +17,8 @@ public class Command implements ResolveCommand {
         try {
             if (tokens[0].equals("user")) {
                 UserCommands.getUserCommands().resolveCommand(tokens);
+            } else if (tokens[0].equalsIgnoreCase("Game")) {
+                GameCommands.getGameCommands().resolveCommand(tokens);
             }
         } catch (Exception e) {
             Server.getServer().send("Exception " + e.getMessage());

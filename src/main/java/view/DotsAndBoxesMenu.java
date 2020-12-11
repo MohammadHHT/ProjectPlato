@@ -13,7 +13,7 @@ public class DotsAndBoxesMenu extends Menu {
     @Override
     public void run() {
 
-        board = new Board()
+        board = new Board();
 
         String command;
         commandLoop:
@@ -26,7 +26,7 @@ public class DotsAndBoxesMenu extends Menu {
                 case "show table":
                 case "who is next?":
                 case "show result":
-                    Client.getClient().send("DotsAndBoxes " + command);
+                    Client.getClient().send("Game DotsAndBoxes " + command);
                     System.out.println(Client.getClient().getResponse());
                     break;
                 case "back":
@@ -40,7 +40,7 @@ public class DotsAndBoxesMenu extends Menu {
                         } else if (temp.equalsIgnoreCase("no")) {
                             break;
                         } else {
-                            System.out.println("Its a Yes or No question :/ ");
+                            System.out.println("Its a Yes/No question :/ ");
                         }
                     }
                 default:
@@ -54,11 +54,12 @@ public class DotsAndBoxesMenu extends Menu {
                                     Integer.parseInt(matcher.group(4)) < 9 && Integer.parseInt(matcher.group(4)) > 0 &&
                                     Integer.parseInt(matcher.group(6)) < 9 && Integer.parseInt(matcher.group(6)) > 0 &&
                                     Integer.parseInt(matcher.group(8)) < 9 && Integer.parseInt(matcher.group(8)) > 0) {
-                                Client.getClient().send("DotsAndBoxes draw " + matcher.group(2) + " " + matcher.group(4) + " " + matcher.group(6) + " " + matcher.group(8));
+                                Client.getClient().send("Game DotsAndBoxes draw " + matcher.group(2) + " " + matcher.group(4) + " " + matcher.group(6) + " " + matcher.group(8));
                             } else
                                 System.out.println("coordinates must be inside the table");
                         } else {
-                            System.out.println("wrong coordination!");
+                            System.out.println("The command should be in this form:" +
+                                    "draw line between x,y and x,y");
                         }
                     } else {
                         System.out.println("Not a valid command!");
@@ -66,7 +67,7 @@ public class DotsAndBoxesMenu extends Menu {
                     break;
             }
         }
-        Client.getClient().send("DotsAndBoxes end");
+        Client.getClient().send("Game DotsAndBoxes end");
         System.out.println(Client.getClient().getResponse());
         next(Menu.menus.peek());
     }
