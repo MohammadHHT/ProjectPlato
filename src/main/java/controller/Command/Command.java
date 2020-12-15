@@ -15,8 +15,13 @@ public class Command implements ResolveCommand {
     @Override
     public void resolveCommand(String[] tokens) {
         try {
-            if (tokens[0].equals("user")) {
-                UserCommands.getUserCommands().resolveCommand(tokens);
+            switch (tokens[0]) {
+                case "user":
+                    UserCommands.getUserCommands().resolveCommand(tokens);
+                    break;
+                case "game":
+                    GameCommands.getGameCommands().resolveCommand(tokens);
+                    break;
             }
         } catch (Exception e) {
             Server.getServer().send("Exception " + e.getMessage());

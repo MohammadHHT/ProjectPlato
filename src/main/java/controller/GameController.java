@@ -2,6 +2,8 @@ package controller;
 
 import exception.GameNotFound;
 import exception.UsernameNotFound;
+import model.DotsAndBoxes.DotsAndBoxes;
+import model.Game;
 import model.GameLog;
 import model.Player;
 
@@ -10,6 +12,35 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class GameController {
+    private static final GameController gameController = new GameController();
+
+    private GameController() {
+    }
+
+    public static GameController getGameController() {
+        return gameController;
+    }
+
+    public String names() {
+        StringBuilder tmp = new StringBuilder();
+        for (String s : Game.getGames()) {
+            tmp.append(s).append(" • ");
+        }
+        return tmp.toString().substring(0, tmp.toString().length() - 1).trim();
+    }
+
+    public String open(String game, String username) throws GameNotFound {
+        switch (game) {
+            case "BattleSea":
+                //TODO BattleSea
+                break;
+            case "DotsAndBoxes":
+                return Long.toString((new DotsAndBoxes(Player.getPlayers().get(username))).getGameID());    // returns game id for further uses (user game commands)
+                break;
+            default:
+                throw new GameNotFound();
+        }
+    }
 
     public void showScoreboard(String gameName) throws GameNotFound {
         HashMap<String, Long> allPlayersScore = new HashMap<String, Long>();
@@ -29,7 +60,7 @@ public class GameController {
         TreeMap<String, Long> sorted = new TreeMap<>();
         sorted.putAll(allPlayersScore);
         sorted.entrySet().stream()
-                .sorted(Map.Entry.<String, Long> comparingByValue().reversed())
+                .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
                 .forEach(n -> {
                     System.out.println(n.getKey() + " " + n.getValue());
                 });

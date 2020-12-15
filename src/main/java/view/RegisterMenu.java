@@ -19,6 +19,10 @@ public class RegisterMenu extends Menu {
 
     @Override
     public void run() {
+        System.out.print("Have Account? yes - no");
+        if (scanner.nextLine().trim().equals("yes")) {
+            next(LoginMenu.getLoginMenu());
+        }
         while (true) {
             if (getFirstName()) {
                 while (true) {
@@ -148,12 +152,16 @@ public class RegisterMenu extends Menu {
     @Override
     public void next(Menu menu) {
         Menu.username = username;
-        if (Client.getClient().getResponse().equals("player")) {
-            rank = Rank.PLAYER;
-        } else {
-            rank = Rank.ADMIN;
+        switch (Client.getClient().getResponse()) {
+            case "player":
+                rank = Rank.PLAYER;
+                menus.pop();
+                break;
+            case "admin":
+                rank = Rank.ADMIN;
+                menus.pop();
+                break;
         }
-        menus.pop();
         menus.push(menu);
         menu.run();
     }

@@ -1,19 +1,18 @@
 package view;
 
-
-import model.DotsAndBoxes.Board;
+import model.DotsAndBoxes.DotsAndBoxes;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DotsAndBoxesMenu extends Menu {
 
-    public static Board board;
+    public static DotsAndBoxes dotsAndBoxes;
 
     @Override
     public void run() {
 
-        board = new Board()
+        dotsAndBoxes = new DotsAndBoxes()
 
         String command;
         commandLoop:
