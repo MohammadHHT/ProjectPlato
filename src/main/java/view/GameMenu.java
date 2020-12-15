@@ -11,12 +11,26 @@ public class GameMenu extends Menu implements Back {
     }
 
     private void open() {
-        System.out.print("Game Name (Battle Sea • Dots And Boxes): >");
+        Client.getClient().send("game names");
+        System.out.print("Game Name (" + Client.getClient().getResponse() + "): >");
         String game = scanner.nextLine().replaceAll(" ", "");
+        Client.getClient().send("game open " + game + " " + username);
 
-        //TODO
+        if (Client.getClient().getResponse().length() == 1) {
+            gameID = Long.parseLong(Client.getClient().getResponse());
+            switch (game) {
+                case "DotsAndBoxes":
+                    next(DotsAndBoxesMenu.getDotsAndBoxesMenu());
+                    break;
+                case "BattleSea":
+                    next(BattleSeaMenu.getBattleSeaMenu());
+                    break;
+            }
+        } else {
+            System.out.println(Client.getClient().getResponse());
+            run();
+        }
     }
-
 
     @Override
     public void run() {
@@ -27,7 +41,7 @@ public class GameMenu extends Menu implements Back {
                     return;
                 case "back":
                     back();
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid command!");
                     break;
@@ -37,6 +51,7 @@ public class GameMenu extends Menu implements Back {
 
     @Override
     public void next(Menu menu) {
-
+        menus.push(menu);
+        menu.run();
     }
 }

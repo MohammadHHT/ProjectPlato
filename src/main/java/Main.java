@@ -5,10 +5,11 @@ import view.RegisterMenu;
 public class Main {
     public static void main(String[] args) {
         FileManager.initialize();
+        start();
     }
 
     private static void start() {
-        Menu.push(RegisterMenu.getRegisterMenu());
+        Menu.menus.push(RegisterMenu.getRegisterMenu());
         RegisterMenu.getRegisterMenu().run();
     }
 

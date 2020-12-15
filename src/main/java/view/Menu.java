@@ -8,10 +8,11 @@ public abstract class Menu {
         ADMIN, PLAYER
     }
 
-    protected static Stack<Menu> menus = new Stack<>();
+    public static Stack<Menu> menus = new Stack<>();
     protected static Scanner scanner = new Scanner(System.in);
     protected static String username = null;
     protected static Rank rank = null;
+    protected static long gameID = -1;                              // when a game starts, gameID will be set
 
     public abstract void run();
 
