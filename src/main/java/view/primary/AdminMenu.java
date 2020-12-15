@@ -1,4 +1,8 @@
-package view;
+package view.primary;
+
+import view.Client;
+import view.Menu;
+import view.account.AccountMenu;
 
 import java.time.LocalDate;
 

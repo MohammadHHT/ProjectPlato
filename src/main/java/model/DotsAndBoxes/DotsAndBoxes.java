@@ -8,16 +8,20 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class DotsAndBoxes extends Game {
-    private static ArrayList<DotsAndBoxes> dotsAndBoxes = new ArrayList<>();
+    private static HashMap<Long, DotsAndBoxes> dotsAndBoxes;
 
     private ArrayList<Edge> edges;
     private Player host;
     private Player guest;
     private Player turn;
 
+    static {
+        dotsAndBoxes = new HashMap<>();
+    }
+
     public DotsAndBoxes(Player host) {
-        super("Dots And Boxes");
-        dotsAndBoxes.add(this);
+        super();
+        dotsAndBoxes.put(getGameID(), this);
         edges = new ArrayList<>();
         this.host = host;
         turn = host;
@@ -73,7 +77,7 @@ public class DotsAndBoxes extends Game {
         return guest;
     }
 
-    public static ArrayList<DotsAndBoxes> getDotsAndBoxes() {
+    public static HashMap<Long, DotsAndBoxes> getDotsAndBoxes() {
         return dotsAndBoxes;
     }
 

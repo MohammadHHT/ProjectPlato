@@ -1,4 +1,9 @@
-package view;
+package view.account;
+
+import view.primary.AdminMenu;
+import view.Client;
+import view.Menu;
+import view.primary.PlayerMenu;
 
 public class RegisterMenu extends Menu {
     private static final RegisterMenu registerMenu = new RegisterMenu();
@@ -22,35 +27,36 @@ public class RegisterMenu extends Menu {
         System.out.print("Have Account? yes - no");
         if (scanner.nextLine().trim().equals("yes")) {
             next(LoginMenu.getLoginMenu());
-        }
-        while (true) {
-            if (getFirstName()) {
-                while (true) {
-                    if (getLastName()) {
-                        while (true) {
-                            if (getUsername()) {
-                                while (true) {
-                                    if (getPassword()) {
-                                        while (true) {
-                                            if (getEmail()) {
-                                                while (true) {
-                                                    if (getPhone()) {
-                                                        Client.getClient().send("user register " + firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
+        } else {
+            while (true) {
+                if (getFirstName()) {
+                    while (true) {
+                        if (getLastName()) {
+                            while (true) {
+                                if (getUsername()) {
+                                    while (true) {
+                                        if (getPassword()) {
+                                            while (true) {
+                                                if (getEmail()) {
+                                                    while (true) {
+                                                        if (getPhone()) {
+                                                            Client.getClient().send("user register " + firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
 
-                                                        switch (Client.getClient().getResponse()) {
-                                                            case "player":
-                                                                System.out.println("Player registered successfully");
-                                                                next(PlayerMenu.getPlayerMenu());
-                                                                break;
-                                                            case "admin":
-                                                                System.out.println("Admin registered successfully");
-                                                                next(AdminMenu.getAdminMenu());
-                                                                break;
-                                                            default:
-                                                                System.out.println(Client.getClient().getResponse());
-                                                                break;
+                                                            switch (Client.getClient().getResponse()) {
+                                                                case "player":
+                                                                    System.out.println("Player registered successfully");
+                                                                    next(PlayerMenu.getPlayerMenu());
+                                                                    break;
+                                                                case "admin":
+                                                                    System.out.println("Admin registered successfully");
+                                                                    next(AdminMenu.getAdminMenu());
+                                                                    break;
+                                                                default:
+                                                                    System.out.println(Client.getClient().getResponse());
+                                                                    break;
+                                                            }
+                                                            return;
                                                         }
-                                                        return;
                                                     }
                                                 }
                                             }

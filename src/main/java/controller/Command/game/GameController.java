@@ -1,6 +1,6 @@
-package controller;
+package controller.Command.game;
 
-import exception.GameNotFound;
+import exception.game.GameNotFound;
 import exception.UsernameNotFound;
 import model.DotsAndBoxes.DotsAndBoxes;
 import model.Game;
@@ -29,7 +29,7 @@ public class GameController {
         return tmp.toString().substring(0, tmp.toString().length() - 1).trim();
     }
 
-    public String open(String game, String username) throws GameNotFound {
+    public String open(String username, String game) throws GameNotFound {
         switch (game) {
             case "BattleSea":
                 //TODO BattleSea
@@ -40,6 +40,10 @@ public class GameController {
             default:
                 throw new GameNotFound();
         }
+    }
+
+    public String turn(long game) {                                                                         // changes turn
+
     }
 
     public void showScoreboard(String gameName) throws GameNotFound {

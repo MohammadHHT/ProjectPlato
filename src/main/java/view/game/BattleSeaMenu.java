@@ -1,4 +1,6 @@
-package view;
+package view.game;
+
+import view.Menu;
 
 public class BattleSeaMenu extends Menu {
     private static final BattleSeaMenu battleSeaMenu = new BattleSeaMenu();
