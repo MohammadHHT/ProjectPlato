@@ -32,7 +32,6 @@ public class GameMenu extends Menu implements Back {
         }
     }
 
-
     @Override
     public void run() {
         while (true) {

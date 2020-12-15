@@ -1,19 +1,20 @@
 package view;
 
-import model.DotsAndBoxes.DotsAndBoxes;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DotsAndBoxesMenu extends Menu {
+    private static final DotsAndBoxesMenu dotsAndBoxesMenu = new DotsAndBoxesMenu();
 
-    public static DotsAndBoxes dotsAndBoxes;
+    private DotsAndBoxesMenu() {
+    }
+
+    public static DotsAndBoxesMenu getDotsAndBoxesMenu() {
+        return dotsAndBoxesMenu;
+    }
 
     @Override
     public void run() {
-
-        dotsAndBoxes = new DotsAndBoxes()
-
         String command;
         commandLoop:
         while (true) {
