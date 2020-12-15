@@ -16,7 +16,7 @@ public class DotsAndBoxes extends Game {
     private Player turn;
 
     public DotsAndBoxes(Player host) {
-        super("Dots And Boxes");
+        super();
         dotsAndBoxes.add(this);
         edges = new ArrayList<>();
         this.host = host;

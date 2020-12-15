@@ -1,4 +1,7 @@
-package view;
+package view.game;
+
+import view.Client;
+import view.Menu;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

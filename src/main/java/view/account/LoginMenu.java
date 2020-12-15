@@ -1,4 +1,8 @@
-package view;
+package view.account;
+
+import view.Client;
+import view.Menu;
+import view.primary.PlayerMenu;
 
 public class LoginMenu extends Menu {
     private static final LoginMenu loginMenu = new LoginMenu();

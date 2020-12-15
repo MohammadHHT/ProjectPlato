@@ -1,4 +1,8 @@
-package view;
+package view.game;
+
+import view.Back;
+import view.Client;
+import view.Menu;
 
 public class GameMenu extends Menu implements Back {
     private static final GameMenu gameMenu = new GameMenu();
@@ -14,7 +18,7 @@ public class GameMenu extends Menu implements Back {
         Client.getClient().send("game names");
         System.out.print("Game Name (" + Client.getClient().getResponse() + "): >");
         String game = scanner.nextLine().replaceAll(" ", "");
-        Client.getClient().send("game open " + game + " " + username);
+        Client.getClient().send("game open " + username + " " + game);
 
         if (Client.getClient().getResponse().length() == 1) {
             gameID = Long.parseLong(Client.getClient().getResponse());

@@ -8,15 +8,13 @@ import java.util.Random;
 public abstract class Game {
     private final static ArrayList<String> games;
 
-    private String game;
     private long gameID;
 
     static {
         games = new ArrayList<>(Arrays.asList("Battle Sea", "Dots And Boxes"));
     }
 
-    public Game(String game) {
-        this.game = game;
+    public Game() {
         gameID = IDGenerator();
     }
 
@@ -27,18 +25,6 @@ public abstract class Game {
 
     public void setScore(){
         //TODO
-    }
-
-    public void setGameName(String gameName) {
-        this.game = gameName;
-    }
-
-    public void setGameID(int gameID) {
-        this.gameID = gameID;
-    }
-
-    public String getGameName() {
-        return game;
     }
 
     public long getGameID() {
