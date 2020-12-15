@@ -1,7 +1,7 @@
 package exception.game;
 
 public class NotYourTurn extends Exception {
-    NotYourTurn() {
+    public NotYourTurn() {
         super("Not your turn!");
     }
 }
