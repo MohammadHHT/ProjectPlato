@@ -10,6 +10,17 @@ public class BattleSea {
 
     public static void runBattleSea(){
         setupRandomBoard(host);
+        host.playerGrid.printShips();
+        System.out.println("Do you like this arrangement of ships? (Y or N)");
+        String input = scanner.nextLine();
+        if (input.equalsIgnoreCase("Y")) {
+            System.out.println("Waiting for your opponent...");
+        } else if (input.equalsIgnoreCase("N")) {
+            changeShipsLocation(host);
+            System.out.println("Waiting for your opponent...");
+        } else {
+            System.out.println("Invalid Command!");
+        }
     }
 
     private static void setupRandomBoard(BattleSeaPlayer battleSeaPlayer) {
@@ -89,5 +100,59 @@ public class BattleSea {
             }
         }
         return false;
+    }
+
+    private static void changeShipsLocation(BattleSeaPlayer battleSeaPlayer) {
+        battleSeaPlayer.playerGrid.printShips();
+        System.out.println();
+        String input;
+        do {
+            System.out.print("Please select the ship you want...");
+            input = scanner.nextLine();
+            input = input.toUpperCase();
+            int selectedShip = convertLetterToInt(input);
+            System.out.println("Enter new row: ");
+            int newRow = scanner.nextInt();
+            System.out.println("Enter new column: ");
+            int newCol = scanner.nextInt();
+            if (newCol >= 0 && newCol <= 9 && newRow >= 0 && newRow <= 9) {
+                if (!hasLocationError(newRow, newCol, battleSeaPlayer.ships[selectedShip].getDirection(),
+                        battleSeaPlayer, selectedShip)) {
+                    battleSeaPlayer.ships[selectedShip].setLocation(newRow, newCol);
+                    battleSeaPlayer.playerGrid.addShip(battleSeaPlayer.ships[selectedShip]);
+                    battleSeaPlayer.playerGrid.printShips();
+                    System.out.println("Ship " + input + " relocated " + "in (" + newRow + ", " + newCol + ") successfully!" );
+                } else {
+                    System.out.println("Ship " + input + " can not relocate in (" + newRow + ", " + newCol + ").");
+                }
+            }
+            System.out.println("Do you want to relocate another ship?(Y or N)");
+            input = scanner.nextLine();
+        } while (input.equalsIgnoreCase("Y"));
+    }
+
+    private static int convertLetterToInt(String letter) {
+        int toReturn = -1;
+        switch (letter) {
+            case "A":
+                toReturn = 0;
+                break;
+            case "B":
+                toReturn = 1;
+                break;
+            case "C":
+                toReturn = 2;
+                break;
+            case "D":
+                toReturn = 3;
+                break;
+            case "E":
+                toReturn = 4;
+                break;
+            case "F":
+                toReturn = 5;
+                break;
+        }
+        return toReturn;
     }
 }
