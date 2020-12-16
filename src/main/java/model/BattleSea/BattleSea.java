@@ -11,16 +11,7 @@ public class BattleSea {
     public static void runBattleSea(){
         setupRandomBoard(host);
         host.playerGrid.printShips();
-        System.out.println("Do you like this arrangement of ships? (Y or N)");
-        String input = scanner.nextLine();
-        if (input.equalsIgnoreCase("Y")) {
-            System.out.println("Waiting for your opponent...");
-        } else if (input.equalsIgnoreCase("N")) {
-            changeShipsLocation(host);
-            System.out.println("Waiting for your opponent...");
-        } else {
-            System.out.println("Invalid Command!");
-        }
+        //TODO ?????
     }
 
     private static void setupRandomBoard(BattleSeaPlayer battleSeaPlayer) {
@@ -102,33 +93,55 @@ public class BattleSea {
         return false;
     }
 
-    private static void changeShipsLocation(BattleSeaPlayer battleSeaPlayer) {
+    private static void changeShipsLocation(BattleSeaPlayer battleSeaPlayer, String shipName) {
         battleSeaPlayer.playerGrid.printShips();
         System.out.println();
         String input;
-        do {
-            System.out.print("Please select the ship you want...");
-            input = scanner.nextLine();
-            input = input.toUpperCase();
-            int selectedShip = convertLetterToInt(input);
-            System.out.println("Enter new row: ");
-            int newRow = scanner.nextInt();
-            System.out.println("Enter new column: ");
-            int newCol = scanner.nextInt();
-            if (newCol >= 0 && newCol <= 9 && newRow >= 0 && newRow <= 9) {
-                if (!hasLocationError(newRow, newCol, battleSeaPlayer.ships[selectedShip].getDirection(),
-                        battleSeaPlayer, selectedShip)) {
-                    battleSeaPlayer.ships[selectedShip].setLocation(newRow, newCol);
-                    battleSeaPlayer.playerGrid.addShip(battleSeaPlayer.ships[selectedShip]);
-                    battleSeaPlayer.playerGrid.printShips();
-                    System.out.println("Ship " + input + " relocated " + "in (" + newRow + ", " + newCol + ") successfully!" );
-                } else {
-                    System.out.println("Ship " + input + " can not relocate in (" + newRow + ", " + newCol + ").");
-                }
+
+        input = shipName.toUpperCase();
+        int selectedShip = convertLetterToInt(input);
+        System.out.println("Enter new row: ");
+        int newRow = scanner.nextInt();
+        System.out.println("Enter new column: ");
+        int newCol = scanner.nextInt();
+        if (newCol >= 0 && newCol <= 9 && newRow >= 0 && newRow <= 9) {
+            if (!hasLocationError(newRow, newCol, battleSeaPlayer.ships[selectedShip].getDirection(),
+                    battleSeaPlayer, selectedShip)) {
+                battleSeaPlayer.ships[selectedShip].setLocation(newRow, newCol);
+                battleSeaPlayer.playerGrid.addShip(battleSeaPlayer.ships[selectedShip]);
+                battleSeaPlayer.playerGrid.printShips();
+                System.out.println("Ship " + input + " relocated " + "in (" + newRow + ", " + newCol + ") successfully!" );
+             } else {
+                System.out.println("Ship " + input + " can not relocate in (" + newRow + ", " + newCol + ").");
             }
-            System.out.println("Do you want to relocate another ship?(Y or N)");
-            input = scanner.nextLine();
-        } while (input.equalsIgnoreCase("Y"));
+        }
+    }
+
+    private static void changeShipsDirection(BattleSeaPlayer battleSeaPlayer, String shipName) {
+        battleSeaPlayer.playerGrid.printShips();
+        System.out.println();
+        String input;
+
+        input = shipName.toUpperCase();
+        int selectedShip = convertLetterToInt(input);
+        int row = battleSeaPlayer.ships[selectedShip].getRow();
+        int col = battleSeaPlayer.ships[selectedShip].getColumn();
+        int dir = battleSeaPlayer.ships[selectedShip].getDirection();
+        if (dir == 0) {
+            dir = 1;
+        } else {
+            dir = 0;
+        }
+        if (!hasLocationError(row, col, dir, battleSeaPlayer, selectedShip)) {
+            battleSeaPlayer.ships[selectedShip].setLocation(row, col);
+            battleSeaPlayer.ships[selectedShip].setDirection(dir);
+            battleSeaPlayer.playerGrid.addShip(battleSeaPlayer.ships[selectedShip]);
+            battleSeaPlayer.playerGrid.printShips();
+            System.out.println("Ship " + input + " rotated successfully!" );
+        } else {
+            System.out.println("Ship " + input + " can not rotated.");
+        }
+
     }
 
     private static int convertLetterToInt(String letter) {

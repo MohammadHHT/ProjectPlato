@@ -84,7 +84,7 @@ public class Grid {
         int col = s.getColumn();
         int length = s.getLength();
         int width = s.getWidth();
-        char shipName = s.getShipName();
+        String shipName = s.getShipName();
         int dir = s.getDirection();
 
         if (!(s.isDirectionSet()) || !(s.isLocationSet()))
@@ -139,17 +139,17 @@ public class Grid {
                         System.out.println("# ");
                 } else if (type == 1) {
                     if (grid[i][j].hasShip()) {
-                        if (grid[i][j].getShipName() == 'A') {
+                        if (grid[i][j].getShipName() == "A") {
                             System.out.print("A ");
-                        } else if (grid[i][j].getShipName() == 'B') {
+                        } else if (grid[i][j].getShipName() == "B") {
                             System.out.print("B ");
-                        } else if (grid[i][j].getShipName() == 'C') {
+                        } else if (grid[i][j].getShipName() == "C") {
                             System.out.print("C ");
-                        } else if (grid[i][j].getShipName() == 'D') {
+                        } else if (grid[i][j].getShipName() == "D") {
                             System.out.print("D ");
-                        } else if (grid[i][j].getShipName() == 'E') {
+                        } else if (grid[i][j].getShipName() == "E") {
                             System.out.println("E ");
-                        } else if (grid[i][j].getShipName() == 'F') {
+                        } else if (grid[i][j].getShipName() == "F") {
                             System.out.println("F ");
                         }
                     } else if (!(grid[i][j].hasShip())) {
