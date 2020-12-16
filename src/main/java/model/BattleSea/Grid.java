@@ -141,15 +141,15 @@ public class Grid {
                     if (grid[i][j].hasShip()) {
                         if (grid[i][j].getShipName() == "A") {
                             System.out.print("A ");
-                        } else if (grid[i][j].getShipName() == "B") {
+                        } else if (grid[i][j].getShipName().equals("B")) {
                             System.out.print("B ");
-                        } else if (grid[i][j].getShipName() == "C") {
+                        } else if (grid[i][j].getShipName().equals("C")) {
                             System.out.print("C ");
-                        } else if (grid[i][j].getShipName() == "D") {
+                        } else if (grid[i][j].getShipName().equals("D")) {
                             System.out.print("D ");
-                        } else if (grid[i][j].getShipName() == "E") {
+                        } else if (grid[i][j].getShipName().equals("E")) {
                             System.out.println("E ");
-                        } else if (grid[i][j].getShipName() == "F") {
+                        } else if (grid[i][j].getShipName().equals("F")) {
                             System.out.println("F ");
                         }
                     } else if (!(grid[i][j].hasShip())) {

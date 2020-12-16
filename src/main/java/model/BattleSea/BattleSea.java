@@ -41,6 +41,33 @@ public class BattleSea {
         }
     }
 
+    private static void askForGuess(BattleSeaPlayer player, BattleSeaPlayer opponent, int x, int y) {
+        boolean flag = false;
+        // row == y  ,  col == x
+
+        if (x < 0 || x > 9 || y < 0 || y > 9) {
+            System.out.println("Coordinates must be inside the grid.");
+        }
+
+        while (!flag) {
+            if (!opponent.playerGrid.alreadyGuessed(y, x)){
+                if (opponent.playerGrid.hasShip(y, x)) {
+                    player.oppGrid.markHit(y, x);
+                    opponent.playerGrid.markHit(y, x);
+                    System.out.println("Bombed successfully!!!");
+                } else {
+                    player.oppGrid.markMiss(y, x);
+                    opponent.playerGrid.markMiss(y, x);
+                    System.out.println("Bombed unsuccessfully!");
+                    flag = true;
+                }
+            } else {
+                System.out.println("Selected X,Y has been already boomed");
+            }
+        }
+
+    }
+
     private static boolean hasLocationError(int row, int col, int dir, BattleSeaPlayer battleSeaPlayer, int counterOfShips) {
         int length = battleSeaPlayer.ships[counterOfShips].getLength();
         int width = battleSeaPlayer.ships[counterOfShips].getWidth();
