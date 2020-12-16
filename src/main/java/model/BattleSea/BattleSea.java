@@ -55,6 +55,15 @@ public class BattleSea {
                     player.oppGrid.markHit(y, x);
                     opponent.playerGrid.markHit(y, x);
                     System.out.println("Bombed successfully!!!");
+                    Ship oppShip = opponent.ships[convertLetterToInt(opponent.playerGrid.get(y, x).getShipName())];
+                    Ship playerShip = player.ships[convertLetterToInt(player.oppGrid.get(y, x).getShipName())];
+                    if (isShipDestroyCompletely(opponent, oppShip)) {
+                        changeDestroyedShipSign(player, playerShip);
+                        changeDestroyedShipSign(opponent, oppShip);
+                    }
+
+
+
                 } else {
                     player.oppGrid.markMiss(y, x);
                     opponent.playerGrid.markMiss(y, x);
@@ -66,6 +75,62 @@ public class BattleSea {
             }
         }
 
+    }
+
+    private static boolean isShipDestroyCompletely (BattleSeaPlayer battleSeaPlayer, Ship ship) {
+        int row = ship.getRow();
+        int col = ship.getColumn();
+        int length = ship.getLength();
+        int width = ship.getWidth();
+        int dir = ship.getDirection();
+        boolean flag = false;
+
+        if (dir == 0) {
+            for (int i = row; i < row + width; i++) {
+                for (int j = col; j < col + length; j++) {
+                    if (battleSeaPlayer.playerGrid.get(i, j).checkHit()) {
+                        flag = true;
+                    }
+                }
+            }
+        }
+
+        // Vertical
+        if (dir == 1) {
+            for (int i = row; i < row + length; i++) {
+                for (int j = col; j < col + width; j++) {
+                    if (battleSeaPlayer.playerGrid.get(i, j).checkHit()) {
+                        flag = true;
+                    }
+                }
+            }
+        }
+        return flag;
+    }
+
+    private static void changeDestroyedShipSign(BattleSeaPlayer battleSeaPlayer, Ship ship) {
+        int row = ship.getRow();
+        int col = ship.getColumn();
+        int length = ship.getLength();
+        int width = ship.getWidth();
+        int dir = ship.getDirection();
+
+        if (dir == 0) {
+            for (int i = row; i < row + width; i++) {
+                for (int j = col; j < col + length; j++) {
+                    battleSeaPlayer.playerGrid.get(row, col).markAllHit();
+                }
+            }
+        }
+
+        // Vertical
+        if (dir == 1) {
+            for (int i = row; i < row + length; i++) {
+                for (int j = col; j < col + width; j++) {
+                    battleSeaPlayer.playerGrid.get(row, col).markAllHit();
+                }
+            }
+        }
     }
 
     private static boolean hasLocationError(int row, int col, int dir, BattleSeaPlayer battleSeaPlayer, int counterOfShips) {

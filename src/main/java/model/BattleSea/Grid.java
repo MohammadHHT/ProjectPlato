@@ -31,6 +31,10 @@ public class Grid {
         grid[row][col].markMiss();
     }
 
+    public void markAllHit(int row, int col) {
+        grid[row][col].markAllHit();
+    }
+
     public void setStatus(int row, int col, int status) {
         grid[row][col].setStatus(status);
     }

@@ -45,6 +45,10 @@ public class Location {
         setStatus(MISSED);
     }
 
+    public void markAllHit() {
+        setStatus(ALL_HIT);
+    }
+
     public boolean hasShip() {
         return hasShip;
     }
