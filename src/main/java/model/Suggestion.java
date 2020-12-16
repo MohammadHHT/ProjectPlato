@@ -8,17 +8,19 @@ public class Suggestion {
     private static HashMap<Long, Suggestion> suggestions;
 
     private long suggestionID;
-    private String gameName;
+    private String game;
+    private String player;
 
     static {
         suggestions = new HashMap<>();
     }
 
-    public Suggestion(String username, String gameName) {
+    public Suggestion(Player player, String game) {
         suggestionID = IDGenerator();
         suggestions.put(suggestionID, this);
-        this.gameName = gameName;
-        ((Player) User.getUsers().get(username)).addSuggestion(this.suggestionID);
+        this.game = game;
+        this.player = player.getUsername();
+        player.addSuggestion(this.suggestionID);
     }
 
     private long IDGenerator() {
@@ -32,12 +34,16 @@ public class Suggestion {
         }
     }
 
-    public int getSuggestionID() {
-        return 0;
+    public long getSuggestionID() {
+        return suggestionID;
     }
 
-    public String getGameName() {
-        return gameName;
+    public String getGame() {
+        return game;
+    }
+
+    public String getPlayer() {
+        return player;
     }
 
     public static HashMap<Long, Suggestion> getSuggestions() {

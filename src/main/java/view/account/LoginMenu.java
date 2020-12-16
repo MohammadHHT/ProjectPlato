@@ -1,6 +1,18 @@
-package view;
+package view.account;
+
+import view.Client;
+import view.Menu;
+import view.primary.PlayerMenu;
 
 public class LoginMenu extends Menu {
+    private static final LoginMenu loginMenu = new LoginMenu();
+
+    private LoginMenu() {
+    }
+
+    public static LoginMenu getLoginMenu() {
+        return loginMenu;
+    }
 
     private int nextMenu;
 
@@ -44,7 +56,7 @@ public class LoginMenu extends Menu {
         if (nextMenu == 0) {
             register(commands[1], commands[2]);
         } else
-            next();
+            next(PlayerMenu.getPlayerMenu());
     }
 
     private void register(String username, String password) {
@@ -66,7 +78,7 @@ public class LoginMenu extends Menu {
     @Override
     public void next(Menu menu) {
         if (nextMenu == 1) {
-            PlayerPrimaryMenu.getPrimaryMenu().run();
+            PlayerMenu.getPlayerMenu().run();
         } else {
             RegisterMenu.getRegisterMenu().run();
         }

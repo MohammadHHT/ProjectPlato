@@ -1,4 +1,9 @@
-package view;
+package view.account;
+
+import view.primary.AdminMenu;
+import view.Client;
+import view.Menu;
+import view.primary.PlayerMenu;
 
 public class RegisterMenu extends Menu {
     private static final RegisterMenu registerMenu = new RegisterMenu();
@@ -19,25 +24,39 @@ public class RegisterMenu extends Menu {
 
     @Override
     public void run() {
-        while (true) {
-            if (getFirstName()) {
-                while (true) {
-                    if (getLastName()) {
-                        while (true) {
-                            if (getUsername()) {
-                                while (true) {
-                                    if (getPassword()) {
-                                        while (true) {
-                                            if (getEmail()) {
-                                                while (true) {
-                                                    if (getPhone()) {
-                                                        Client.getClient().send("User register " + firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
-                                                        if (Client.getClient().getResponse().equals("Player logged in")) {
-                                                            next(PlayerMenu.getPlayerMenu());
-                                                        } else {
-                                                            next(AdminMenu.getAdminMenu());
+        System.out.print("Have Account? yes - no");
+        if (scanner.nextLine().trim().equals("yes")) {
+            next(LoginMenu.getLoginMenu());
+        } else {
+            while (true) {
+                if (getFirstName()) {
+                    while (true) {
+                        if (getLastName()) {
+                            while (true) {
+                                if (getUsername()) {
+                                    while (true) {
+                                        if (getPassword()) {
+                                            while (true) {
+                                                if (getEmail()) {
+                                                    while (true) {
+                                                        if (getPhone()) {
+                                                            Client.getClient().send("user register " + firstName + " " + lastName + " " + username + " " + password + " " + email + " " + phone);
+
+                                                            switch (Client.getClient().getResponse()) {
+                                                                case "player":
+                                                                    System.out.println("Player registered successfully");
+                                                                    next(PlayerMenu.getPlayerMenu());
+                                                                    break;
+                                                                case "admin":
+                                                                    System.out.println("Admin registered successfully");
+                                                                    next(AdminMenu.getAdminMenu());
+                                                                    break;
+                                                                default:
+                                                                    System.out.println(Client.getClient().getResponse());
+                                                                    break;
+                                                            }
+                                                            return;
                                                         }
-                                                        return;
                                                     }
                                                 }
                                             }
@@ -128,7 +147,7 @@ public class RegisterMenu extends Menu {
                 phone = tmp;
                 return true;
             } else {
-                System.err.println("Phone Number must be exactly 12 digits");
+                System.err.println("Phone Number must be exactly 12 numbers(plus +)");
             }
         } else {
             System.err.println("Phone Number includes numbers only");
@@ -139,8 +158,17 @@ public class RegisterMenu extends Menu {
     @Override
     public void next(Menu menu) {
         Menu.username = username;
-        pop();
-        push(menu);
+        switch (Client.getClient().getResponse()) {
+            case "player":
+                rank = Rank.PLAYER;
+                menus.pop();
+                break;
+            case "admin":
+                rank = Rank.ADMIN;
+                menus.pop();
+                break;
+        }
+        menus.push(menu);
         menu.run();
     }
 }

@@ -6,38 +6,46 @@ import java.util.HashMap;
 public class Player extends User {
     private static HashMap<String, Player> players;
 
+    private int level;
+    private int score;
     private int platoAge;
     private double money;
-    private long score;
-    private HashMap<String, Player> friends;
-    private HashMap<String, Player> friendRequest;
+    private ArrayList<String> friends;
+    private ArrayList<String> friendRequest;
     private ArrayList<String> favoriteGames;
     private ArrayList<Long> suggestions;
     private ArrayList<String> inbox;
-    private ArrayList<String> gameLogs;
+    private ArrayList<Long> gameLogs;
+    private HashMap<String, Integer> plays;                    //String:game name e.g:DotsAndBoxes    Integer: numbers of times played
+    private HashMap<String, Integer> wins;
+    private HashMap<String, Integer> defeats;
 
     static {
         players = new HashMap<>();
     }
 
-    public Player(String firstName, String lastName, String username, String password, String email, String phoneNumber) {
-        super(firstName, lastName, username, password, email, phoneNumber);
+    public Player(String firstName, String lastName, String username, String password, String email, String phone) {
+        super(firstName, lastName, username, password, email, phone);
         players.put(username, this);
-        this.money = 0;
+        this.level = 0;
         this.score = 0;
+        this.money = 0;
         this.platoAge = 0;
-        this.friends = new HashMap<>();
-        this.friendRequest = new HashMap<>();
+        this.friends = new ArrayList<>();
+        this.friendRequest = new ArrayList<>();
         this.favoriteGames = new ArrayList<>();
         this.suggestions = new ArrayList<>();
         this.inbox = new ArrayList<>();
         this.gameLogs = new ArrayList<>();
+        plays = new HashMap<>();
+        wins = new HashMap<>();
+        defeats = new HashMap<>();
     }
 
     //TODO add process to accept or decline friend
 
-    public void addNewFriend(Player player) {
-        //TODO
+    public void addFriendRequest(String playerID) {
+        friendRequest.add(playerID);
     }
 
     public void removeFriend(Player player) {
@@ -58,6 +66,14 @@ public class Player extends User {
         }
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public void setPlatoAge(int platoAge) {
         this.platoAge = platoAge;
     }
@@ -66,7 +82,7 @@ public class Player extends User {
         this.money = money;
     }
 
-    public void setScore(long score) {
+    public void setScore(int score) {
         this.score = score;
     }
 
@@ -90,11 +106,11 @@ public class Player extends User {
         return players;
     }
 
-    public HashMap<String, Player> getFriends() {
+    public ArrayList<String> getFriends() {
         return friends;
     }
 
-    public HashMap<String, Player> getFriendRequest() {
+    public ArrayList<String> getFriendRequest() {
         return friendRequest;
     }
 
@@ -110,7 +126,31 @@ public class Player extends User {
         return suggestions;
     }
 
-    public ArrayList<String> getGameLogs() {
+    public ArrayList<Long> getGameLogs() {
         return gameLogs;
+    }
+
+    public HashMap<String, Integer> getPlays() {
+        return plays;
+    }
+
+    public HashMap<String, Integer> getWins() {
+        return wins;
+    }
+
+    public HashMap<String, Integer> getDefeats() {
+        return defeats;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder tmp = new StringBuilder();
+        tmp.append("Friends: ").append(friends.size()).append("\nWins: ");
+        int n = 0;
+        for (Integer i : wins.values()) {
+            n += i;
+        }
+        tmp.append(n).append("\nPlato Age: ").append(platoAge);
+        return tmp.toString();
     }
 }

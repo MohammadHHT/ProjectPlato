@@ -54,7 +54,7 @@ public class FileManager {
         Gson gson = new Gson();
         ArrayList<GameLog> gameLogs = new ArrayList<>();
 
-        for (Map.Entry<Integer, GameLog> entry : GameLog.getGameLogs().entrySet()) {
+        for (Map.Entry<Long, GameLog> entry : GameLog.getGameLogs().entrySet()) {
             gameLogs.add(entry.getValue());
         }
 
@@ -66,7 +66,7 @@ public class FileManager {
         Gson gson = new Gson();
         ArrayList<Event> events = new ArrayList<>();
 
-        for (Map.Entry<Integer, Event> entry : Event.getEvents().entrySet()) {
+        for (Map.Entry<Long, Event> entry : Event.getEvents().entrySet()) {
             events.add(entry.getValue());
         }
 
@@ -78,7 +78,7 @@ public class FileManager {
         Gson gson = new Gson();
         ArrayList<Suggestion> suggestions = new ArrayList<>();
 
-        for (Map.Entry<Integer, Suggestion> entry : Suggestion.getSuggestions().entrySet()) {
+        for (Map.Entry<Long, Suggestion> entry : Suggestion.getSuggestions().entrySet()) {
             suggestions.add(entry.getValue());
         }
 
@@ -128,9 +128,7 @@ public class FileManager {
         Type foundListType = new TypeToken<ArrayList<GameLog>>(){}.getType();
         ArrayList<GameLog> gameLogs = gson.fromJson(data, foundListType);
         scanner.close();
-        for (GameLog gameLog : gameLogs) {
-            GameLog.addGameLog(gameLog);
-        }
+        GameLog.addGameLogs(gameLogs);
     }
 
     public static void loadEvent() {
@@ -140,9 +138,7 @@ public class FileManager {
         Type foundListType = new TypeToken<ArrayList<Event>>(){}.getType();
         ArrayList<Event> events = gson.fromJson(data, foundListType);
         scanner.close();
-        for (Event event : events) {
-            Event.addEvent(event);
-        }
+        Event.addEvents(events);
     }
 
     public static void loadSuggestion() {

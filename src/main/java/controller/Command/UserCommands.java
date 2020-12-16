@@ -1,31 +1,64 @@
 package controller.Command;
 
-import controller.AccountManager;
+import controller.AccountController;
+import controller.AdminController;
+import controller.FriendController;
 import controller.PlayerController;
 import model.Admin;
-import model.Player;
 
 public class UserCommands implements ResolveCommand {
     private static final UserCommands userCommands = new UserCommands();
 
-    private UserCommands() {}
+    private UserCommands() {
+    }
 
     static UserCommands getUserCommands() {
         return userCommands;
     }
 
-    // user commands can be :register, login, delete, 
-    // showFriends, removeFriend, viewFriendProfile, addFriend, showFriendRequests, acceptFriend, declineFriend and ...
-
     @Override
     public void resolveCommand(String[] tokens) throws Exception {
-        if (tokens[1].equals("register") || tokens[1].equals("delete")) {
-            RegisterCommand.getRegisterCommand().execute(tokens);
-        } else if (tokens[1].equals("login") || tokens[1].equals("logout")) {
-            LoginCommand.getLoginCommand().execute(tokens);
-        } else if (tokens[1].equals("showPoint") || tokens[1].equals("showFavoriteGames") || tokens[1].equals("showAdminMessages") || tokens[1].equals("showAdminSuggestions") ||
-                tokens[1].equals("playSuggested") || tokens[1].equals("showLastGame") || tokens[1].equals("addFriend")) {
-            PlayerCommand.getPlayerCommand().execute(tokens);
+        switch (tokens[1]) {
+            case "register":
+            case "delete":
+            case "login":
+                RegisterCommand.getRegisterCommand().execute(tokens);
+                break;
+            case "showPoint":
+            case "showFavoriteGames":
+            case "showAdminMessages":
+            case "showAdminSuggestions":
+            case "playSuggested":
+            case "showLastGame":
+            case "addFriend":
+                PlayerCommand.getPlayerCommand().execute(tokens);
+                break;
+            case "addEvent":
+            case "showEvents":
+            case "editEvent":
+            case "removeEvent":
+            case "suggest":
+            case "showSuggestions":
+            case "removeSuggestion":
+            case "showUsers":
+            case "showUserProfile":
+                AdminCommand.getAdminCommand().execute(tokens);
+                break;
+            case "showInfo":
+            case "changePassword":
+            case "editField":
+            case "showPlatoStatistics":
+            case "showHistory":
+            case "showGameStatistics":
+                AccountCommand.getAccountCommand().execute(tokens);
+                break;
+            case "showFriends":
+            case "removeFriend":
+            case "showRequests":
+            case "accept":
+            case "decline":
+                FriendCommand.getFriendCommand().execute(tokens);
+                break;
         }
     }
 
@@ -33,7 +66,8 @@ public class UserCommands implements ResolveCommand {
     private static class RegisterCommand implements ExecuteCommand {
         private static final RegisterCommand registerCommand = new RegisterCommand();
 
-        private RegisterCommand() {}
+        private RegisterCommand() {
+        }
 
         static RegisterCommand getRegisterCommand() {
             return registerCommand;
@@ -43,45 +77,52 @@ public class UserCommands implements ResolveCommand {
         public void execute(String[] tokens) throws Exception {
             switch (tokens[1]) {
                 case "register":
-                    AccountManager.getAccountManager().register(tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7]);
-                    if (AccountManager.getAccountManager().getLoggedInUser() instanceof Admin) {
-                        done("Admin logged in");
-                    } else {
-                        done("Player logged in");
-                    }
+                    done(AccountController.getAccountController().register(tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7]));
                     break;
                 case "delete":
-                    AccountManager.getAccountManager().deleteAccount(tokens[2], tokens[3]);
-                    done("Account deleted");
+                    AccountController.getAccountController().delete(tokens[2], tokens[3]);
+                    done("Deleted");
+                    break;
+                case "login":
+                    done(AccountController.getAccountController().login(tokens[2], tokens[3]));
                     break;
             }
         }
     }
 
-    //LoginCommand nested class
-    private static class LoginCommand implements ExecuteCommand {
-        private static final LoginCommand loginCommand = new LoginCommand();
+    //AccountCommand nested class
+    private static class AccountCommand implements ExecuteCommand {
+        private static final AccountCommand accountCommand = new AccountCommand();
 
-        private LoginCommand() {}
+        private AccountCommand() {
+        }
 
-        static LoginCommand getLoginCommand() {
-            return loginCommand;
+        static AccountCommand getAccountCommand() {
+            return accountCommand;
         }
 
         @Override
         public void execute(String[] tokens) throws Exception {
             switch (tokens[1]) {
-                case "login":
-                    AccountManager.getAccountManager().login(tokens[2], tokens[3]);
-                    if (AccountManager.getAccountManager().getLoggedInUser() instanceof Admin) {
-                        done("Admin logged in");
-                    } else {
-                        done("Player logged in");
-                    }
+                case "showInfo":
+                    done(AccountController.getAccountController().showInfo(tokens[2]));
                     break;
-                case "logout":
-                    AccountManager.getAccountManager().logout();
-                    done("Logged out");
+                case "changePassword":
+                    AccountController.getAccountController().changePassword(tokens[2], tokens[3], tokens[4]);
+                    done("Changed");
+                    break;
+                case "editField":
+                    AccountController.getAccountController().editField(tokens[2], tokens[3], tokens[4]);
+                    done("Edited");
+                    break;
+                case "showPlatoStatistics":
+                    done(AccountController.getAccountController().showPlatoStatistics(tokens[2]));
+                    break;
+                case "showHistory":
+                    done(AccountController.getAccountController().showHistory(tokens[2]));
+                    break;
+                case "showGameStatistics":
+                    done(AccountController.getAccountController().showGameStatistics(tokens[2], tokens[3]));
                     break;
             }
         }
@@ -91,7 +132,8 @@ public class UserCommands implements ResolveCommand {
     private static class PlayerCommand implements ExecuteCommand {
         private static final PlayerCommand playerCommand = new PlayerCommand();
 
-        private PlayerCommand() {}
+        private PlayerCommand() {
+        }
 
         static PlayerCommand getPlayerCommand() {
             return playerCommand;
@@ -113,14 +155,15 @@ public class UserCommands implements ResolveCommand {
                     done(PlayerController.getPlayerController().showAdminSuggestions(tokens[2]));
                     break;
                 case "playSuggested":
-                    PlayerController.getPlayerController().playSuggestedGame(tokens[2], tokens[3]);
-                    done("Game begins");
+                    PlayerController.getPlayerController().playSuggested(tokens[2], tokens[3]);
+                    done("Began");
                     break;
                 case "showLastGame":
-
+                    done(PlayerController.getPlayerController().showLastGame(tokens[2]));
                     break;
                 case "addFriend":
-
+                    PlayerController.getPlayerController().addFriend(tokens[2], tokens[3]);
+                    done("Requested");
                     break;
             }
         }
@@ -130,7 +173,8 @@ public class UserCommands implements ResolveCommand {
     private static class AdminCommand implements ExecuteCommand {
         private static final AdminCommand adminCommand = new AdminCommand();
 
-        private AdminCommand() {}
+        private AdminCommand() {
+        }
 
         static AdminCommand getAdminCommand() {
             return adminCommand;
@@ -140,31 +184,76 @@ public class UserCommands implements ResolveCommand {
         public void execute(String[] tokens) throws Exception {
             switch (tokens[1]) {
                 case "addEvent":
-
+                    AdminController.getAdminController().addEvent(tokens[2], Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]), Integer.parseInt(tokens[8]), Long.parseLong(tokens[9]));
+                    done("Added");
                     break;
                 case "showEvents":
-
+                    done(AdminController.getAdminController().showEvents());
                     break;
                 case "editEvent":
-
+                    if (tokens.length == 7) {
+                        AdminController.getAdminController().editEvent(Long.parseLong(tokens[2]), tokens[3], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]));
+                    } else {
+                        AdminController.getAdminController().editEvent(Long.parseLong(tokens[2]), Integer.parseInt(tokens[3]));
+                    }
+                    done("Edited");
                     break;
                 case "removeEvent":
-
+                    AdminController.getAdminController().removeEvent(Long.parseLong(tokens[2]));
+                    done("Removed");
                     break;
                 case "suggest":
-
+                    AdminController.getAdminController().addSuggestion(tokens[2], tokens[3]);
+                    done("Suggested");
                     break;
                 case "showSuggestions":
-
+                    done(AdminController.getAdminController().showSuggestions());
                     break;
                 case "removeSuggestion":
-
+                    AdminController.getAdminController().removeSuggestion(Long.parseLong(tokens[2]));
+                    done("Removed");
                     break;
                 case "showUsers":
-
+                    done(AdminController.getAdminController().showUsers());
                     break;
                 case "showUserProfile":
+                    done(AdminController.getAdminController().showUserProfile(tokens[2]));
+                    break;
+            }
+        }
+    }
 
+    //FriendCommand nested class
+    private static class FriendCommand implements ExecuteCommand {
+        private static final FriendCommand friendCommand = new FriendCommand();
+
+        private FriendCommand() {
+        }
+
+        static FriendCommand getFriendCommand() {
+            return friendCommand;
+        }
+
+        @Override
+        public void execute(String[] tokens) throws Exception {
+            switch (tokens[1]) {
+                case "showFriends":
+                    done(FriendController.getFriendController().showFriends(tokens[2]));
+                    break;
+                case "removeFriend":
+                    FriendController.getFriendController().removeFriend(tokens[2], tokens[3]);
+                    done("Removed");
+                    break;
+                case "showRequests":
+                    done(FriendController.getFriendController().showRequests(tokens[2]));
+                    break;
+                case "accept":
+                    FriendController.getFriendController().accept(tokens[2], tokens[3]);
+                    done("Accepted");
+                    break;
+                case "decline":
+                    FriendController.getFriendController().decline(tokens[2], tokens[3]);
+                    done("Declined");
                     break;
             }
         }

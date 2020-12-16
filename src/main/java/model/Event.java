@@ -1,37 +1,39 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 public class Event {
+    private static HashMap<Long, Event> events;
+
     private String gameName;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private long eventScore;
-    private int eventID;
-    private static HashMap<Integer, Event> events;
+    private LocalDate start;
+    private LocalDate end;
+    private long score;
+    private long eventID;
 
     static {
-        events = new HashMap<Integer, Event>();
+        events = new HashMap<>();
     }
 
-    public Event(String gameName, LocalDate startDate, LocalDate endDate, long eventScore) {
-        this.gameName = gameName;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.eventScore = eventScore;
-        //EventID
+    public Event(String gameName, LocalDate start, LocalDate end, long score) {
+        eventID = IDGenerator();
         events.put(eventID, this);
+        this.gameName = gameName;
+        this.start = start;
+        this.end = end;
+        this.score = score;
     }
 
-    public static void addEvent(Event event) {
-        events.put(event.getEventID(), event);
+    private long IDGenerator() {
+        Random random = new Random();
+        return random.nextLong();
     }
 
-    public void addNewEvent(){
-        //TODO
+    public static void addEvents(ArrayList<Event> events) {
+        for (Event e : events) {
+            Event.events.put(e.eventID, e);
+        }
     }
 
     public void deleteEvent(){
@@ -42,43 +44,39 @@ public class Event {
         this.gameName = gameName;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStart(LocalDate start) {
+        this.start = start;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setEventScore(long eventScore) {
-        this.eventScore = eventScore;
-    }
-
-    public void setEventID(int eventID) {
-        this.eventID = eventID;
+    public void setEnd(LocalDate end) {
+        this.end = end;
     }
 
     public String getGameName() {
         return null;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getStart() {
+        return start;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDate getEnd() {
+        return end;
     }
 
-    public long getEventScore() {
-        return eventScore;
+    public void setScore(int score) {
+        this.score = score;
     }
 
-    public int getEventID() {
+    public long getScore() {
+        return score;
+    }
+
+    public long getEventID() {
         return eventID;
     }
 
-    public static HashMap<Integer, Event> getEvents() {
+    public static HashMap<Long, Event> getEvents() {
         return events;
     }
 }

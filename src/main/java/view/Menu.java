@@ -4,23 +4,15 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public abstract class Menu {
-    protected static Stack<Menu> menus;
-    protected static Scanner scanner;
-    protected static String username;
-
-    static {
-        menus = new Stack<>();
-        scanner = new Scanner(System.in);
-        username = null;
+    public enum Rank {
+        ADMIN, PLAYER
     }
 
-    public static void push(Menu menu) {
-        menus.push(menu);
-    }
-
-    public static void pop() {
-        menus.pop();
-    }
+    public static Stack<Menu> menus = new Stack<>();
+    public static Scanner scanner = new Scanner(System.in);
+    public static String username = null;
+    public static Rank rank = null;
+    public static long gameID = -1;                              // when a game starts, gameID will be set
 
     public abstract void run();
 

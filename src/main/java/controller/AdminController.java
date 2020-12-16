@@ -1,120 +1,119 @@
 package controller;
 
 import exception.*;
+import exception.game.GameNotFound;
 import model.*;
 
 import java.time.LocalDate;
-import java.util.Map;
 
 public class AdminController {
+    private static final AdminController adminController = new AdminController();
 
-    public String addEvent(String gameName, LocalDate startDate, LocalDate endDate, long eventScore) throws
-            InvalidGameNameException, InvalidDateException {
-        if (!(Game.getGamesName().contains(gameName)))
-            throw new InvalidGameNameException();
-        if (startDate.isAfter(endDate) || endDate.isBefore(startDate))
-            throw new InvalidDateException();
-        new Event(gameName, startDate, endDate, eventScore);
-        return "The event was created successfully.";
+    private AdminController() {
     }
 
-    public void viewEvent() throws ExpiredEventException {
-        for (Map.Entry<Integer, Event> entry : Event.getEvents().entrySet()) {
-            if (entry.getValue().getStartDate().isBefore(entry.getValue().getEndDate())) {
-                System.out.println("Game name: " + entry.getValue().getGameName() + "\n" +
-                        "Event ID: " + entry.getValue().getEventID() + "\n" +
-                        entry.getValue().getStartDate() + "to" + entry.getValue().getEndDate() + "\n" +
-                        "Score" + entry.getValue().getEventScore());
-            } else
-                throw new ExpiredEventException();
+    public static AdminController getAdminController() {
+        return adminController;
+    }
+
+    public void addEvent(String game, int syear, int smonth, int sday, int fyear, int fmonth, int fday, long score) throws GameNotFound {
+        if (game.equalsIgnoreCase("BattleSea") || game.equalsIgnoreCase("DotsAndBoxes")) {
+            new Event(game, LocalDate.of(syear, smonth, sday), LocalDate.of(fyear, fmonth, fday), score);
+        } else {
+            throw new GameNotFound();
         }
     }
 
-    public void editEvent(String eventID, String field, String newValue) throws GameNotFoundException,
-            InvalidDateException, EventIDNotFoundException {
-        Event event = Event.getEvents().get(Integer.parseInt(eventID));
-        if (Event.getEvents().containsKey(Integer.parseInt(eventID))) {
-            if (field.equalsIgnoreCase("Game name")){
-                if (Game.getGamesName().contains(newValue)) {
-                    event.setGameName(newValue);
-                    System.out.println("Successfully changed to a new value.");
-                } else
-                    throw new GameNotFoundException();
-            } else if (field.equalsIgnoreCase("Start data")) {
-                if (LocalDate.parse(newValue).isBefore(LocalDate.now()) ||
-                        LocalDate.parse(newValue).isAfter(event.getEndDate()) ||
-                        !newValue.matches("\\d{4}, \\d{2}, \\d{2}"))
-                        throw new InvalidDateException();
-                        event.setStartDate(LocalDate.parse(newValue));
-                        System.out.println("Successfully changed to a new value.");
-            } else if (field.equalsIgnoreCase("End date")) {
-                if (LocalDate.parse(newValue).isBefore(event.getStartDate()) ||
-                        !newValue.matches("\\d{4}, \\d{2}, \\d{2}"))
-                    throw new InvalidDateException();
-                event.setEndDate(LocalDate.parse(newValue));
-                System.out.println("Successfully changed to a new value.");
-            } else if (field.equalsIgnoreCase("Score")) {
-                event.setEventScore(Long.parseLong(newValue));
-                System.out.println("Successfully changed to a new value.");
-            }
-        } else
-            throw new EventIDNotFoundException();
+    public String showEvents() {
+        StringBuilder tmp = new StringBuilder();
+        for (Event e : Event.getEvents().values()) {
+            tmp.append("ID: ").append(e.getEventID()).append('\n').append("Game: ").append(e.getGameName()).append('\n')
+                    .append("Start: ").append(e.getStart().getYear()).append('-').append(e.getStart().getMonth()).append('-').append(e.getStart().getDayOfMonth()).append('\n')
+                    .append("Finish: ").append(e.getEnd().getYear()).append('-').append(e.getEnd().getMonth()).append('-').append(e.getEnd().getDayOfMonth()).append('\n')
+                    .append("Score: ").append(e.getScore()).append("\n\n");
+        }
+        return tmp.toString().trim();
     }
 
-    public void removeEvent(String eventID) throws EventIDNotFoundException {
-        if (!(Event.getEvents().containsKey(Integer.parseInt(eventID))))
-            throw new EventIDNotFoundException();
-        Event.getEvents().remove(Integer.parseInt(eventID));
-        System.out.println("Event with " + eventID + " ID deleted successfully.");
+    public void editEvent(long eventID, int score) throws EventIDNotFound {
+        Event event = Event.getEvents().get(eventID);
+        if (event != null) {
+            event.setScore(score);
+        } else {
+            throw new EventIDNotFound();
+        }
     }
 
-    public void addSuggestion(String userName, String gameName) throws UsernameNotFoundException, GameNotFoundException,
-            ThisGameHasAlreadyBeenSuggested {
-        if (Player.getPlayers().containsKey(userName)) {
-            if (Game.getGamesName().contains(gameName)) {
-                Suggestion suggestion = new Suggestion(userName, gameName);
-                if (!(Player.getPlayers().get(userName).getSuggestions()
-                        .contains(String.valueOf(suggestion.getSuggestionID())))) {
-                    Player.getPlayers().get(userName).getSuggestions().add(String.valueOf(suggestion.getSuggestionID()));
-                } else {
-                    throw new ThisGameHasAlreadyBeenSuggested();
-                }
+    public void editEvent(long eventID, String field, int year, int month, int day) throws EventIDNotFound {
+        Event event = Event.getEvents().get(eventID);
+        if (event != null) {
+            if (field.equals("start")) {
+                event.setStart(LocalDate.of(year, month, day));
             } else {
-               throw new GameNotFoundException();
+                event.setEnd(LocalDate.of(year, month, day));
             }
         } else {
-             throw new UsernameNotFoundException();
+            throw new EventIDNotFound();
         }
     }
 
-    public void viewSuggestion() {
-        for (Map.Entry<Integer, Suggestion> entry : Suggestion.getSuggestions().entrySet()) {
-            System.out.println(entry.getValue().getPlayerID() + ": " + entry.getValue().getGameName());
+    public void removeEvent(long eventID) throws EventIDNotFound {
+        if (Event.getEvents().containsKey(eventID)) {
+            Event.getEvents().remove(eventID);
+        } else {
+            throw new EventIDNotFound();
         }
     }
 
-    public void removeSuggestion(String suggestionID) throws SuggestionIDNotFoundException {
-        if (Suggestion.getSuggestions().containsKey(Integer.parseInt(suggestionID))) {
-            Suggestion.getSuggestions().remove(Integer.parseInt(suggestionID));
-            System.out.println("Suggestion with " + suggestionID + " ID deleted successfully.");
+    public void addSuggestion(String username, String game) throws UsernameNotFound, GameNotFound, GameAlreadySuggested {
+        Player player = Player.getPlayers().get(username);
+        if (player != null) {
+            if (game.equalsIgnoreCase("BattleSea") || game.equalsIgnoreCase("DotsAndBoxes")) {
+                for (Long l : player.getSuggestions()) {
+                    if (Suggestion.getSuggestions().get(l).getGame().equals(game)) {
+                        throw new GameAlreadySuggested();
+                    }
+                }
+                new Suggestion(player, game);
+            } else {
+                throw new GameNotFound();
+            }
+        } else {
+            throw new UsernameNotFound();
+        }
+    }
+
+    public String showSuggestions() {
+        StringBuilder tmp = new StringBuilder();
+        for (Suggestion s : Suggestion.getSuggestions().values()) {
+            tmp.append("ID: ").append(s.getSuggestionID()).append('\n').append("Player: ").append(s.getPlayer()).append('\n').append("Game: ").append(s.getGame()).append("\n\n");
+        }
+        return tmp.toString().trim();
+    }
+
+    public void removeSuggestion(long suggestionID) throws SuggestionIDNotFound {
+        Suggestion suggestion = Suggestion.getSuggestions().get(suggestionID);
+        if (suggestion != null) {
+            Player.getPlayers().get(suggestion.getPlayer()).getSuggestions().remove(suggestionID);
+            Suggestion.getSuggestions().remove(suggestionID);
         } else
-            throw new SuggestionIDNotFoundException();
+            throw new SuggestionIDNotFound();
     }
 
-    public void viewUsers() {
-        for (Map.Entry<String, Player> entry : Player.getPlayers().entrySet()) {
-            System.out.println("Username: " + entry.getValue().getUsername());
+    public String showUsers() {
+        StringBuilder tmp = new StringBuilder();
+        for (User u : User.getUsers().values()) {
+            tmp.append(u.getFirstName()).append(' ').append(u.getLastName()).append(": ").append(u.getUsername()).append('\n');
         }
+        return tmp.toString().trim();
     }
 
-    public void viewUserProfile(String userName) throws UsernameNotFoundException {
-        if (Player.getPlayers().containsKey(userName)) {
-            Player player = Player.getPlayers().get(userName);
-            System.out.println(player.getFirstName() + " " + player.getLastName() + "\n"
-                    + player.getUsername() + "\n"
-                    + player.getEmail() + " " + player.getPhoneNumber() + "\n"
-                    + player.getScore() + " " + player.getFavoriteGames());
-        } else
-            throw new UsernameNotFoundException();
+    public String showUserProfile(String username) throws UsernameNotFound {
+        User user = User.getUsers().get(username);
+        if (user != null) {
+            return user.toString();
+        } else {
+            throw new UsernameNotFound();
+        }
     }
 }

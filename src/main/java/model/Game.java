@@ -1,54 +1,43 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Random;
 
-public class Game {
-    private String gameName;
-    private int gameID;
-    private static HashMap<Integer, Game> games;
-    private static ArrayList<String> gamesName;
+public abstract class Game {
+    private final static ArrayList<String> games;
+
+    private long gameID;
 
     static {
-        games = new HashMap<Integer, Game>();
-        gamesName = new ArrayList<String>();
+        games = new ArrayList<>(Arrays.asList("Battle Sea", "Dots And Boxes"));
     }
 
-    public Game(String gameName, String gameID) {
-        this.gameName = gameName;
-        //gameID
-        gamesName.add(gameName);
+    public Game() {
+        gameID = IDGenerator();
     }
 
-    public void run(){
-        //TODO
+    private long IDGenerator() {
+        Random random = new Random();
+        return random.nextLong();
     }
 
     public void setScore(){
         //TODO
     }
 
-    public void setGameName(String gameName) {
-        this.gameName = gameName;
-    }
-
-    public void setGameID(int gameID) {
-        this.gameID = gameID;
-    }
-
-    public String getGameName() {
-        return gameName;
-    }
-
-    public int getGameID() {
+    public long getGameID() {
         return gameID;
     }
 
-    public static HashMap<Integer, Game> getGames() {
+    public static ArrayList<String> getGames() {
         return games;
     }
 
-    public static ArrayList<String> getGamesName() {
-        return gamesName;
-    }
+    public abstract void turn();
+
+    public abstract boolean join(Player guest);
+
+    public abstract Player judge();
 }
