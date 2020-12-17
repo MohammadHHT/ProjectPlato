@@ -46,7 +46,7 @@ public class BattleSea extends Game {
         return null;
     }
 
-    private  void setupRandomBoard(BattleSeaPlayer battleSeaPlayer) {
+    private void setupRandomBoard(BattleSeaPlayer battleSeaPlayer) {
         System.out.println();
         int counterOfShips = 0;
 
@@ -217,7 +217,7 @@ public class BattleSea extends Game {
         return false;
     }
 
-    private void changeShipsLocation(BattleSeaPlayer battleSeaPlayer, String shipName , int newCol, int newRow) {
+    private String changeShipsLocation(BattleSeaPlayer battleSeaPlayer, String shipName , int newCol, int newRow) {
         if (!turn.isReady) {
             battleSeaPlayer.playerGrid.printShips();
             System.out.println();
@@ -232,17 +232,19 @@ public class BattleSea extends Game {
                     battleSeaPlayer.ships[selectedShip].setLocation(newRow, newCol);
                     battleSeaPlayer.playerGrid.addShip(battleSeaPlayer.ships[selectedShip]);
                     battleSeaPlayer.playerGrid.printShips();
-                    System.out.println("Ship " + input + " relocated " + "in (" + newRow + ", " + newCol + ") successfully!" );
+                    return "Ship " + input + " relocated " + "in (" + newRow + ", " + newCol + ") successfully!";
                 } else {
-                    System.out.println("Ship " + input + " can not relocate in (" + newRow + ", " + newCol + ").");
+                    return "Ship " + input + " can not relocate in (" + newRow + ", " + newCol + ").";
                 }
+            } else {
+                return "Invalid coordinate.";
             }
         } else {
-            System.out.println("This command is for before starting the game.");
+            return "This command is for before starting the game.";
         }
     }
 
-    private void changeShipsDirection(BattleSeaPlayer battleSeaPlayer, String shipName) {
+    private String changeShipsDirection(BattleSeaPlayer battleSeaPlayer, String shipName) {
         if (!turn.isReady) {
             battleSeaPlayer.playerGrid.printShips();
             System.out.println();
@@ -263,12 +265,12 @@ public class BattleSea extends Game {
                 battleSeaPlayer.ships[selectedShip].setDirection(dir);
                 battleSeaPlayer.playerGrid.addShip(battleSeaPlayer.ships[selectedShip]);
                 battleSeaPlayer.playerGrid.printShips();
-                System.out.println("Ship " + input + " rotated successfully!" );
+                return "Ship " + input + " rotated successfully!";
             } else {
-                System.out.println("Ship " + input + " can not rotated.");
+                return "Ship " + input + " can not rotated.";
             }
         } else {
-            System.out.println("This command is for before starting the game.");
+            return"This command is for before starting the game.";
         }
     }
 
