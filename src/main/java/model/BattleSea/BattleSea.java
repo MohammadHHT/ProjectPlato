@@ -278,7 +278,12 @@ public class BattleSea extends Game {
 
     @Override
     public boolean join(Player guest) {
-        return false;
+        if (this.guest == null) {
+            this.guest = new BattleSeaPlayer(guest);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
