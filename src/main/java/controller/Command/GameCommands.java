@@ -72,22 +72,22 @@ public class GameCommands implements ResolveCommand {
                     break;
                 case "join" :
                     done(DotsAndBoxesController.getDotsAndBoxesController().join(Long.parseLong(tokens[3]),tokens[4]));
-                case "end of my turn":
+                case "endofmyturn":
                     done(DotsAndBoxesController.getDotsAndBoxesController().endOfMyTurn(Long.parseLong(tokens[3])));
                     break;
-                case "show score":
+                case "showscore":
                     done(DotsAndBoxesController.getDotsAndBoxesController().showScore(Long.parseLong(tokens[3])));
                     break;
-                case "show available lines":
+                case "showavailablelines":
                     done(DotsAndBoxesController.getDotsAndBoxesController().showAvailableLines(Long.parseLong(tokens[3])));
                     break;
-                case "show table":
+                case "showtable":
                     done(DotsAndBoxesController.getDotsAndBoxesController().showTable(Long.parseLong(tokens[3])));
                     break;
-                case "who is next?":
+                case "whoisnext?":
                     done(DotsAndBoxesController.getDotsAndBoxesController().whoIsNext(Long.parseLong(tokens[3])));
                     break;
-                case "show result":
+                case "showresult":
                     done(DotsAndBoxesController.getDotsAndBoxesController().showResult(Long.parseLong(tokens[3])));
                     break;
                 case "end":

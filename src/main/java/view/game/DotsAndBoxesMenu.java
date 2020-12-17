@@ -33,7 +33,7 @@ public class DotsAndBoxesMenu extends Menu implements Back {
                 case "show table":
                 case "who is next?":
                 case "show result":
-                    Client.getClient().send("game DotsAndBoxes "+ command + " " + gameID);
+                    Client.getClient().send("game DotsAndBoxes "+ command.replaceAll(" ", "") + " " + gameID);
                     System.out.println(Client.getClient().getResponse());
                     break;
                 case "back":
