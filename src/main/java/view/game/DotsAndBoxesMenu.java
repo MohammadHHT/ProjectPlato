@@ -21,9 +21,6 @@ public class DotsAndBoxesMenu extends Menu {
     @Override
     public void run() {
 
-        Client.getClient().send("game DotsAndBoxes open " + username);
-        String gameId = Client.getClient().getResponse();
-
         while (true) {
             System.out.println("Enter second player username : ");
             String username = scanner.nextLine();
@@ -31,7 +28,7 @@ public class DotsAndBoxesMenu extends Menu {
                 next(GameMenu.getGameMenu());
                 return;
             }
-            Client.getClient().send("game DotsAndBoxes join " +gameId + " " + username);
+            Client.getClient().send("game DotsAndBoxes join " +gameID + " " + username);
             if (Client.getClient().getResponse().equals("joined")) {
                 System.out.println("Player successfully joined");
                 break;
@@ -50,7 +47,7 @@ public class DotsAndBoxesMenu extends Menu {
                 case "show table":
                 case "who is next?":
                 case "show result":
-                    Client.getClient().send("game DotsAndBoxes "+ command + " " + gameId);
+                    Client.getClient().send("game DotsAndBoxes "+ command + " " + gameID);
                     System.out.println(Client.getClient().getResponse());
                     break;
                 case "back":
@@ -79,7 +76,7 @@ public class DotsAndBoxesMenu extends Menu {
                                     Integer.parseInt(matcher.group(4)) < 9 && Integer.parseInt(matcher.group(4)) > 0 &&
                                     Integer.parseInt(matcher.group(6)) < 9 && Integer.parseInt(matcher.group(6)) > 0 &&
                                     Integer.parseInt(matcher.group(8)) < 9 && Integer.parseInt(matcher.group(8)) > 0) {
-                                Client.getClient().send("game DotsAndBoxes occupy " + gameId + " " + matcher.group(2) + " " + matcher.group(4) + " " + matcher.group(6) + " " + matcher.group(8));
+                                Client.getClient().send("game DotsAndBoxes occupy " + gameID + " " + matcher.group(2) + " " + matcher.group(4) + " " + matcher.group(6) + " " + matcher.group(8));
                                 System.out.println(Client.getClient().getResponse());
                             } else
                                 System.out.println("coordinates must be inside the table");
@@ -93,7 +90,7 @@ public class DotsAndBoxesMenu extends Menu {
                     break;
             }
         }
-        Client.getClient().send("game DotsAndBoxes end");
+        Client.getClient().send("game DotsAndBoxes end " + gameID);
         System.out.println(Client.getClient().getResponse());
         next(GameMenu.getGameMenu());
     }
