@@ -42,16 +42,29 @@ public class DotsAndBoxes extends Game {
         turn = host;
     }
 
-    private Player winner(int x1, int y1, int x2, int y2) {                             // executes just one time when edges size is 64 (board is full)
-        Edge edge = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);       // just for information full board has 112 edges :D
-        for (Edge e : edges) {
-            if (e.equals(edge)) {
-                return e.player;
-            }
-        }
-        return null;
+    public boolean isBoardFull() {
+        return edges.size() == 112;
     }
 
+    public Player getWinner() {
+        if (hostScore > guestScore)
+            return host;
+        else if (guestScore > hostScore)
+            return guest;
+        else
+            return null;
+    }
+
+    /*    private Player winner(int x1, int y1, int x2, int y2) {                             // executes just one time when edges size is 64 (board is full)
+            Edge edge = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);       // just for information full board has 112 edges :D
+            for (Edge e : edges) {
+                if (e.equals(edge)) {
+                    return e.player;
+                }
+            }
+            return null;
+        }
+    */
     public boolean isEdgeAvailable(int x1, int y1, int x2, int y2) {
         if (x1 < 1 || x1 > 8 || x2 < 1 || x2 > 8 || y1 < 1 || y1 > 8 || y2 < 1 || y2 > 8)
             return false;

@@ -5,6 +5,7 @@ import exception.game.NotYourTurn;
 import model.DotsAndBoxes.DotsAndBoxes;
 
 import model.DotsAndBoxes.DotsAndBoxes;
+import model.Player;
 
 public class DotsAndBoxesController {
     private static final DotsAndBoxesController dotsAndBoxesController = new DotsAndBoxesController();
@@ -63,7 +64,7 @@ public class DotsAndBoxesController {
 
     public String showScore(long gameID) {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-        return "Host score = " + dotsAndBoxes.getHostScore() + "\n" + "Guest score = " + dotsAndBoxes.getGuestScore();
+        return dotsAndBoxes.getHost().getUsername() + " score = " + dotsAndBoxes.getHostScore() + "\n" + dotsAndBoxes.getGuest().getUsername() + " score = " + dotsAndBoxes.getGuestScore();
     }
 
     public String showAvailableLines(long gameID) {
@@ -74,7 +75,7 @@ public class DotsAndBoxesController {
                 if (dotsAndBoxes.isEdgeAvailable(j, i, j + 1, i)) {
                     stringBuilder.append("(").append(j).append(",").append(i).append(") and (").append(j + 1).append(",").append(i).append(")").append('\n');
                 } else if (dotsAndBoxes.isEdgeAvailable(j, i, j, i + 1)) {
-                    stringBuilder.append("(").append(j).append(",").append(i).append(") and (").append(j).append(",").append(i+1).append(")").append('\n');
+                    stringBuilder.append("(").append(j).append(",").append(i).append(") and (").append(j).append(",").append(i + 1).append(")").append('\n');
                 }
             }
         }
@@ -91,11 +92,15 @@ public class DotsAndBoxesController {
 
     public String whoIsNext(long gameID) {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-
+        return "It's " + dotsAndBoxes.getTurn().getUsername() + "'s turn";
     }
 
     public String showResult(long gameID) {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-
+        Player winner = dotsAndBoxes.getWinner();
+        if (winner != null)
+            return showScore(gameID) + '\n' + winner.getUsername() + "is the winner";
+        else
+            return showScore(gameID) + '\n' + "Its a draw";
     }
 }
