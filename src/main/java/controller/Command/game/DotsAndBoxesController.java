@@ -68,7 +68,17 @@ public class DotsAndBoxesController {
 
     public String showAvailableLines(long gameID) {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-        
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 1; i < 9; i++) {
+            for (int j = 1; j < 9; j++) {
+                if (dotsAndBoxes.isEdgeAvailable(j, i, j + 1, i)) {
+                    stringBuilder.append("(").append(j).append(",").append(i).append(") and (").append(j + 1).append(",").append(i).append(")").append('\n');
+                } else if (dotsAndBoxes.isEdgeAvailable(j, i, j, i + 1)) {
+                    stringBuilder.append("(").append(j).append(",").append(i).append(") and (").append(j).append(",").append(i+1).append(")").append('\n');
+                }
+            }
+        }
+        return stringBuilder.toString();
     }
 
     public String showTable(long gameID) {

@@ -53,7 +53,9 @@ public class DotsAndBoxes extends Game {
     }
 
     public boolean isEdgeAvailable(int x1, int y1, int x2, int y2) {
-        Edge temp = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);
+        if (x1 < 1 || x1 > 8 || x2 < 1 || x2 > 8 || y1 < 1 || y1 > 8 || y2 < 1 || y2 > 8)
+            return false;
+            Edge temp = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);
         for (Edge edge : edges) {
             if (edge.equals(temp))
                 return false;
@@ -78,8 +80,7 @@ public class DotsAndBoxes extends Game {
                 else if (edge.equals(new Edge(new Vertex((x2 - 1), y2), new Vertex(x2, y2), null)))
                     e6 = true;
             }
-        }
-        else if (y1 == y2) {
+        } else if (y1 == y2) {
             for (Edge edge : edges) {
                 if (edge.equals(new Edge(new Vertex(x1, (y1 - 1)), new Vertex(x1, y1), null)))
                     e1 = true;
@@ -95,22 +96,22 @@ public class DotsAndBoxes extends Game {
                     e6 = true;
             }
         }
-            if ((e1 && e2 && e3) || (e4 && e5 && e6)) {
-                if ((e1 && e2 && e3) && (e4 && e5 && e6)) {
-                    if (turn.equals(host))
-                        hostScore += 2;
-                    else
-                        guestScore += 2;
-                } else {
-                    if (turn.equals(host))
-                        hostScore ++;
-                    else
-                        guestScore ++;
-                }
-                return true;
+        if ((e1 && e2 && e3) || (e4 && e5 && e6)) {
+            if ((e1 && e2 && e3) && (e4 && e5 && e6)) {
+                if (turn.equals(host))
+                    hostScore += 2;
+                else
+                    guestScore += 2;
+            } else {
+                if (turn.equals(host))
+                    hostScore++;
+                else
+                    guestScore++;
             }
-            playerMovedInThisTurn = true;
-            return false;
+            return true;
+        }
+        playerMovedInThisTurn = true;
+        return false;
     }
 
     public void occupy(int x1, int y1, int x2, int y2) {                                // no need to check that if edge is empty. this will be done in DotsAndBoxesMenu
