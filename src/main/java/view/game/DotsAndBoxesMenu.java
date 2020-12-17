@@ -35,7 +35,7 @@ public class DotsAndBoxesMenu extends Menu {
                 case "show table":
                 case "who is next?":
                 case "show result":
-                    Client.getClient().send("game DotsAndBoxes " + gameId + " " + command);
+                    Client.getClient().send("game DotsAndBoxes "+ command + " " + gameId);
                     System.out.println(Client.getClient().getResponse());
                     break;
                 case "back":
