@@ -1,5 +1,7 @@
 package view.game;
 
+import model.DotsAndBoxes.DotsAndBoxes;
+import model.Player;
 import view.Client;
 import view.Menu;
 
@@ -18,6 +20,10 @@ public class DotsAndBoxesMenu extends Menu {
 
     @Override
     public void run() {
+
+        Client.getClient().send("game DotsAndBoxes open " + username);
+        String gameId = Client.getClient().getResponse();
+
         String command;
         commandLoop:
         while (true) {
@@ -29,12 +35,13 @@ public class DotsAndBoxesMenu extends Menu {
                 case "show table":
                 case "who is next?":
                 case "show result":
-                    Client.getClient().send("DotsAndBoxes " + command);
+                    Client.getClient().send("game DotsAndBoxes "+ command + " " + gameId);
                     System.out.println(Client.getClient().getResponse());
                     break;
                 case "back":
                     System.out.println("Are you sure you want to leave ?" +
-                            "If game is not over it means your forfeit the game. yes/no : ");
+                            "If game is not over it means your forfeit the game. yes/no : " +
+                            "(you can check if game is over with <show result> command)");
                     while (true) {
                         String temp;
                         temp = scanner.nextLine();
@@ -43,7 +50,7 @@ public class DotsAndBoxesMenu extends Menu {
                         } else if (temp.equalsIgnoreCase("no")) {
                             break;
                         } else {
-                            System.out.println("Its a Yes or No question :/ ");
+                            System.out.println("Its a Yes/No question :/ ");
                         }
                     }
                 default:
@@ -57,11 +64,13 @@ public class DotsAndBoxesMenu extends Menu {
                                     Integer.parseInt(matcher.group(4)) < 9 && Integer.parseInt(matcher.group(4)) > 0 &&
                                     Integer.parseInt(matcher.group(6)) < 9 && Integer.parseInt(matcher.group(6)) > 0 &&
                                     Integer.parseInt(matcher.group(8)) < 9 && Integer.parseInt(matcher.group(8)) > 0) {
-                                Client.getClient().send("DotsAndBoxes draw " + matcher.group(2) + " " + matcher.group(4) + " " + matcher.group(6) + " " + matcher.group(8));
+                                Client.getClient().send("game DotsAndBoxes occupy " + gameId + " " + matcher.group(2) + " " + matcher.group(4) + " " + matcher.group(6) + " " + matcher.group(8));
+                                System.out.println(Client.getClient().getResponse());
                             } else
                                 System.out.println("coordinates must be inside the table");
                         } else {
-                            System.out.println("wrong coordination!");
+                            System.out.println("The command should be in this form:" +
+                                    "draw line between x,y and x,y");
                         }
                     } else {
                         System.out.println("Not a valid command!");
@@ -69,13 +78,14 @@ public class DotsAndBoxesMenu extends Menu {
                     break;
             }
         }
-        Client.getClient().send("DotsAndBoxes end");
+        Client.getClient().send("game DotsAndBoxes end");
         System.out.println(Client.getClient().getResponse());
-        next(Menu.menus.peek());
+        next(GameMenu.getGameMenu());
     }
 
     @Override
     public void next(Menu menu) {
+        menus.pop();
         menu.run();
     }
 }
