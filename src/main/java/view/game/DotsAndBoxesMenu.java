@@ -24,6 +24,21 @@ public class DotsAndBoxesMenu extends Menu {
         Client.getClient().send("game DotsAndBoxes open " + username);
         String gameId = Client.getClient().getResponse();
 
+        while (true) {
+            System.out.println("Enter second player username : ");
+            String username = scanner.nextLine();
+            if (username.equals("back")) {
+                next(GameMenu.getGameMenu());
+                return;
+            }
+            Client.getClient().send("game DotsAndBoxes join " + username);
+            if (Client.getClient().getResponse().equals("joined")) {
+                System.out.println("Player successfully joined");
+                break;
+            }
+            else System.out.println("No player found with this user name.");
+        }
+
         String command;
         commandLoop:
         while (true) {
