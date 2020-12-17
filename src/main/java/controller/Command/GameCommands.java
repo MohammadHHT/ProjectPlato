@@ -2,6 +2,7 @@ package controller.Command;
 
 import controller.Command.game.DotsAndBoxesController;
 import controller.Command.game.GameController;
+import model.DotsAndBoxes.DotsAndBoxes;
 
 public class GameCommands implements ResolveCommand {
     private static final GameCommands gameCommands = new GameCommands();
@@ -69,6 +70,8 @@ public class GameCommands implements ResolveCommand {
                 case "open":
                     done(GameController.getGameController().open(tokens[3], tokens[1]));
                     break;
+                case "join" :
+                    done(DotsAndBoxesController.getDotsAndBoxesController().join(Long.parseLong(tokens[3]),tokens[4]));
                 case "end of my turn":
                     done(DotsAndBoxesController.getDotsAndBoxesController().endOfMyTurn(Long.parseLong(tokens[3])));
                     break;

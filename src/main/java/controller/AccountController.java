@@ -3,6 +3,7 @@ package controller;
 import exception.*;
 import exception.game.GameNotFound;
 import model.*;
+import view.Menu;
 
 public class AccountController {
     private static final AccountController accountController = new AccountController();
@@ -16,6 +17,7 @@ public class AccountController {
 
     public String register(String firstName, String lastName, String username, String password, String email, String phone) throws UsernameIsAlreadyTaken {
         if (!User.getUsers().containsKey(username)) {
+            Menu.username = username;
             if (User.getUsers().size() == 0) {
                 new Admin(firstName, lastName, username, password, email, phone);
                 return "admin";
@@ -34,6 +36,7 @@ public class AccountController {
         } else if (!User.getUsers().get(username).getPassword().equals(password)) {
             throw new IncorrectPassword();
         } else {
+            Menu.username = username;
             if (User.getUsers().get(username) instanceof Admin) {
                 return "Admin logged in";
             } else {

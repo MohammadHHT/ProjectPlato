@@ -16,6 +16,19 @@ public class DotsAndBoxesController {
         return dotsAndBoxesController;
     }
 
+    public String join(long gameID, String username) throws GameNotFound {
+        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
+        if (dotsAndBoxes != null) {
+            if (Player.getPlayers().containsKey(username)) {
+                dotsAndBoxes.join(Player.getPlayers().get(username));
+                return "joined";
+            } else
+                return "wrong username";
+        } else {
+            throw new GameNotFound();
+        }
+    }
+
     public String occupy(long gameID, int x1, int y1, int x2, int y2, String username) throws NotYourTurn, GameNotFound {
         if (x1 == x2) {
             if (y1 == y2 + 1) {
