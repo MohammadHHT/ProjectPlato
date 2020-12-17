@@ -26,4 +26,8 @@ public class DotsAndBoxesController {
             throw new GameNotFound();
         }
     }
+
+    private boolean checkThisTurnMove() {
+
+    }
 }

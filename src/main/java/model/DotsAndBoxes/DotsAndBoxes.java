@@ -15,6 +15,16 @@ public class DotsAndBoxes extends Game {
     private Player guest;
     private Player turn;
     private boolean playerMovedInThisTurn = false;
+    private int hostScore;
+    private int guestScore;
+
+    public int getHostScore() {
+        return hostScore;
+    }
+
+    public int getGuestScore() {
+        return guestScore;
+    }
 
     static {
         dotsAndBoxes = new HashMap<>();
@@ -51,6 +61,58 @@ public class DotsAndBoxes extends Game {
         return true;
     }
 
+    public boolean checkForBoxes(int x1, int y1, int x2, int y2) {
+        boolean e1 = false, e2 = false, e3 = false, e4 = false, e5 = false, e6 = false;
+        if (x1 == x2) {
+            for (Edge edge : edges) {
+                if (edge.equals(new Edge(new Vertex(x1, y1), new Vertex((x1 + 1), y1), null)))
+                    e1 = true;
+                else if (edge.equals(new Edge(new Vertex((x1 + 1), y1), new Vertex((x2 + 1), y2), null)))
+                    e2 = true;
+                else if (edge.equals(new Edge(new Vertex(x2, y2), new Vertex((x2 + 1), y2), null)))
+                    e3 = true;
+                else if (edge.equals(new Edge(new Vertex((x1 - 1), y1), new Vertex(x1, y1), null)))
+                    e4 = true;
+                else if (edge.equals(new Edge(new Vertex((x1 - 1), y1), new Vertex((x2 - 1), y2), null)))
+                    e5 = true;
+                else if (edge.equals(new Edge(new Vertex((x2 - 1), y2), new Vertex(x2, y2), null)))
+                    e6 = true;
+            }
+        }
+        else if (y1 == y2) {
+            for (Edge edge : edges) {
+                if (edge.equals(new Edge(new Vertex(x1, (y1 - 1)), new Vertex(x1, y1), null)))
+                    e1 = true;
+                else if (edge.equals(new Edge(new Vertex(x1, (y1 - 1)), new Vertex(x2, (y2 - 1)), null)))
+                    e2 = true;
+                else if (edge.equals(new Edge(new Vertex(x2, (y2 - 1)), new Vertex(x2, y2), null)))
+                    e3 = true;
+                else if (edge.equals(new Edge(new Vertex(x1, y1), new Vertex(x1, (y1 + 1)), null)))
+                    e4 = true;
+                else if (edge.equals(new Edge(new Vertex(x1, (y1 + 1)), new Vertex(x2, (y2 + 1)), null)))
+                    e5 = true;
+                else if (edge.equals(new Edge(new Vertex(x2, y2), new Vertex(x2, (y2 + 1)), null)))
+                    e6 = true;
+            }
+        }
+            if ((e1 && e2 && e3) || (e4 && e5 && e6)) {
+                if ((e1 && e2 && e3) && (e4 && e5 && e6)) {
+                    if (turn.equals(host))
+                        hostScore += 2;
+                    else
+                        guestScore += 2;
+                } else {
+                    if (turn.equals(host))
+                        hostScore ++;
+                    else
+                        guestScore ++;
+                }
+                return true;
+            }
+            playerMovedInThisTurn = true;
+            return false;
+    }
+
     public void occupy(int x1, int y1, int x2, int y2) {                                // no need to check that if edge is empty. this will be done in DotsAndBoxesMenu
         edges.add(new Edge(new Vertex(x1, y1), new Vertex(x2, y2), turn));
     }
@@ -62,6 +124,7 @@ public class DotsAndBoxes extends Game {
         } else {
             turn = host;
         }
+        playerMovedInThisTurn = false;
     }
 
     @Override
