@@ -68,7 +68,7 @@ public class GameCommands implements ResolveCommand {
                     done("occupied");
                     break;
                 case "open":
-                    done(GameController.getGameController().open(tokens[2], tokens[3]));
+                    done(GameController.getGameController().open(tokens[3], tokens[1]));
                     break;
             }
         }

@@ -1,5 +1,7 @@
 package view.game;
 
+import model.DotsAndBoxes.DotsAndBoxes;
+import model.Player;
 import view.Client;
 import view.Menu;
 
@@ -18,6 +20,10 @@ public class DotsAndBoxesMenu extends Menu {
 
     @Override
     public void run() {
+
+        Client.getClient().send("game DotsAndBoxes open " + username);
+        String gameId = Client.getClient().getResponse();
+
         String command;
         commandLoop:
         while (true) {
@@ -29,7 +35,7 @@ public class DotsAndBoxesMenu extends Menu {
                 case "show table":
                 case "who is next?":
                 case "show result":
-                    Client.getClient().send("game DotsAndBoxes " + command);
+                    Client.getClient().send("game DotsAndBoxes " + gameId + " " + command);
                     System.out.println(Client.getClient().getResponse());
                     break;
                 case "back":
@@ -57,7 +63,7 @@ public class DotsAndBoxesMenu extends Menu {
                                     Integer.parseInt(matcher.group(4)) < 9 && Integer.parseInt(matcher.group(4)) > 0 &&
                                     Integer.parseInt(matcher.group(6)) < 9 && Integer.parseInt(matcher.group(6)) > 0 &&
                                     Integer.parseInt(matcher.group(8)) < 9 && Integer.parseInt(matcher.group(8)) > 0) {
-                                Client.getClient().send("game DotsAndBoxes draw " + matcher.group(2) + " " + matcher.group(4) + " " + matcher.group(6) + " " + matcher.group(8));
+                                Client.getClient().send("game DotsAndBoxes occupy " + gameId + " " + matcher.group(2) + " " + matcher.group(4) + " " + matcher.group(6) + " " + matcher.group(8));
                             } else
                                 System.out.println("coordinates must be inside the table");
                         } else {

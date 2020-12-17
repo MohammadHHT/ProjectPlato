@@ -14,9 +14,14 @@ public class DotsAndBoxes extends Game {
     private Player host;
     private Player guest;
     private Player turn;
+    private boolean playerMovedInThisTurn = false;
 
     static {
         dotsAndBoxes = new HashMap<>();
+    }
+
+    public boolean hasPlayerMovedInThisTurn() {
+        return playerMovedInThisTurn;
     }
 
     public DotsAndBoxes(Player host) {
@@ -38,12 +43,12 @@ public class DotsAndBoxes extends Game {
     }
 
     public boolean isEdgeAvailable(int x1, int y1, int x2, int y2) {
-        Edge temp = new Edge(new Vertex(x1,y1), new Vertex(x2, y2), null);
+        Edge temp = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);
         for (Edge edge : edges) {
             if (edge.equals(temp))
                 return false;
         }
-            return true;
+        return true;
     }
 
     public void occupy(int x1, int y1, int x2, int y2) {                                // no need to check that if edge is empty. this will be done in DotsAndBoxesMenu
