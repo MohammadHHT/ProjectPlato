@@ -11,6 +11,7 @@ public class BattleSeaPlayer {
     public Ship[] ships;
     public Grid playerGrid;
     private Player player;
+    boolean isReady;
 
 
     public BattleSeaPlayer(Player player) {
@@ -23,6 +24,7 @@ public class BattleSeaPlayer {
         }
         playerGrid = new Grid();
         this.player = player;
+        isReady =false;
     }
 
     public int numOfShipsLeft() {
