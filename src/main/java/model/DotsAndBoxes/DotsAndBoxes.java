@@ -55,7 +55,7 @@ public class DotsAndBoxes extends Game {
     public boolean isEdgeAvailable(int x1, int y1, int x2, int y2) {
         if (x1 < 1 || x1 > 8 || x2 < 1 || x2 > 8 || y1 < 1 || y1 > 8 || y2 < 1 || y2 > 8)
             return false;
-            Edge temp = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);
+        Edge temp = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);
         for (Edge edge : edges) {
             if (edge.equals(temp))
                 return false;
@@ -118,6 +118,15 @@ public class DotsAndBoxes extends Game {
         edges.add(new Edge(new Vertex(x1, y1), new Vertex(x2, y2), turn));
     }
 
+    public String makeTable() {
+        int i = 1;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Edge edge : edges) {
+            stringBuilder.append("Line ").append(i).append(": ").append(edge.toString());
+        }
+        return stringBuilder.toString();
+    }
+
     @Override
     public void turn() {                                                                // flips turn
         if (turn.equals(host)) {
@@ -177,6 +186,11 @@ public class DotsAndBoxes extends Game {
                 return (v1.equals(edge.v1) && v2.equals(edge.v2));
             }
             return false;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + v1.x + "," + v1.y + ") and (" + v2.x + "," + v2.y + ")";
         }
     }
 

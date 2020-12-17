@@ -83,7 +83,11 @@ public class DotsAndBoxesController {
 
     public String showTable(long gameID) {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-
+        String table = ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' +
+                ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' +
+                ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' +
+                ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' + dotsAndBoxes.makeTable();
+        return table;
     }
 
     public String whoIsNext(long gameID) {
