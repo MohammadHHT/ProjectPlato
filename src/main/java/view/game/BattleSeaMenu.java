@@ -2,7 +2,7 @@ package view.game;
 
 import view.Menu;
 
-public class BattleSeaMenu extends Menu {
+public class BattleSeaMenu extends Menu implements Game {
     private static final BattleSeaMenu battleSeaMenu = new BattleSeaMenu();
 
     private BattleSeaMenu() {
@@ -14,7 +14,14 @@ public class BattleSeaMenu extends Menu {
 
     @Override
     public void run() {
-
+        while (true) {
+            switch (scanner.nextLine().trim()) {
+                case "turn":
+                    turn();
+                    break;
+                case ""
+            }
+        }
     }
 
     @Override

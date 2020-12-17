@@ -36,12 +36,19 @@ public class GameMenu extends Menu implements Back {
         }
     }
 
+    private void join() {
+
+    }
+
     @Override
     public void run() {
         while (true) {
-            switch (scanner.nextLine()) {
+            switch (scanner.nextLine().trim()) {
                 case "open":
                     open();
+                    return;
+                case "join":
+                    join();
                     return;
                 case "back":
                     back();
