@@ -11,9 +11,6 @@ public class DotsAndBoxes extends Game {
     private static HashMap<Long, DotsAndBoxes> dotsAndBoxes;
 
     private ArrayList<Edge> edges;
-    private Player host;
-    private Player guest;
-    private Player turn;
     private boolean playerMovedInThisTurn = false;
     private int hostScore;
     private int guestScore;
@@ -36,11 +33,9 @@ public class DotsAndBoxes extends Game {
     }
 
     public DotsAndBoxes(Player host) {
-        super();
+        super(host);
         dotsAndBoxes.put(getGameID(), this);
         edges = new ArrayList<>();
-        this.host = host;
-        turn = host;
     }
 
     public boolean isBoardFull() {
@@ -139,26 +134,6 @@ public class DotsAndBoxes extends Game {
         else
             winner =guest;
         return winner;
-    }
-
-    @Override
-    public void turn() {                                                                // flips turn
-        if (turn.equals(host)) {
-            turn = guest;
-        } else {
-            turn = host;
-        }
-        playerMovedInThisTurn = false;
-    }
-
-    @Override
-    public boolean join(Player guest) {                                                  // another player joins and game can be start
-        if (this.guest == null) {
-            this.guest = guest;
-            return true;
-        } else {
-            return false;
-        }
     }
 
     @Override

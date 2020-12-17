@@ -50,7 +50,7 @@ public class AdminMenu extends Menu {
         if (localDate.isAfter(LocalDate.of(syear, smonth, sday)) || localDate.isAfter(LocalDate.of(fyear, fmonth, fday))) {
             System.out.println("Invalid Start or End Date!");
         } else if (score < 1) {
-            System.out.println("Score can not be zero on negative!");
+            System.out.println("Score can not be zero or negative!");
         } else {
             Client.getClient().send("user addEvent " + game + " " + syear + " " + smonth + " " + sday + " " + fyear + " " + fmonth + " " + fday + " " + score);
         }

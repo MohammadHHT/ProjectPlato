@@ -1,7 +1,5 @@
 package view.game;
 
-import model.DotsAndBoxes.DotsAndBoxes;
-import model.Player;
 import view.Client;
 import view.Menu;
 
