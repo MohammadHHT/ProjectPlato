@@ -61,7 +61,7 @@ public class DotsAndBoxes extends Game {
         return true;
     }
 
-    public boolean checkForBoxes(int x1, int y1, int x2, int y2) {
+    public boolean madeAnyBoxes(int x1, int y1, int x2, int y2) {
         boolean e1 = false, e2 = false, e3 = false, e4 = false, e5 = false, e6 = false;
         if (x1 == x2) {
             for (Edge edge : edges) {

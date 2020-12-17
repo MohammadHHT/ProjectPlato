@@ -63,9 +63,8 @@ public class GameCommands implements ResolveCommand {
         @Override
         public void execute(String[] tokens) throws Exception {
             switch (tokens[2]) {
-                case "occupy":                                                      // when we want to occupy a line (edge). we must pass x1,y1,x2,y2 through menu
-                    DotsAndBoxesController.getDotsAndBoxesController().occupy(Long.parseLong(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]), tokens[8]);
-                    done("occupied");
+                case "occupy":                                                      // when we want to occupy a line (edge). we must pass x1,y1,x2,y2 through menu (the is no username coming from menu)
+                    done(DotsAndBoxesController.getDotsAndBoxesController().occupy(Long.parseLong(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]), null));
                     break;
                 case "open":
                     done(GameController.getGameController().open(tokens[3], tokens[1]));
