@@ -31,12 +31,12 @@ public class DotsAndBoxesMenu extends Menu {
                 next(GameMenu.getGameMenu());
                 return;
             }
-            Client.getClient().send("game DotsAndBoxes join " + username);
+            Client.getClient().send("game DotsAndBoxes join " +gameId + " " + username);
             if (Client.getClient().getResponse().equals("joined")) {
                 System.out.println("Player successfully joined");
                 break;
             }
-            else System.out.println("No player found with this user name.");
+            else System.out.println("No player found with this username.");
         }
 
         String command;
