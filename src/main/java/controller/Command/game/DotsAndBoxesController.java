@@ -52,67 +52,96 @@ public class DotsAndBoxesController {
     }
 
 
-    public String endOfMyTurn(long gameID) {
+    public String endOfMyTurn(long gameID) throws GameNotFound {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-        if (dotsAndBoxes.hasPlayerMovedInThisTurn()) {
-            dotsAndBoxes.turn();
-            return "Turn changed successfully";
-        } else
-            return "in your turn you should draw a line";
+        if (dotsAndBoxes != null) {
+            if (dotsAndBoxes.hasPlayerMovedInThisTurn()) {
+                dotsAndBoxes.turn();
+                return "Turn changed successfully";
+            } else
+                return "in your turn you should draw a line";
+        } else {
+            throw new GameNotFound();
+        }
     }
 
-    public String showScore(long gameID) {
+    public String showScore(long gameID) throws GameNotFound {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-        return dotsAndBoxes.getHost().getUsername() + " score = " + dotsAndBoxes.getHostScore() + "\n" + dotsAndBoxes.getGuest().getUsername() + " score = " + dotsAndBoxes.getGuestScore();
+        if (dotsAndBoxes != null) {
+            return dotsAndBoxes.getHost().getUsername() + " score = " + dotsAndBoxes.getHostScore() + "\n" + dotsAndBoxes.getGuest().getUsername() + " score = " + dotsAndBoxes.getGuestScore();
+        } else {
+            throw new GameNotFound();
+        }
     }
 
-    public String showAvailableLines(long gameID) {
+    public String showAvailableLines(long gameID) throws GameNotFound {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 1; i < 9; i++) {
-            for (int j = 1; j < 9; j++) {
-                if (dotsAndBoxes.isEdgeAvailable(j, i, j + 1, i)) {
-                    stringBuilder.append("(").append(j).append(",").append(i).append(") and (").append(j + 1).append(",").append(i).append(")").append('\n');
-                } else if (dotsAndBoxes.isEdgeAvailable(j, i, j, i + 1)) {
-                    stringBuilder.append("(").append(j).append(",").append(i).append(") and (").append(j).append(",").append(i + 1).append(")").append('\n');
+        if (dotsAndBoxes != null) {
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 1; i < 9; i++) {
+                for (int j = 1; j < 9; j++) {
+                    if (dotsAndBoxes.isEdgeAvailable(j, i, j + 1, i)) {
+                        stringBuilder.append("(").append(j).append(",").append(i).append(") and (").append(j + 1).append(",").append(i).append(")").append('\n');
+                    } else if (dotsAndBoxes.isEdgeAvailable(j, i, j, i + 1)) {
+                        stringBuilder.append("(").append(j).append(",").append(i).append(") and (").append(j).append(",").append(i + 1).append(")").append('\n');
+                    }
                 }
             }
-        }
-        return stringBuilder.toString();
-    }
-
-    public String showTable(long gameID) {
-        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-        return ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' +
-                ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' +
-                ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' +
-                ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' + dotsAndBoxes.makeTable();
-    }
-
-    public String whoIsNext(long gameID) {
-        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-        return "It's " + dotsAndBoxes.getTurn().getUsername() + "'s turn";
-    }
-
-    public String showResult(long gameID) {
-        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-        if (dotsAndBoxes.isBoardFull()) {
-            Player winner = dotsAndBoxes.judge();
-            if (winner != null)
-                return showScore(gameID) + '\n' + winner.getUsername() + "is the winner";
-            else
-                return showScore(gameID) + '\n' + "Its a draw";
-        } else
-            return "Game is not over yet";
-    }
-
-    public String end(long gameID) {
-        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-        if (dotsAndBoxes.isBoardFull()) {
-            return "Back to the game menu";
+            return stringBuilder.toString();
         } else {
-            return dotsAndBoxes.winByForfeit().getUsername() + "won by forfeit" + '\n' + "Back to the game menu";
+            throw new GameNotFound();
         }
+    }
 
+    public String showTable(long gameID) throws GameNotFound {
+        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
+        if (dotsAndBoxes != null) {
+            return ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' +
+                    ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' +
+                    ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' +
+                    ".   .   .   .   .   .   .   ." + '\n' + ".   .   .   .   .   .   .   ." + '\n' + dotsAndBoxes.makeTable();
+        } else {
+            throw new GameNotFound();
+        }
+    }
+
+    public String whoIsNext(long gameID) throws GameNotFound {
+        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
+        if (dotsAndBoxes != null) {
+            return "It's " + dotsAndBoxes.getTurn().getUsername() + "'s turn";
+        } else {
+            throw new GameNotFound();
+        }
+    }
+
+    public String showResult(long gameID) throws GameNotFound {
+        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
+        if (dotsAndBoxes != null) {
+            if (dotsAndBoxes.isBoardFull()) {
+                Player winner = dotsAndBoxes.judge();
+                if (winner != null)
+                    return showScore(gameID) + '\n' + winner.getUsername() + "is the winner";
+                else
+                    return showScore(gameID) + '\n' + "Its a draw";
+            } else
+                return "Game is not over yet";
+        } else {
+            throw new GameNotFound();
+        }
+    }
+
+    public String end(long gameID) throws GameNotFound {
+        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
+        if (dotsAndBoxes != null) {
+            if (dotsAndBoxes.isBoardFull()) {
+                return "Back to the game menu";
+            } else {
+                return dotsAndBoxes.winByForfeit().getUsername() + "won by forfeit" + '\n' + "Back to the game menu";
+            }
+
+        } else {
+            throw new GameNotFound();
+        }
     }
 }

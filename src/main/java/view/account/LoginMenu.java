@@ -1,10 +1,11 @@
 package view.account;
 
+import view.Back;
 import view.Client;
 import view.Menu;
 import view.primary.PlayerMenu;
 
-public class LoginMenu extends Menu {
+public class LoginMenu extends Menu implements Back {
     private static final LoginMenu loginMenu = new LoginMenu();
 
     private LoginMenu() {
@@ -14,8 +15,6 @@ public class LoginMenu extends Menu {
         return loginMenu;
     }
 
-    private int nextMenu;
-
     @Override
     public void run() {
         String[] commands;
@@ -24,7 +23,7 @@ public class LoginMenu extends Menu {
             commands = command.split("\\s");
             if (commands[0].equalsIgnoreCase("register")) {
                 if (commands.length == 3) {
-                    nextMenu = 0;
+                    next(RegisterMenu.getRegisterMenu());
                     break;
                 } else {
                     System.out.println("you should enter your username and password after the keyword < register >");
@@ -33,7 +32,7 @@ public class LoginMenu extends Menu {
                 if (commands.length == 2) {
                     login(commands[1]);
                     if (Client.getClient().getResponse().equals("successfully logged in")) {
-                        nextMenu = 1;
+                        next(AccountMenu.getAccountMenu());
                         break;
                     }
                 } else {
@@ -43,24 +42,19 @@ public class LoginMenu extends Menu {
                 if (commands.length == 2) {
                     delete(commands[1]);
                     if (Client.getClient().getResponse().equals("successfully deleted")) {
-                        nextMenu = 2;
+                        next(RegisterMenu.getRegisterMenu());
                         break;
                     }
                 } else {
                     System.out.println("you should enter your username after the keyword < delete >");
                 }
+            } else if (command.equalsIgnoreCase("back")) {
+                back();
             } else {
                 System.out.println("Wrong command");
             }
         }
-        if (nextMenu == 0) {
-            register(commands[1], commands[2]);
-        } else
-            next(PlayerMenu.getPlayerMenu());
-    }
 
-    private void register(String username, String password) {
-        RegisterMenu.getRegisterMenu().run();
     }
 
     private void delete(String username) {
@@ -77,10 +71,7 @@ public class LoginMenu extends Menu {
 
     @Override
     public void next(Menu menu) {
-        if (nextMenu == 1) {
-            PlayerMenu.getPlayerMenu().run();
-        } else {
-            RegisterMenu.getRegisterMenu().run();
-        }
+        menus.push(menu);
+        menu.run();
     }
 }
