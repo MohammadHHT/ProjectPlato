@@ -128,6 +128,7 @@ public class DotsAndBoxes extends Game {
         StringBuilder stringBuilder = new StringBuilder();
         for (Edge edge : edges) {
             stringBuilder.append("Line ").append(i).append(": ").append(edge.toString());
+            i++;
         }
         return stringBuilder.toString();
     }
