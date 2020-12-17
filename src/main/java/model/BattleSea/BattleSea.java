@@ -12,7 +12,6 @@ public class BattleSea extends Game {
     private static HashMap<Long, BattleSea> battleSeas;
 
 
-    public static Scanner scanner = new Scanner(System.in);
      BattleSeaPlayer host ;
      BattleSeaPlayer guest ;
      BattleSeaPlayer turn;
@@ -24,7 +23,7 @@ public class BattleSea extends Game {
         turn = this.host;
     }
 
-    private static void setupRandomBoard(BattleSeaPlayer battleSeaPlayer) {
+    private  void setupRandomBoard(BattleSeaPlayer battleSeaPlayer) {
         System.out.println();
         int counterOfShips = 0;
 
@@ -51,7 +50,7 @@ public class BattleSea extends Game {
         }
     }
 
-    private static void askForGuess(BattleSeaPlayer player, BattleSeaPlayer opponent, int x, int y) {
+    private void askForGuess(BattleSeaPlayer player, BattleSeaPlayer opponent, int x, int y) {
         boolean flag = false;
         // row == y  ,  col == x
 
@@ -83,7 +82,7 @@ public class BattleSea extends Game {
 
     }
 
-    private static boolean isShipDestroyCompletely (BattleSeaPlayer battleSeaPlayer, Ship ship) {
+    private boolean isShipDestroyCompletely (BattleSeaPlayer battleSeaPlayer, Ship ship) {
         int row = ship.getRow();
         int col = ship.getColumn();
         int length = ship.getLength();
@@ -114,7 +113,7 @@ public class BattleSea extends Game {
         return flag;
     }
 
-    private static void changeDestroyedShipSign(BattleSeaPlayer battleSeaPlayer, Ship ship) {
+    private void changeDestroyedShipSign(BattleSeaPlayer battleSeaPlayer, Ship ship) {
         int row = ship.getRow();
         int col = ship.getColumn();
         int length = ship.getLength();
@@ -139,7 +138,7 @@ public class BattleSea extends Game {
         }
     }
 
-    private static boolean hasLocationError(int row, int col, int dir, BattleSeaPlayer battleSeaPlayer, int counterOfShips) {
+    private boolean hasLocationError(int row, int col, int dir, BattleSeaPlayer battleSeaPlayer, int counterOfShips) {
         int length = battleSeaPlayer.ships[counterOfShips].getLength();
         int width = battleSeaPlayer.ships[counterOfShips].getWidth();
 
@@ -191,17 +190,14 @@ public class BattleSea extends Game {
         return false;
     }
 
-    private static void changeShipsLocation(BattleSeaPlayer battleSeaPlayer, String shipName) {
+    private void changeShipsLocation(BattleSeaPlayer battleSeaPlayer, String shipName , int newCol, int newRow) {
         battleSeaPlayer.playerGrid.printShips();
         System.out.println();
         String input;
 
         input = shipName.toUpperCase();
         int selectedShip = convertLetterToInt(input);
-        System.out.println("Enter new row: ");
-        int newRow = scanner.nextInt();
-        System.out.println("Enter new column: ");
-        int newCol = scanner.nextInt();
+
         if (newCol >= 0 && newCol <= 9 && newRow >= 0 && newRow <= 9) {
             if (!hasLocationError(newRow, newCol, battleSeaPlayer.ships[selectedShip].getDirection(),
                     battleSeaPlayer, selectedShip)) {
@@ -215,7 +211,7 @@ public class BattleSea extends Game {
         }
     }
 
-    private static void changeShipsDirection(BattleSeaPlayer battleSeaPlayer, String shipName) {
+    private void changeShipsDirection(BattleSeaPlayer battleSeaPlayer, String shipName) {
         battleSeaPlayer.playerGrid.printShips();
         System.out.println();
         String input;
@@ -242,7 +238,7 @@ public class BattleSea extends Game {
 
     }
 
-    private static int convertLetterToInt(String letter) {
+    private int convertLetterToInt(String letter) {
         int toReturn = -1;
         switch (letter) {
             case "A":
