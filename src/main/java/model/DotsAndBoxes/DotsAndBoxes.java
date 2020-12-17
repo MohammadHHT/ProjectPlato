@@ -14,9 +14,25 @@ public class DotsAndBoxes extends Game {
     private Player host;
     private Player guest;
     private Player turn;
+    private boolean playerMovedInThisTurn = false;
+    private int hostScore;
+    private int guestScore;
+    private Player winner;
+
+    public int getHostScore() {
+        return hostScore;
+    }
+
+    public int getGuestScore() {
+        return guestScore;
+    }
 
     static {
         dotsAndBoxes = new HashMap<>();
+    }
+
+    public boolean hasPlayerMovedInThisTurn() {
+        return playerMovedInThisTurn;
     }
 
     public DotsAndBoxes(Player host) {
@@ -27,18 +43,101 @@ public class DotsAndBoxes extends Game {
         turn = host;
     }
 
-    private Player winner(int x1, int y1, int x2, int y2) {                             // executes just one time when edges size is 64 (board is full)
-        Edge edge = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);
-        for (Edge e : edges) {
-            if (e.equals(edge)) {
-                return e.player;
+    public boolean isBoardFull() {
+        return edges.size() == 112;
+    }
+
+    /*    private Player winner(int x1, int y1, int x2, int y2) {                             // executes just one time when edges size is 64 (board is full)
+            Edge edge = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);       // just for information full board has 112 edges :D
+            for (Edge e : edges) {
+                if (e.equals(edge)) {
+                    return e.player;
+                }
+            }
+            return null;
+        }
+    */
+    public boolean isEdgeAvailable(int x1, int y1, int x2, int y2) {
+        if (x1 < 1 || x1 > 8 || x2 < 1 || x2 > 8 || y1 < 1 || y1 > 8 || y2 < 1 || y2 > 8)
+            return false;
+        Edge temp = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);
+        for (Edge edge : edges) {
+            if (edge.equals(temp))
+                return false;
+        }
+        return true;
+    }
+
+    public boolean madeAnyBoxes(int x1, int y1, int x2, int y2) {
+        boolean e1 = false, e2 = false, e3 = false, e4 = false, e5 = false, e6 = false;
+        if (x1 == x2) {
+            for (Edge edge : edges) {
+                if (edge.equals(new Edge(new Vertex(x1, y1), new Vertex((x1 + 1), y1), null)))
+                    e1 = true;
+                else if (edge.equals(new Edge(new Vertex((x1 + 1), y1), new Vertex((x2 + 1), y2), null)))
+                    e2 = true;
+                else if (edge.equals(new Edge(new Vertex(x2, y2), new Vertex((x2 + 1), y2), null)))
+                    e3 = true;
+                else if (edge.equals(new Edge(new Vertex((x1 - 1), y1), new Vertex(x1, y1), null)))
+                    e4 = true;
+                else if (edge.equals(new Edge(new Vertex((x1 - 1), y1), new Vertex((x2 - 1), y2), null)))
+                    e5 = true;
+                else if (edge.equals(new Edge(new Vertex((x2 - 1), y2), new Vertex(x2, y2), null)))
+                    e6 = true;
+            }
+        } else if (y1 == y2) {
+            for (Edge edge : edges) {
+                if (edge.equals(new Edge(new Vertex(x1, (y1 - 1)), new Vertex(x1, y1), null)))
+                    e1 = true;
+                else if (edge.equals(new Edge(new Vertex(x1, (y1 - 1)), new Vertex(x2, (y2 - 1)), null)))
+                    e2 = true;
+                else if (edge.equals(new Edge(new Vertex(x2, (y2 - 1)), new Vertex(x2, y2), null)))
+                    e3 = true;
+                else if (edge.equals(new Edge(new Vertex(x1, y1), new Vertex(x1, (y1 + 1)), null)))
+                    e4 = true;
+                else if (edge.equals(new Edge(new Vertex(x1, (y1 + 1)), new Vertex(x2, (y2 + 1)), null)))
+                    e5 = true;
+                else if (edge.equals(new Edge(new Vertex(x2, y2), new Vertex(x2, (y2 + 1)), null)))
+                    e6 = true;
             }
         }
-        return null;
+        if ((e1 && e2 && e3) || (e4 && e5 && e6)) {
+            if ((e1 && e2 && e3) && (e4 && e5 && e6)) {
+                if (turn.equals(host))
+                    hostScore += 2;
+                else
+                    guestScore += 2;
+            } else {
+                if (turn.equals(host))
+                    hostScore++;
+                else
+                    guestScore++;
+            }
+            return true;
+        }
+        playerMovedInThisTurn = true;
+        return false;
     }
 
     public void occupy(int x1, int y1, int x2, int y2) {                                // no need to check that if edge is empty. this will be done in DotsAndBoxesMenu
         edges.add(new Edge(new Vertex(x1, y1), new Vertex(x2, y2), turn));
+    }
+
+    public String makeTable() {
+        int i = 1;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Edge edge : edges) {
+            stringBuilder.append("Line ").append(i).append(": ").append(edge.toString());
+        }
+        return stringBuilder.toString();
+    }
+
+    public Player winByForfeit() {
+        if (turn == guest)
+            winner = host;
+        else
+            winner =guest;
+        return winner;
     }
 
     @Override
@@ -48,6 +147,7 @@ public class DotsAndBoxes extends Game {
         } else {
             turn = host;
         }
+        playerMovedInThisTurn = false;
     }
 
     @Override
@@ -62,7 +162,11 @@ public class DotsAndBoxes extends Game {
 
     @Override
     public Player judge() {                                                             // judges whole game when finished (in this one, board is full)
-        return null;
+        if (hostScore > guestScore)
+            winner = host;
+        else if (guestScore > hostScore)
+            winner = guest;
+        return winner;
     }
 
     public Player getTurn() {
@@ -99,6 +203,11 @@ public class DotsAndBoxes extends Game {
                 return (v1.equals(edge.v1) && v2.equals(edge.v2));
             }
             return false;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + v1.x + "," + v1.y + ") and (" + v2.x + "," + v2.y + ")";
         }
     }
 

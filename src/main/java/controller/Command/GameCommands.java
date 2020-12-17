@@ -63,13 +63,32 @@ public class GameCommands implements ResolveCommand {
         @Override
         public void execute(String[] tokens) throws Exception {
             switch (tokens[2]) {
-                case "occupy":                                                      // when we want to occupy a line (edge). we must pass x1,y1,x2,y2 through menu
-                    DotsAndBoxesController.getDotsAndBoxesController().occupy(Long.parseLong(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]), tokens[8]);
-                    done("occupied");
+                case "occupy":                                                      // when we want to occupy a line (edge). we must pass x1,y1,x2,y2 through menu (there is no username coming from menu)
+                    done(DotsAndBoxesController.getDotsAndBoxesController().occupy(Long.parseLong(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]), null));
                     break;
                 case "open":
-                    done(GameController.getGameController().open(tokens[2], tokens[3]));
+                    done(GameController.getGameController().open(tokens[3], tokens[1]));
                     break;
+                case "end of my turn":
+                    done(DotsAndBoxesController.getDotsAndBoxesController().endOfMyTurn(Long.parseLong(tokens[3])));
+                    break;
+                case "show score":
+                    done(DotsAndBoxesController.getDotsAndBoxesController().showScore(Long.parseLong(tokens[3])));
+                    break;
+                case "show available lines":
+                    done(DotsAndBoxesController.getDotsAndBoxesController().showAvailableLines(Long.parseLong(tokens[3])));
+                    break;
+                case "show table":
+                    done(DotsAndBoxesController.getDotsAndBoxesController().showTable(Long.parseLong(tokens[3])));
+                    break;
+                case "who is next?":
+                    done(DotsAndBoxesController.getDotsAndBoxesController().whoIsNext(Long.parseLong(tokens[3])));
+                    break;
+                case "show result":
+                    done(DotsAndBoxesController.getDotsAndBoxesController().showResult(Long.parseLong(tokens[3])));
+                    break;
+                case "end":
+                    done(DotsAndBoxesController.getDotsAndBoxesController().end(Long.parseLong(tokens[3])));
             }
         }
     }

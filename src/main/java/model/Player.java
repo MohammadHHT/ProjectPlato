@@ -16,7 +16,7 @@ public class Player extends User {
     private ArrayList<Long> suggestions;
     private ArrayList<String> inbox;
     private ArrayList<Long> gameLogs;
-    private HashMap<String, Integer> plays;                    //String:game name e.g:DotsAndBoxes    Integer: numbers of times played
+    private HashMap<String, Integer> plays;              //String:game name e.g:DotsAndBoxes    Integer: numbers of times played
     private HashMap<String, Integer> wins;
     private HashMap<String, Integer> defeats;
 
