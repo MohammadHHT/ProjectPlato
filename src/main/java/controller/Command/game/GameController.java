@@ -2,6 +2,7 @@ package controller.Command.game;
 
 import exception.game.GameNotFound;
 import exception.UsernameNotFound;
+import exception.game.NotPlayedYet;
 import model.DotsAndBoxes.DotsAndBoxes;
 import model.Game;
 import model.GameLog;
@@ -23,7 +24,7 @@ public class GameController {
 
     public String names() {
         StringBuilder tmp = new StringBuilder();
-        for (String s : Game.getGames()) {
+        for (String s : Game.getNames()) {
             tmp.append(s).append(" • ");
         }
         return tmp.toString().substring(0, tmp.toString().length() - 1).trim();
@@ -40,10 +41,6 @@ public class GameController {
             default:
                 throw new GameNotFound();
         }
-    }
-
-    public String turn(long game) {                                                                         // changes turn
-
     }
 
     public void showScoreboard(String gameName) throws GameNotFound {
