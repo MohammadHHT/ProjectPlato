@@ -22,15 +22,15 @@ public class DotsAndBoxesController {
                 y1--;
                 y2++;
             } else if (!(y1 == y2 - 1))
-                return "Lines can be drawn only between dots that are next to each other";
+                return "you can’t draw a line between these two";
         } else if (y1 == y2) {
             if (x1 == x2 + 1) {
                 x1--;
                 x2++;
             } else if (!(x1 == x2 - 1))
-                return "Lines can be drawn only between dots that are next to each other";
+                return "you can’t draw a line between these two";
         } else
-            return "Lines can be drawn only between dots that are next to each other";
+            return "you can’t draw a line between these two";
 
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
         if (dotsAndBoxes != null) {
