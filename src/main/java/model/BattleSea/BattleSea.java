@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class BattleSea extends Game {
-    private static HashMap<Long, BattleSea> battleSeas;
+    private static HashMap<Long, BattleSea> battleSeas = new HashMap<>();
 
 
      BattleSeaPlayer host ;
@@ -21,6 +21,10 @@ public class BattleSea extends Game {
         battleSeas.put(getGameID(), this);
         this.host = new BattleSeaPlayer(host);
         turn = this.host;
+    }
+
+    public static HashMap<Long, BattleSea> getBattleSeas() {
+        return battleSeas;
     }
 
     private  void setupRandomBoard(BattleSeaPlayer battleSeaPlayer) {
@@ -265,7 +269,11 @@ public class BattleSea extends Game {
 
     @Override
     public void turn() {
-
+        if (turn.equals(host)) {
+            turn = guest;
+        } else {
+            turn = host;
+        }
     }
 
     @Override
