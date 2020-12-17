@@ -1,20 +1,33 @@
 package model.BattleSea;
 
+import model.DotsAndBoxes.DotsAndBoxes;
+import model.Game;
+import model.Player;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-public class BattleSea {
+public class BattleSea extends Game {
+    private static HashMap<Long, BattleSea> battleSeas = new HashMap<>();
 
-    public static Scanner scanner = new Scanner(System.in);
-    static BattleSeaPlayer host = new BattleSeaPlayer();
-    static BattleSeaPlayer guest =  new BattleSeaPlayer();
 
-    public static void runBattleSea(){
-        setupRandomBoard(host);
-        host.playerGrid.printShips();
-        //TODO ?????
+     BattleSeaPlayer host ;
+     BattleSeaPlayer guest ;
+     BattleSeaPlayer turn;
+
+    public BattleSea(Player host) {
+        super();
+        battleSeas.put(getGameID(), this);
+        this.host = new BattleSeaPlayer(host);
+        turn = this.host;
     }
 
-    private static void setupRandomBoard(BattleSeaPlayer battleSeaPlayer) {
+    public static HashMap<Long, BattleSea> getBattleSeas() {
+        return battleSeas;
+    }
+
+    private  void setupRandomBoard(BattleSeaPlayer battleSeaPlayer) {
         System.out.println();
         int counterOfShips = 0;
 
@@ -41,7 +54,7 @@ public class BattleSea {
         }
     }
 
-    private static void askForGuess(BattleSeaPlayer player, BattleSeaPlayer opponent, int x, int y) {
+    private void askForGuess(BattleSeaPlayer player, BattleSeaPlayer opponent, int x, int y) {
         boolean flag = false;
         // row == y  ,  col == x
 
@@ -52,20 +65,16 @@ public class BattleSea {
         while (!flag) {
             if (!opponent.playerGrid.alreadyGuessed(y, x)){
                 if (opponent.playerGrid.hasShip(y, x)) {
-                    player.oppGrid.markHit(y, x);
                     opponent.playerGrid.markHit(y, x);
                     System.out.println("Bombed successfully!!!");
                     Ship oppShip = opponent.ships[convertLetterToInt(opponent.playerGrid.get(y, x).getShipName())];
-                    Ship playerShip = player.ships[convertLetterToInt(player.oppGrid.get(y, x).getShipName())];
                     if (isShipDestroyCompletely(opponent, oppShip)) {
-                        changeDestroyedShipSign(player, playerShip);
                         changeDestroyedShipSign(opponent, oppShip);
                     }
 
 
 
                 } else {
-                    player.oppGrid.markMiss(y, x);
                     opponent.playerGrid.markMiss(y, x);
                     System.out.println("Bombed unsuccessfully!");
                     flag = true;
@@ -77,7 +86,7 @@ public class BattleSea {
 
     }
 
-    private static boolean isShipDestroyCompletely (BattleSeaPlayer battleSeaPlayer, Ship ship) {
+    private boolean isShipDestroyCompletely (BattleSeaPlayer battleSeaPlayer, Ship ship) {
         int row = ship.getRow();
         int col = ship.getColumn();
         int length = ship.getLength();
@@ -108,7 +117,7 @@ public class BattleSea {
         return flag;
     }
 
-    private static void changeDestroyedShipSign(BattleSeaPlayer battleSeaPlayer, Ship ship) {
+    private void changeDestroyedShipSign(BattleSeaPlayer battleSeaPlayer, Ship ship) {
         int row = ship.getRow();
         int col = ship.getColumn();
         int length = ship.getLength();
@@ -133,7 +142,7 @@ public class BattleSea {
         }
     }
 
-    private static boolean hasLocationError(int row, int col, int dir, BattleSeaPlayer battleSeaPlayer, int counterOfShips) {
+    private boolean hasLocationError(int row, int col, int dir, BattleSeaPlayer battleSeaPlayer, int counterOfShips) {
         int length = battleSeaPlayer.ships[counterOfShips].getLength();
         int width = battleSeaPlayer.ships[counterOfShips].getWidth();
 
@@ -185,17 +194,14 @@ public class BattleSea {
         return false;
     }
 
-    private static void changeShipsLocation(BattleSeaPlayer battleSeaPlayer, String shipName) {
+    private void changeShipsLocation(BattleSeaPlayer battleSeaPlayer, String shipName , int newCol, int newRow) {
         battleSeaPlayer.playerGrid.printShips();
         System.out.println();
         String input;
 
         input = shipName.toUpperCase();
         int selectedShip = convertLetterToInt(input);
-        System.out.println("Enter new row: ");
-        int newRow = scanner.nextInt();
-        System.out.println("Enter new column: ");
-        int newCol = scanner.nextInt();
+
         if (newCol >= 0 && newCol <= 9 && newRow >= 0 && newRow <= 9) {
             if (!hasLocationError(newRow, newCol, battleSeaPlayer.ships[selectedShip].getDirection(),
                     battleSeaPlayer, selectedShip)) {
@@ -209,7 +215,7 @@ public class BattleSea {
         }
     }
 
-    private static void changeShipsDirection(BattleSeaPlayer battleSeaPlayer, String shipName) {
+    private void changeShipsDirection(BattleSeaPlayer battleSeaPlayer, String shipName) {
         battleSeaPlayer.playerGrid.printShips();
         System.out.println();
         String input;
@@ -236,7 +242,7 @@ public class BattleSea {
 
     }
 
-    private static int convertLetterToInt(String letter) {
+    private int convertLetterToInt(String letter) {
         int toReturn = -1;
         switch (letter) {
             case "A":
@@ -259,5 +265,24 @@ public class BattleSea {
                 break;
         }
         return toReturn;
+    }
+
+    @Override
+    public void turn() {
+        if (turn.equals(host)) {
+            turn = guest;
+        } else {
+            turn = host;
+        }
+    }
+
+    @Override
+    public boolean join(Player guest) {
+        return false;
+    }
+
+    @Override
+    public Player judge() {
+        return null;
     }
 }

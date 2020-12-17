@@ -44,11 +44,11 @@ public class DotsAndBoxes extends Game {
     }
 
     public boolean isBoardFull() {
-        return edges.size() == 112;
+        return edges.size() == 144;
     }
 
     /*    private Player winner(int x1, int y1, int x2, int y2) {                             // executes just one time when edges size is 64 (board is full)
-            Edge edge = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);       // just for information full board has 112 edges :D
+            Edge edge = new Edge(new Vertex(x1, y1), new Vertex(x2, y2), null);       // just for information full board has 144 edges :D
             for (Edge e : edges) {
                 if (e.equals(edge)) {
                     return e.player;
@@ -127,7 +127,8 @@ public class DotsAndBoxes extends Game {
         int i = 1;
         StringBuilder stringBuilder = new StringBuilder();
         for (Edge edge : edges) {
-            stringBuilder.append("Line ").append(i).append(": ").append(edge.toString());
+            stringBuilder.append("Line ").append(i).append(": ").append(edge.toString()).append('\n');
+            i++;
         }
         return stringBuilder.toString();
     }
