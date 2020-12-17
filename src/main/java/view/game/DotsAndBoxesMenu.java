@@ -29,7 +29,7 @@ public class DotsAndBoxesMenu extends Menu {
                 case "show table":
                 case "who is next?":
                 case "show result":
-                    Client.getClient().send("Game DotsAndBoxes " + command);
+                    Client.getClient().send("game DotsAndBoxes " + command);
                     System.out.println(Client.getClient().getResponse());
                     break;
                 case "back":
@@ -57,7 +57,7 @@ public class DotsAndBoxesMenu extends Menu {
                                     Integer.parseInt(matcher.group(4)) < 9 && Integer.parseInt(matcher.group(4)) > 0 &&
                                     Integer.parseInt(matcher.group(6)) < 9 && Integer.parseInt(matcher.group(6)) > 0 &&
                                     Integer.parseInt(matcher.group(8)) < 9 && Integer.parseInt(matcher.group(8)) > 0) {
-                                Client.getClient().send("Game DotsAndBoxes draw " + matcher.group(2) + " " + matcher.group(4) + " " + matcher.group(6) + " " + matcher.group(8));
+                                Client.getClient().send("game DotsAndBoxes draw " + matcher.group(2) + " " + matcher.group(4) + " " + matcher.group(6) + " " + matcher.group(8));
                             } else
                                 System.out.println("coordinates must be inside the table");
                         } else {
@@ -70,7 +70,7 @@ public class DotsAndBoxesMenu extends Menu {
                     break;
             }
         }
-        Client.getClient().send("Game DotsAndBoxes end");
+        Client.getClient().send("game DotsAndBoxes end");
         System.out.println(Client.getClient().getResponse());
         next(Menu.menus.peek());
     }
