@@ -1,5 +1,7 @@
 package model.BattleSea;
 
+import model.Player;
+
 public class BattleSeaPlayer {
     private static final int[] shipsLength = {2, 2, 3, 4, 4, 5};
     private static final int[] shipsWidth = {1, 1, 1, 1, 1, 2};
@@ -8,9 +10,10 @@ public class BattleSeaPlayer {
 
     public Ship[] ships;
     public Grid playerGrid;
-    public Grid oppGrid;
+    private Player player;
 
-    public BattleSeaPlayer() {
+
+    public BattleSeaPlayer(Player player) {
         if (numOfShips != 6)
             throw new IllegalArgumentException("ERROR! Num of ships must be 6.");
         ships = new Ship[numOfShips];
@@ -19,7 +22,7 @@ public class BattleSeaPlayer {
             ships[i] = tempShip;
         }
         playerGrid = new Grid();
-        oppGrid = new Grid();
+        this.player = player;
     }
 
     public int numOfShipsLeft() {

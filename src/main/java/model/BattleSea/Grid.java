@@ -14,6 +14,8 @@ public class Grid {
 
         grid = new Location[NUM_ROWS][NUM_COLS];
 
+        points = 25;
+
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid[row].length; col++) {
                 Location tempLoc = new Location();
@@ -24,7 +26,7 @@ public class Grid {
 
     public void markHit(int row, int col) {
         grid[row][col].markHit();
-        points++;
+        points--;
     }
 
     public void markMiss(int row, int col) {

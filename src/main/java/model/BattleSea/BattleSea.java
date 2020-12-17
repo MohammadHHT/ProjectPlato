@@ -1,17 +1,27 @@
 package model.BattleSea;
 
+import model.DotsAndBoxes.DotsAndBoxes;
+import model.Game;
+import model.Player;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-public class BattleSea {
+public class BattleSea extends Game {
+    private static HashMap<Long, BattleSea> battleSeas;
+
 
     public static Scanner scanner = new Scanner(System.in);
-    static BattleSeaPlayer host = new BattleSeaPlayer();
-    static BattleSeaPlayer guest =  new BattleSeaPlayer();
+     BattleSeaPlayer host ;
+     BattleSeaPlayer guest ;
+     BattleSeaPlayer turn;
 
-    public static void runBattleSea(){
-        setupRandomBoard(host);
-        host.playerGrid.printShips();
-        //TODO ?????
+    public BattleSea(Player host) {
+        super();
+        battleSeas.put(getGameID(), this);
+        this.host = new BattleSeaPlayer(host);
+        turn = this.host;
     }
 
     private static void setupRandomBoard(BattleSeaPlayer battleSeaPlayer) {
@@ -52,20 +62,16 @@ public class BattleSea {
         while (!flag) {
             if (!opponent.playerGrid.alreadyGuessed(y, x)){
                 if (opponent.playerGrid.hasShip(y, x)) {
-                    player.oppGrid.markHit(y, x);
                     opponent.playerGrid.markHit(y, x);
                     System.out.println("Bombed successfully!!!");
                     Ship oppShip = opponent.ships[convertLetterToInt(opponent.playerGrid.get(y, x).getShipName())];
-                    Ship playerShip = player.ships[convertLetterToInt(player.oppGrid.get(y, x).getShipName())];
                     if (isShipDestroyCompletely(opponent, oppShip)) {
-                        changeDestroyedShipSign(player, playerShip);
                         changeDestroyedShipSign(opponent, oppShip);
                     }
 
 
 
                 } else {
-                    player.oppGrid.markMiss(y, x);
                     opponent.playerGrid.markMiss(y, x);
                     System.out.println("Bombed unsuccessfully!");
                     flag = true;
@@ -259,5 +265,20 @@ public class BattleSea {
                 break;
         }
         return toReturn;
+    }
+
+    @Override
+    public void turn() {
+
+    }
+
+    @Override
+    public boolean join(Player guest) {
+        return false;
+    }
+
+    @Override
+    public Player judge() {
+        return null;
     }
 }
