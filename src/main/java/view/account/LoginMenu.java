@@ -3,6 +3,7 @@ package view.account;
 import view.Back;
 import view.Client;
 import view.Menu;
+import view.primary.AdminMenu;
 import view.primary.PlayerMenu;
 
 public class LoginMenu extends Menu implements Back {
@@ -31,8 +32,11 @@ public class LoginMenu extends Menu implements Back {
             } else if (commands[0].equalsIgnoreCase("login")) {
                 if (commands.length == 2) {
                     login(commands[1]);
-                    if (Client.getClient().getResponse().equals("successfully logged in")) {
-                        next(AccountMenu.getAccountMenu());
+                    if (Client.getClient().getResponse().equals("Admin logged in")) {
+                        next(AdminMenu.getAdminMenu());
+                        break;
+                    } else if (Client.getClient().getResponse().equals("Player logged in")) {
+                        next(PlayerMenu.getPlayerMenu());
                         break;
                     }
                 } else {
@@ -41,7 +45,7 @@ public class LoginMenu extends Menu implements Back {
             } else if (commands[0].equalsIgnoreCase("delete")) {
                 if (commands.length == 2) {
                     delete(commands[1]);
-                    if (Client.getClient().getResponse().equals("successfully deleted")) {
+                    if (Client.getClient().getResponse().equals("Deleted")) {
                         next(RegisterMenu.getRegisterMenu());
                         break;
                     }
@@ -54,7 +58,6 @@ public class LoginMenu extends Menu implements Back {
                 System.out.println("Wrong command");
             }
         }
-
     }
 
     private void delete(String username) {
