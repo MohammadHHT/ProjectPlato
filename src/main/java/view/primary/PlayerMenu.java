@@ -1,4 +1,9 @@
-package view;
+package view.primary;
+
+import view.Client;
+import view.Menu;
+import view.account.AccountMenu;
+import view.game.GameMenu;
 
 public class PlayerMenu extends Menu {
     private static final PlayerMenu playerMenu = new PlayerMenu();
@@ -49,7 +54,8 @@ public class PlayerMenu extends Menu {
     }
 
     private void playSuggested() {
-        System.out.print("Game Name (Battle Sea • Dots And Boxes): >");
+        Client.getClient().send("game names");
+        System.out.print("Game Name (" + Client.getClient().getResponse() + "): >");
         String game = scanner.nextLine().replaceAll(" ", "");
         Client.getClient().send("user playSuggested " + username + " " + game);
 

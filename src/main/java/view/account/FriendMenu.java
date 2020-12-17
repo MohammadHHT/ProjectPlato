@@ -1,5 +1,9 @@
-package view;
+package view.account;
 
+
+import view.*;
+import view.primary.AdminMenu;
+import view.primary.PlayerMenu;
 
 public class FriendMenu extends Menu implements Back {
     private static final FriendMenu friendMenu = new FriendMenu();

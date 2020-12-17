@@ -31,6 +31,10 @@ public class Grid {
         grid[row][col].markMiss();
     }
 
+    public void markAllHit(int row, int col) {
+        grid[row][col].markAllHit();
+    }
+
     public void setStatus(int row, int col, int status) {
         grid[row][col].setStatus(status);
     }
@@ -63,7 +67,7 @@ public class Grid {
         return NUM_COLS;
     }
 
-    public void printStatus() {
+    public void printPlayerGrid() {
         generalPrintMethod(0);
     }
 
@@ -71,7 +75,7 @@ public class Grid {
         generalPrintMethod(1);
     }
 
-    public void printCombined() {
+    public void printOppGrid() {
         generalPrintMethod(2);
     }
 
@@ -84,7 +88,7 @@ public class Grid {
         int col = s.getColumn();
         int length = s.getLength();
         int width = s.getWidth();
-        char shipName = s.getShipName();
+        String shipName = s.getShipName();
         int dir = s.getDirection();
 
         if (!(s.isDirectionSet()) || !(s.isLocationSet()))
@@ -128,51 +132,43 @@ public class Grid {
             for (int j = 0; j < NUM_COLS; j++) {
                 if (type == 0) {
                     if (grid[i][j].isUnGuessed())
-                        System.out.print("_ ");
+                        System.out.print("O ");
                     else if (grid[i][j].checkMiss())
                         System.out.print("- ");
                     else if (grid[i][j].checkHit())
                         System.out.print("+ ");
                     else if (grid[i][j].isAllHit())
                         System.out.println("* ");
+                    else if (grid[i][j].hasShip())
+                        System.out.println("# ");
                 } else if (type == 1) {
                     if (grid[i][j].hasShip()) {
-                        if (grid[i][j].getShipName() == 'A') {
+                        if (grid[i][j].getShipName() == "A") {
                             System.out.print("A ");
-                        } else if (grid[i][j].getShipName() == 'B') {
+                        } else if (grid[i][j].getShipName().equals("B")) {
                             System.out.print("B ");
-                        } else if (grid[i][j].getShipName() == 'C') {
+                        } else if (grid[i][j].getShipName().equals("C")) {
                             System.out.print("C ");
-                        } else if (grid[i][j].getShipName() == 'D') {
+                        } else if (grid[i][j].getShipName().equals("D")) {
                             System.out.print("D ");
-                        } else if (grid[i][j].getShipName() == 'E') {
+                        } else if (grid[i][j].getShipName().equals("E")) {
                             System.out.println("E ");
-                        } else if (grid[i][j].getShipName() == 'F') {
+                        } else if (grid[i][j].getShipName().equals("F")) {
                             System.out.println("F ");
                         }
                     } else if (!(grid[i][j].hasShip())) {
-                        System.out.print("_ ");
+                        System.out.print("O ");
                     }
+                } else if (type == 2) {
+                    if (grid[i][j].isUnGuessed())
+                        System.out.print("O ");
+                    else if (grid[i][j].checkMiss())
+                        System.out.print("- ");
+                    else if (grid[i][j].checkHit())
+                        System.out.print("+ ");
+                    else if (grid[i][j].isAllHit())
+                        System.out.println("* ");
                 }
-//                else {
-//                    if (grid[switchCounterToIntegerForArray(i)][j].checkHit())
-//                        System.out.print(" ");
-//                    else if (grid[switchCounterToIntegerForArray(i)][j].hasShip()) {
-//                        // System.out.print("X ");
-//                        if (grid[switchCounterToIntegerForArray(i)][j].getLengthOfShip() == 2) {
-//                            System.out.print("D ");
-//                        } else if (grid[switchCounterToIntegerForArray(i)][j].getLengthOfShip() == 3) {
-//                            System.out.print("C ");
-//                        } else if (grid[switchCounterToIntegerForArray(i)][j].getLengthOfShip() == 4) {
-//                            System.out.print("B ");
-//                        } else if (grid[switchCounterToIntegerForArray(i)][j].getLengthOfShip() == 5) {
-//                            System.out.print("A ");
-//                        }
-//                    }
-//                    else if (!(grid[switchCounterToIntegerForArray(i)][j].hasShip())) {
-//                        System.out.print("_ ");
-//                    }
-//                }
             }
         }
             System.out.println();

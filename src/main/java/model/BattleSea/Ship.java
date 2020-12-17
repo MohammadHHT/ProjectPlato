@@ -1,7 +1,7 @@
 package model.BattleSea;
 
 public class Ship {
-    private char shipName;
+    private String shipName;
     private int row;
     private int column;
     private int length;
@@ -11,7 +11,7 @@ public class Ship {
     public static final int Horizontal = 0;
     public static final int Vertical = 1;
 
-    public Ship(char shipName, int length, int width) {
+    public Ship(String shipName, int length, int width) {
         this.shipName = shipName;
         this.length = length;
         this.width = width;
@@ -40,7 +40,7 @@ public class Ship {
         this.direction = direction;
     }
 
-    public char getShipName() {
+    public String getShipName() {
         return shipName;
     }
 

@@ -1,4 +1,8 @@
-package view;
+package view.account;
+
+import view.Back;
+import view.Client;
+import view.Menu;
 
 public class AccountMenu extends Menu implements Back {
     private static final AccountMenu accountMenu = new AccountMenu();

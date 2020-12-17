@@ -10,14 +10,14 @@ public class Location {
     private boolean hasShip;
     private int status;
     private int lengthOfShip;
-    private char shipName;
+    private String shipName;
     private int directionOfShip;
 
     public Location() {
         status = 0;
         hasShip = false;
         lengthOfShip = -1;
-        shipName = ' ';
+        shipName = " ";
         directionOfShip = -1;
     }
 
@@ -45,6 +45,10 @@ public class Location {
         setStatus(MISSED);
     }
 
+    public void markAllHit() {
+        setStatus(ALL_HIT);
+    }
+
     public boolean hasShip() {
         return hasShip;
     }
@@ -69,11 +73,11 @@ public class Location {
         lengthOfShip = val;
     }
 
-    public void setShipName(char shipName) {
+    public void setShipName(String shipName) {
         this.shipName = shipName;
     }
 
-    public char getShipName() {
+    public String getShipName() {
         return shipName;
     }
 

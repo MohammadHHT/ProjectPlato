@@ -1,6 +1,7 @@
 package controller;
 
 import exception.*;
+import exception.game.GameNotFound;
 import model.*;
 
 public class AccountController {

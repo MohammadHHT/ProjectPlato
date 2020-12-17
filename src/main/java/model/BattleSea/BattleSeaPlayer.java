@@ -3,7 +3,7 @@ package model.BattleSea;
 public class BattleSeaPlayer {
     private static final int[] shipsLength = {2, 2, 3, 4, 4, 5};
     private static final int[] shipsWidth = {1, 1, 1, 1, 1, 2};
-    private static final char[] shipsName = {'A', 'B', 'C', 'D', 'E', 'F'};
+    private static final String[] shipsName = {"A", "B", "C", "D", "E", "F"};
     private static final int numOfShips = 6;
 
     public Ship[] ships;
