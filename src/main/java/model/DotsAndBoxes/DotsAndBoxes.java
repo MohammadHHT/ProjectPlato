@@ -17,6 +17,7 @@ public class DotsAndBoxes extends Game {
     private boolean playerMovedInThisTurn = false;
     private int hostScore;
     private int guestScore;
+    private Player winner;
 
     public int getHostScore() {
         return hostScore;
@@ -44,15 +45,6 @@ public class DotsAndBoxes extends Game {
 
     public boolean isBoardFull() {
         return edges.size() == 112;
-    }
-
-    public Player getWinner() {
-        if (hostScore > guestScore)
-            return host;
-        else if (guestScore > hostScore)
-            return guest;
-        else
-            return null;
     }
 
     /*    private Player winner(int x1, int y1, int x2, int y2) {                             // executes just one time when edges size is 64 (board is full)
@@ -140,6 +132,14 @@ public class DotsAndBoxes extends Game {
         return stringBuilder.toString();
     }
 
+    public Player winByForfeit() {
+        if (turn == guest)
+            winner = host;
+        else
+            winner =guest;
+        return winner;
+    }
+
     @Override
     public void turn() {                                                                // flips turn
         if (turn.equals(host)) {
@@ -162,7 +162,11 @@ public class DotsAndBoxes extends Game {
 
     @Override
     public Player judge() {                                                             // judges whole game when finished (in this one, board is full)
-        return null;
+        if (hostScore > guestScore)
+            winner = host;
+        else if (guestScore > hostScore)
+            winner = guest;
+        return winner;
     }
 
     public Player getTurn() {

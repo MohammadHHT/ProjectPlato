@@ -87,6 +87,8 @@ public class GameCommands implements ResolveCommand {
                 case "show result":
                     done(DotsAndBoxesController.getDotsAndBoxesController().showResult(Long.parseLong(tokens[3])));
                     break;
+                case "end":
+                    done(DotsAndBoxesController.getDotsAndBoxesController().end(Long.parseLong(tokens[3])));
             }
         }
     }

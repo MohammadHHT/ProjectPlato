@@ -4,7 +4,6 @@ import exception.game.GameNotFound;
 import exception.game.NotYourTurn;
 import model.DotsAndBoxes.DotsAndBoxes;
 
-import model.DotsAndBoxes.DotsAndBoxes;
 import model.Player;
 
 public class DotsAndBoxesController {
@@ -97,10 +96,23 @@ public class DotsAndBoxesController {
 
     public String showResult(long gameID) {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-        Player winner = dotsAndBoxes.getWinner();
-        if (winner != null)
-            return showScore(gameID) + '\n' + winner.getUsername() + "is the winner";
-        else
-            return showScore(gameID) + '\n' + "Its a draw";
+        if (dotsAndBoxes.isBoardFull()) {
+            Player winner = dotsAndBoxes.judge();
+            if (winner != null)
+                return showScore(gameID) + '\n' + winner.getUsername() + "is the winner";
+            else
+                return showScore(gameID) + '\n' + "Its a draw";
+        } else
+            return "Game is not over yet";
+    }
+
+    public String end(long gameID) {
+        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
+        if (dotsAndBoxes.isBoardFull()) {
+            return "Back to the game menu";
+        } else {
+            return dotsAndBoxes.winByForfeit().getUsername() + "won by forfeit" + '\n' + "Back to the game menu";
+        }
+
     }
 }
