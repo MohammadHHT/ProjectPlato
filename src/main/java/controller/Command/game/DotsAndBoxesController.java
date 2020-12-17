@@ -54,17 +54,21 @@ public class DotsAndBoxesController {
 
     public String endOfMyTurn(long gameID) {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-
+        if (dotsAndBoxes.hasPlayerMovedInThisTurn()) {
+            dotsAndBoxes.turn();
+            return "Turn changed successfully";
+        } else
+            return "in your turn you should draw a line";
     }
 
     public String showScore(long gameID) {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-
+        return "Host score = " + dotsAndBoxes.getHostScore() + "\n" + "Guest score = " + dotsAndBoxes.getGuestScore();
     }
 
     public String showAvailableLines(long gameID) {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
-
+        
     }
 
     public String showTable(long gameID) {
