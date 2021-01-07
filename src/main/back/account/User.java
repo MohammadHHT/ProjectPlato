@@ -18,6 +18,7 @@ public class User {
     private String email;
     private String phone;
     private LocalDateTime date;
+    private boolean logged;
 
     static {
         users = new HashMap<>();
@@ -33,11 +34,12 @@ public class User {
         this.email = email;
         this.phone = phone;
         date = LocalDateTime.now();
+        logged = false;
     }
 
     private long IDGenerator() {
         Random random = new Random();
-        return (username.charAt(0) % 100) + ((username.charAt(1) % 100) * 100) + ((username.charAt(2) % 100) * 10000) + (random.nextInt(10000) * 1000000);
+        return 1000000;
     }
 
     public static void addUsers(ArrayList<User> users) {
@@ -100,6 +102,14 @@ public class User {
 
     public LocalDateTime getDate() {
         return date;
+    }
+
+    public void setLogged(boolean logged) {
+        this.logged = logged;
+    }
+
+    public boolean isLogged() {
+        return logged;
     }
 
     @Override

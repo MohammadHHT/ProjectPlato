@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class Server extends WebSocketServer {
 
-    private static int PORT = 4444;
+    private static final int PORT = 4444;
 
     private Set<WebSocket> conns;
 
@@ -39,10 +39,8 @@ public class Server extends WebSocketServer {
     }
 
     public void onError(WebSocket conn, Exception e) {
-        //ex.printStackTrace();
         if (conn != null) {
             conns.remove(conn);
-            // do some thing if required
         }
         System.out.println("ERROR from " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
     }
@@ -51,12 +49,10 @@ public class Server extends WebSocketServer {
         switch (tokens[0]) {
             case "user":
                 return UserCommand.resolve(Arrays.copyOfRange(tokens, 1, tokens.length));
-            break;
             case "game":
                 return GameCommand.resolve(Arrays.copyOfRange(tokens, 1, tokens.length));
-            break;
             default:
-                return null;
+                return "failed command";
         }
     }
 }
