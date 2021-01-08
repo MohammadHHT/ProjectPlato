@@ -1,5 +1,7 @@
-import account.Admin;
+package main.back;
+
 import controller.Server;
+import main.back.account.Admin;
 
 public class Main {
     public static void main(String[] args) {

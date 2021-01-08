@@ -1,7 +1,7 @@
 package controller;
 
 import account.Player;
-import account.User;
+import main.back.account.User;
 
 public interface UserCommand {
     static String resolve(String[] tokens) {

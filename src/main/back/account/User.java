@@ -1,6 +1,5 @@
-package account;
+package main.back.account;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +33,7 @@ public class User {
         this.email = email;
         this.phone = phone;
         date = LocalDateTime.now();
-        logged = false;
+        logged = true;
     }
 
     private long IDGenerator() {
