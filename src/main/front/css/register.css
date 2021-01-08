@@ -138,6 +138,12 @@ section.login form .next.show {
     visibility: visible;
 }
 
+section.register form .next.hide,
+section.login form .next.hide {
+    transform: translateX(10px);
+    visibility: hidden;
+}
+
 section.register form .progress,
 section.login form .progress {
     position: absolute;
