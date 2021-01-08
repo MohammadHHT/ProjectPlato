@@ -1,8 +1,8 @@
 function login() {
-    this.items = document.querySelectorAll('.login form ol .item');
-    this.inputs = document.querySelectorAll('.login form ol .item input');
-    this.next = document.querySelector('.login form .next');
-    this.message = document.querySelector('.login form .message');
+    this.items = document.querySelectorAll('section.login form ol .item');
+    this.inputs = document.querySelectorAll('section.login form ol .item input');
+    this.next = document.querySelector('section.login form .next');
+    this.message = document.querySelector('section.login form .message');
     this.question = 1;
     this.init();
 }
@@ -27,15 +27,11 @@ login.prototype.init = function () {
     this.inputs[0].addEventListener('focus', function (event) {
         self.next.classList.add('show');
     });
-
-    document.querySelector('.login h1 span').addEventListener('click', function(event) {
-        nextPage('login', 'register');
-    });
 }
 
 login.prototype.next_question = function () {
     if ((this.question == 1 && this.q1()) || (this.question == 2 && this.q2())) {
-        document.querySelector('.login form .progress').style.transform = 'scaleX(' + this.question / 2 + ')';
+        document.querySelector('section.login form .progress').style.transform = 'scaleX(' + this.question / 2 + ')';
         this.items[this.question - 1].classList.remove('show');
         this.items[this.question].classList.add('show');
         this.items[this.question].querySelector('input').focus();

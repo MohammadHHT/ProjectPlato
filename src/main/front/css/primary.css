@@ -13,7 +13,7 @@
     font-family: 'Product';
 }
 
-.primary header {
+section.primary header {
     display: flex;
     width: 100%;
     height: calc(0.075 * 97vh);
@@ -23,7 +23,7 @@
     align-items: center;
 }
 
-.primary header .search {
+section.primary header .search {
     outline: none;
     border: none;
     border-bottom: 2px solid #222026;
@@ -38,6 +38,6 @@
     transition: opacity ease-in-out 0.1s;
 }
 
-.primary header .search:hover, .primary header .search:focus {
+section.primary header .search:hover, section.primary header .search:focus {
     opacity: 1;
 }

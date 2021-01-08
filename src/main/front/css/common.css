@@ -79,7 +79,7 @@ main section {
     display: block;
     transition: transform ease-in-out 0.3s, opacity ease-in-out 0.3s;
     opacity: 0;
-    transform: translateY(20%);
+    transform: translateY(10%);
 }
 
 .page {

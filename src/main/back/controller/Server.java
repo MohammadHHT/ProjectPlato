@@ -35,6 +35,7 @@ public class Server extends WebSocketServer {
     }
 
     public void onMessage(WebSocket conn, String message) {
+        System.out.println(message);
         conn.send(resolve(message.trim().split(" ")));
     }
 
