@@ -1,4 +1,4 @@
-package controller;
+package main.back.controller;
 
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;

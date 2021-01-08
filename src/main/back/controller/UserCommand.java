@@ -1,4 +1,4 @@
-package controller;
+package main.back.controller;
 
 import account.Player;
 import main.back.account.User;
@@ -52,6 +52,7 @@ public interface UserCommand {
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 if (!user.isLogged()) {
+                    user.setLogged(true);
                     return "done";
                 } else {
                     return "failed logging";

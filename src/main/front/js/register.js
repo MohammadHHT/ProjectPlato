@@ -80,25 +80,15 @@ register.prototype.init = function () {
                 break;
         }
     });
-}
 
-register.prototype.submission = function () {
-    if ((this.question == 1 && this.firstName()) || (this.question == 2 && this.lastName()) || (this.question == 3 && this.username()) || (this.question == 4 && this.password()) || (this.question == 5 && this.phone())) {
-        this.progress.style.transform = 'scaleX(' + this.question / 6 + ')';
-        this.items[this.question - 1].classList.remove('show');
-        this.items[this.question].classList.add('show');
-        this.items[this.question].querySelector('input').focus();
-        this.message.style.opacity = 0;
-        this.question++;
-    } else if (this.question == 6) {
-        this.q6();
-    } else {
-        this.items[this.question - 1].querySelector('input').focus();
-    }
+    this.navigation[1].addEventListener('click', function (event) {
+        self.navigation[1].classList.remove('show');
+        self.navigation[2].classList.add('show');
+    });
 }
 
 register.prototype.firstName = function () {
-    var e = new RegExp('^[a-zA-Z]+$');
+    var e = new RegExp('^[a-zA-Z\\s]+$');
     if (e.test(this.inputs[0].value)) {
         this.progress.style.transform = 'scaleX(' + 1 / 6 + ')';
         this.items[0].classList.remove('show');
@@ -113,7 +103,7 @@ register.prototype.firstName = function () {
 }
 
 register.prototype.lastName = function () {
-    var e = new RegExp('^[a-zA-Z]+$');
+    var e = new RegExp('^[a-zA-Z\\s]+$');
     if (e.test(this.inputs[1].value)) {
         this.progress.style.transform = 'scaleX(' + 2 / 6 + ')';
         this.items[1].classList.remove('show');

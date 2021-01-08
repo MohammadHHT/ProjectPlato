@@ -3,63 +3,127 @@ function login() {
     this.inputs = document.querySelectorAll('section.login form ol .item input');
     this.next = document.querySelector('section.login form .next');
     this.message = document.querySelector('section.login form .message');
+    this.progress = document.querySelector('section.login form .progress');
+    this.navigation = document.querySelectorAll('aside nav');
     this.question = 1;
     this.init();
 }
 
 login.prototype.init = function () {
-    this.items[0].classList.add('show');
-    var self = this;
-
-    for (let i = 0; i < 2; i++) {
-        this.inputs[i].addEventListener('keydown', function (event) {
-            if (event.keyCode == 13) {
-                event.preventDefault();
-                self.next_question();
-            }
-        });
-    }
-
-    this.next.addEventListener('click', function (event) {
-        self.next_question();
-    });
+    const self = this;
 
     this.inputs[0].addEventListener('focus', function (event) {
         self.next.classList.add('show');
     });
+
+    this.inputs[0].addEventListener('keydown', function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            self.username();
+        }
+    });
+
+    this.inputs[1].addEventListener('keydown', function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            self.password();
+        }
+    });
+
+    this.next.addEventListener('click', function (event) {
+        switch (self.question) {
+            case 1:
+                self.username();
+                break;
+            case 2:
+                self.password();
+                break;
+        }
+    });
+
+    this.navigation[2].addEventListener('click', function (event) {
+        self.navigation[2].classList.remove('show');
+        self.navigation[1].classList.add('show');
+    });
 }
 
-login.prototype.next_question = function () {
-    if ((this.question == 1 && this.q1()) || (this.question == 2 && this.q2())) {
-        document.querySelector('section.login form .progress').style.transform = 'scaleX(' + this.question / 2 + ')';
-        this.items[this.question - 1].classList.remove('show');
-        this.items[this.question].classList.add('show');
-        this.items[this.question].querySelector('input').focus();
-        this.message.style.opacity = 0;
-        this.question++;
+login.prototype.username = function () {
+    if (this.inputs[0].value.length > 0) {
+        self.progress.style.transform = 'scaleX(' + 1 / 2 + ')';
+        self.items[0].classList.remove('show');
+        self.items[1].classList.add('show');
+        self.items[1].querySelector('input').focus();
+        self.message.style.opacity = 0;
+        self.question++;
     } else {
-        this.items[this.question - 1].querySelector('input').focus();
-    }
-}
-
-login.prototype.q1 = function () {
-    var e = new RegExp('^[a-zA-Z]+$');
-    if (e.test(this.inputs[0].value)) {
-        return true
-    } else {
-        this.message.innerHTML = "Just english letters!";
+        this.message.innerHTML = "Enter username!";
         this.message.style.opacity = 1;
     }
-    return false;
 }
 
-login.prototype.q2 = function () {
-    var e = new RegExp('^[a-zA-Z]+$');
-    if (e.test(this.inputs[1].value)) {
-        return true
+login.prototype.password = function () {
+    if (this.inputs[3].value.length > 0) {
+        const connection = new WebSocket('ws://127.0.0.1:4444');
+        const self = this;
+
+        connection.onopen = function () {
+            connection.send('user login ' + self.inputs[0].value + ' ' + self.inputs[1].value);
+        };
+
+        connection.onmessage = function (e) {
+            if (e.data.localeCompare('done') == 0) {
+                self.progress.style.transform = 'scaleX(' + 2 / 2 + ')';
+                self.items[1].style.opacity = 0;
+                self.clearFields();
+                self.message.style.opacity = 0;
+                self.next.classList.add('hide');
+                self.question++;
+                setTimeout(function () {
+                    nextPage('login', 'primary');
+                    self.navigation[2].classList.remove('show');
+                    self.navigation[3].classList.add('show');
+                    self.navigation[4].classList.add('show');
+                    self.navigation[5].classList.add('show');
+                }, 1000);
+            } else {
+                if (e.data.localeCompare('failed username') == 0) {
+                    this.message.innerHTML = "Username doesn't exist!";
+                    this.message.style.opacity = 1;
+                } else if (e.data.localeCompare('failed password') == 0) {
+                    this.message.innerHTML = "Wrong password!";
+                    this.message.style.opacity = 1;
+                } else {
+                    this.message.innerHTML = "You've logged in already!";
+                    this.message.style.opacity = 1;
+                }
+                self.question--;
+                self.clearFields();
+                self.progress.style.transform = 'scaleX(' + 0 + ')';
+                self.items[1].classList.remove('show');
+                self.items[0].classList.add('show');
+                self.items[0].querySelector('input').focus();
+                self.message.style.opacity = 0;
+            }
+            connection.close();
+        };
     } else {
-        this.message.innerHTML = "Just english letters!";
+        this.message.innerHTML = "Enter password!";
         this.message.style.opacity = 1;
     }
-    return false;
+}
+
+login.prototype.nextPage = function (previous, next) {
+    let pre = document.querySelector('section.' + previous);
+    let nxt = document.querySelector('section.' + next);
+
+    if (pre != undefined) {
+        pre.classList.remove('page');
+    }
+    nxt.classList.add('page');
+}
+
+login.prototype.clearFields = function () {
+    for (let i = 0; i < 2; i++) {
+        this.inputs[i].value = '';
+    }
 }

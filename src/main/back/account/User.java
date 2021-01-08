@@ -1,5 +1,6 @@
-package main.back.account;
+package account;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class User {
     }
 
     public User(String firstName, String lastName, String username, String password, String email, String phone) {
-        userID = IDGenerator();
+        userID = (new Random()).nextLong();
         users.put(username, this);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,11 +35,6 @@ public class User {
         this.phone = phone;
         date = LocalDateTime.now();
         logged = true;
-    }
-
-    private long IDGenerator() {
-        Random random = new Random();
-        return 1000000;
     }
 
     public static void addUsers(ArrayList<User> users) {
