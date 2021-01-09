@@ -1,6 +1,6 @@
-package game;
+package main.back.game;
 
-import account.Player;
+import main.back.account.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;

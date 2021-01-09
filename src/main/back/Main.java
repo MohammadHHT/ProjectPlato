@@ -1,6 +1,6 @@
 package main.back;
 
-import account.Admin;
+import main.back.account.Admin;
 import main.back.controller.Server;
 
 public class Main {

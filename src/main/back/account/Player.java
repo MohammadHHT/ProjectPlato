@@ -1,7 +1,5 @@
 package main.back.account;
 
-import main.back.account.User;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;

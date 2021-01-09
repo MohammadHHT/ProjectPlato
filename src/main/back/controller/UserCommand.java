@@ -1,6 +1,6 @@
 package main.back.controller;
 
-import account.Player;
+import main.back.account.Player;
 import main.back.account.User;
 
 public interface UserCommand {
