@@ -1,4 +1,4 @@
-package game;
+package main.back.game;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

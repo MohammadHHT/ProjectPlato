@@ -1,6 +1,6 @@
-package game;
+package main.back.game;
 
-import account.Player;
+import main.back.account.Player;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
