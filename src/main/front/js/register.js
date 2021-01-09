@@ -84,6 +84,7 @@ register.prototype.init = function () {
     this.navigation[1].addEventListener('click', function (event) {
         self.navigation[1].classList.remove('show');
         self.navigation[2].classList.add('show');
+        self.nextPage('register', 'login');
     });
 }
 
@@ -206,10 +207,10 @@ register.prototype.email = function () {
             if (e.data.localeCompare('true') == 0) {
                 self.progress.style.transform = 'scaleX(' + 6 / 6 + ')';
                 self.items[5].style.opacity = 0;
-                self.clearFields();
                 self.message.style.opacity = 0;
-                self.next.classList.add('hide');
+                self.next.classList.remove('show');
                 connection.send('user register ' + self.inputs[0].value + ' ' + self.inputs[1].value + ' ' + self.inputs[2].value + ' ' + self.inputs[3].value + ' ' + self.inputs[4].value + ' ' + self.inputs[5].value);
+                self.clearFields();
                 setTimeout(function() {
                     nextPage('register', 'primary');
                     self.navigation[1].classList.remove('show');

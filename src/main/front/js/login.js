@@ -44,17 +44,18 @@ login.prototype.init = function () {
     this.navigation[2].addEventListener('click', function (event) {
         self.navigation[2].classList.remove('show');
         self.navigation[1].classList.add('show');
+        self.nextPage('login', 'register');
     });
 }
 
 login.prototype.username = function () {
     if (this.inputs[0].value.length > 0) {
-        self.progress.style.transform = 'scaleX(' + 1 / 2 + ')';
-        self.items[0].classList.remove('show');
-        self.items[1].classList.add('show');
-        self.items[1].querySelector('input').focus();
-        self.message.style.opacity = 0;
-        self.question++;
+        this.progress.style.transform = 'scaleX(' + 1 / 2 + ')';
+        this.items[0].classList.remove('show');
+        this.items[1].classList.add('show');
+        this.items[1].querySelector('input').focus();
+        this.message.style.opacity = 0;
+        this.question++;
     } else {
         this.message.innerHTML = "Enter username!";
         this.message.style.opacity = 1;
@@ -62,7 +63,7 @@ login.prototype.username = function () {
 }
 
 login.prototype.password = function () {
-    if (this.inputs[3].value.length > 0) {
+    if (this.inputs[1].value.length > 0) {
         const connection = new WebSocket('ws://127.0.0.1:4444');
         const self = this;
 
@@ -87,22 +88,24 @@ login.prototype.password = function () {
                 }, 1000);
             } else {
                 if (e.data.localeCompare('failed username') == 0) {
-                    this.message.innerHTML = "Username doesn't exist!";
-                    this.message.style.opacity = 1;
+                    self.message.innerHTML = "Username doesn't exist!";
+                    self.message.style.opacity = 1;
                 } else if (e.data.localeCompare('failed password') == 0) {
-                    this.message.innerHTML = "Wrong password!";
-                    this.message.style.opacity = 1;
+                    self.message.innerHTML = "Wrong password!";
+                    self.message.style.opacity = 1;
                 } else {
-                    this.message.innerHTML = "You've logged in already!";
-                    this.message.style.opacity = 1;
+                    self.message.innerHTML = "You've logged in already!";
+                    self.message.style.opacity = 1;
                 }
-                self.question--;
-                self.clearFields();
-                self.progress.style.transform = 'scaleX(' + 0 + ')';
-                self.items[1].classList.remove('show');
-                self.items[0].classList.add('show');
-                self.items[0].querySelector('input').focus();
-                self.message.style.opacity = 0;
+                setTimeout(function () {
+                    self.question--;
+                    self.clearFields();
+                    self.progress.style.transform = 'scaleX(' + 0 + ')';
+                    self.items[1].classList.remove('show');
+                    self.items[0].classList.add('show');
+                    self.items[0].querySelector('input').focus();
+                    self.message.style.opacity = 0;
+                }, 1000);
             }
             connection.close();
         };
