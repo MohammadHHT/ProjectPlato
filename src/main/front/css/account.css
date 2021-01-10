@@ -1,0 +1,105 @@
+@font-face {
+    src: url('../font/Product Sans Bold.ttf');
+    font-family: 'Product Bold';
+}
+
+@font-face {
+    src: url('../font/Product Sans Regular.ttf');
+    font-family: 'Product';
+}
+
+@font-face {
+    src: url('../font/Questrial-Regular.ttf');
+    font-family: 'Questrial';
+}
+
+section.account {
+    padding: calc(0.03 * 97vh);
+}
+
+section.account header {
+    height: calc(0.25 * 0.94 * 97vh);
+    width: 100%;
+    border-radius: 9.4px;
+    background-color: rgb(239, 233, 224);
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    padding: 4px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+section.account header div {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+section.account header div:first-child {
+    flex-basis: 33.33%;
+    padding: 2%;
+}
+
+#avatar {
+    width: 75%;
+    margin-bottom: 10%;
+}
+
+.money {
+    display: block;
+    font-family: 'Questrial';
+    font-size: 20px;
+}
+
+.flaticon-coin:before {
+    margin-left: 0;
+    font-size: 30px;
+    vertical-align: middle;
+}
+
+section.account header div:nth-child(2) {
+    flex-grow: 1;
+}
+
+section.account header div:nth-child(3) {
+    flex-basis: calc(0.25 * 0.5 * 0.94 * 97vh - 2px);
+    padding-left: 4px;
+}
+
+section.account header div:nth-child(3) div {
+    width: 100%;
+    height: calc(50% - 2px);
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+}
+
+section.account header div .apply {
+    background-color: rgb(72, 251, 127);
+    margin-bottom: 4px;
+}
+
+section.account header div .ignore {
+    background-color: rgb(241, 52, 83);
+}
+
+section.account header div .apply svg, section.account header div .ignore svg {
+    width: 30%;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+#age {
+    font-family: 'Questrial';
+    font-size: 12px;
+    position: absolute;
+    left: 50%;
+    bottom: 4px;
+    color: black;
+    transform: translateX(-50%);
+    opacity: 0.5;
+}
