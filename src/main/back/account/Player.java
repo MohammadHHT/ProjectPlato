@@ -11,6 +11,7 @@ public class Player extends User {
 
     private int level;
     private int score;
+    private int wins;
     private double money;
     private Set<String> friends;
     private Set<String> friendRequest;
@@ -18,7 +19,6 @@ public class Player extends User {
     private Set<Long> suggestions;
     private ArrayList<Long> inbox;
     private Set<Long> gameLogs;
-    private int wins;
 
     static {
         players = new HashMap<>();
@@ -29,6 +29,7 @@ public class Player extends User {
         players.put(username, this);
         this.level = 0;
         this.score = 0;
+        this.wins = 0;
         this.money = 0;
         this.friends = new HashSet<>();
         this.friendRequest = new HashSet<>();
