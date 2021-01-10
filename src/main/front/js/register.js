@@ -217,6 +217,7 @@ register.prototype.email = function () {
                     self.navigation[3].classList.add('show');
                     self.navigation[4].classList.add('show');
                     self.navigation[5].classList.add('show');
+                    self.navigation[6].classList.add('show');
                 }, 1000);
             } else if (e.data.localeCompare('false') == 0) {
                 self.message.innerHTML = "Email already exists!";
