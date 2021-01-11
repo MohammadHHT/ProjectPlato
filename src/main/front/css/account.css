@@ -30,6 +30,7 @@ section.account header {
     justify-content: space-between;
     align-items: center;
     position: relative;
+    overflow: hidden;
 }
 
 section.account header div {
@@ -37,7 +38,7 @@ section.account header div {
     box-sizing: border-box;
 }
 
-section.account header div:first-child {
+section.account header .first {
     flex-basis: 33.33%;
     padding: 2%;
 }
@@ -50,25 +51,53 @@ section.account header div:first-child {
 .money {
     display: block;
     font-family: 'Questrial';
-    font-size: 20px;
+    font-size: 15px;
 }
 
-.flaticon-coin:before {
-    margin-left: 0;
-    font-size: 30px;
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before {
+    margin: 0 5px 0 0;
+    font-size: 15px;
     vertical-align: middle;
 }
 
-section.account header div:nth-child(2) {
+section.account header .second {
     flex-grow: 1;
+    padding: 2% 10% 2% 0;
+    position: relative;
 }
 
-section.account header div:nth-child(3) {
+section.account header .second .name {
+    font-family: 'Product Bold';
+    font-size: 1.5em;
+    margin: 0.3em 0 0 0;
+}
+
+section.account header .second span {
+    font-family: 'Questrial';
+    font-size: 15px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+section.account header .second .level {
+    position: absolute;
+    padding: 6.4px 10px;
+    font-family: 'Questrial';
+    font-size: 1em;
+    height: auto;
+    top: 19px;
+    right: 22px;
+    border-radius: 15px;
+    color: rgb(239, 233, 224);
+    background-color: rgb(61, 140, 243);
+}
+
+section.account header .third {
     flex-basis: calc(0.25 * 0.5 * 0.94 * 97vh - 2px);
     padding-left: 4px;
 }
 
-section.account header div:nth-child(3) div {
+section.account header .third div {
     width: 100%;
     height: calc(50% - 2px);
     border-radius: 6px;
@@ -76,16 +105,16 @@ section.account header div:nth-child(3) div {
     position: relative;
 }
 
-section.account header div .apply {
+section.account header .third .apply {
     background-color: rgb(72, 251, 127);
     margin-bottom: 4px;
 }
 
-section.account header div .ignore {
+section.account header .third .ignore {
     background-color: rgb(241, 52, 83);
 }
 
-section.account header div .apply svg, section.account header div .ignore svg {
+section.account header .third .apply svg, section.account header .third .ignore svg {
     width: 30%;
     top: 50%;
     left: 50%;
