@@ -17,7 +17,7 @@ section.events {
     padding: calc(0.03 * 97vh);
 }
 
-.money {
+section.events .money {
     display: block;
     font-family: 'Questrial';
     color: #eeeeee;
