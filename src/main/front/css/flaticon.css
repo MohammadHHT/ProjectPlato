@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 10/01/2021 17:06
+  	Creation date: 11/01/2021 08:06
   	*/
 
 @font-face {
@@ -30,4 +30,6 @@ font-style: normal;
 margin-left: 20px;
 }
 
-.flaticon-coin:before { content: "\f100"; }
+.flaticon-mail:before { content: "\f100"; }
+.flaticon-at:before { content: "\f101"; }
+.flaticon-coins:before { content: "\f102"; }
