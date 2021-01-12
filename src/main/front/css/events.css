@@ -24,7 +24,7 @@ section.events .money {
     font-size: 20px;
 }
 
-.box {
+section.events .box {
     height: calc(0.25 * 0.94 * 97vh);
     width: 100%;
     border-radius: 9.4px;
@@ -37,7 +37,6 @@ section.events .money {
     justify-content: space-between;
     align-items: center;
     position: relative;
-
 }
 
 .event-img {
