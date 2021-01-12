@@ -51,7 +51,8 @@ section.account header .first {
 .money {
     display: block;
     font-family: 'Questrial';
-    font-size: 15px;
+    font-size: 2vh;
+    line-height: 1em;
 }
 
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before {
@@ -68,13 +69,16 @@ section.account header .second {
 
 section.account header .second .name {
     font-family: 'Product Bold';
-    font-size: 1.5em;
-    margin: 0.3em 0 0 0;
+    font-size: 3vh;
+    line-height: 1em;
+    padding: 5% 0 0 0;
+    margin: 0;
 }
 
 section.account header .second span {
     font-family: 'Questrial';
-    font-size: 15px;
+    font-size: 1.8vh;
+    line-height: 1em;
     display: block;
     margin-bottom: 6px;
 }
@@ -85,16 +89,17 @@ section.account header .second .level {
     font-family: 'Questrial';
     font-size: 1em;
     height: auto;
-    top: 19px;
-    right: 22px;
-    border-radius: 15px;
+    border-radius: 19px;
     color: rgb(239, 233, 224);
+    transform-origin: top;
     background-color: rgb(61, 140, 243);
 }
 
 section.account header .third {
     flex-basis: calc(0.25 * 0.5 * 0.94 * 97vh - 2px);
     padding-left: 4px;
+    transition: visibility ease-in-out 0.1s;
+    visibility: hidden;
 }
 
 section.account header .third div {
@@ -124,11 +129,32 @@ section.account header .third .apply svg, section.account header .third .ignore 
 
 #age {
     font-family: 'Questrial';
-    font-size: 12px;
+    font-size: 1.5vh;
+    line-height: 1em;
     position: absolute;
     left: 50%;
     bottom: 4px;
     color: black;
     transform: translateX(-50%);
     opacity: 0.5;
+}
+
+#edit {
+    width: calc(0.05 * 97vh);
+    height: calc(0.05 * 97vh);
+    background: transparent;
+    opacity: 0.5;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 0 0 9.4px 0;
+    border: none;
+    transition: opacity 0.1s;
+    outline: none;
+}
+
+#edit:hover {
+    opacity: 1;
 }

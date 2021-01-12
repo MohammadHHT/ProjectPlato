@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="css/register.css" />
     <link rel="stylesheet" type="text/css" href="css/primary.css" />
     <link rel="stylesheet" type="text/css" href="css/account.css" />
-    <script src="js/common.js"></script>
     <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button,
@@ -65,7 +64,7 @@
             <nav class="events" title="Events">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path
-                            d="M11 24h-9v-12h9v12zm0-18h-11v4h11v-4zm2 18h9v-12h-9v12zm0-18v4h11v-4h-11zm4.369-6c-2.947 0-4.671 3.477-5.369 5h5.345c3.493 0 3.53-5 .024-5zm-.796 3.621h-2.043c.739-1.121 1.439-1.966 2.342-1.966 1.172 0 1.228 1.966-.299 1.966zm-9.918 1.379h5.345c-.698-1.523-2.422-5-5.369-5-3.506 0-3.469 5 .024 5zm.473-3.345c.903 0 1.603.845 2.342 1.966h-2.043c-1.527 0-1.471-1.966-.299-1.966z"/>
+                        d="M11 24h-9v-12h9v12zm0-18h-11v4h11v-4zm2 18h9v-12h-9v12zm0-18v4h11v-4h-11zm4.369-6c-2.947 0-4.671 3.477-5.369 5h5.345c3.493 0 3.53-5 .024-5zm-.796 3.621h-2.043c.739-1.121 1.439-1.966 2.342-1.966 1.172 0 1.228 1.966-.299 1.966zm-9.918 1.379h5.345c-.698-1.523-2.422-5-5.369-5-3.506 0-3.469 5 .024 5zm.473-3.345c.903 0 1.603.845 2.342 1.966h-2.043c-1.527 0-1.471-1.966-.299-1.966z" />
                 </svg>
             </nav>
             <nav class="account" title="account">
@@ -96,7 +95,7 @@
         </aside>
 
         <main>
-            <section class="register page">
+            <section class="register">
                 <h1>SIGN UP</h1>
                 <form autocomplete="off">
                     <ol>
@@ -186,7 +185,7 @@
                 </header>
             </section>
 
-            <section class="account">
+            <section class="account page">
                 <header>
                     <div class="first">
                         <img id="avatar" src="avatar/avatar (11).svg">
@@ -194,28 +193,50 @@
                     </div>
                     <div class="second">
                         <h1 class="name">Mahdi Hadi</h1>
-                        <div style="width: 110%; height: 2px; margin: 10px 0; background-color: #464646; transform: translateX(-4.5454%);"></div>
+                        <div
+                            style="width: 110%; height: 2px; margin: 10px 0; background-color: #464646; transform: translateX(-4.5454%);">
+                        </div>
                         <span class="username"><i class="flaticon-at"></i>mahdihadiam</span>
                         <span class="email"><i class="flaticon-mail"></i>mahdihadiam@gmail.com</span>
                         <div class="level" title="level">7</div>
                     </div>
                     <div class="third">
                         <div class="apply">
-                            <svg style="fill: #33b55b;" viewBox="0 -65 434.67733 434" xmlns="http://www.w3.org/2000/svg">
+                            <svg style="fill: #33b55b;" viewBox="0 -65 434.67733 434"
+                                xmlns="http://www.w3.org/2000/svg">
                                 <path
-                                        d="m152.003906 304.34375c-5.460937 0-10.921875-2.089844-15.082031-6.25l-130.664063-130.667969c-8.34375-8.339843-8.34375-21.824219 0-30.164062 8.339844-8.339844 21.820313-8.339844 30.164063 0l115.582031 115.582031 246.253906-246.25c8.339844-8.339844 21.820313-8.339844 30.164063 0 8.339844 8.34375 8.339844 21.824219 0 30.167969l-261.332031 261.332031c-4.160156 4.160156-9.625 6.25-15.085938 6.25zm0 0" />
+                                    d="m152.003906 304.34375c-5.460937 0-10.921875-2.089844-15.082031-6.25l-130.664063-130.667969c-8.34375-8.339843-8.34375-21.824219 0-30.164062 8.339844-8.339844 21.820313-8.339844 30.164063 0l115.582031 115.582031 246.253906-246.25c8.339844-8.339844 21.820313-8.339844 30.164063 0 8.339844 8.34375 8.339844 21.824219 0 30.167969l-261.332031 261.332031c-4.160156 4.160156-9.625 6.25-15.085938 6.25zm0 0" />
                             </svg>
                         </div>
                         <div class="ignore">
                             <svg style="fill: #bb2d44;" viewBox="0 0 311 311.07733" xmlns="http://www.w3.org/2000/svg">
                                 <path
-                                        d="m16.035156 311.078125c-4.097656 0-8.195312-1.558594-11.308594-4.695313-6.25-6.25-6.25-16.382812 0-22.632812l279.0625-279.0625c6.25-6.25 16.382813-6.25 22.632813 0s6.25 16.382812 0 22.636719l-279.058594 279.058593c-3.136719 3.117188-7.234375 4.695313-11.328125 4.695313zm0 0" />
+                                    d="m16.035156 311.078125c-4.097656 0-8.195312-1.558594-11.308594-4.695313-6.25-6.25-6.25-16.382812 0-22.632812l279.0625-279.0625c6.25-6.25 16.382813-6.25 22.632813 0s6.25 16.382812 0 22.636719l-279.058594 279.058593c-3.136719 3.117188-7.234375 4.695313-11.328125 4.695313zm0 0" />
                                 <path
-                                        d="m295.117188 311.078125c-4.097657 0-8.191407-1.558594-11.308594-4.695313l-279.082032-279.058593c-6.25-6.253907-6.25-16.386719 0-22.636719s16.382813-6.25 22.636719 0l279.058594 279.0625c6.25 6.25 6.25 16.382812 0 22.632812-3.136719 3.117188-7.230469 4.695313-11.304687 4.695313zm0 0" />
+                                    d="m295.117188 311.078125c-4.097657 0-8.191407-1.558594-11.308594-4.695313l-279.082032-279.058593c-6.25-6.253907-6.25-16.386719 0-22.636719s16.382813-6.25 22.636719 0l279.058594 279.0625c6.25 6.25 6.25 16.382812 0 22.632812-3.136719 3.117188-7.230469 4.695313-11.304687 4.695313zm0 0" />
                             </svg>
                         </div>
                     </div>
                     <span id="age">since 27 October 2020</span>
+                    <button id="edit" title="edit">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 477.873 477.873"
+                            style="fill: #464646; vertical-align: middle; width: 50%;">
+                            <g>
+                                <path
+                                    d="M392.533,238.937c-9.426,0-17.067,7.641-17.067,17.067V426.67c0,9.426-7.641,17.067-17.067,17.067H51.2
+                                        c-9.426,0-17.067-7.641-17.067-17.067V85.337c0-9.426,7.641-17.067,17.067-17.067H256c9.426,0,17.067-7.641,17.067-17.067
+                                        S265.426,34.137,256,34.137H51.2C22.923,34.137,0,57.06,0,85.337V426.67c0,28.277,22.923,51.2,51.2,51.2h307.2
+                                        c28.277,0,51.2-22.923,51.2-51.2V256.003C409.6,246.578,401.959,238.937,392.533,238.937z" />
+
+                            </g>
+                            <g>
+                                <path d="M458.742,19.142c-12.254-12.256-28.875-19.14-46.206-19.138c-17.341-0.05-33.979,6.846-46.199,19.149L141.534,243.937
+                                        c-1.865,1.879-3.272,4.163-4.113,6.673l-34.133,102.4c-2.979,8.943,1.856,18.607,10.799,21.585
+                                        c1.735,0.578,3.552,0.873,5.38,0.875c1.832-0.003,3.653-0.297,5.393-0.87l102.4-34.133c2.515-0.84,4.8-2.254,6.673-4.13
+                                        l224.802-224.802C484.25,86.023,484.253,44.657,458.742,19.142z" />
+                            </g>
+                        </svg>
+                    </button>
                 </header>
             </section>
         </main>
@@ -224,6 +245,16 @@
     <script src="js/register.js"></script>
     <script src="js/login.js"></script>
     <script>
+        var header = document.querySelector('.account header');
+        var second = document.querySelector('.account header .second');
+        var fullname = document.querySelector('.account header .second .name');
+        var level = document.querySelector('.account header .second .level');
+
+        level.style.top = (header.offsetWidth / 50 + second.offsetHeight / 20) + 'px';
+        level.style.right = header.offsetWidth / 10 + 'px';
+        console.log(fullname.offsetHeight);
+        level.style.transform = 'translateX(100%) scale(' + window.innerHeight * 0.03 / level.offsetHeight + ')';
+
         new register();
         new login();
     </script>
