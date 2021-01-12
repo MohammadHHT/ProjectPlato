@@ -20,7 +20,8 @@ section.events {
 section.events .money {
     display: block;
     font-family: 'Questrial';
-    color: #eeeeee;
+    font-weight: bolder;
+    color: #2ecc71;
     font-size: 20px;
 }
 
@@ -40,8 +41,7 @@ section.events .box {
 }
 
 .event-img {
-    position: relative;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../jpg/battle-ship-event-back-ground.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url("../jpg/battle-ship-event-back-ground.jpg");
     background-attachment:fixed;
     background-repeat: no-repeat;
     background-position: center;
