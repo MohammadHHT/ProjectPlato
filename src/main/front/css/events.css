@@ -1,0 +1,90 @@
+@font-face {
+    src: url('../font/Product Sans Bold.ttf');
+    font-family: 'Product Bold';
+}
+
+@font-face {
+    src: url('../font/Product Sans Regular.ttf');
+    font-family: 'Product';
+}
+
+@font-face {
+    src: url('../font/Questrial-Regular.ttf');
+    font-family: 'Questrial';
+}
+
+section.events {
+    padding: calc(0.03 * 97vh);
+}
+
+section.events .money {
+    display: block;
+    font-family: 'Questrial';
+    color: #eeeeee;
+    font-size: 20px;
+}
+
+section.events .box {
+    height: calc(0.25 * 0.94 * 97vh);
+    width: 100%;
+    border-radius: 9.4px;
+    background-color: rgb(221, 217, 210);
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    padding: 4px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.event-img {
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../jpg/battle-ship-event-back-ground.jpg");
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.box div:first-child {
+    flex-basis: 33.33%;
+    padding: 2%;
+}
+
+section.events .box div #badge-icon {
+    width: 100%;
+    top: 50%;
+    left: 50%;
+}
+
+.events-name {
+    /*float: left;*/
+    alignment: center;
+    margin-left: 50px;
+}
+
+.events-name span {
+    font-family: 'Questrial';
+    font-size: 20px;
+    color: #ecf0f1;
+}
+
+.events-name span:first-child {
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #f1c40f;
+}
+
+.join-button {
+    display: flex;
+    transform: translateY(90%) translateX(70%);
+}
+#info-icon:hover {
+    cursor: pointer;
+    opacity: 60%;
+}
+
+section.events .box .join-button #info-icon {
+    width: 30%;
+}
