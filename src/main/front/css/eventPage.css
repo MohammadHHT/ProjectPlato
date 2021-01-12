@@ -17,33 +17,28 @@ section.event-page {
     padding: calc(0.03 * 97vh);
 }
 
-.event-header-img {
-    display: block;
-    float: left;
-    width: 100%;
-    height: calc(0.25 * 0.94 * 97vh);
-}
-
 .event-header-img img {
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 8px 8px 2px 2px;
+    opacity: 80%;
 }
 
 section.event-page .money {
     display: block;
     font-family: 'Questrial';
-    color: #485460;
-    font-size: 30px;
+    color: #27ae60;
+    font-size: 25px;
+    margin-top: 18px;
 }
 
 section.event-page .box {
     /*height: calc(0.25 * 0.94 * 97vh);*/
-    height: 550px;
+    height: 600px;
     width: 100%;
     border-radius: 9.4px;
     background-color: rgb(221, 217, 210);
-    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
     padding: 4px;
     display: block;
@@ -64,6 +59,16 @@ section.event-page .box {
     height: 80px;
 }
 
+.text {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    font-family: 'Questrial';
+    font-weight: bold;
+    font-size: 30px;
+    color: #8e44ad;
+}
+
 .second-prize img {
     width: 80px;
     height: 80px;
@@ -73,8 +78,8 @@ section.event-page .box {
     display: flex;
 }
 .first-prize {
-    margin-left: 85px;
-    margin-bottom: 20px;
+    margin-left: 82px;
+    margin-bottom: 15px;
 }
 
 .second-prize {
@@ -86,13 +91,13 @@ section.event-page .box {
 }
 
 .event-buttons {
-    margin-top: 50px;
-    margin-left: 80px;
+    margin-top: 15px;
+    margin-left: 45px;
 }
 
 .event-buttons button {
-    width: 100%;
-    height: 40px;
+    width: 300px;
+    height: 38px;
     display: block;
     margin: 8px;
     font-family: 'Product Bold';
