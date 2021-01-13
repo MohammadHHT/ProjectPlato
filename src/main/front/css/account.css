@@ -260,7 +260,7 @@ section.account .friends ol .item .delete {
 section.account .friends ol .item .delete div {
     background-color: rgb(241, 52, 83);
     position: absolute;
-    right: 0;
+    right: -1px;
     bottom: 0;
     left: 0;
     top: 0;
