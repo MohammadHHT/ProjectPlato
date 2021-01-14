@@ -218,7 +218,6 @@ section.account .friends ol .item {
     align-items: center;
     border-radius: 6px;
     text-align: left;
-    transition: background-color ease-in-out 0.15s;
     cursor: pointer;
     position: relative;
 }
@@ -242,7 +241,6 @@ section.account .friends ol .item h2 {
     margin: 0;
     flex-grow: 1;
     transform: translateY(1px);
-    transition: color ease-in-out 0.15s;
 }
 
 section.account .friends ol .item:hover h2 {
@@ -251,7 +249,7 @@ section.account .friends ol .item:hover h2 {
 
 section.account .friends ol .item .delete {
     background: transparent;
-    flex-basis: 33.33%;
+    flex-basis: 50%;
     height: calc(100% + 1vh);
     transform: translateX(1vh);
     position: relative;
