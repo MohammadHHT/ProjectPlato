@@ -197,11 +197,36 @@ section.primary .player .events section .card {
     width: 100%;
     height: auto;
     border-radius: 5px;
+    position: relative;
     transform-origin: bottom center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.329);
     transition: transform linear 0.2s;
     overflow: hidden;
     cursor: pointer;
+}
+
+section.primary .player .events section .card .cover {
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: visibility ease-in-out 0.1s;
+    backdrop-filter: blur(6px);
+    border-radius: 5px;
+}
+
+section.primary .player .events section .card .cover span {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Questrial';
+    font-size: 5vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-weight: bold;
 }
 
 section.primary .player .events .dots .card {
