@@ -177,7 +177,7 @@ section.primary .player .favorites div .title {
 
 section.primary .player .events {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     box-sizing: border-box;
     width: 100%;
     padding: 2vh 7vh;
@@ -311,5 +311,38 @@ section.primary .player .events .battle .card .title {
 section.primary .player .events section .card .info {
     width: 100%;
     height: 20vh;
+    display: flex;
+    flex-flow: column nowrap;
+    color: rgb(239, 233, 224);
+}
 
+section.primary .player .events section .card .info .prize {
+    font-family: 'Questrial';
+    font-size: 6vh;
+}
+
+
+section.primary .player .events section .card .info .date {
+    font-family: monospace;
+    height: 50%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    flex-grow: 1;
+}
+
+section.primary .player .events section .card .info .date span span:nth-child(1) {
+    font-size: 1.5vh;
+    display: block;
+}
+
+section.primary .player .events section .card .info .date span span:nth-child(2) {
+    font-size: 2vh;
+    display: block;
+}
+
+section.primary .player .events section .card .info .date svg {
+    padding: 2px 0;
+    height: 10%;
 }
