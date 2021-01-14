@@ -16,21 +16,21 @@
 section.primary header {
     display: flex;
     width: 100%;
-    height: calc(0.075 * 97vh);
     background-color: transparent;
     justify-content: center;
-    flex-flow: row nowrap;
+    padding: calc(0.0155 * 97vh) 0;
+    flex-flow: column nowrap;
     align-items: center;
 }
 
-section.primary header .search {
+section.primary .player header .search {
     outline: none;
     border: none;
     border-bottom: 2px solid #222026;
     color: #222026;
     font-family: 'Product';
     width: 33.33%;
-    height: 50%;
+    height: calc(0.045 * 97vh);
     text-align: center;
     background: transparent;
     font-size: calc(0.4 * 0.7 * 0.075 * 97vh);
@@ -38,6 +38,278 @@ section.primary header .search {
     transition: opacity ease-in-out 0.1s;
 }
 
-section.primary header .search:hover, section.primary header .search:focus {
+section.primary .player header .search:hover, section.primary header .search:focus {
     opacity: 1;
+}
+
+section.primary .player header ol {
+    list-style: none;
+    margin: 0;
+    box-sizing: border-box;
+    width: 33.33%;
+    background-color: #efeae1;
+    z-index: 10;
+    border: 1px solid #888583;
+    padding: 5px;
+    border-radius: 0 0 9.4px 9.4px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5px;
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    visibility: hidden;
+}
+
+section.primary .player header ol .item {
+    width: 100%;
+    height: 4vh;
+    padding: 0.5vh 1vh;
+    box-sizing: border-box;
+    margin: 0;
+    background-color: rgba(18, 41, 72, 0.05);
+    overflow: hidden;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+}
+
+section.primary .player header ol .item:hover {
+    background-color: rgb(18, 41, 72);
+}
+
+section.primary .player header ol .item img {
+    height: 100%;
+    width: auto;
+    margin-right: 1vh;
+    transform-origin: center;
+    transform: scale(0.9);
+    transition: transform ease-in-out 0.1s;
+}
+
+section.primary .player header ol .item:hover img {
+    transform: scale(1);
+}
+
+section.primary .player header ol .item h2 {
+    display: inline;
+    text-align: center;
+    font-family: 'Questrial';
+    font-size: 2vh;
+    line-height: 1em;
+    margin: 0;
+    flex-grow: 1;
+}
+
+section.primary .player header ol .item:hover h2 {
+    color: rgb(239, 233, 224);
+}
+
+section.primary .player .favorites {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2vh;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2vh;
+    transform: translateY(-23vh);
+}
+
+section.primary .player .favorites div {
+    height: 6vh;
+    border-radius: 1vh;
+    flex-grow: 1;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -37px;
+    position: relative;
+}
+
+section.primary .player .favorites .battle {
+    background-image: url('../jpg/sea\ battle.jpg');
+}
+
+section.primary .player .favorites .dots {
+    background-image: url('../jpg/dots\ and\ boxes.jpeg');
+}
+
+section.primary .player .favorites div:hover {
+    filter: brightness(0.9);
+}
+
+section.primary .player .favorites div .badge {
+    height: 4vh;
+    width: 4vh;
+    box-sizing: border-box;
+    padding: 1vh;
+    background-color: rgb(239, 233, 224);
+    border-radius: 6px;
+    position: absolute;
+    left: 2vh;
+    top: -2vh;
+}
+
+section.primary .player .favorites div .badge svg {
+    width: 2vh;
+    height: 2vh;
+    fill: #f9b060;
+}
+
+section.primary .player .favorites div .title {
+    font-family: 'Product Bold';
+    font-size: 3vh;
+    line-height: 1em;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    white-space: nowrap;
+    color: rgb(239, 233, 224);
+    text-shadow: 0 0 6px rgba(61, 61, 61, 0.699);
+    text-decoration: underline;
+}
+
+section.primary .player .events {
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 2vh 7vh;
+    gap: 7vh;
+    background: transparent;
+}
+
+section.primary .player .events::-webkit-scrollbar {
+    display: none;
+}
+
+section.primary .player .events section {
+    flex-grow: 1;
+}
+
+section.primary .player .events section .card {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    transform-origin: bottom center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.329);
+    transition: transform linear 0.2s;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+section.primary .player .events .dots .card {
+    background-color: #6d6af7;
+}
+
+section.primary .player .events .battle .card {
+    background-color: #f55a5a;
+}
+
+section.primary .player .events .dots .card:nth-child(1) {
+    transform: rotate(1.6deg) translateX(0.5vh);
+}
+
+section.primary .player .events .dots .card:nth-child(1):hover {
+    transform: translateY(-18vh);
+}
+
+section.primary .player .events .dots .card:nth-child(2) {
+    transform: translateY(-19vh) rotate(2deg) translateX(-0.5vh);
+}
+
+section.primary .player .events .dots .card:nth-child(2):hover {
+    transform: translateY(-37vh);
+}
+
+section.primary .player .events .dots .card:nth-child(3) {
+    transform: translateY(-38.2vh) rotate(-1.4deg) translateX(0.5vh);
+}
+
+section.primary .player .events .dots .card:nth-child(3):hover {
+    transform: translateY(-56.2vh);
+}
+
+section.primary .player .events .dots .card:nth-child(4) {
+    transform: translateY(-57vh) rotate(1.8deg) translateX(-0.5vh);
+}
+
+section.primary .player .events .dots .card:nth-child(4):hover {
+    transform: translateY(-75vh);
+}
+
+section.primary .player .events .dots .card:nth-child(5) {
+    transform: translateY(-76vh) rotate(-2.5deg) translateX(0.5vh);
+}
+
+section.primary .player .events .dots .card:nth-child(5):hover {
+    transform: translateY(-94vh);
+}
+
+section.primary .player .events .battle .card:nth-child(1):hover {
+    transform: translateY(-18vh);
+}
+
+section.primary .player .events .battle .card:nth-child(2) {
+    transform: translateY(-19.1vh) rotate(2.5deg) translateX(-0.5vh);
+}
+
+section.primary .player .events .battle .card:nth-child(2):hover {
+    transform: translateY(-37.1vh);
+}
+
+section.primary .player .events .battle .card:nth-child(3) {
+    transform: translateY(-37.8vh) rotate(2.8deg) translateX(0.5vh);
+}
+
+section.primary .player .events .battle .card:nth-child(3):hover {
+    transform: translateY(-55.8vh);
+}
+
+section.primary .player .events .battle .card:nth-child(4) {
+    transform: translateY(-57.15vh) rotate(-1.8deg) translateX(-0.5vh);
+}
+
+section.primary .player .events .battle .card:nth-child(4):hover {
+    transform: translateY(-75.15vh);
+}
+
+section.primary .player .events .battle .card:nth-child(5) {
+    transform: translateY(-75.9vh) rotate(1.1deg) translateX(0.5vh);
+}
+
+section.primary .player .events .battle .card:nth-child(5):hover {
+    transform: translateY(-93.9vh);
+}
+
+section.primary .player .events section .card .title {
+    font-family: 'Product Bold';
+    font-size: 1.5vh;
+    line-height: 1em;
+    text-align: center;
+    display: block;
+    padding: 0.5vh 0;
+    color: black;
+    width: 25%;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+section.primary .player .events .dots .card .title {
+    float: left;
+}
+
+section.primary .player .events .battle .card .title {
+    float: right;
+}
+
+section.primary .player .events section .card .info {
+    width: 100%;
+    height: 20vh;
+
 }
