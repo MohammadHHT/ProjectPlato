@@ -27,7 +27,7 @@ public class Player extends User {
     public Player(String firstName, String lastName, String username, String password, String email, String phone) {
         super(firstName, lastName, username, password, email, phone);
         players.put(username, this);
-        this.level = 0;
+        this.level = 1;
         this.score = 0;
         this.wins = 0;
         this.money = 0;

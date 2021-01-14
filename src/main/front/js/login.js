@@ -12,7 +12,7 @@ function login() {
 login.prototype.init = function () {
     const self = this;
 
-    this.inputs[0].addEventListener('focus', function (event) {
+    this.inputs[0].addEventListener('focus', function () {
         self.next.classList.add('show');
     });
 
@@ -30,7 +30,7 @@ login.prototype.init = function () {
         }
     });
 
-    this.next.addEventListener('click', function (event) {
+    this.next.addEventListener('click', function () {
         switch (self.question) {
             case 1:
                 self.username();
@@ -41,21 +41,23 @@ login.prototype.init = function () {
         }
     });
 
-    this.navigation[2].addEventListener('click', function (event) {
+    this.navigation[2].addEventListener('click', function () {
         self.navigation[2].classList.remove('show');
         self.navigation[1].classList.add('show');
         self.nextPage('login', 'register');
+
+        self.clearFields();
+        self.items[self.question - 1].classList.remove('show');
+        self.items[0].classList.add('show');
+        self.progress.style.transform = 'scaleX(' + 0 + ')';
+        self.next.classList.remove('show');
+        self.question = 1;
     });
 }
 
 login.prototype.username = function () {
     if (this.inputs[0].value.length > 0) {
-        this.progress.style.transform = 'scaleX(' + 1 / 2 + ')';
-        this.items[0].classList.remove('show');
-        this.items[1].classList.add('show');
-        this.items[1].querySelector('input').focus();
-        this.message.style.opacity = 0;
-        this.question++;
+        this.toggle(1, 2);
     } else {
         this.message.innerHTML = "Enter username!";
         this.message.style.opacity = 1;
@@ -72,25 +74,30 @@ login.prototype.password = function () {
         };
 
         connection.onmessage = function (e) {
-            if (e.data.localeCompare('done') == 0) {
+            let data = e.data.split(' ');
+            if (data.length != 2) {
                 self.progress.style.transform = 'scaleX(' + 2 / 2 + ')';
+                document.querySelector('section.login form ol .item.show label').classList.add('tmp');
                 self.items[1].style.opacity = 0;
-                self.clearFields();
                 self.message.style.opacity = 0;
-                self.next.classList.add('hide');
-                self.question++;
+                self.next.classList.remove('show');
+
+                self.navigation[2].classList.remove('show');
+                self.navigation[3].classList.add('show');
+                self.navigation[4].classList.add('show');
+                self.navigation[5].classList.add('show');
                 setTimeout(function () {
-                    nextPage('login', 'primary');
-                    self.navigation[2].classList.remove('show');
-                    self.navigation[3].classList.add('show');
-                    self.navigation[4].classList.add('show');
-                    self.navigation[5].classList.add('show');
-                }, 1000);
+                    self.nextPage('login', 'primary');
+                    self.items[1].classList.remove('show');
+                }, 300);
+                self.clearFields();
+
+                new account(data[0].localeCompare('admin') != 0, data[1], data[2], data[3], data[4], data[5], parseInt(data[6]), parseInt(data[7]), parseInt(data[8]), data[9], data[10])
             } else {
-                if (e.data.localeCompare('failed username') == 0) {
+                if (data[1].localeCompare('username') == 0) {
                     self.message.innerHTML = "Username doesn't exist!";
                     self.message.style.opacity = 1;
-                } else if (e.data.localeCompare('failed password') == 0) {
+                } else if (data[1].localeCompare('password') == 0) {
                     self.message.innerHTML = "Wrong password!";
                     self.message.style.opacity = 1;
                 } else {
@@ -98,13 +105,8 @@ login.prototype.password = function () {
                     self.message.style.opacity = 1;
                 }
                 setTimeout(function () {
-                    self.question--;
                     self.clearFields();
-                    self.progress.style.transform = 'scaleX(' + 0 + ')';
-                    self.items[1].classList.remove('show');
-                    self.items[0].classList.add('show');
-                    self.items[0].querySelector('input').focus();
-                    self.message.style.opacity = 0;
+                    this.toggle(2, 1);
                 }, 1000);
             }
             connection.close();
@@ -113,6 +115,15 @@ login.prototype.password = function () {
         this.message.innerHTML = "Enter password!";
         this.message.style.opacity = 1;
     }
+}
+
+login.prototype.toggle = function (num1, num2) {
+    this.progress.style.transform = 'scaleX(' + num1 / 2 + ')';
+    this.items[num1 - 1].classList.remove('show');
+    this.items[num2 - 1].classList.add('show');
+    this.items[num2 - 1].querySelector('input').focus();
+    this.message.style.opacity = 0;
+    this.question += num2 - num1;
 }
 
 login.prototype.nextPage = function (previous, next) {

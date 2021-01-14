@@ -1,5 +1,6 @@
 package main.back.controller;
 
+import main.back.account.Admin;
 import main.back.account.Player;
 import main.back.account.User;
 
@@ -53,7 +54,13 @@ public interface UserCommand {
             if (user.getPassword().equals(password)) {
                 if (!user.isLogged()) {
                     user.setLogged(true);
-                    return "done";
+                    if (user instanceof Admin) {
+                        return "admin " + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
+                                user.getDate().getYear() + " " + user.getDate().getMonthValue() + " " + user.getDate().getDayOfMonth();
+                    } else {
+                        return "player " + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
+                                user.getDate().getYear() + " " + user.getDate().getMonthValue() + " " + user.getDate().getDayOfMonth() + ((Player) user).getLevel() + " " + ((Player) user).getMoney();
+                    }
                 } else {
                     return "failed logging";
                 }

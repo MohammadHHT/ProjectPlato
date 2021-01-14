@@ -77,7 +77,7 @@ body>section>main>section {
     position: relative;
     display: block;
     box-sizing: border-box;
-    transition: transform linear 0.3s, visibility linear 0.3s;
+    transition: transform linear 0.3s;
     opacity: 0;
     height: 0;
     transform: translateY(5%) scale(1.05);

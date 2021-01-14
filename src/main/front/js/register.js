@@ -12,7 +12,7 @@ function register() {
 register.prototype.init = function () {
     const self = this;
 
-    this.inputs[0].addEventListener('focus', function (event) {
+    this.inputs[0].addEventListener('focus', function () {
         self.next.classList.add('show');
     });
 
@@ -58,7 +58,7 @@ register.prototype.init = function () {
         }
     });
 
-    this.next.addEventListener('click', function (event) {
+    this.next.addEventListener('click', function () {
         switch (self.question) {
             case 1:
                 self.firstName();
@@ -81,22 +81,23 @@ register.prototype.init = function () {
         }
     });
 
-    this.navigation[1].addEventListener('click', function (event) {
+    this.navigation[1].addEventListener('click', function () {
         self.navigation[1].classList.remove('show');
         self.navigation[2].classList.add('show');
         self.nextPage('register', 'login');
+
+        self.clearFields();
+        self.items[self.question - 1].classList.remove('show');
+        self.items[0].classList.add('show');
+        self.progress.style.transform = 'scaleX(' + 0 + ')';
+        self.next.classList.remove('show');
+        self.question = 1;
     });
 }
 
 register.prototype.firstName = function () {
-    var e = new RegExp('^[a-zA-Z\\s]+$');
-    if (e.test(this.inputs[0].value)) {
-        this.progress.style.transform = 'scaleX(' + 1 / 6 + ')';
-        this.items[0].classList.remove('show');
-        this.items[1].classList.add('show');
-        this.items[1].querySelector('input').focus();
-        this.message.style.opacity = 0;
-        this.question++;
+    if (/^[a-zA-Z\s]+$/.test(this.inputs[0].value)) {
+        this.toggle(1);
     } else {
         this.message.innerHTML = "Just english letters!";
         this.message.style.opacity = 1;
@@ -104,14 +105,8 @@ register.prototype.firstName = function () {
 }
 
 register.prototype.lastName = function () {
-    var e = new RegExp('^[a-zA-Z\\s]+$');
-    if (e.test(this.inputs[1].value)) {
-        this.progress.style.transform = 'scaleX(' + 2 / 6 + ')';
-        this.items[1].classList.remove('show');
-        this.items[2].classList.add('show');
-        this.items[2].querySelector('input').focus();
-        this.message.style.opacity = 0;
-        this.question++;
+    if (/^[a-zA-Z\s]+$/.test(this.inputs[1].value)) {
+        this.toggle(2);
     } else {
         this.message.innerHTML = "Just english letters!";
         this.message.style.opacity = 1;
@@ -119,8 +114,7 @@ register.prototype.lastName = function () {
 }
 
 register.prototype.username = function () {
-    var e = new RegExp('\\w{3}\\w*');
-    if (e.test(this.inputs[2].value)) {
+    if (/\w{3}\w*/.test(this.inputs[2].value)) {
         const connection = new WebSocket('ws://127.0.0.1:4444');
         const self = this;
 
@@ -130,12 +124,7 @@ register.prototype.username = function () {
 
         connection.onmessage = function (e) {
             if (e.data.localeCompare('true') == 0) {
-                self.progress.style.transform = 'scaleX(' + 3 / 6 + ')';
-                self.items[2].classList.remove('show');
-                self.items[3].classList.add('show');
-                self.items[3].querySelector('input').focus();
-                self.message.style.opacity = 0;
-                self.question++;
+                this.toggle(3);
             } else {
                 self.message.innerHTML = "Username unavailable!";
                 self.message.style.opacity = 1;
@@ -149,14 +138,8 @@ register.prototype.username = function () {
 }
 
 register.prototype.password = function () {
-    var e = new RegExp('\\w{6}\\w*');
-    if (e.test(this.inputs[3].value)) {
-        this.progress.style.transform = 'scaleX(' + 4 / 6 + ')';
-        this.items[3].classList.remove('show');
-        this.items[4].classList.add('show');
-        this.items[4].querySelector('input').focus();
-        this.message.style.opacity = 0;
-        this.question++;
+    if (/\w{6}\w*/.test(this.inputs[3].value)) {
+        this.toggle(4);
     } else {
         this.message.innerHTML = "Password must be at least 6 characters!";
         this.message.style.opacity = 1;
@@ -164,8 +147,7 @@ register.prototype.password = function () {
 }
 
 register.prototype.phone = function () {
-    var e = new RegExp('\\d{12}');
-    if (e.test(this.inputs[4].value)) {
+    if (/\d{12}/.test(this.inputs[4].value)) {
         const connection = new WebSocket('ws://127.0.0.1:4444');
         const self = this;
 
@@ -175,12 +157,7 @@ register.prototype.phone = function () {
 
         connection.onmessage = function (e) {
             if (e.data.localeCompare('true') == 0) {
-                self.progress.style.transform = 'scaleX(' + 5 / 6 + ')';
-                self.items[4].classList.remove('show');
-                self.items[5].classList.add('show');
-                self.items[5].querySelector('input').focus();
-                self.message.style.opacity = 0;
-                self.question++;
+                this.toggle(5);
             } else {
                 self.message.innerHTML = "Phone number already exists!";
                 self.message.style.opacity = 1;
@@ -194,8 +171,7 @@ register.prototype.phone = function () {
 }
 
 register.prototype.email = function () {
-    var e = new RegExp('^\\w+@\\w+\\.(com|ir)$');
-    if (e.test(this.inputs[5].value)) {
+    if (/^\w+@\w+\.(com|ir)$/.test(this.inputs[5].value)) {
         const connection = new WebSocket('ws://127.0.0.1:4444');
         const self = this;
 
@@ -205,20 +181,25 @@ register.prototype.email = function () {
 
         connection.onmessage = function (e) {
             if (e.data.localeCompare('true') == 0) {
+                connection.send('user register ' + self.inputs[0].value + ' ' + self.inputs[1].value + ' ' + self.inputs[2].value + ' ' + self.inputs[3].value + ' ' + self.inputs[4].value + ' ' + self.inputs[5].value);
+
                 self.progress.style.transform = 'scaleX(' + 6 / 6 + ')';
                 self.items[5].style.opacity = 0;
                 self.message.style.opacity = 0;
                 self.next.classList.remove('show');
-                connection.send('user register ' + self.inputs[0].value + ' ' + self.inputs[1].value + ' ' + self.inputs[2].value + ' ' + self.inputs[3].value + ' ' + self.inputs[4].value + ' ' + self.inputs[5].value);
-                self.clearFields();
+
+                self.navigation[1].classList.remove('show');
+                self.navigation[3].classList.add('show');
+                self.navigation[4].classList.add('show');
+                self.navigation[5].classList.add('show');
                 setTimeout(function() {
-                    nextPage('register', 'primary');
-                    self.navigation[1].classList.remove('show');
-                    self.navigation[3].classList.add('show');
-                    self.navigation[4].classList.add('show');
-                    self.navigation[5].classList.add('show');
-                    self.navigation[6].classList.add('show');
-                }, 1000);
+                    self.nextPage('register', 'primary');
+                    self.items[5].classList.remove('show');
+                }, 300);
+                self.clearFields();
+
+                let date = new Date();
+                new account(true, self.inputs[0].value, self.inputs[1].value, self.inputs[2].value, self.inputs[4].value, self.inputs[5].value, date.getFullYear(), (date.getMonth() + 1), date.getDate(), 1, 0);
             } else if (e.data.localeCompare('false') == 0) {
                 self.message.innerHTML = "Email already exists!";
                 self.message.style.opacity = 1;
@@ -229,6 +210,15 @@ register.prototype.email = function () {
         this.message.innerHTML = "Invalid email!";
         this.message.style.opacity = 1;
     }
+}
+
+register.prototype.toggle = function (num) {
+    this.progress.style.transform = 'scaleX(' + num / 6 + ')';
+    this.items[num - 1].classList.remove('show');
+    this.items[num].classList.add('show');
+    this.items[num].querySelector('input').focus();
+    this.message.style.opacity = 0;
+    this.question++;
 }
 
 register.prototype.nextPage = function (previous, next) {
