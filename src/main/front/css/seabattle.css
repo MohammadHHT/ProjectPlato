@@ -1,0 +1,46 @@
+@font-face {
+    src: url('../font/Questrial-Regular.ttf');
+    font-family: 'Questrial';
+}
+
+section.battle {
+    perspective: 1000px;
+}
+
+section.battle .board {
+    width: calc(0.490 * 97.0vh);
+    height: calc(0.560 * 97.0vh);
+    display: flex;
+    flex-flow: row wrap;
+    border: 1px solid white;
+    position: absolute;
+    left: calc(50% - 0.245 * 97.0vh);
+    transform: rotateX(57deg);
+    bottom: calc(0.035 * 97.0vh);
+}
+
+section.battle .board .cell {
+    flex-basis: calc(0.0480 * 97.0vh);
+    max-width: calc(0.0490 * 97.0vh);
+    height: calc(0.0560 * 97.0vh);
+    box-sizing: border-box;
+    flex-grow: 1;
+    border: 1px solid white;
+    z-index: 20;
+    cursor: crosshair;
+}
+
+section.battle .ships {
+    z-index: 20;
+    color: white;
+    font-family: 'Questrial';
+    font-size: 1.5vh;
+    position: absolute;
+    bottom: calc(0.035 * 97.0vh);
+    width: 100%;
+    text-align: center;
+}
+
+section.battle .ships span {
+    opacity: 0.5;
+}
