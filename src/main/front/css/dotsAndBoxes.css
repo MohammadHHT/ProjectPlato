@@ -1,0 +1,53 @@
+.players-score, .scores{
+    display: flex;
+}
+
+.players-score {
+    width: 50%;
+    height: 45px;
+    margin-left: 110px;
+}
+
+.user1-score {
+    display: flex;
+    width: 35%;
+    height: 35px;
+    border: #4cf38b 2px solid;
+    background-color: #2d2c34;
+    border-radius: 8px 0 0 8px;
+    color: #ffffff;
+    margin-top: 5px;
+}
+
+.user2-score {
+    display: flex;
+    width: 35%;
+    height: 35px;
+    border: #2963f6 2px solid;
+    background-color: #2d2c34;
+    border-radius: 0 8px 8px 0;
+    color: #ffffff;
+    margin-top: 5px;
+}
+
+.user1-score span, .user2-score span {
+    margin-top: 5px;
+    margin-left: 14px;
+}
+
+.scores {
+    width: 30%;
+    height: 45px;
+    background-color: blue;
+    border-radius: 6px;
+}
+
+.scores div:first-child, .scores div:last-child {
+    width: 100%;
+}
+
+#player1-score, #player2-score {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #ffffff;
+}
