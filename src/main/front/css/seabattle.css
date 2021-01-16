@@ -4,43 +4,225 @@
 }
 
 section.battle {
-    perspective: 1000px;
+    perspective: 800px;
+}
+
+section.battle>section {
+    box-sizing: border-box;
+    width: calc(0.630 * 97.0vh);
+    height: calc(0.070 * 97.0vh);
+    position: absolute;
+    left: calc(50% - 0.3150 * 97.0vh);
+    top: calc(0.0350 * 97.0vh);
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: calc(0.010 * 97.0vh);
+    display: flex;
+    flex-flow: row nowrap;
+    overflow: hidden;
+}
+
+section.battle>section .host,
+section.battle>section .guest {
+    flex-basis: 50%;
+    flex-grow: 1;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
+    align-items: center;
+    background: transparent;
+    overflow: hidden;
+    transition: background-color 0.1s;
+}
+
+section.battle>section .turn {
+    position: relative;
+    background-color: rgba(130, 255, 46, 0.2);
+}
+
+section.battle>section .host .timer,
+section.battle>section .guest .timer {
+    background: transparent;
+    transition: background-color 0.1s;
+}
+
+section.battle>section .host.turn .timer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 40%;
+    background-color: rgba(130, 255, 46, 0.2);
+}
+
+section.battle>section .guest.turn .timer {
+    position: absolute;
+    left: 40%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(130, 255, 46, 0.2);
+}
+
+section.battle>section .host img,
+section.battle>section .guest img {
+    flex-grow: 0;
+    height: calc(0.056 * 97.0vh);
+    padding: 0 calc(0.007 * 97.0vh);
+}
+
+section.battle>section .host span,
+section.battle>section .guest span {
+    flex-grow: 1;
+    padding: 0 calc(0.007 * 97.0vh);
+    font-size: 2.5vh;
+    line-height: 1em;
+    font-family: 'Questrial';
+    color: white;
+}
+
+section.battle>section .host span {
+    text-align: left;
+}
+
+section.battle>section .guest span {
+    text-align: right;
 }
 
 section.battle .board {
-    width: calc(0.490 * 97.0vh);
-    height: calc(0.560 * 97.0vh);
+    width: calc(0.560 * 97.0vh);
     display: flex;
     flex-flow: row wrap;
     border: 1px solid white;
     position: absolute;
-    left: calc(50% - 0.245 * 97.0vh);
+    left: calc(50% - 0.28 * 97.0vh);
+    transform-origin: bottom;
     transform: rotateX(57deg);
-    bottom: calc(0.035 * 97.0vh);
+    bottom: calc(0.07 * 97.0vh);
+    perspective: 400px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+section.battle .board.arrange {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0);
+    transform: rotateX(0);
 }
 
 section.battle .board .cell {
-    flex-basis: calc(0.0480 * 97.0vh);
-    max-width: calc(0.0490 * 97.0vh);
-    height: calc(0.0560 * 97.0vh);
+    flex-basis: calc(0.0550 * 97.0vh);
+    max-width: calc(0.0560 * 97.0vh);
+    height: calc(0.0630 * 97.0vh);
     box-sizing: border-box;
     flex-grow: 1;
+    background-color: rgba(255, 255, 255, 0.6);
     border: 1px solid white;
-    z-index: 20;
-    cursor: crosshair;
+    transition: background-color 0.1s, height 0.3s;
 }
 
-section.battle .ships {
-    z-index: 20;
+section.battle .board.arrange .cell {
+    height: calc(0.0560 * 97.0vh);
+}
+
+section.battle .board .cell.selected {
+    background-color: rgba(127, 127, 127, 0.6);
+    animation-name: update ;
+    animation-timing-function: ease;
+    animation-duration: 0.3s;
+    animation-iteration-count: 1;
+}
+
+@keyframes update {
+    0%   {transform: scale(1);}
+    50%  {transform: scale(0.9);}
+    100%  {transform: scale(1);}
+}
+
+section.battle .board .cell.destroyed {
+    background-color: rgba(255, 0, 0, 0.6);
+}
+
+section.battle .board .cell.empty {
+    background-color: transparent;
+}
+
+section.battle .board .start {
+    width: calc(4.0 * 0.0560 * 97.0vh);
+    height: calc(4.0 * 0.0560 * 97.0vh);
+    position: absolute;
+    left: calc(3.0 * 0.0560 * 97.0vh);
+    bottom: 0;
+    background-color:  rgba(25, 49, 47, 0.8);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    visibility: hidden;
+    transition: visibility 0.1s;
+}
+
+section.battle .board .start span {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%);
+    font-family: 'Questrial';
+    font-size: 3vh;
+    line-height: 1em;
+    color: white;
+}
+
+section.battle .board img {
+    position: absolute;
+    transform-origin: bottom left;
+    visibility: hidden;
+    transition: visibility 0.1s;
+}
+
+section.battle .board img.xl {
+    width: calc(4.50 * 0.0560 * 97.0vh);
+    bottom: 2vh;
+    left: -1vh;
+}
+
+section.battle .board img.l {
+    width: calc(4.0 * 0.0560 * 97.0vh);
+    bottom: 3vh;
+    left: 0.1vh;
+}
+
+section.battle .board img.m {
+    width: calc(4.10 * 0.0560 * 97.0vh);
+    bottom: 0vh;
+    left: -0.2vh;
+}
+
+section.battle .board img.s {
+    width: calc(2.70 * 0.0560 * 97.0vh);
+    bottom: 1vh;
+    left: -3.6vh;
+}
+
+section.battle .control {
     color: white;
     font-family: 'Questrial';
     font-size: 1.5vh;
     position: absolute;
     bottom: calc(0.035 * 97.0vh);
+    transform: translateY(50%);
     width: 100%;
     text-align: center;
 }
 
-section.battle .ships span {
+section.battle .control .size {
     opacity: 0.5;
+    transition: opacity 0.1s;
+}
+
+section.battle .control .size.used {
+    opacity: 1;
+}
+
+#canvas {
+    position: absolute;
+    box-sizing: border-box;
+    cursor: crosshair;
 }
