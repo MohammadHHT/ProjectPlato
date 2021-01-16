@@ -1,0 +1,229 @@
+@font-face {
+    src: url('../font/Product Sans Bold.ttf');
+    font-family: 'Product Bold';
+}
+
+@font-face {
+    src: url('../font/Product Sans Regular.ttf');
+    font-family: 'Product';
+}
+
+@font-face {
+    src: url('../font/Questrial-Regular.ttf');
+    font-family: 'Questrial';
+}
+
+section .suggestion {
+    padding: calc(0.03 * 97vh);
+}
+
+.all-games {
+    height: calc(0.295 * 97vh);
+    width: 100%;
+    border-radius: 9.4px;
+    background-color: #f7f7f6;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    padding: 4px;
+    display: block;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 calc(0.03 * 97vh) 0;
+}
+
+.games-title, .player-title {
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Product Bold';
+    text-transform: uppercase;
+    font-size: 3vh;
+    line-height: 1em;
+    padding: 2vh 0;
+    margin: 0;
+    background-color: #122948;
+    color: rgb(239, 233, 224);
+    margin-bottom: 1vh;
+}
+
+.games {
+    width: 100%;
+    display: flex;
+}
+
+.battle-sea-sugg, .dots-and-boxes-sugg {
+    /*display: block;*/
+    width: 100%;
+}
+
+
+.game-pic {
+    /*box-sizing: border-box;*/
+    width: 100%;
+}
+
+.game-pic img {
+    width: 140px;
+    height: 90px;
+    border-radius: 8px 8px 0 0;
+    /*margin-top: 8px;*/
+}
+
+.select-game {
+    margin-left: 30px;
+    width: 140px;
+    height: 18%;
+    background-color: #ddddd9;
+    font-family: 'Product Bold';
+    font-size: 17px;
+    border-radius: 0 0 8px 8px;
+}
+
+.select-game:hover {
+    background-color: #34f16e;
+    cursor: pointer;
+}
+
+.all-players {
+    height: calc(0.705 * 97vh);
+    width: 100%;
+    border-radius: 9.4px 9.4px 0 0;
+    background-color: #f7f7f6;
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    display: flex;
+    padding: 4px;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow-y: scroll;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.all-players::-webkit-scrollbar {
+    display: none;
+}
+
+.player-box {
+    margin-bottom: 8px;
+    margin-left: 1px;
+    display: flex;
+    width: 97%;
+    background-color: rgba(18, 41, 72, 0.204);
+    height: 45px;
+    border-radius: 8px;
+}
+
+.suggestion-buttons {
+    margin-bottom: 8px;
+    margin-left: 1px;
+    display: flex;
+    width: 97%;
+    background-color: rgb(233, 233, 233);
+    height: 45px;
+    border-radius: 8px;
+}
+
+.send-suggestion, .unsend-suggestion {
+    width: 50%;
+    background-color: #34f16e;
+    border-radius: 8px 0 0 8px;
+    box-sizing: border-box;
+    font-family: 'Product Bold';
+    text-transform: uppercase;
+    font-size: 3vh;
+    line-height: 1em;
+    padding: 2vh 0;
+    margin: 0;
+}
+
+.unsend-suggestion {
+    border-radius: 0 8px 8px 0;
+    background-color: #bb2d44;
+}
+.send-suggestion:hover, .unsend-suggestion:hover {
+    cursor: pointer;
+    border: #122948 3px solid;
+}
+
+
+.player-avatar svg {
+    /*width: 100%;*/
+    width: 40px;
+    height: 40px;
+    margin-top: 2px;
+    margin-left: 4px;
+}
+
+.player-avatar {
+    width: 76%;
+    display: flex;
+}
+
+.player-avatar span {
+    color: #122948;
+    font-family: 'Product Bold';
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.message-icon img {
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+}
+
+.message-icon {
+    width: 14%;
+    background-color: #122948;
+    border-radius: 8px 0 0 8px;
+}
+
+.message-icon:hover {
+    background-color: rgba(18, 41, 72, 0.204);
+
+}
+
+.suggestion-checkbox {
+    display: block;
+    width: 10%;
+    margin-top: 10px;
+
+}
+
+.regular-checkbox {
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    padding: 9px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+}
+
+.regular-checkbox:active, .regular-checkbox:checked:active {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.regular-checkbox:checked {
+    background-color: #e9ecee;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+    color: #99a1a7;
+}
+
+.regular-checkbox:checked:after {
+    content: '\2714';
+    font-size: 14px;
+    position: absolute;
+    top: 0px;
+    left: 3px;
+    color: #99a1a7;
+}
