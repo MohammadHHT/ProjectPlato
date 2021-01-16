@@ -38,7 +38,7 @@
 .scores {
     width: 30%;
     height: 45px;
-    background-color: blue;
+    background-color: green;
     border-radius: 6px;
 }
 
@@ -50,4 +50,10 @@
     margin-top: 10px;
     font-size: 20px;
     color: #ffffff;
+}
+
+#DBcanvas {
+    position: absolute;
+    box-sizing: border-box;
+    transform: translateX(-15vw) translateY(12vh)
 }

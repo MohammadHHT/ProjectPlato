@@ -1032,14 +1032,15 @@
                 <div class="user1-score">
                     <span>User 1</span>
                 </div>
-                <div class="scores">
-                    <div id="player1-score"><span>1</span></div>
-                    <div id="player2-score"><span>1</span></div>
+                <div class="scores" id="scorebg">
+                    <div id="player1-score"><span id="1stScore"></span></div>
+                    <div id="player2-score"><span id="2ndScore"></span></div>
                 </div>
                 <div class="user2-score">
                     <span>User 2</span>
                 </div>
             </div>
+            <div><canvas id="DBcanvas"></canvas></div>
         </section>
     </main>
 </section>
@@ -1049,6 +1050,7 @@
 <script src="js/primary.js"></script>
 <script src="js/register.js"></script>
 <script src="js/login.js"></script>
+<script src="js/dot_and_box.js"></script>
 <script>
     var header = document.querySelector('.account header');
     var second = document.querySelector('.account header .second');
