@@ -39,7 +39,7 @@ section .sea-battle-page {
 }
 
 
-.history {
+.history, .leaderboard {
     height: calc(0.600 * 97vh);
     width: 100%;
     box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
@@ -58,7 +58,7 @@ section .sea-battle-page {
     border-radius: 0 0 9.4px 9.4px;
 }
 
-.history::-webkit-scrollbar {
+.history::-webkit-scrollbar, .leaderboard::-webkit-scrollbar {
     display: none;
 }
 
@@ -201,7 +201,7 @@ section .sea-battle-page {
     margin-right: 0;
 }
 
-.game-history {
+.game-history, .player-score {
     display: flex;
     background-color: #e1aa12;
     border-radius: 8px;
@@ -214,7 +214,7 @@ section .sea-battle-page {
     width: 15%;
 }
 
-.history .game-icon img {
+.history .game-icon img, .player-avatar-rank svg {
     width: 40px;
     height: 40px;
     margin-top: 4px;
@@ -260,4 +260,37 @@ section .sea-battle-page {
 .run-game:hover {
     color: #222026;
     opacity: 0.9;
+}
+
+.player-score {
+    width: 100%;
+    display: flex;
+}
+
+.rank {
+    width: 10%;
+    font-size: 20px;
+    margin-top: 12px;
+}
+
+.player-avatar-rank {
+    width: 70%;
+    display: flex;
+}
+
+.player-avatar-rank span {
+    margin-top: 13px;
+    margin-left: 8px;
+}
+
+.score {
+    width: 20%;
+    margin-top: 14px;
+}
+
+.score span {
+    background-color: #222026;
+    color: #ffffff;
+    border-radius: 40%;
+    padding: 6px;
 }
