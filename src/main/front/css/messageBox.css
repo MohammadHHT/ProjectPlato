@@ -34,11 +34,20 @@ section.messageBox {
     box-shadow: 0 1px #ccc;
 }
 
+.chat-title {
+    background: #66CDAA;
+    text-align: center;
+    border-radius: 7px;
+    padding: 5px;
+    margin-bottom: 10px;
+    color: #000000;
+}
 .chat-logs {
     padding: 10px;
     width: 100%;
-    height: 375px;
-    background: aliceblue;
+    height: 325px;
+    border-radius: 7px;
+    background: #F0FFFF;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -56,24 +65,25 @@ section.messageBox {
     display: flex;
     flex-flow: row wrap;
     align-items: flex-start;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .chat-friend >.user-photo {
-    width: 65px;
-    height: 65px;
-    background-color: lightgray;
+    width: 40px;
+    height: 40px;
+    margin: 5px 5px 0;
+    background-color: #90EE90;
     border-radius: 50%;
     overflow: hidden;
 }
 
 .chat-friend >.chat-message {
     width: 70%;
-    padding: 15px;
-    margin: 5px 10px 0;
+    padding: 10px;
+    margin: 5px 5px 0;
     border-radius: 7px;
     color: #000;
-    font-size: 18px;
+    font-size: 14px;
     background-color: skyblue;
 }
 
@@ -81,24 +91,26 @@ section.messageBox {
     display: flex;
     flex-flow: row wrap;
     align-items: flex-start;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    justify-content: flex-end;
 }
 
 .chat-self >.user-photo {
-    width: 65px;
-    height: 65px;
-    background-color: lightgray;
+    width: 40px;
+    height: 40px;
+    background-color: #D3D3D3;
+    margin: 5px 5px 0;
     border-radius: 50%;
     overflow: hidden;
 }
 
 .chat-self >.chat-message {
     width: 70%;
-    padding: 15px;
-    margin: 5px 10px 0;
+    padding: 10px;
+    margin: 5px 5px 0;
     border-radius: 7px;
     color: #000;
-    font-size: 18px;
+    font-size: 14px;
     background-color: lightgreen;
     order: -1;
 }
@@ -108,8 +120,8 @@ section.messageBox {
 }
 
 #user-image {
-    width: 65px;
-    height: 65px;
+    width: 40px;
+    height: 40px;
 }
 
 .chat-form {
@@ -120,13 +132,13 @@ section.messageBox {
 
 .chat-form > textarea {
     width: 100%;
-    height: 50px;
-    border: 2px solid #eee;
+    height: 40px;
+    border: 2px solid #C0C0C0;
     resize: none;
     border-radius: 3px;
-    padding: 13px;
-    font-size: 16px;
-    color: #999;
+    padding: 8px;
+    font-size: 14px;
+    color: #000000;
 }
 
 .chat-form > textarea:focus {
@@ -134,20 +146,25 @@ section.messageBox {
 }
 
 .chat-form > button {
-    background-color: #1ddced;
+    background-color: #4CBB17;
     padding: 5px 15px;
     width: 100px;
+    height: 40px;
+    margin-left: 10px;
     font-size: 16px;
     color: white;
     cursor: pointer;
     border: none;
-    margin-left: 8px;
-    margin-top: 8px;
     border-radius: 3px;
-    box-shadow: 0 4px 0 #0eb2c1;
     transition: 1s;
 }
 
 .chat-form > button:hover {
-    background: #13c8d9;
+    background: #98FB98;
+    color: #355E3B;
+}
+
+.time {
+    display: block;
+    margin: 8px 0 0;
 }
