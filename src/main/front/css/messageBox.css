@@ -138,7 +138,7 @@ section.messageBox {
     border-radius: 3px;
     padding: 8px;
     font-size: 14px;
-    color: #E5E7E9;
+    color: #000000;
 }
 
 .chat-form > textarea:focus {
