@@ -13,7 +13,7 @@
     font-family: 'Questrial';
 }
 
-section .player-message {
+section .games-menu {
     padding: calc(0.03 * 97vh);
 }
 
@@ -52,7 +52,7 @@ section .player-message {
     overflow-x: hidden;
 }
 
-.suggestion-title, .request-title {
+.suggestion-title, .request-title, .game-title {
     border-radius: 6px;
     width: 100%;
     box-sizing: border-box;

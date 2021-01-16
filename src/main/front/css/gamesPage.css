@@ -1,0 +1,77 @@
+@font-face {
+    src: url('../font/Product Sans Bold.ttf');
+    font-family: 'Product Bold';
+}
+
+@font-face {
+    src: url('../font/Product Sans Regular.ttf');
+    font-family: 'Product';
+}
+
+@font-face {
+    src: url('../font/Questrial-Regular.ttf');
+    font-family: 'Questrial';
+}
+
+section .all-game {
+    padding: calc(0.03 * 97vh);
+}
+
+section .all-game {
+    height: calc(0.690 * 97vh);
+    width: 100%;
+    border-radius: 9.4px;
+    background-color: #f7f7f6;
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    padding: 4px;
+    display: block;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 calc(0.03 * 97vh) 0;
+}
+
+.game {
+    display: block;
+    width: 100%;
+}
+
+.battle-sea-photo {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.battle-sea-photo img, .dots-and-boxes-photo img {
+    width: 80%;
+    height: 130px;
+    border-radius: 8px 8px 0 0;
+}
+
+.battle-sea-photo span, .dots-and-boxes-photo span {
+    width: 100%;
+    display: block;
+}
+
+.battle-sea-photo span, .dots-and-boxes-photo span {
+    width: 80%;
+    height: 27px;
+    margin-left: 40px;
+    background-color: #cac8c8;
+    border-radius: 0 0 8px 8px;
+    box-sizing: border-box;
+    vertical-align: center;
+    font-size: 20px;
+}
+
+.battle-sea-photo img:hover, .dots-and-boxes-photo img:hover,
+.battle-sea-photo span:hover, .dots-and-boxes-photo span:hover {
+    opacity: 0.9;
+}
+
+.battle-sea-photo span:hover, .dots-and-boxes-photo span:hover {
+    background-color: #f13453;
+    color: #ffffff;
+}
