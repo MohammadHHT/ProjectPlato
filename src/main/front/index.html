@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/suggestion.css" />
     <link rel="stylesheet" type="text/css" href="css/messageBox.css" />
     <link rel="stylesheet" type="text/css" href="css/gamesPage.css" />
+    <link rel="stylesheet" type="text/css" href="css/seaBattle.css" />
     <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button,
@@ -178,61 +179,49 @@
         </section>
 
         <section class="primary">
-            <section class="player">
+            <section class="player" style="display: none;">
                 <header>
-                    <input class="search" type="search" name="users" placeholder="search">
+                    <input class="search" type="search" placeholder="search">
                     <ol>
-                        <li class="item" name="mahdihadi0">
-                            <img src="avatar/avatar (32).svg">
-                            <h2>player 0</h2>
-                        </li>
-                        <li class="item" name="mahdihadi1">
-                            <img src="avatar/avatar (33).svg">
-                            <h2>player 1</h2>
-                        </li>
-                        <li class="item" name="mahdihadi2">
-                            <img src="avatar/avatar (34).svg">
-                            <h2>player 2</h2>
-                        </li>
-                        <li class="item" name="mahdihadi3">
-                            <img src="avatar/avatar (35).svg">
-                            <h2>player 3</h2>
-                        </li>
-                        <li class="item" name="mahdihadi4">
-                            <img src="avatar/avatar (36).svg">
-                            <h2>player 4</h2>
+                        <li class="item" name="username1">
+                            <img src="avatar/avatar (1).svg">
+                            <h2>username</h2>
                         </li>
                     </ol>
                 </header>
+
                 <div class="favorites">
                     <div class="dots">
-                        <div class="badge" title="favorite">
+                        <div title="favorite">
                             <svg viewBox="0 -10 511.98685 511" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                         d="m510.652344 185.902344c-3.351563-10.367188-12.546875-17.730469-23.425782-18.710938l-147.773437-13.417968-58.433594-136.769532c-4.308593-10.023437-14.121093-16.511718-25.023437-16.511718s-20.714844 6.488281-25.023438 16.535156l-58.433594 136.746094-147.796874 13.417968c-10.859376 1.003906-20.03125 8.34375-23.402344 18.710938-3.371094 10.367187-.257813 21.738281 7.957031 28.90625l111.699219 97.960937-32.9375 145.089844c-2.410156 10.667969 1.730468 21.695313 10.582031 28.09375 4.757813 3.4375 10.324219 5.1875 15.9375 5.1875 4.839844 0 9.640625-1.304687 13.949219-3.882813l127.46875-76.183593 127.421875 76.183593c9.324219 5.609376 21.078125 5.097657 29.910156-1.304687 8.855469-6.417969 12.992187-17.449219 10.582031-28.09375l-32.9375-145.089844 111.699219-97.941406c8.214844-7.1875 11.351563-18.539063 7.980469-28.925781zm0 0" />
                             </svg>
                         </div>
-                        <span class="title">Dots & Boxes</span>
+                        <span>Dots & Boxes</span>
                     </div>
+
                     <div class="battle">
-                        <div class="badge" title="favorite">
+                        <div title="favorite">
                             <svg viewBox="0 -10 511.98685 511" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                         d="m510.652344 185.902344c-3.351563-10.367188-12.546875-17.730469-23.425782-18.710938l-147.773437-13.417968-58.433594-136.769532c-4.308593-10.023437-14.121093-16.511718-25.023437-16.511718s-20.714844 6.488281-25.023438 16.535156l-58.433594 136.746094-147.796874 13.417968c-10.859376 1.003906-20.03125 8.34375-23.402344 18.710938-3.371094 10.367187-.257813 21.738281 7.957031 28.90625l111.699219 97.960937-32.9375 145.089844c-2.410156 10.667969 1.730468 21.695313 10.582031 28.09375 4.757813 3.4375 10.324219 5.1875 15.9375 5.1875 4.839844 0 9.640625-1.304687 13.949219-3.882813l127.46875-76.183593 127.421875 76.183593c9.324219 5.609376 21.078125 5.097657 29.910156-1.304687 8.855469-6.417969 12.992187-17.449219 10.582031-28.09375l-32.9375-145.089844 111.699219-97.941406c8.214844-7.1875 11.351563-18.539063 7.980469-28.925781zm0 0" />
                             </svg>
                         </div>
-                        <span class="title">Sea Battle</span>
+                        <span>Sea Battle</span>
                     </div>
                 </div>
+
                 <div class="events">
                     <section class="dots">
-                        <div class="card" eventID="126489">
-                            <span class="title">Dots & Boxes</span>
+                        <div class="card" eventID="1226489">
+                            <span>Dots & Boxes</span>
                             <div class="info">
-                                <span class="prize">279$</span>
-                                <div class="date">
+                                <span>104$</span>
+                                <div>
                                     <span class="start"><span>21 December 2021</span><span>21:48</span></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 447.243 447.243">
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 447.243 447.243">
                                         <g>
                                             <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
 			                                        c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
@@ -246,14 +235,16 @@
                                     <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
                                 </div>
                             </div>
+                            <div class="cover"><span>JOIN</span></div>
                         </div>
-                        <div class="card" eventID="126489">
-                            <span class="title">Dots & Boxes</span>
+                        <div class="card" eventID="15923879">
+                            <span>Dots & Boxes</span>
                             <div class="info">
-                                <span class="prize">279$</span>
-                                <div class="date">
+                                <span>279$</span>
+                                <div>
                                     <span class="start"><span>21 December 2021</span><span>21:48</span></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 447.243 447.243">
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 447.243 447.243">
                                         <g>
                                             <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
 			                                        c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
@@ -267,79 +258,18 @@
                                     <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card" eventID="126489">
-                            <span class="title">Dots & Boxes</span>
-                            <div class="info">
-                                <span class="prize">279$</span>
-                                <div class="date">
-                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 447.243 447.243">
-                                        <g>
-                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
-			                                        c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
-			                                        c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
-			                                        c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
-			                                        c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
-			                                        c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
-			                                        C418.542,265.382,418.577,245.121,406.101,232.603z" />
-                                        </g>
-                                    </svg>
-                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card" eventID="126489">
-                            <span class="title">Dots & Boxes</span>
-                            <div class="info">
-                                <span class="prize">279$</span>
-                                <div class="date">
-                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 447.243 447.243">
-                                        <g>
-                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
-			                                        c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
-			                                        c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
-			                                        c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
-			                                        c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
-			                                        c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
-			                                        C418.542,265.382,418.577,245.121,406.101,232.603z" />
-                                        </g>
-                                    </svg>
-                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card" eventID="126489">
-                            <span class="title">Dots & Boxes</span>
-                            <div class="info">
-                                <span class="prize">279$</span>
-                                <div class="date">
-                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 447.243 447.243">
-                                        <g>
-                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
-			                                        c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
-			                                        c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
-			                                        c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
-			                                        c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
-			                                        c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
-			                                        C418.542,265.382,418.577,245.121,406.101,232.603z" />
-                                        </g>
-                                    </svg>
-                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
-                                </div>
-                            </div>
+                            <div class="cover"><span>JOIN</span></div>
                         </div>
                     </section>
                     <section class="battle">
-                        <div class="card" eventID="126489">
-                            <span class="title">Sea Battle</span>
+                        <div class="card" eventID="789216">
+                            <span>Sea Battle</span>
                             <div class="info">
-                                <span class="prize">279$</span>
-                                <div class="date">
+                                <span>578$</span>
+                                <div>
                                     <span class="start"><span>21 December 2021</span><span>21:48</span></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 447.243 447.243">
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 447.243 447.243">
                                         <g>
                                             <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
 			                                        c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
@@ -353,14 +283,16 @@
                                     <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
                                 </div>
                             </div>
+                            <div class="cover"><span>JOIN</span></div>
                         </div>
-                        <div class="card" eventID="126489">
-                            <span class="title">Sea Battle</span>
+                        <div class="card" eventID="1597">
+                            <span>Sea Battle</span>
                             <div class="info">
-                                <span class="prize">279$</span>
-                                <div class="date">
+                                <span>2139$</span>
+                                <div>
                                     <span class="start"><span>21 December 2021</span><span>21:48</span></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 447.243 447.243">
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 447.243 447.243">
                                         <g>
                                             <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
 			                                        c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
@@ -374,75 +306,213 @@
                                     <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card" eventID="126489">
-                            <span class="title">Sea Battle</span>
-                            <div class="info">
-                                <span class="prize">279$</span>
-                                <div class="date">
-                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 447.243 447.243">
-                                        <g>
-                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
-			                                        c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
-			                                        c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
-			                                        c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
-			                                        c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
-			                                        c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
-			                                        C418.542,265.382,418.577,245.121,406.101,232.603z" />
-                                        </g>
-                                    </svg>
-                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card" eventID="126489">
-                            <span class="title">Sea Battle</span>
-                            <div class="info">
-                                <span class="prize">279$</span>
-                                <div class="date">
-                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 447.243 447.243">
-                                        <g>
-                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
-			                                        c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
-			                                        c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
-			                                        c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
-			                                        c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
-			                                        c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
-			                                        C418.542,265.382,418.577,245.121,406.101,232.603z" />
-                                        </g>
-                                    </svg>
-                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card" eventID="126489">
-                            <span class="title">Sea Battle</span>
-                            <div class="info">
-                                <span class="prize">279$</span>
-                                <div class="date">
-                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 447.243 447.243">
-                                        <g>
-                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
-			                                        c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
-			                                        c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
-			                                        c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
-			                                        c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
-			                                        c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
-			                                        C418.542,265.382,418.577,245.121,406.101,232.603z" />
-                                        </g>
-                                    </svg>
-                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
-                                </div>
-                            </div>
+                            <div class="cover"><span>JOIN</span></div>
                         </div>
                     </section>
                 </div>
             </section>
-            <section class="admin">
 
+            <section class="admin" style="display: none;">
+                <section class="players">
+                    <input class="search" type="search" placeholder="search player">
+                    <ol>
+                        <li class="item" name="username">
+                            <img src="avatar/avatar (16).svg">
+                            <h2>friend 0</h2>
+                        </li>
+                    </ol>
+                </section>
+
+                <section class="events">
+                    <h1>EVENTS</h1>
+                    <div class="games">
+                        <div class="card dots" eventID="1226489">
+                            <span>Dots & Boxes</span>
+                            <div class="info">
+                                <span>104$</span>
+                                <div>
+                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 447.243 447.243">
+                                        <g>
+                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
+                                                    c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
+                                                    c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
+                                                    c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
+                                                    c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
+                                                    c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
+                                                    C418.542,265.382,418.577,245.121,406.101,232.603z" />
+                                        </g>
+                                    </svg>
+                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
+                                </div>
+                            </div>
+                            <div class="cover"><span>DELETE</span></div>
+                        </div>
+                        <div class="card battle" eventID="15923879">
+                            <span>Sea Battle</span>
+                            <div class="info">
+                                <span>279$</span>
+                                <div>
+                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 447.243 447.243">
+                                        <g>
+                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
+                                                    c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
+                                                    c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
+                                                    c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
+                                                    c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
+                                                    c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
+                                                    C418.542,265.382,418.577,245.121,406.101,232.603z" />
+                                        </g>
+                                    </svg>
+                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
+                                </div>
+                            </div>
+                            <div class="cover"><span>DELETE</span></div>
+                        </div>
+                        <div class="card dots" eventID="152249">
+                            <span>Dots & Boxes</span>
+                            <div class="info">
+                                <span>279$</span>
+                                <div>
+                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 447.243 447.243">
+                                        <g>
+                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
+                                                    c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
+                                                    c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
+                                                    c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
+                                                    c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
+                                                    c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
+                                                    C418.542,265.382,418.577,245.121,406.101,232.603z" />
+                                        </g>
+                                    </svg>
+                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
+                                </div>
+                            </div>
+                            <div class="cover"><span>DELETE</span></div>
+                        </div>
+                        <div class="card battle" eventID="1278">
+                            <span>Sea Battle</span>
+                            <div class="info">
+                                <span>279$</span>
+                                <div>
+                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 447.243 447.243">
+                                        <g>
+                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
+                                                    c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
+                                                    c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
+                                                    c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
+                                                    c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
+                                                    c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
+                                                    C418.542,265.382,418.577,245.121,406.101,232.603z" />
+                                        </g>
+                                    </svg>
+                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
+                                </div>
+                            </div>
+                            <div class="cover"><span>DELETE</span></div>
+                        </div>
+                        <div class="card dots" eventID="98752">
+                            <span>Dots & Boxes</span>
+                            <div class="info">
+                                <span>279$</span>
+                                <div>
+                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 447.243 447.243">
+                                        <g>
+                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
+                                                    c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
+                                                    c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
+                                                    c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
+                                                    c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
+                                                    c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
+                                                    C418.542,265.382,418.577,245.121,406.101,232.603z" />
+                                        </g>
+                                    </svg>
+                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
+                                </div>
+                            </div>
+                            <div class="cover"><span>DELETE</span></div>
+                        </div>
+                        <div class="card dots" eventID="98752">
+                            <span>Dots & Boxes</span>
+                            <div class="info">
+                                <span>279$</span>
+                                <div>
+                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 447.243 447.243">
+                                        <g>
+                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
+                                                    c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
+                                                    c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
+                                                    c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
+                                                    c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
+                                                    c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
+                                                    C418.542,265.382,418.577,245.121,406.101,232.603z" />
+                                        </g>
+                                    </svg>
+                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
+                                </div>
+                            </div>
+                            <div class="cover"><span>DELETE</span></div>
+                        </div>
+                        <div class="card dots" eventID="98752">
+                            <span>Dots & Boxes</span>
+                            <div class="info">
+                                <span>279$</span>
+                                <div>
+                                    <span class="start"><span>21 December 2021</span><span>21:48</span></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         viewBox="0 0 447.243 447.243">
+                                        <g>
+                                            <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
+                                                    c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
+                                                    c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
+                                                    c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
+                                                    c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
+                                                    c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
+                                                    C418.542,265.382,418.577,245.121,406.101,232.603z" />
+                                        </g>
+                                    </svg>
+                                    <span class="finish"><span>22 June 2022</span><span>09:56</span></span>
+                                </div>
+                            </div>
+                            <div class="cover"><span>DELETE</span></div>
+                        </div>
+                    </div>
+                    <div class="template">
+                        <input type="text" class="game" placeholder="game name">
+                        <div class="info">
+                            <input type="number" class="prize" placeholder="prize">
+                            <div class="start"><input type="number" class="day" placeholder="day">-<input
+                                    type="number" class="month" placeholder="month">-<input type="number"
+                                                                                            class="year" placeholder="year"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 447.243 447.243">
+                                <g>
+                                    <path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32
+                                                    c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76
+                                                    c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88
+                                                    c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64
+                                                    c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160
+                                                    c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160
+                                                    C418.542,265.382,418.577,245.121,406.101,232.603z" />
+                                </g>
+                            </svg>
+                            <div class="finish"><input type="number" class="day" placeholder="day">-<input
+                                    type="number" class="month" placeholder="month">-<input type="number"
+                                                                                            class="year" placeholder="year"></div>
+                        </div>
+                        <button type="button">ADD</button>
+                    </div>
+                </section>
             </section>
         </section>
 
@@ -968,6 +1038,9 @@
     </main>
 </section>
 
+<script src="js/seaBattle.js"></script>
+<script src="js/account.js"></script>
+<script src="js/primary.js"></script>
 <script src="js/register.js"></script>
 <script src="js/login.js"></script>
 <script>
@@ -980,6 +1053,7 @@
     level.style.right = header.offsetWidth / 10 + 'px';
     level.style.transform = 'translateX(100%) scale(' + window.innerHeight * 0.03 / level.offsetHeight + ')';
 
+    new seabattle();
     new register();
     new login();
 </script>
