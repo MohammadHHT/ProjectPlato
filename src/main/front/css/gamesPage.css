@@ -13,11 +13,11 @@
     font-family: 'Questrial';
 }
 
-section .all-game {
+section .all-game, section .sea-battle-page {
     padding: calc(0.03 * 97vh);
 }
 
-section .all-game {
+section .all-game, section .sea-battle-page {
     height: calc(0.690 * 97vh);
     width: 100%;
     border-radius: 9.4px;
@@ -32,6 +32,34 @@ section .all-game {
     position: relative;
     overflow: hidden;
     margin: 0 0 calc(0.03 * 97vh) 0;
+}
+
+section .sea-battle-page {
+    height: calc(0.940 * 97vh);
+}
+
+
+.history {
+    height: calc(0.600 * 97vh);
+    width: 100%;
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    display: flex;
+    padding: 4px;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow-y: scroll;
+    margin: 0;
+    overflow-x: hidden;
+    width: 100%;
+    background-color: #e7e7e7;
+    border-radius: 0 0 9.4px 9.4px;
+}
+
+.history::-webkit-scrollbar {
+    display: none;
 }
 
 .game {
@@ -74,4 +102,162 @@ section .all-game {
 .battle-sea-photo span:hover, .dots-and-boxes-photo span:hover {
     background-color: #f13453;
     color: #ffffff;
+}
+
+.container {
+    margin-left: 8px;
+    margin-top: 15px;
+    width: 240px;
+    /*text-align: center;*/
+}
+
+.progress {
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar {
+    height: 18px;
+    background-color: #ee303c;
+    border-radius: 4px;
+    transition: 0.4s linear;
+    transition-property: width, background-color;
+}
+
+.progress-striped .progress-bar {
+    background-color: #FCBC51;
+    width: 60%;
+    background-image: linear-gradient(
+            45deg, rgb(252,163,17) 25%,
+            transparent 25%, transparent 50%,
+            rgb(252,163,17) 50%, rgb(252,163,17) 75%,
+            transparent 75%, transparent);
+    animation: progressAnimationStrike 4s;
+}
+
+@keyframes progressAnimationStrike {
+    from { width: 0 }
+    to   { width: 60% }
+}
+
+.game-level {
+    display: flex;
+    background-color: #cd3700;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.game-level div svg {
+    width: 55px;
+    height: 55px;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+.level-number {
+    display: flex;
+    width: 33px;
+    height: 33px;
+    background-color: #ffd700;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.level-number span {
+    margin-left: 12px;
+    margin-top: 6px;
+}
+
+.ribbon {
+    width: 100%;
+    display: flex;
+    margin-top: 8px;
+}
+
+.ribbon div {
+    width: 100%;
+    height: 20px;
+    margin: 3px;
+    background-color: #122948;
+    border-radius: 8px 8px 0 0;
+}
+
+.ribbon div span {
+    font-family: 'Product Bold';
+    font-size: 14px;
+    color: rgb(239, 233, 224);
+    text-transform: uppercase;
+}
+
+.ribbon div:first-child {
+    margin-left: 0;
+}
+
+.ribbon div:last-child {
+    margin-right: 0;
+}
+
+.game-history {
+    display: flex;
+    background-color: #e1aa12;
+    border-radius: 8px;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 8px;
+}
+
+.game-icon {
+    width: 15%;
+}
+
+.history .game-icon img {
+    width: 40px;
+    height: 40px;
+    margin-top: 4px;
+}
+
+.history-info {
+    display: block;
+    width: 65%;
+    margin-top: 4px;
+}
+
+.history-info span {
+    display: flex;
+}
+
+/*.history-info span {*/
+/*    float: left;*/
+/*    clear: both;*/
+/*}*/
+
+.history-info div {
+    display: flex;
+}
+
+.game-time {
+    width: 20%;
+}
+
+.run-game {
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Product Bold';
+    font-size: 3vh;
+    line-height: 1em;
+    padding: 2vh 0;
+    margin-top: 10px;
+    background-color: #34f16e;
+    color: rgb(239, 233, 224);
+    margin-bottom: 1vh;
+}
+
+.run-game:hover {
+    color: #222026;
+    opacity: 0.9;
 }
