@@ -696,32 +696,33 @@
                     <div class="cell" num="98"></div>
                     <div class="cell" num="99"></div>
                     <div class="cell" num="100"></div>
-                    <button class="start" type="button"><span>START</span></button>
+                    <canvas id="canvas"></canvas>
+                    <button class="start" disabled type="button"><span>START</span></button>
+                    <a href="#" class="message">Draw a valid square!</a>
                     <img src="ship/4x2.svg" class="xl">
                     <img src="ship/3x2.svg" class="l">
                     <img src="ship/4x1.svg" class="m">
                     <img src="ship/2x1.svg" class="s">
                     <img src="ship/2x1.svg" class="s">
-                    <canvas id="canvas"></canvas>
                 </div>
                 <div class="control">
-                    <span>Rearrange</span>
+                    <span id="rearrange">Rearrange</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span>•</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="size">4&nbsp;x&nbsp;2</span>
+                    <span class="area">4&nbsp;x&nbsp;2</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="size">3&nbsp;x&nbsp;2</span>
+                    <span class="area">3&nbsp;x&nbsp;2</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="size">4&nbsp;x&nbsp;1</span>
+                    <span class="area">4&nbsp;x&nbsp;1</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="size">2&nbsp;x&nbsp;1</span>
+                    <span class="area">2&nbsp;x&nbsp;1</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="size">2&nbsp;x&nbsp;1</span>
+                    <span class="area">2&nbsp;x&nbsp;1</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span>•</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span>Random</span>
+                    <span id="randomarrange">Random</span>
                 </div>
             </section>
         </main>
@@ -732,7 +733,7 @@
     <script src="js/register.js"></script>
     <script src="js/login.js"></script>
     <script>
-         var header = document.querySelector('.account header');
+        var header = document.querySelector('.account header');
         var second = document.querySelector('.account header .second');
         var fullname = document.querySelector('.account header .second .name');
         var level = document.querySelector('.account header .second .level');

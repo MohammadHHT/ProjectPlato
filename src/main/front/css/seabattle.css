@@ -116,7 +116,7 @@ section.battle .board .cell {
     flex-grow: 1;
     background-color: rgba(255, 255, 255, 0.6);
     border: 1px solid white;
-    transition: background-color 0.1s, height 0.3s;
+    transition: background-color 0.3s, height 0.3s;
 }
 
 section.battle .board.arrange .cell {
@@ -145,18 +145,51 @@ section.battle .board .cell.empty {
     background-color: transparent;
 }
 
+section.battle .board .message {
+    position: absolute;
+    left: 50%;
+    top: calc(0.5 * 0.0560 * 97.0vh);
+    transform: translateX(-50%) translateY(-50%) scale(0.9);
+    padding: 1vh 1.5vh;
+    font: 1.75vh 'Questrial';
+    color: white;
+    background-color: black;
+    border-radius: 2vh;
+    opacity: 0;
+    margin: 0;
+    white-space: nowrap;
+    visibility: hidden;
+    transition: opacity 0.3s, transform 0.3s;
+    cursor: default;
+    text-decoration: none;
+}
+
+section.battle .board .message.show {
+    opacity: 0.75;
+    transform: translateX(-50%) translateY(-50%) scale(1);
+}
+
 section.battle .board .start {
     width: calc(4.0 * 0.0560 * 97.0vh);
     height: calc(4.0 * 0.0560 * 97.0vh);
     position: absolute;
     left: calc(3.0 * 0.0560 * 97.0vh);
     bottom: 0;
-    background-color:  rgba(25, 49, 47, 0.8);
+    background-color: rgba(70, 216, 101, 1);
     outline: none;
     border: none;
     cursor: pointer;
+    opacity: 0;
     visibility: hidden;
-    transition: visibility 0.1s;
+    transition: opacity 0.3s;
+}
+
+section.battle .board .start:hover {
+    background-color: rgb(62, 208, 93);
+}
+
+section.battle .board .start.show {
+    opacity: 1;
 }
 
 section.battle .board .start span {
@@ -164,45 +197,42 @@ section.battle .board .start span {
     bottom: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(50%);
-    font-family: 'Questrial';
-    font-size: 3vh;
+    font-family: 'Product Bold';
+    font-size: 4vh;
     line-height: 1em;
     color: white;
 }
 
 section.battle .board img {
     position: absolute;
-    transform-origin: bottom left;
     visibility: hidden;
     transition: visibility 0.1s;
+    bottom: 0;
+    left: 0;
 }
 
 section.battle .board img.xl {
-    width: calc(4.50 * 0.0560 * 97.0vh);
-    bottom: 2vh;
-    left: -1vh;
+    width: calc(4 * 0.0560 * 97.0vh);
+    transform-origin: calc(0.0560 * 97.0vh) calc(100% - 0.0560 * 97.0vh);
 }
 
 section.battle .board img.l {
-    width: calc(4.0 * 0.0560 * 97.0vh);
-    bottom: 3vh;
-    left: 0.1vh;
+    width: calc(4 * 0.0560 * 97.0vh);
+    transform-origin: calc(0.0560 * 97.0vh) calc(100% - 0.0560 * 97.0vh);
 }
 
 section.battle .board img.m {
-    width: calc(4.10 * 0.0560 * 97.0vh);
-    bottom: 0vh;
-    left: -0.2vh;
+    width: calc(4 * 0.0560 * 97.0vh);
+    transform-origin: calc(0.5 * 0.0560 * 97.0vh) calc(100% - 0.5 * 0.0560 * 97.0vh);
 }
 
 section.battle .board img.s {
-    width: calc(2.70 * 0.0560 * 97.0vh);
-    bottom: 1vh;
-    left: -3.6vh;
+    width: calc(2 * 0.0560 * 97.0vh);
+    transform-origin: calc(0.5 * 0.0560 * 97.0vh) calc(100% - 0.5 * 0.0560 * 97.0vh);
 }
 
 section.battle .control {
-    color: white;
+    color: rgba(255, 255, 255, 0.5);
     font-family: 'Questrial';
     font-size: 1.5vh;
     position: absolute;
@@ -210,15 +240,23 @@ section.battle .control {
     transform: translateY(50%);
     width: 100%;
     text-align: center;
+    cursor: default;
 }
 
-section.battle .control .size {
-    opacity: 0.5;
-    transition: opacity 0.1s;
+section.battle .control .area {
+    transition: color 0.1s;
 }
 
-section.battle .control .size.used {
-    opacity: 1;
+section.battle .control .area.used {
+    color: rgba(255, 255, 255, 1);
+}
+
+#rearrange, #randomarrange {
+    cursor: pointer;
+}
+
+#rearrange:hover, #randomarrange:hover {
+    color: rgba(255, 255, 255, 1);
 }
 
 #canvas {
