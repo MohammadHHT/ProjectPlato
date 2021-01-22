@@ -640,11 +640,11 @@
             </section>
         </section>
 
-        <section class="games-menu">
-            <section class="all-game">
+        <section class="games-menu page">
+            <section class="all-game" id="allGameMenu">
                 <div class="game-title"><span>games</span></div>
                 <div class="game">
-                    <div class="battle-sea-photo">
+                    <div onclick="showBattleSeaGamePage()" class="battle-sea-photo">
                         <img src="jpg/sea%20battle.jpg" alt="sea Battle">
                         <span>Sea Battle</span>
                     </div>
@@ -654,7 +654,7 @@
                     </div>
                 </div>
             </section>
-            <section class="sea-battle-page">
+            <section class="game-page" id="gamePage">
                 <div class="game-title"><span>Sea Battle</span></div>
                 <div class="game-level">
                     <div>
@@ -673,11 +673,11 @@
                     </div>
                 </div>
                 <div class="ribbon">
-                    <div><span>History</span></div>
-                    <div><span>Leaderboard</span></div>
+                    <div onclick="showHistoryDiv()"><span>History</span></div>
+                    <div onclick="showLeaderboardDiv()"><span>Leaderboard</span></div>
                     <div><span>How to Play</span></div>
                 </div>
-                <div class="history">
+                <div class="history" id="historyDiv">
                     <div class="game-history">
                         <div class="game-icon">
                             <img src="jpg/com.dot.box.game-logo.png">
@@ -718,7 +718,7 @@
                         <div class="game-time">14:20 PM</div>
                     </div>
                 </div>
-                <div class="leaderboard">
+                <div class="leaderboard" id="leaderboardDiv">
                     <div class="player-score">
                         <div class="rank"><span>1.</span></div>
                         <div class="player-avatar-rank">
@@ -1027,7 +1027,7 @@
             </div>
         </section>
 
-        <section class="dots-and-boxes-page page">
+        <section class="dots-and-boxes-page">
             <div class="players-score">
                 <div class="user1-score">
                     <span>User 1</span>
@@ -1043,7 +1043,7 @@
             <div><canvas id="DBcanvas"></canvas></div>
         </section>
 
-        <section class="battle page">
+        <section class="battle">
             <img src="jpg/sea battle wallpaper.jpg" width="110%" height="110%"
                  style="filter: blur(12px); position: absolute; left: calc(-0.035 * 97vh); top: calc(-0.05 * 97vh);">
             <section>
@@ -1196,6 +1196,7 @@
 <script src="js/register.js"></script>
 <script src="js/login.js"></script>
 <script src="js/dot_and_box.js"></script>
+<script src="js/gameMenu.js"></script>
 <script>
     var header = document.querySelector('.account header');
     var second = document.querySelector('.account header .second');

@@ -13,11 +13,11 @@
     font-family: 'Questrial';
 }
 
-section .all-game, section .sea-battle-page {
+section .all-game, section .game-page {
     padding: calc(0.03 * 97vh);
 }
 
-section .all-game, section .sea-battle-page {
+section .all-game, section .game-page {
     height: calc(0.690 * 97vh);
     width: 100%;
     border-radius: 9.4px;
@@ -34,8 +34,9 @@ section .all-game, section .sea-battle-page {
     margin: 0 0 calc(0.03 * 97vh) 0;
 }
 
-section .sea-battle-page {
+section .game-page {
     height: calc(0.940 * 97vh);
+    display: none;
 }
 
 
@@ -58,6 +59,10 @@ section .sea-battle-page {
     border-radius: 0 0 9.4px 9.4px;
 }
 
+.leaderboard {
+    display: none;
+}
+
 .history::-webkit-scrollbar, .leaderboard::-webkit-scrollbar {
     display: none;
 }
@@ -70,6 +75,10 @@ section .sea-battle-page {
 .battle-sea-photo {
     margin-top: 20px;
     margin-bottom: 30px;
+}
+
+.battle-sea-photo:hover {
+    cursor: pointer;
 }
 
 .battle-sea-photo img, .dots-and-boxes-photo img {
@@ -107,7 +116,7 @@ section .sea-battle-page {
 .container {
     margin-left: 8px;
     margin-top: 15px;
-    width: 240px;
+    width: 280px;
     /*text-align: center;*/
 }
 
@@ -184,6 +193,12 @@ section .sea-battle-page {
     margin: 3px;
     background-color: #122948;
     border-radius: 8px 8px 0 0;
+}
+
+.ribbon div:hover {
+    cursor: pointer;
+    background-color: #bb2d44;
+    color: #ffffff;
 }
 
 .ribbon div span {
