@@ -13,7 +13,7 @@
     font-family: 'Questrial';
 }
 
-section .all-game, section .game-page {
+section .games-menu, section .all-game, section .game-page {
     padding: calc(0.03 * 97vh);
 }
 
@@ -78,6 +78,10 @@ section .game-page {
 }
 
 .battle-sea-photo:hover {
+    cursor: pointer;
+}
+
+.dots-and-boxes-photo:hover {
     cursor: pointer;
 }
 
@@ -159,6 +163,13 @@ section .game-page {
 }
 
 .game-level div svg {
+    width: 55px;
+    height: 55px;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+.game-level div img {
     width: 55px;
     height: 55px;
     margin-left: 5px;

@@ -1,14 +1,29 @@
 function showBattleSeaGamePage() {
     document.getElementById("allGameMenu").style.display = "none";
-    document.getElementById("gamePage").style.display = "block";
+    document.getElementById("seaBattleGamePage").style.display = "block";
 }
 
-function showHistoryDiv() {
-    document.getElementById("leaderboardDiv").style.display = "none";
-    document.getElementById("historyDiv").style.display = "flex";
+function showDotsAndBoxesGamePage() {
+    document.getElementById("allGameMenu").style.display = "none";
+    document.getElementById("dotsAndBoxesGamePage").style.display = "block";
 }
 
-function showLeaderboardDiv() {
-    document.getElementById("historyDiv").style.display = "none";
-    document.getElementById("leaderboardDiv").style.display = "flex";
+function showSeaBattleHistoryDiv() {
+    document.getElementById("SB-leaderboardDiv").style.display = "none";
+    document.getElementById("SB-historyDiv").style.display = "flex";
+}
+
+function showSeaBattleLeaderboardDiv() {
+    document.getElementById("SB-historyDiv").style.display = "none";
+    document.getElementById("SB-leaderboardDiv").style.display = "flex";
+}
+
+function showDotsAndBoxesHistoryDiv() {
+    document.getElementById("DB-leaderboardDiv").style.display = "none";
+    document.getElementById("DB-historyDiv").style.display = "flex";
+}
+
+function showDotsAndBoxesLeaderboardDiv() {
+    document.getElementById("DB-historyDiv").style.display = "none";
+    document.getElementById("DB-leaderboardDiv").style.display = "flex";
 }
