@@ -773,7 +773,7 @@
                 <div class="ribbon">
                     <div onclick="showDotsAndBoxesHistoryDiv()"><span>History</span></div>
                     <div onclick="showDotsAndBoxesLeaderboardDiv()"><span>Leaderboard</span></div>
-                    <div><span>How to Play</span></div>
+                    <div onclick="showDotsAndBoxesHowToPlay()"><span>How to Play</span></div>
                 </div>
                 <div class="history" id="DB-historyDiv">
                     <div class="game-history">
@@ -848,7 +848,27 @@
                         <div class="score"><span>1200</span></div>
                     </div>
                 </div>
-                <div class="How-to-Play"></div>
+                <div class="How-to-Play" id="DB-HowToPlayDiv">
+                    <div class="DB-content">
+                        <div>
+                            <h1>Game Rules</h1>
+                            <p>The objective in Dots & Boxes is to capture more boxes on the board than your opponent.</p>
+                            <p>Each player takes turn connecting a line between 2 adjacent dots either horizontally or
+                                vertically. Simple click between 2 available dots to create a line between them</p>
+                        </div>
+                        <div>
+                            <h1>Capturing a Box</h1>
+                            <img src="jpg/DB-tutorial.png" alt="A captured box">
+                            <p>When you place the 4th line that completes a box, rhat box will be captured by you,
+                                regardless whether any of the other lines were created by your opponent.</p>
+                        </div>
+                        <div>
+                            <h1>Endgame</h1>
+                            <p>The game end when there are no more dots to connect</p>
+                            <p>The player that has captured the most boxes wins the game.</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="run-game">Play</div>
             </section>
         </section>

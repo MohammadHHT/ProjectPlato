@@ -40,7 +40,7 @@ section .game-page {
 }
 
 
-.history, .leaderboard {
+.history, .leaderboard, .How-to-Play {
     height: calc(0.600 * 97vh);
     width: 100%;
     box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
@@ -59,11 +59,11 @@ section .game-page {
     border-radius: 0 0 9.4px 9.4px;
 }
 
-.leaderboard {
+.leaderboard, .How-to-Play {
     display: none;
 }
 
-.history::-webkit-scrollbar, .leaderboard::-webkit-scrollbar {
+.history::-webkit-scrollbar, .leaderboard::-webkit-scrollbar, .How-to-Play::-webkit-scrollbar {
     display: none;
 }
 
@@ -286,6 +286,7 @@ section .game-page {
 .run-game:hover {
     color: #222026;
     opacity: 0.9;
+    cursor: pointer;
 }
 
 .player-score {
@@ -319,4 +320,40 @@ section .game-page {
     color: #ffffff;
     border-radius: 40%;
     padding: 6px;
+}
+
+.DB-content {
+    padding: 8px;
+}
+
+.DB-content div h1, .DB-content div p, .DB-content div img {
+    text-align: left;
+}
+
+.DB-content div h1 {
+    font-family: 'Product Bold';
+    margin-bottom: 6px;
+    font-size: 18px;
+}
+
+.DB-content div p {
+    font-family: 'Questrial';
+    width: 100%;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 4px;
+    line-height: 120%;
+}
+
+.DB-content div {
+    width: 100%;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.DB-content div img {
+    width: 40%;
+    height: 25%;
+    margin-left: 30%;
+    margin-bottom: 4px;
 }
