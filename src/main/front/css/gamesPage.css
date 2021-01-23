@@ -323,21 +323,22 @@ section .game-page {
     padding: 6px;
 }
 
-.DB-content {
+.DB-content, .SB-content {
     padding: 8px;
 }
 
-.DB-content div h1, .DB-content div p, .DB-content div img {
+.DB-content div h1, .DB-content div p, .DB-content div img,
+.SB-content div h1,.SB-content div p,.SB-content div img {
     text-align: left;
 }
 
-.DB-content div h1 {
+.DB-content div h1, .SB-content div h1 {
     font-family: 'Product Bold';
     margin-bottom: 6px;
     font-size: 18px;
 }
 
-.DB-content div p {
+.DB-content div p, .SB-content div p {
     font-family: 'Questrial';
     width: 100%;
     text-align: justify;
@@ -346,7 +347,7 @@ section .game-page {
     line-height: 120%;
 }
 
-.DB-content div {
+.DB-content div, .SB-content div {
     width: 100%;
     text-align: justify;
     text-justify: inter-word;

@@ -9,13 +9,21 @@ function showDotsAndBoxesGamePage() {
 }
 
 function showSeaBattleHistoryDiv() {
+    document.getElementById("SB-HowToPlayDiv").style.display = "none"
     document.getElementById("SB-leaderboardDiv").style.display = "none";
     document.getElementById("SB-historyDiv").style.display = "flex";
 }
 
 function showSeaBattleLeaderboardDiv() {
+    document.getElementById("SB-HowToPlayDiv").style.display = "none"
     document.getElementById("SB-historyDiv").style.display = "none";
     document.getElementById("SB-leaderboardDiv").style.display = "flex";
+}
+
+function showSeaBattleHowToPlayDiv() {
+    document.getElementById("SB-historyDiv").style.display = "none";
+    document.getElementById("SB-leaderboardDiv").style.display = "none";
+    document.getElementById("SB-HowToPlayDiv").style.display = "flex"
 }
 
 function showDotsAndBoxesHistoryDiv() {

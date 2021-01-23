@@ -675,7 +675,7 @@
                 <div class="ribbon">
                     <div onclick="showSeaBattleHistoryDiv()"><span>History</span></div>
                     <div onclick="showSeaBattleLeaderboardDiv()"><span>Leaderboard</span></div>
-                    <div><span>How to Play</span></div>
+                    <div onclick="showSeaBattleHowToPlayDiv()"><span>How to Play</span></div>
                 </div>
                 <div class="history" id="SB-historyDiv">
                     <div class="game-history">
@@ -750,7 +750,39 @@
                         <div class="score"><span>1200</span></div>
                     </div>
                 </div>
-                <div class="How-to-Play"></div>
+                <div class="How-to-Play" id="SB-HowToPlayDiv">
+                    <div class="SB-content">
+                        <div>
+                            <div>
+                                <h1>Object of Game</h1>
+                                <p>Sea Battle is a 2 players game where players take turns trying to destroy the other
+                                    player's fleet of ships on a 10x10 grid:</p>
+                                <img src="" alt="SB-board">
+                                <p>The game is played in 2 phases: 1. Ship Placement Phase and 2. Attack Phase</p>
+                            </div>
+                            <div>
+                                <h1>Ship Placement Phase</h1>
+                                <p>At the start of each game, you must place your ships on the grid.</p>
+                                <p>Each player starts out with 6 ships.</p>
+                                <p>To place a ship, you can click and drag a ship to available area</p>
+                                <p>You can rotate a ship by simply double click on it</p>
+                                <p>you can also click Random button to randomly assign placement to each ship</p>
+                                <p>Once you've finished placing your ships, click on the Ready button.</p>
+                            </div>
+                            <div>
+                                <h1>Attack Phase</h1>
+                                <p>When both players have clicked on their Ready button, the Attack Phase will now start.</p>
+                                <p>Both players will now see thr following game board:</p>
+                                <img src="" alt="SB board with bombed cell">
+                                <p>The larger grid represents your opponent's are. The smaller grid represents your area and your ships</p>
+                                <p>When it is your turn, click on the square on the main grid you wish to attack.</p>
+                                <p>Every time you hit an enemy ship, you get another turn. When you miss,tour turn is over.</p>
+                                <p>when you've sunk your opponent's ship, that ship will appear on the main grid.</p>
+                                <p>The first person to sink all five of his/her opponent's ships wins the games.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="run-game">Play</div>
             </section>
 
