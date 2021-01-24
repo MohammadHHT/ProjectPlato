@@ -34,3 +34,4 @@ public class SeaBattle extends Game {
         return null;
     }
 }
+

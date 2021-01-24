@@ -1,4 +1,5 @@
-function seabattle() {
+function seabattle(host) {
+    this.host = host;
     this.cells = document.getElementsByClassName('cell');
     this._4x2 = [];
     this._3x2 = [];
@@ -13,8 +14,6 @@ seabattle.prototype.init = function () {
     let self = this;
 
     function initCanvas() {
-        document.getElementById('rearrange').addEventListener('click', rearrange);
-
         let canvas = document.getElementById('canvas');
         let ctx = canvas.getContext('2d');
         canvas.width = window.innerHeight * 0.97 * 0.560;
@@ -149,7 +148,7 @@ seabattle.prototype.init = function () {
             canvas.removeEventListener('mousemove', mousemove);
         }
 
-        function rearrange() {
+        document.getElementById('rearrange').addEventListener('click', () => {
             self._4x2 = [];
             self._3x2 = [];
             self._4x1 = [];
@@ -175,6 +174,19 @@ seabattle.prototype.init = function () {
                 canvas.addEventListener('mouseup', mouseup);
                 canvas.addEventListener('mousemove', mousemove);
             }
-        }
+        });
+
+        document.getElementById('section.battle .board .start').addEventListener('click', () => {
+            const connection = new WebSocket('ws://127.0.0.1:4444');
+
+            connection.onopen = function () {
+                connection.send('user register email ' + self.inputs[5].value);
+            };
+
+            connection.onmessage = function (e) {
+
+                connection.close();
+            };
+        });
     }
 }
