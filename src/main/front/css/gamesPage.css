@@ -118,10 +118,33 @@ section .game-page {
 }
 
 .container {
+    display: block;
     margin-left: 8px;
     margin-top: 15px;
     width: 280px;
-    /*text-align: center;*/
+}
+
+.gameLog {
+    display: flex;
+    width: 100%;
+}
+
+.gameLog div:first-child {
+    text-align: left;
+    width: 50%;
+}
+
+.gameLog div:last-child {
+    text-align: right;
+    width: 50%;
+}
+
+.gameLog div span:first-child {
+    color: #f9bf24;
+}
+
+.gameLog div span:last-child {
+    color: #ffffff;
 }
 
 .progress {
