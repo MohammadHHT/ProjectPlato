@@ -121,7 +121,7 @@ section .inbox {
     font-size: 16px;
     font-family: 'Questrial';
     margin-top: 5px;
-    padding: 3px;
+    padding: 12px;
     color: #ececec;
     border-radius: 6px 6px 6px 6px;
 }
@@ -129,7 +129,7 @@ section .inbox {
 .messageField div:first-child textarea::-webkit-input-placeholder {
     font-size: 15px;
     color: #d2d2d2;
-    padding: 8px;
+    /*padding: 8px;*/
     font-family: 'Product';
 }
 

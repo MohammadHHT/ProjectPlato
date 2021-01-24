@@ -34,13 +34,17 @@ section .all-game, section .game-page {
     margin: 0 0 calc(0.03 * 97vh) 0;
 }
 
+section .all-game {
+    height: auto;
+}
+
 section .game-page {
     height: calc(0.940 * 97vh);
     display: none;
 }
 
 
-.history, .leaderboard, .How-to-Play {
+.history, .leaderboard, .How-to-Play, .availableGames {
     height: calc(0.600 * 97vh);
     width: 100%;
     box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
@@ -59,11 +63,11 @@ section .game-page {
     border-radius: 0 0 9.4px 9.4px;
 }
 
-.leaderboard, .How-to-Play {
+.history, .leaderboard, .How-to-Play {
     display: none;
 }
 
-.history::-webkit-scrollbar, .leaderboard::-webkit-scrollbar, .How-to-Play::-webkit-scrollbar {
+.availableGames::-webkit-scrollbar, .history::-webkit-scrollbar, .leaderboard::-webkit-scrollbar, .How-to-Play::-webkit-scrollbar {
     display: none;
 }
 
@@ -73,8 +77,7 @@ section .game-page {
 }
 
 .battle-sea-photo {
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin: 20px auto 30px auto;
 }
 
 .battle-sea-photo:hover {
@@ -99,7 +102,7 @@ section .game-page {
 .battle-sea-photo span, .dots-and-boxes-photo span {
     width: 80%;
     height: 27px;
-    margin-left: 40px;
+    margin: auto auto 30px auto;
     background-color: #cac8c8;
     border-radius: 0 0 8px 8px;
     box-sizing: border-box;
@@ -219,14 +222,17 @@ section .game-page {
     width: 100%;
     display: flex;
     margin-top: 8px;
+    height: 30px;
 }
 
 .ribbon div {
     width: 100%;
-    height: 20px;
+    height: 25px;
     margin: 3px;
     background-color: #122948;
     border-radius: 8px 8px 0 0;
+    display: inline-block;
+    vertical-align: middle;
 }
 .ribbon div:first-child {
     background-color: #bb2d44;
@@ -237,8 +243,10 @@ section .game-page {
 }
 
 .ribbon div span {
+    display: inline-block;
+    vertical-align: middle;
     font-family: 'Product Bold';
-    font-size: 14px;
+    font-size: 12px;
     color: rgb(239, 233, 224);
     text-transform: uppercase;
 }
@@ -251,7 +259,7 @@ section .game-page {
     margin-right: 0;
 }
 
-.game-history, .player-score {
+.SB-game, .DB-game, .game-history, .player-score {
     display: flex;
     background-color: #e1aa12;
     border-radius: 8px;
@@ -260,37 +268,62 @@ section .game-page {
     margin-bottom: 8px;
 }
 
+.SB-game, .DB-game {
+    background-color: #0b9cff;
+}
+
 .game-icon {
     width: 15%;
 }
 
-.history .game-icon img, .player-avatar-rank svg {
+.availableGames .game-icon img, .history .game-icon img, .player-avatar-rank svg {
     width: 40px;
     height: 40px;
     margin-top: 4px;
 }
 
-.history-info {
+.history-info, .game-info {
     display: block;
     width: 65%;
     margin-top: 4px;
 }
 
-.history-info span {
+.history-info span, .game-info span {
     display: flex;
+    font-size: 19px;
 }
 
-/*.history-info span {*/
-/*    float: left;*/
-/*    clear: both;*/
-/*}*/
-
-.history-info div {
+.history-info div, .game-info div {
     display: flex;
+    font-family: 'Product';
+    font-size: 16px;
 }
 
-.game-time {
+.game-time, .join {
     width: 20%;
+}
+
+.join {
+    display: block;
+}
+
+.join-button {
+    display: inline-block;
+    vertical-align: middle;
+    width: 85%;
+    height: 2.2em;
+    text-transform: uppercase;
+    margin-top: 9px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ee303c;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.join-button:hover {
+    cursor: pointer;
+    opacity: 0.9;
 }
 
 .run-game {
@@ -342,7 +375,7 @@ section .game-page {
 .score span {
     background-color: #222026;
     color: #ffffff;
-    border-radius: 40%;
+    border-radius: 20px;
     padding: 6px;
 }
 

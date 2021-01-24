@@ -801,9 +801,42 @@
                     </div>
                 </div>
                 <div class="ribbon">
+                    <div id="SB-GamesRibbon" onclick="showSeaBattleGamesDiv()"><span>games</span></div>
                     <div id="SB-HistoryRibbon" onclick="showSeaBattleHistoryDiv()"><span>History</span></div>
                     <div id="SB-LeaderboardRibbon" onclick="showSeaBattleLeaderboardDiv()"><span>Leaderboard</span></div>
                     <div id="SB-HowToPlayRibbon" onclick="showSeaBattleHowToPlayDiv()"><span>How to Play</span></div>
+                </div>
+                <div class="availableGames" id="SB-GamesDiv">
+                    <div class="SB-game">
+                        <div class="game-icon">
+                            <img src="jpg/battleship.png">
+                        </div>
+                        <div class="game-info">
+                            <span>Sea Battle</span>
+                            <div>
+                                <div class="opponent-name">Friend 1</div>
+                                <div>&nbsp;started the game!</div>
+                            </div>
+                        </div>
+                        <div class="join">
+                            <button class="join-button" type="button">Join</button>
+                        </div>
+                    </div>
+                    <div class="SB-game">
+                        <div class="game-icon">
+                            <img src="jpg/battleship.png">
+                        </div>
+                        <div class="game-info">
+                            <span>Sea Battle</span>
+                            <div>
+                                <div class="opponent-name">Friend 2</div>
+                                <div>&nbsp;started the game!</div>
+                            </div>
+                        </div>
+                        <div class="join">
+                            <button class="join-button" type="button">Join</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="history" id="SB-historyDiv">
                     <div class="game-history">
@@ -892,9 +925,9 @@
                                 <h1>Ship Placement Phase</h1>
                                 <p>At the start of each game, you must place your ships on the grid.</p>
                                 <p>Each player starts out with 6 ships.</p>
-                                <p>To place a ship, you can click and drag a ship to available area</p>
-                                <p>You can rotate a ship by simply double click on it</p>
-                                <p>you can also click Random button to randomly assign placement to each ship</p>
+                                <p>To place a ship, you can click and drag a ship to available area.</p>
+                                <p>You can rotate a ship by simply double click on it.</p>
+                                <p>you can also click Random button to randomly assign placement to each ship.</p>
                                 <p>Once you've finished placing your ships, click on the Ready button.</p>
                             </div>
                             <div>
@@ -902,7 +935,7 @@
                                 <p>When both players have clicked on their Ready button, the Attack Phase will now start.</p>
                                 <p>Both players will now see thr following game board:</p>
                                 <img src="" alt="SB board with bombed cell">
-                                <p>The larger grid represents your opponent's are. The smaller grid represents your area and your ships</p>
+                                <p>The larger grid represents your opponent's are. The smaller grid represents your area and your ships.</p>
                                 <p>When it is your turn, click on the square on the main grid you wish to attack.</p>
                                 <p>Every time you hit an enemy ship, you get another turn. When you miss,tour turn is over.</p>
                                 <p>when you've sunk your opponent's ship, that ship will appear on the main grid.</p>
@@ -911,7 +944,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="run-game">Play</div>
+                <div class="run-game">Create Game</div>
             </section>
 
             <section class="game-page" id="dotsAndBoxesGamePage">
@@ -941,9 +974,42 @@
                     </div>
                 </div>
                 <div class="ribbon">
+                    <div id="GamesRibbon" onclick="showDotsAndBoxesGamesDiv()"><span>games</span></div>
                     <div id="HistoryRibbon" onclick="showDotsAndBoxesHistoryDiv()"><span>History</span></div>
                     <div id="LeaderboardRibbon" onclick="showDotsAndBoxesLeaderboardDiv()"><span>Leaderboard</span></div>
                     <div id="HowToPlayRibbon" onclick="showDotsAndBoxesHowToPlay()"><span>How to Play</span></div>
+                </div>
+                <div class="availableGames" id="DB-GamesDiv">
+                    <div class="DB-game">
+                        <div class="game-icon">
+                            <img src="jpg/com.dot.box.game-logo.png">
+                        </div>
+                        <div class="game-info">
+                            <span>Dots & Boxes</span>
+                            <div>
+                                <div class="opponent-name">Friend 1</div>
+                                <div>&nbsp;started the game!</div>
+                            </div>
+                        </div>
+                        <div class="join">
+                            <button class="join-button" type="button">Join</button>
+                        </div>
+                    </div>
+                    <div class="DB-game">
+                        <div class="game-icon">
+                            <img src="jpg/com.dot.box.game-logo.png">
+                        </div>
+                        <div class="game-info">
+                            <span>Dots & Boxes</span>
+                            <div>
+                                <div class="opponent-name">Friend 2</div>
+                                <div>&nbsp;started the game!</div>
+                            </div>
+                        </div>
+                        <div class="join">
+                            <button class="join-button" type="button">Join</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="history" id="DB-historyDiv">
                     <div class="game-history">
@@ -1024,22 +1090,22 @@
                             <h1>Game Rules</h1>
                             <p>The objective in Dots & Boxes is to capture more boxes on the board than your opponent.</p>
                             <p>Each player takes turn connecting a line between 2 adjacent dots either horizontally or
-                                vertically. Simple click between 2 available dots to create a line between them</p>
+                                vertically. Simple click between 2 available dots to create a line between them.</p>
                         </div>
                         <div>
                             <h1>Capturing a Box</h1>
                             <img src="jpg/DB-tutorial.png" alt="A captured box">
-                            <p>When you place the 4th line that completes a box, rhat box will be captured by you,
+                            <p>When you place the 4th line that completes a box, that box will be captured by you,
                                 regardless whether any of the other lines were created by your opponent.</p>
                         </div>
                         <div>
                             <h1>Endgame</h1>
-                            <p>The game end when there are no more dots to connect</p>
+                            <p>The game end when there are no more dots to connect.</p>
                             <p>The player that has captured the most boxes wins the game.</p>
                         </div>
                     </div>
                 </div>
-                <div class="run-game">Play</div>
+                <div class="run-game">Create Game</div>
             </section>
         </section>
 
