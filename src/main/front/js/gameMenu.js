@@ -9,18 +9,30 @@ function showDotsAndBoxesGamePage() {
 }
 
 function showSeaBattleHistoryDiv() {
+    document.getElementById("SB-HistoryRibbon").style.backgroundColor = "#bb2d44";
+    document.getElementById("SB-HowToPlayRibbon").style.backgroundColor = "#122948";
+    document.getElementById("SB-LeaderboardRibbon").style.backgroundColor = "#122948";
+
     document.getElementById("SB-HowToPlayDiv").style.display = "none"
     document.getElementById("SB-leaderboardDiv").style.display = "none";
     document.getElementById("SB-historyDiv").style.display = "flex";
 }
 
 function showSeaBattleLeaderboardDiv() {
+    document.getElementById("SB-HistoryRibbon").style.backgroundColor = "#122948";
+    document.getElementById("SB-HowToPlayRibbon").style.backgroundColor = "#122948";
+    document.getElementById("SB-LeaderboardRibbon").style.backgroundColor = "#bb2d44";
+
     document.getElementById("SB-HowToPlayDiv").style.display = "none"
     document.getElementById("SB-historyDiv").style.display = "none";
     document.getElementById("SB-leaderboardDiv").style.display = "flex";
 }
 
 function showSeaBattleHowToPlayDiv() {
+    document.getElementById("SB-HistoryRibbon").style.backgroundColor = "#122948";
+    document.getElementById("SB-HowToPlayRibbon").style.backgroundColor = "#bb2d44";
+    document.getElementById("SB-LeaderboardRibbon").style.backgroundColor = "#122948";
+
     document.getElementById("SB-historyDiv").style.display = "none";
     document.getElementById("SB-leaderboardDiv").style.display = "none";
     document.getElementById("SB-HowToPlayDiv").style.display = "flex"

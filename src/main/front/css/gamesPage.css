@@ -359,3 +359,7 @@ section .game-page {
     margin-left: 30%;
     margin-bottom: 4px;
 }
+
+.DB-content div p:last-child, .SB-content div p:last-child {
+    margin-bottom: 12px;
+}

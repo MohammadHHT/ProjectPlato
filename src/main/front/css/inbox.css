@@ -1,0 +1,194 @@
+@font-face {
+    src: url('../font/Product Sans Bold.ttf');
+    font-family: 'Product Bold';
+}
+
+@font-face {
+    src: url('../font/Product Sans Regular.ttf');
+    font-family: 'Product';
+}
+
+@font-face {
+    src: url('../font/Questrial-Regular.ttf');
+    font-family: 'Questrial';
+}
+
+section .inbox {
+    padding: calc(0.03 * 97vh);
+}
+
+.chatBox {
+    height: calc(0.940 * 97vh);
+    width: 100%;
+    border-radius: 9.4px;
+    /*background-color: #e7e7e7;*/
+    background-color: #ffffa5;
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    padding: 4px;
+    display: block;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 calc(0.03 * 97vh) 0;
+}
+
+.inboxHeader {
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Product Bold';
+    font-size: 3.5vh;
+    line-height: 1em;
+    padding: 2vh 0;
+    margin: 0;
+    background-color: #122948;
+    color: rgb(239, 233, 224);
+    margin-bottom: 1vh;
+}
+
+.messageHistory {
+    width: 100%;
+    display: block;
+    height: 1.5em;
+}
+
+.messageHistory div {
+    text-align: center;
+    margin: auto;
+    width: 26%;
+    border: #313335 1px solid;
+    background-color: #313335;
+    border-radius: 10px;
+    opacity: 0.75;
+    color: white;
+}
+
+.messageHistory div span {
+    display: inline-block;
+    vertical-align: middle;
+    font-family: 'Product';
+    font-size: 14px;
+}
+
+.messageArea {
+    height: calc(0.770 * 97vh);
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    padding: 4px;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow-y: scroll;
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #ffffa5;
+    border-radius: 0 0 9.4px 9.4px;
+}
+
+.messageArea::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messageArea::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.messageField {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    border-radius: 6px;
+    height: 50px;
+}
+
+.messageField div:first-child {
+    width: 90%;
+}
+
+.messageField div:first-child textarea {
+    width: 100%;
+    border: none;
+    height: 40px;
+    resize: none;
+    background-color: #cd3700;
+    font-size: 16px;
+    font-family: 'Questrial';
+    margin-top: 5px;
+    padding: 3px;
+    color: #ececec;
+    border-radius: 6px 6px 6px 6px;
+}
+
+.messageField div:first-child textarea::-webkit-input-placeholder {
+    font-size: 15px;
+    color: #d2d2d2;
+    padding: 8px;
+    font-family: 'Product';
+}
+
+.messageField div:last-child {
+    width: 10%;
+    margin-top: 7px;
+    height: 40px;
+}
+
+.messageField div svg {
+    width: 35px;
+    height: auto;
+}
+
+.messageField div svg:hover {
+    opacity: 0.7;
+}
+
+.messageArea div svg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.avatar-message {
+    display: flex;
+    margin-top: 12px;
+}
+
+.messageBox div:first-child {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.messageBox div p {
+    font-family: 'Product';
+    font-size: 16px;
+}
+
+.messageBox {
+    height: auto;
+    width: 60%;
+    border-radius: 2px 8px 8px 8px;
+    background-color: #90EE90;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    padding: 4px;
+    display: block;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin-left: 6px;
+    opacity: 0.9;
+}
+
+.messageBox div:last-child {
+    text-align: right;
+    font-family: 'Questrial';
+    font-size: 13px;
+}
