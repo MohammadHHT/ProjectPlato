@@ -9,9 +9,9 @@ function seabattle(host) {
 }
 
 seabattle.prototype.init = function () {
-    initCanvas();
-
     let self = this;
+
+    initCanvas();
 
     function initCanvas() {
         let canvas = document.getElementById('canvas');
@@ -176,7 +176,7 @@ seabattle.prototype.init = function () {
             }
         });
 
-        document.getElementById('section.battle .board .start').addEventListener('click', () => {
+        document.querySelector('section.battle .board .start').addEventListener('click', () => {
             const connection = new WebSocket('ws://127.0.0.1:4444');
 
             connection.onopen = function () {

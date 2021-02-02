@@ -75,7 +75,7 @@ public class Grid {
                 for (int i = 0; i < pos1.length; i++) {
                     pos1[i] += pos1[i] * yOffset * 10 + xOffset;
                 }
-            } while (!available(tmp, pos1));
+            } while (available(tmp, pos1));
             for (int p : pos1) {
                 tmp[p] = true;
             }
@@ -87,7 +87,7 @@ public class Grid {
                 for (int i = 0; i < pos2.length; i++) {
                     pos2[i] += pos2[i] * yOffset * 10 + xOffset;
                 }
-            } while (!available(tmp, pos2));
+            } while (available(tmp, pos2));
             for (int p : pos2) {
                 tmp[p] = true;
             }
@@ -106,7 +106,7 @@ public class Grid {
                 for (int i = 0; i < pos1.length; i++) {
                     pos1[i] += pos1[i] * yOffset * 10 + xOffset;
                 }
-            } while (!available(tmp, pos1));
+            } while (available(tmp, pos1));
             for (int p : pos1) {
                 tmp[p] = true;
             }
@@ -118,7 +118,7 @@ public class Grid {
                 for (int i = 0; i < pos2.length; i++) {
                     pos2[i] += pos2[i] * yOffset * 10 + xOffset;
                 }
-            } while (!available(tmp, pos2));
+            } while (available(tmp, pos2));
             for (int p : pos2) {
                 tmp[p] = true;
             }
@@ -137,7 +137,7 @@ public class Grid {
                 for (int i = 0; i < pos1.length; i++) {
                     pos1[i] += pos1[i] * yOffset * 10 + xOffset;
                 }
-            } while (!available(tmp, pos1));
+            } while (available(tmp, pos1));
             for (int p : pos1) {
                 tmp[p] = true;
             }
@@ -149,7 +149,7 @@ public class Grid {
                 for (int i = 0; i < pos2.length; i++) {
                     pos2[i] += pos2[i] * yOffset * 10 + xOffset;
                 }
-            } while (!available(tmp, pos2));
+            } while (available(tmp, pos2));
             for (int p : pos2) {
                 tmp[p] = true;
             }
@@ -168,7 +168,7 @@ public class Grid {
                 for (int i = 0; i < pos1.length; i++) {
                     pos1[i] += pos1[i] * yOffset * 10 + xOffset;
                 }
-            } while (!available(tmp, pos1));
+            } while (available(tmp, pos1));
             for (int p : pos1) {
                 tmp[p] = true;
             }
@@ -180,7 +180,7 @@ public class Grid {
                 for (int i = 0; i < pos2.length; i++) {
                     pos2[i] += pos2[i] * yOffset * 10 + xOffset;
                 }
-            } while (!available(tmp, pos2));
+            } while (available(tmp, pos2));
             for (int p : pos2) {
                 tmp[p] = true;
             }
