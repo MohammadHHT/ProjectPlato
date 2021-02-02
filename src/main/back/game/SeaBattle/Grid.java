@@ -66,125 +66,161 @@ public class Grid {
 
     private int[] random8(boolean[] tmp) {
         Random random = new Random();
-        int[] pos1 = {1, 2, 3, 4, 11, 12, 13, 14};      // horizontal
-        int[] pos2 = {1, 2, 11, 12, 21, 22, 31, 32};    //vertical
-        if (random.nextBoolean()) {
+        int[] pos = new int[8];
+        if (random.nextBoolean()) {     // horizontal
             do {
+                pos[0] = 1;
+                pos[1] = 2;
+                pos[2] = 3;
+                pos[3] = 4;
+                pos[4] = 11;
+                pos[5] = 12;
+                pos[6] = 13;
+                pos[7] = 14;
                 int xOffset = random.nextInt(7);
                 int yOffset = random.nextInt(9);
-                for (int i = 0; i < pos1.length; i++) {
-                    pos1[i] += pos1[i] * yOffset * 10 + xOffset;
+                for (int i = 0; i < pos.length; i++) {
+                    pos[i] += pos[i] * yOffset * 10 + xOffset;
                 }
-            } while (available(tmp, pos1));
-            for (int p : pos1) {
+            } while (!available(tmp, pos));
+            for (int p : pos) {
                 tmp[p] = true;
             }
-            return pos1;
-        } else {
+            return pos;
+        } else {                        // vertical
             do {
+                pos[0] = 1;
+                pos[1] = 2;
+                pos[2] = 11;
+                pos[3] = 12;
+                pos[4] = 21;
+                pos[5] = 22;
+                pos[6] = 31;
+                pos[7] = 32;
                 int xOffset = random.nextInt(9);
                 int yOffset = random.nextInt(7);
-                for (int i = 0; i < pos2.length; i++) {
-                    pos2[i] += pos2[i] * yOffset * 10 + xOffset;
+                for (int i = 0; i < pos.length; i++) {
+                    pos[i] += pos[i] * yOffset * 10 + xOffset;
                 }
-            } while (available(tmp, pos2));
-            for (int p : pos2) {
+            } while (!available(tmp, pos));
+            for (int p : pos) {
                 tmp[p] = true;
             }
-            return pos2;
+            return pos;
         }
     }
 
     private int[] random6(boolean[] tmp) {
         Random random = new Random();
-        int[] pos1 = {1, 2, 3, 11, 12, 13};      // horizontal
-        int[] pos2 = {1, 2, 11, 12, 21, 22};     //vertical
-        if (random.nextBoolean()) {
+        int[] pos = new int[6];
+        if (random.nextBoolean()) {     // horizontal
             do {
+                pos[0] = 1;
+                pos[1] = 2;
+                pos[2] = 3;
+                pos[3] = 11;
+                pos[4] = 12;
+                pos[5] = 13;
                 int xOffset = random.nextInt(8);
                 int yOffset = random.nextInt(9);
-                for (int i = 0; i < pos1.length; i++) {
-                    pos1[i] += pos1[i] * yOffset * 10 + xOffset;
+                for (int i = 0; i < pos.length; i++) {
+                    pos[i] += pos[i] * yOffset * 10 + xOffset;
                 }
-            } while (available(tmp, pos1));
-            for (int p : pos1) {
+            } while (!available(tmp, pos));
+            for (int p : pos) {
                 tmp[p] = true;
             }
-            return pos1;
-        } else {
+            return pos;
+        } else {                        //vertical
             do {
+                pos[0] = 1;
+                pos[1] = 2;
+                pos[2] = 11;
+                pos[3] = 12;
+                pos[4] = 21;
+                pos[5] = 22;
                 int xOffset = random.nextInt(9);
                 int yOffset = random.nextInt(8);
-                for (int i = 0; i < pos2.length; i++) {
-                    pos2[i] += pos2[i] * yOffset * 10 + xOffset;
+                for (int i = 0; i < pos.length; i++) {
+                    pos[i] += pos[i] * yOffset * 10 + xOffset;
                 }
-            } while (available(tmp, pos2));
-            for (int p : pos2) {
+            } while (!available(tmp, pos));
+            for (int p : pos) {
                 tmp[p] = true;
             }
-            return pos2;
+            return pos;
         }
     }
 
     private int[] random4(boolean[] tmp) {
         Random random = new Random();
-        int[] pos1 = {1, 2, 3, 4};      // horizontal
-        int[] pos2 = {1, 11, 21, 31};   //vertical
-        if (random.nextBoolean()) {
+        int[] pos = new int[4];
+        if (random.nextBoolean()) {     // horizontal
             do {
+                pos[0] = 1;
+                pos[1] = 2;
+                pos[2] = 3;
+                pos[3] = 4;
                 int xOffset = random.nextInt(7);
                 int yOffset = random.nextInt(10);
-                for (int i = 0; i < pos1.length; i++) {
-                    pos1[i] += pos1[i] * yOffset * 10 + xOffset;
+                for (int i = 0; i < pos.length; i++) {
+                    pos[i] += pos[i] * yOffset * 10 + xOffset;
                 }
-            } while (available(tmp, pos1));
-            for (int p : pos1) {
+            } while (!available(tmp, pos));
+            for (int p : pos) {
                 tmp[p] = true;
             }
-            return pos1;
-        } else {
+            return pos;
+        } else {                        //vertical
             do {
+                pos[0] = 1;
+                pos[1] = 11;
+                pos[2] = 21;
+                pos[3] = 31;
                 int xOffset = random.nextInt(10);
                 int yOffset = random.nextInt(7);
-                for (int i = 0; i < pos2.length; i++) {
-                    pos2[i] += pos2[i] * yOffset * 10 + xOffset;
+                for (int i = 0; i < pos.length; i++) {
+                    pos[i] += pos[i] * yOffset * 10 + xOffset;
                 }
-            } while (available(tmp, pos2));
-            for (int p : pos2) {
+            } while (!available(tmp, pos));
+            for (int p : pos) {
                 tmp[p] = true;
             }
-            return pos2;
+            return pos;
         }
     }
 
     private int[] random2(boolean[] tmp) {
         Random random = new Random();
-        int[] pos1 = {1, 2};      // horizontal
-        int[] pos2 = {1, 11};     //vertical
-        if (random.nextBoolean()) {
+        int[] pos = new int[2];
+        if (random.nextBoolean()) {     // horizontal
             do {
+                pos[0] = 1;
+                pos[1] = 2;
                 int xOffset = random.nextInt(9);
                 int yOffset = random.nextInt(10);
-                for (int i = 0; i < pos1.length; i++) {
-                    pos1[i] += pos1[i] * yOffset * 10 + xOffset;
+                for (int i = 0; i < pos.length; i++) {
+                    pos[i] += pos[i] * yOffset * 10 + xOffset;
                 }
-            } while (available(tmp, pos1));
-            for (int p : pos1) {
+            } while (!available(tmp, pos));
+            for (int p : pos) {
                 tmp[p] = true;
             }
-            return pos1;
-        } else {
+            return pos;
+        } else {                        //vertical
             do {
+                pos[0] = 1;
+                pos[1] = 11;
                 int xOffset = random.nextInt(10);
                 int yOffset = random.nextInt(9);
-                for (int i = 0; i < pos2.length; i++) {
-                    pos2[i] += pos2[i] * yOffset * 10 + xOffset;
+                for (int i = 0; i < pos.length; i++) {
+                    pos[i] += pos[i] * yOffset * 10 + xOffset;
                 }
-            } while (available(tmp, pos2));
-            for (int p : pos2) {
+            } while (!available(tmp, pos));
+            for (int p : pos) {
                 tmp[p] = true;
             }
-            return pos2;
+            return pos;
         }
     }
 

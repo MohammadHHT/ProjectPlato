@@ -8,7 +8,6 @@ public class Main {
     public static void main(String[] args) {
         Admin admin = new Admin("admin", "admin", "admin", "admin", "admin@gamil.com", "989198178163");
         admin.setLogged(false);
-        System.out.println((new Grid()).random().length);
         new Server().start();
 
     }
