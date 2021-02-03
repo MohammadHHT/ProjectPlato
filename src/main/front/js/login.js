@@ -92,7 +92,7 @@ login.prototype.password = function () {
                 }, 300);
                 self.clearFields();
 
-                new account(data[0].localeCompare('admin') != 0, data[1], data[2], data[3], data[4], data[5], parseInt(data[6]), parseInt(data[7]), parseInt(data[8]), data[9], data[10])
+                new account(data[0].localeCompare('admin') != 0, data[1], data[2], data[3], data[4], data[5], data[6], parseInt(data[7]), parseInt(data[8]), parseInt(data[9]), data[10], data[11])
             } else {
                 if (data[1].localeCompare('username') == 0) {
                     self.message.innerHTML = "Username doesn't exist!";
@@ -106,7 +106,7 @@ login.prototype.password = function () {
                 }
                 setTimeout(function () {
                     self.clearFields();
-                    this.toggle(2, 1);
+                    self.toggle(2, 1);
                 }, 1000);
             }
             connection.close();
@@ -118,7 +118,7 @@ login.prototype.password = function () {
 }
 
 login.prototype.toggle = function (num1, num2) {
-    this.progress.style.transform = 'scaleX(' + num1 / 2 + ')';
+    this.progress.style.transform = 'scaleX(' + (num1 % 2) / 2 + ')';
     this.items[num1 - 1].classList.remove('show');
     this.items[num2 - 1].classList.add('show');
     this.items[num2 - 1].querySelector('input').focus();

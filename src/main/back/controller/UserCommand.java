@@ -44,8 +44,9 @@ public interface UserCommand {
     }
 
     static String register(String firstName, String lastName, String username, String password, String email, String phone) {
-        new Player(firstName, lastName, username, password, email, phone);
-        return "done";
+        Player player = new Player(firstName, lastName, username, password, email, phone);
+        player.login();
+        return player.getToken();
     }
 
     static String login(String username, String password) {
@@ -53,12 +54,12 @@ public interface UserCommand {
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 if (!user.isLogged()) {
-                    user.setLogged(true);
+                    user.login();
                     if (user instanceof Admin) {
-                        return "admin " + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
+                        return "admin " + user.getToken() + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
                                 user.getDate().getYear() + " " + user.getDate().getMonthValue() + " " + user.getDate().getDayOfMonth();
                     } else {
-                        return "player " + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
+                        return "player " + user.getToken() + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
                                 user.getDate().getYear() + " " + user.getDate().getMonthValue() + " " + user.getDate().getDayOfMonth() + ((Player) user).getLevel() + " " + ((Player) user).getMoney();
                     }
                 } else {

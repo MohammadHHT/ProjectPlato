@@ -73,6 +73,7 @@ body>section>main {
 
 body>section>main>section {
     width: 100%;
+    overflow: hidden;
     background: transparent;
     position: relative;
     display: block;

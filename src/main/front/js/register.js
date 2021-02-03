@@ -124,7 +124,7 @@ register.prototype.username = function () {
 
         connection.onmessage = function (e) {
             if (e.data.localeCompare('true') == 0) {
-                this.toggle(3);
+                self.toggle(3);
             } else {
                 self.message.innerHTML = "Username unavailable!";
                 self.message.style.opacity = 1;
@@ -157,7 +157,7 @@ register.prototype.phone = function () {
 
         connection.onmessage = function (e) {
             if (e.data.localeCompare('true') == 0) {
-                this.toggle(5);
+                self.toggle(5);
             } else {
                 self.message.innerHTML = "Phone number already exists!";
                 self.message.style.opacity = 1;
@@ -181,8 +181,6 @@ register.prototype.email = function () {
 
         connection.onmessage = function (e) {
             if (e.data.localeCompare('true') == 0) {
-                connection.send('user register ' + self.inputs[0].value + ' ' + self.inputs[1].value + ' ' + self.inputs[2].value + ' ' + self.inputs[3].value + ' ' + self.inputs[4].value + ' ' + self.inputs[5].value);
-
                 self.progress.style.transform = 'scaleX(' + 6 / 6 + ')';
                 self.items[5].style.opacity = 0;
                 self.message.style.opacity = 0;
@@ -192,14 +190,11 @@ register.prototype.email = function () {
                 self.navigation[3].classList.add('show');
                 self.navigation[4].classList.add('show');
                 self.navigation[5].classList.add('show');
-                setTimeout(function() {
+                setTimeout(function () {
                     self.nextPage('register', 'primary');
                     self.items[5].classList.remove('show');
                 }, 300);
-                self.clearFields();
-
-                let date = new Date();
-                new account(true, self.inputs[0].value, self.inputs[1].value, self.inputs[2].value, self.inputs[4].value, self.inputs[5].value, date.getFullYear(), (date.getMonth() + 1), date.getDate(), 1, 0);
+                self.submit();
             } else if (e.data.localeCompare('false') == 0) {
                 self.message.innerHTML = "Email already exists!";
                 self.message.style.opacity = 1;
@@ -234,5 +229,21 @@ register.prototype.nextPage = function (previous, next) {
 register.prototype.clearFields = function () {
     for (let i = 0; i < 6; i++) {
         this.inputs[i].value = '';
+    }
+}
+
+register.prototype.submit = function () {
+    const connection = new WebSocket('ws://127.0.0.1:4444');
+    const self = this;
+
+    connection.onopen = function () {
+        connection.send('user register ' + self.inputs[0].value + ' ' + self.inputs[1].value + ' ' + self.inputs[2].value + ' ' + self.inputs[3].value + ' ' + self.inputs[4].value + ' ' + self.inputs[5].value);
+    };
+
+    connection.onmessage = function (e) {
+        let date = new Date();
+        new account(true, e.data, self.inputs[0].value, self.inputs[1].value, self.inputs[2].value, self.inputs[4].value, self.inputs[5].value, date.getFullYear(), (date.getMonth() + 1), date.getDate(), 1, 0);
+        self.clearFields();
+        connection.close();
     }
 }

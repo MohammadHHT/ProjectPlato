@@ -6,9 +6,7 @@ import main.back.game.SeaBattle.Grid;
 
 public class Main {
     public static void main(String[] args) {
-        Admin admin = new Admin("admin", "admin", "admin", "admin", "admin@gamil.com", "989198178163");
-        admin.setLogged(false);
+        new Admin("admin", "admin", "admin", "admin", "admin@gamil.com", "989120000000");
         new Server().start();
-
     }
 }

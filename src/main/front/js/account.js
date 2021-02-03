@@ -1,5 +1,6 @@
-function account(player, firstName, lastName, username, phone, email, year, month, day, level, money) {
+function account(player, token, firstName, lastName, username, phone, email, year, month, day, level, money) {
     this.player = player;
+    this.token = token;
     this.firstName = firstName;
     this.lastName = lastName;
     this.username = username;
