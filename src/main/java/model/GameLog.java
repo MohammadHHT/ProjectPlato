@@ -32,11 +32,15 @@ public class GameLog {
 
         switch (result) {
             case WIN:
+                host.setScore(host.getScore() + 10);
+                host.setLevel(host.getLevel() + 1);
                 if (host.getWins().containsKey(game)) {
                     host.getWins().put(game, host.getWins().get(game) + 1);
                 } else {
                     host.getWins().put(game, 1);
                 }
+
+                guest.setScore(host.getScore() - 5);
                 if (guest.getDefeats().containsKey(game)) {
                     guest.getDefeats().put(game, guest.getDefeats().get(game) + 1);
                 } else {
@@ -44,11 +48,16 @@ public class GameLog {
                 }
                 break;
             case DEFEAT:
+
+                guest.setScore(host.getScore() + 10);
+                guest.setLevel(host.getLevel() + 1);
                 if (guest.getWins().containsKey(game)) {
                     guest.getWins().put(game, guest.getWins().get(game) + 1);
                 } else {
                     guest.getWins().put(game, 1);
                 }
+
+                host.setScore(host.getScore() - 5);
                 if (host.getDefeats().containsKey(game)) {
                     host.getDefeats().put(game, host.getDefeats().get(game) + 1);
                 } else {

@@ -98,7 +98,7 @@ public class Player extends User {
         return money;
     }
 
-    public long getScore() {
+    public int getScore() {
         return score;
     }
 
