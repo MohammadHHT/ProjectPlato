@@ -20,7 +20,7 @@ public class Grid {
         return destroyed;
     }
 
-    public void setShips(int[][] ships) {
+    public void setShips(int[]... ships) {
         for (int i = 0; i < 5; i++) {
             this.ships[i] = new Ship(ships[i]);
         }

@@ -45,11 +45,13 @@ section.primary .player header .search:hover, section.primary .player header .se
 section.primary .player header ol {
     list-style: none;
     margin: 0;
+    position: absolute;
+    top: calc(0.0605 * 97vh);
     box-sizing: border-box;
     width: 33.33%;
-    background-color: #efeae1;
+    background-color: rgba(239, 234, 225, 0.5);
+    backdrop-filter: blur(15px);
     z-index: 10;
-    border: 1px solid #888583;
     padding: 5px;
     border-radius: 0 0 9.4px 9.4px;
     display: flex;
@@ -69,6 +71,7 @@ section.primary .player header ol .item {
     overflow: hidden;
     display: flex;
     flex-flow: row nowrap;
+    border: 1px solid transparent;
     justify-content: space-between;
     align-items: center;
     border-radius: 5px;
@@ -78,7 +81,7 @@ section.primary .player header ol .item {
 }
 
 section.primary .player header ol .item:hover {
-    background-color: rgb(18, 41, 72);
+    border: 1px solid rgba(18, 41, 72, 0.5);
 }
 
 section.primary .player header ol .item img {
@@ -86,12 +89,6 @@ section.primary .player header ol .item img {
     width: auto;
     margin-right: 1vh;
     transform-origin: center;
-    transform: scale(0.9);
-    transition: transform ease-in-out 0.1s;
-}
-
-section.primary .player header ol .item:hover img {
-    transform: scale(1);
 }
 
 section.primary .player header ol .item h2 {
@@ -104,24 +101,20 @@ section.primary .player header ol .item h2 {
     flex-grow: 1;
 }
 
-section.primary .player header ol .item:hover h2 {
-    color: rgb(239, 233, 224);
-}
-
 section.primary .player .favorites {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     width: 100%;
     box-sizing: border-box;
     padding: 2vh;
     justify-content: space-between;
     align-items: center;
-    gap: 2vh;
-    transform: translateY(-5vh);
+    gap: 1vh;
 }
 
 section.primary .player .favorites div {
     height: 6vh;
+    width: 100%;
     border-radius: 1vh;
     flex-grow: 1;
     cursor: pointer;
@@ -148,17 +141,16 @@ section.primary .player .favorites div div {
     width: 4vh;
     box-sizing: border-box;
     padding: 1vh;
-    background-color: rgb(239, 233, 224);
     border-radius: 6px;
     position: absolute;
-    left: 2vh;
-    top: -2vh;
+    left: 1vh;
+    top: 0;
 }
 
 section.primary .player .favorites div div svg {
     width: 2vh;
     height: 2vh;
-    fill: #f9b060;
+    fill: rgba(255, 255, 255, 0.603);
 }
 
 section.primary .player .favorites div span {
@@ -181,7 +173,7 @@ section.primary .player .events {
     box-sizing: border-box;
     width: 100%;
     padding: 2vh 7vh;
-    gap: 7vh;
+    justify-content: space-between;
     background: transparent;
     transform: translateY(15vh);
 }
@@ -191,7 +183,7 @@ section.primary .player .events::-webkit-scrollbar {
 }
 
 section.primary .player .events section {
-    flex-grow: 1;
+    flex-basis: 45%;
 }
 
 section.primary .player .events section .card {
@@ -201,7 +193,7 @@ section.primary .player .events section .card {
     position: relative;
     transform-origin: bottom center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.329);
-    transition: transform linear 0.2s;
+    transition: transform linear 0.3s;
     overflow: hidden;
     cursor: pointer;
 }
@@ -238,32 +230,28 @@ section.primary .player .events .battle .card {
     background-color: #f55a5a;
 }
 
-section.primary .player .events .dots .card:nth-child(1) {
-    transform: rotate(1.6deg) translateX(0.5vh);
-}
-
 section.primary .player .events .dots .card:nth-child(1):hover {
-    transform: translateY(-80%);
+    transform: translateY(-80%) scale(1.1);
 }
 
 section.primary .player .events .dots .card:nth-child(2) {
-    transform: translateY(-80%) rotate(2deg) translateX(-0.5vh);
-}
-
-section.primary .player .events .dots .card:nth-child(2):hover {
-    transform: translateY(-160%);
-}
-
-section.primary .player .events .battle .card:nth-child(1):hover {
     transform: translateY(-80%);
 }
 
+section.primary .player .events .dots .card:nth-child(2):hover {
+    transform: translateY(-160%) scale(1.1);
+}
+
+section.primary .player .events .battle .card:nth-child(1):hover {
+    transform: translateY(-80%) scale(1.1);
+}
+
 section.primary .player .events .battle .card:nth-child(2) {
-    transform: translateY(-80%) rotate(2.5deg) translateX(-0.5vh);
+    transform: translateY(-80%);
 }
 
 section.primary .player .events .battle .card:nth-child(2):hover {
-    transform: translateY(-160%);
+    transform: translateY(-160%) scale(1.1);
 }
 
 section.primary .player .events section .card>span {

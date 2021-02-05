@@ -1,5 +1,6 @@
-function seabattle(host) {
-    this.host = host;
+function seabattle(username, token) {
+    this.username = username;
+    this.token = token;
     this.cells = document.getElementsByClassName('cell');
     this._4x2 = [];
     this._3x2 = [];
@@ -180,7 +181,10 @@ seabattle.prototype.init = function () {
             const connection = new WebSocket('ws://127.0.0.1:4444');
 
             connection.onopen = function () {
-                connection.send('user register email ' + self.inputs[5].value);
+                connection.send('game battle arrange' + self.username + ' ' + self.token + ' ' + self._4x2[0] + ' ' + self._4x2[1] + ' ' + self._4x2[2] + ' ' + self._4x2[3]
+                    + ' ' + self._4x2[4] + ' ' + self._4x2[5] + ' ' + self._4x2[6] + ' ' + self._4x2[7] + ' ' + self._3x2[0] + ' ' + self._3x2[1]
+                    + ' ' + self._3x2[2] + ' ' + self._3x2[3] + ' ' + self._3x2[4] + ' ' + self._3x2[5] + ' ' + self._4x1[0] + ' ' + self._4x1[1] + ' ' + self._4x1[2] + ' ' + self._4x1[3]
+                    + ' ' + self._2x1[0][0] + ' ' + self._2x1[0][1] + ' ' + self._2x1[1][0] + ' ' + self._2x1[1][1]);
             };
 
             connection.onmessage = function (e) {

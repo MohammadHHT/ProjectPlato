@@ -7,6 +7,7 @@ import org.java_websocket.server.WebSocketServer;
 
 import java.net.InetSocketAddress;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,11 +15,11 @@ public class Server extends WebSocketServer {
 
     private static final int PORT = 4444;
 
-    private Set<WebSocket> conns;
+    private HashMap<String, WebSocket> conns;
 
     public Server() {
         super(new InetSocketAddress(PORT));
-        conns = new HashSet<>();
+        conns = new HashMap<>();
     }
 
     public void onStart() {
@@ -26,7 +27,7 @@ public class Server extends WebSocketServer {
     }
 
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        conns.add(conn);
+        conns.put();
         System.out.println("New connection from " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
     }
 
