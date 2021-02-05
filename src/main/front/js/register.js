@@ -192,6 +192,7 @@ register.prototype.email = function () {
                 self.navigation[5].classList.add('show');
                 setTimeout(function () {
                     self.nextPage('register', 'primary');
+                    new primary(true);
                     self.items[5].classList.remove('show');
                 }, 300);
                 self.submit();

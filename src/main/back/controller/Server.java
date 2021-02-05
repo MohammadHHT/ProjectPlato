@@ -15,11 +15,11 @@ public class Server extends WebSocketServer {
 
     private static final int PORT = 4444;
 
-    private HashMap<String, WebSocket> conns;
+    private Set<WebSocket> conns;
 
     public Server() {
         super(new InetSocketAddress(PORT));
-        conns = new HashMap<>();
+        conns = new HashSet<>();
     }
 
     public void onStart() {
@@ -27,7 +27,7 @@ public class Server extends WebSocketServer {
     }
 
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        conns.put();
+        conns.add(conn);
         System.out.println("New connection from " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
     }
 

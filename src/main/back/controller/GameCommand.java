@@ -39,6 +39,7 @@ interface BattleCommand {
         if (player.getToken().equals(token)) {
 
         }
+        return null;
     }
 
     static String join(String username, String token, long gameID) {
@@ -46,6 +47,7 @@ interface BattleCommand {
         if (player.getToken().equals(token)) {
 
         }
+        return null;
     }
 
     static void arrange(String username, String token, long gameID, int[] cells) {
