@@ -264,7 +264,7 @@ function drawCircles() {
 //function draw circle
 function drawCircle(x, y) {
     context.beginPath();
-    context.fillStyle = '#000000';
+    context.fillStyle = '#ffffff';
     context.arc(x, y, CELL_SIZE / 12, 0, 2 * Math.PI);
     context.fill();
     context.closePath();
