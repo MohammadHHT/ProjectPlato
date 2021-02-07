@@ -8,7 +8,7 @@ suggestion.prototype.init = function () {
     const self = this;
 
     //TODO I can not find suggestion menu button to select it!
-    document.querySelector().addEventListener('click', () => {
+    document.getElementById('unSend-button').addEventListener('click', () => {
         const connection = new WebSocket('ws://127.0.0.1:4444');
 
         connection.onopen = function () {
@@ -37,7 +37,7 @@ suggestion.prototype.init = function () {
                     '                        <span>' + username[i] + '</span>\n' +
                     '                    </div>\n' +
                     '                    <div class="suggestion-checkbox">\n' +
-                    '                        <input type="checkbox" class="regular-checkbox" />\n' +
+                    '                        <input type="checkbox" class="regular-checkbox" id="' + username[i] + ' " />\n' +
                     '                    </div>';
                 document.querySelector('all-players').appendChild(playerInfoDiv);
 
