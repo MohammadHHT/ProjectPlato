@@ -8,7 +8,7 @@ suggestion.prototype.init = function () {
     const self = this;
 
     //TODO I can not find suggestion menu button to select it!
-    document.getElementById('unSend-button').addEventListener('click', () => {
+    document.querySelector('section.suggestion .all-players .suggestion-buttons .unSend-suggestion').addEventListener('click', function () {
         const connection = new WebSocket('ws://127.0.0.1:4444');
 
         connection.onopen = function () {

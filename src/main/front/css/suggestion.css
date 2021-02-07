@@ -128,7 +128,7 @@ section .suggestion {
     border-radius: 8px;
 }
 
-.send-suggestion, .unsend-suggestion {
+.send-suggestion, .unSend-suggestion {
     width: 50%;
     background-color: #34f16e;
     border-radius: 8px 0 0 8px;
@@ -141,11 +141,11 @@ section .suggestion {
     margin: 0;
 }
 
-.unsend-suggestion {
+.unSend-suggestion {
     border-radius: 0 8px 8px 0;
     background-color: #bb2d44;
 }
-.send-suggestion:hover, .unsend-suggestion:hover {
+.send-suggestion:hover, .unSend-suggestion:hover {
     cursor: pointer;
     border: #122948 3px solid;
 }
