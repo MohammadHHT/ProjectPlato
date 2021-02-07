@@ -90,7 +90,7 @@
         </aside>
 
         <main>
-            <section class="register">
+            <section class="register page">
                 <h1>SIGN UP</h1>
                 <form autocomplete="off">
                     <ol>
@@ -179,18 +179,6 @@
                     <header>
                         <input class="search" type="search" placeholder="search">
                         <ol>
-                            <li class="item" name="username1">
-                                <img src="avatar/avatar (1).svg">
-                                <h2>username</h2>
-                            </li>
-                            <li class="item" name="username1">
-                                <img src="avatar/avatar (1).svg">
-                                <h2>username</h2>
-                            </li>
-                            <li class="item" name="username1">
-                                <img src="avatar/avatar (1).svg">
-                                <h2>username</h2>
-                            </li>
                         </ol>
                     </header>
 
@@ -315,7 +303,7 @@
                         </section>
                     </div>
                 </section>
-                <section class="admin">
+                <section class="admin" style="display: none;">
                     <section class="players">
                         <input class="search" type="search" placeholder="search player">
                         <ol>
@@ -587,7 +575,7 @@
                 </section>
             </section>
 
-            <section class="battle page">
+            <section class="battle">
                 <img src="jpg/sea battle wallpaper.jpg" width="110%" height="110%"
                     style="filter: blur(12px); position: absolute; left: calc(-0.035 * 97vh); top: calc(-0.05 * 97vh);">
                 <section>
@@ -739,6 +727,7 @@
     <script src="js/primary.js"></script>
     <script src="js/register.js"></script>
     <script src="js/login.js"></script>
+    <script src="js/common.js"></script>
     <script>
         var header = document.querySelector('.account header');
         var second = document.querySelector('.account header .second');
@@ -750,8 +739,6 @@
         level.style.transform = 'translateX(100%) scale(' + window.innerHeight * 0.03 / level.offsetHeight + ')';
 
         new seabattle();
-        new register();
-        new login();
     </script>
 </body>
 

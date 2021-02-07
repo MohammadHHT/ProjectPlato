@@ -49,24 +49,26 @@ section.primary .player header ol {
     top: calc(0.0605 * 97vh);
     box-sizing: border-box;
     width: 33.33%;
+    height: 0;
     background-color: rgba(239, 234, 225, 0.5);
     backdrop-filter: blur(15px);
     z-index: 10;
-    padding: 5px;
+    padding: 0;
     border-radius: 0 0 9.4px 9.4px;
     display: flex;
     flex-flow: column nowrap;
-    gap: 5px;
-    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
-    visibility: hidden;
+    gap: 0.7vh;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(177, 177, 177, 0.08);
+    transition: height ease-in-out 0.5s;
 }
 
 section.primary .player header ol .item {
-    width: 100%;
+    width: calc(100% - 1.4vh);
     height: 4vh;
     padding: 0.5vh 1vh;
     box-sizing: border-box;
-    margin: 0;
+    margin: 0 0.7vh;
     background-color: rgba(18, 41, 72, 0.05);
     overflow: hidden;
     display: flex;
@@ -78,6 +80,20 @@ section.primary .player header ol .item {
     text-align: left;
     cursor: pointer;
     position: relative;
+    opacity: 0;
+    transition: opacity ease-in-out 0.3s;
+}
+
+section.primary .player header ol .item.show {
+    opacity: 1;
+}
+
+section.primary .player header ol .item:first-child {
+    margin: 0.7vh 0.7vh 0 0.7vh;
+}
+
+section.primary .player header ol .item:last-child {
+    margin: 0 0.7vh 0.7vh 0.7vh;
 }
 
 section.primary .player header ol .item:hover {

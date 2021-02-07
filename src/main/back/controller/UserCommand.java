@@ -3,6 +3,9 @@ package main.back.controller;
 import main.back.account.Admin;
 import main.back.account.Player;
 import main.back.account.User;
+import main.back.game.SeaBattle.SeaBattle;
+
+import java.util.ArrayList;
 
 public interface UserCommand {
     static String resolve(String[] tokens) {
@@ -15,6 +18,8 @@ public interface UserCommand {
                 }
             case "login":
                 return login(tokens[1], tokens[2]);
+            case "search":
+                return search(tokens[1], tokens[2], tokens[3]);
             default:
                 return "failed command";
         }
@@ -56,11 +61,11 @@ public interface UserCommand {
                 if (!user.isLogged()) {
                     user.login();
                     if (user instanceof Admin) {
-                        return "admin " + user.getToken() + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
+                        return "admin " + user.getUsername() + " " + user.getToken() + " " + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
                                 user.getDate().getYear() + " " + user.getDate().getMonthValue() + " " + user.getDate().getDayOfMonth();
                     } else {
-                        return "player " + user.getToken() + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
-                                user.getDate().getYear() + " " + user.getDate().getMonthValue() + " " + user.getDate().getDayOfMonth() + ((Player) user).getLevel() + " " + ((Player) user).getMoney();
+                        return "player " + user.getUsername() + " " + user.getToken() + " " + user.getFirstName() + " " + user.getLastName() + " " + user.getPhone() + " " + user.getEmail() + " " +
+                                user.getDate().getYear() + " " + user.getDate().getMonthValue() + " " + user.getDate().getDayOfMonth() + " " + ((Player) user).getLevel() + " " + ((Player) user).getMoney();
                     }
                 } else {
                     return "failed logging";
@@ -71,5 +76,21 @@ public interface UserCommand {
         } else {
             return "failed username";
         }
+    }
+
+    static String search(String username, String token, String input) {
+        User user = User.getUsers().get(username);
+        if (user.getToken().equals(token)) {
+            StringBuilder users = new StringBuilder();
+            for (String s : User.getUsers().keySet()) {
+                if (s.contains(input)) {
+                    users.append(s).append(" ");
+                }
+            }
+            System.out.println(users.toString().trim());
+
+            return users.toString().trim();
+        }
+        return null;
     }
 }
