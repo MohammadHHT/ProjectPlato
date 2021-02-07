@@ -1,143 +1,137 @@
-function login() {
-    this.items = document.querySelectorAll('section.login form ol .item');
-    this.inputs = document.querySelectorAll('section.login form ol .item input');
-    this.next = document.querySelector('section.login form .next');
-    this.message = document.querySelector('section.login form .message');
-    this.progress = document.querySelector('section.login form .progress');
-    this.navigation = document.querySelectorAll('aside nav');
-    this.question = 1;
-    this.init();
-}
+var login_question = 1;
+var login_items = document.querySelectorAll('section.login form ol .item');
+var login_inputs = document.querySelectorAll('section.login form ol .item input');
+var login_next = document.querySelector('section.login form .next');
+var login_progress = document.querySelector('section.login form .progress');
+var login_message = document.querySelector('section.login form .message');
 
-login.prototype.init = function () {
-    const self = this;
+document.querySelectorAll('aside nav')[2].addEventListener('click', function () {
+    document.querySelectorAll('aside nav')[2].classList.remove('show');
+    document.querySelectorAll('aside nav')[1].classList.add('show');
+    next_page('login', 'register');
 
-    this.inputs[0].addEventListener('focus', function () {
-        self.next.classList.add('show');
-    });
+    login_clear_fields();
+    login_items[login_question - 1].classList.remove('show');
+    login_items[0].classList.add('show');
+    login_progress.style.transform = 'scaleX(' + 0 + ')';
+    login_next.classList.remove('show');
+    login_question = 1;
+});
 
-    this.inputs[0].addEventListener('keydown', function (event) {
-        if (event.keyCode == 13) {
-            event.preventDefault();
-            self.username();
-        }
-    });
+login_inputs[0].addEventListener('focus', function () {
+    login_next.classList.add('show');
+});
 
-    this.inputs[1].addEventListener('keydown', function (event) {
-        if (event.keyCode == 13) {
-            event.preventDefault();
-            self.password();
-        }
-    });
+login_inputs[0].addEventListener('keydown', function (event) {
+    if (event.keyCode == 13) {
+        event.preventDefault();
+        login_username();
+    }
+});
 
-    this.next.addEventListener('click', function () {
-        switch (self.question) {
-            case 1:
-                self.username();
-                break;
-            case 2:
-                self.password();
-                break;
-        }
-    });
+login_inputs[1].addEventListener('keydown', function (event) {
+    if (event.keyCode == 13) {
+        event.preventDefault();
+        login_password();
+    }
+});
 
-    this.navigation[2].addEventListener('click', function () {
-        self.navigation[2].classList.remove('show');
-        self.navigation[1].classList.add('show');
-        self.nextPage('login', 'register');
+login_next.addEventListener('click', function () {
+    switch (login_question) {
+        case 1:
+            login_username();
+            break;
+        case 2:
+            login_password();
+            break;
+    }
+});
 
-        self.clearFields();
-        self.items[self.question - 1].classList.remove('show');
-        self.items[0].classList.add('show');
-        self.progress.style.transform = 'scaleX(' + 0 + ')';
-        self.next.classList.remove('show');
-        self.question = 1;
-    });
-}
-
-login.prototype.username = function () {
-    if (this.inputs[0].value.length > 0) {
-        this.toggle(1, 2);
+function login_username() {
+    if (login_inputs[0].value.length > 0) {
+        login_toggle(1, 2);
     } else {
-        this.message.innerHTML = "Enter username!";
-        this.message.style.opacity = 1;
+        login_message.innerHTML = "Enter username!";
+        login_message.style.opacity = 1;
     }
 }
 
-login.prototype.password = function () {
-    if (this.inputs[1].value.length > 0) {
+function login_password() {
+    if (login_inputs[1].value.length > 0) {
         const connection = new WebSocket('ws://127.0.0.1:4444');
-        const self = this;
 
         connection.onopen = function () {
-            connection.send('user login ' + self.inputs[0].value + ' ' + self.inputs[1].value);
+            connection.send('user login ' + login_inputs[0].value + ' ' + login_inputs[1].value);
         };
 
         connection.onmessage = function (e) {
             let data = e.data.split(' ');
             if (data.length != 2) {
-                self.progress.style.transform = 'scaleX(' + 2 / 2 + ')';
+                login_progress.style.transform = 'scaleX(' + 2 / 2 + ')';
                 document.querySelector('section.login form ol .item.show label').classList.add('tmp');
-                self.items[1].style.opacity = 0;
-                self.message.style.opacity = 0;
-                self.next.classList.remove('show');
+                login_items[1].style.opacity = 0;
+                login_message.style.opacity = 0;
+                login_next.classList.remove('show');
 
-                self.navigation[2].classList.remove('show');
-                self.navigation[3].classList.add('show');
-                self.navigation[4].classList.add('show');
-                self.navigation[5].classList.add('show');
+                document.querySelectorAll('aside nav')[2].classList.remove('show');
+                document.querySelectorAll('aside nav')[3].classList.add('show');
+                document.querySelectorAll('aside nav')[4].classList.add('show');
+                document.querySelectorAll('aside nav')[5].classList.add('show');
                 setTimeout(function () {
-                    self.nextPage('login', 'primary');
-                    self.items[1].classList.remove('show');
+                    document.querySelectorAll('aside nav')[2].classList.remove('show');
+                    primary(data[0].localeCompare('admin') != 0);
+                    next_page('login', 'primary');
+                    login_items[1].classList.remove('show');
                 }, 300);
-                self.clearFields();
+                login_clear_fields();
 
-                new account(data[0].localeCompare('admin') != 0, data[1], data[2], data[3], data[4], data[5], data[6], parseInt(data[7]), parseInt(data[8]), parseInt(data[9]), data[10], data[11])
+                player = data[0].localeCompare('admin') != 0;
+                username = data[1];
+                token = data[2];
+                first_name = data[3];
+                last_name = data[4];
+                phone = data[5];
+                email = data[6];
+                year = parseInt(data[7]);
+                month = parseInt(data[8]);
+                day = parseInt(data[9]);
+                level = player ? 0 : parseInt(data[10]);
+                money = player ? 0.0 : parseFloat(data[11]);
             } else {
                 if (data[1].localeCompare('username') == 0) {
-                    self.message.innerHTML = "Username doesn't exist!";
-                    self.message.style.opacity = 1;
+                    login_message.innerHTML = "Username doesn't exist!";
+                    login_message.style.opacity = 1;
                 } else if (data[1].localeCompare('password') == 0) {
-                    self.message.innerHTML = "Wrong password!";
-                    self.message.style.opacity = 1;
+                    login_message.innerHTML = "Wrong password!";
+                    login_message.style.opacity = 1;
                 } else {
-                    self.message.innerHTML = "You've logged in already!";
-                    self.message.style.opacity = 1;
+                    login_message.innerHTML = "You've logged in already!";
+                    login_message.style.opacity = 1;
                 }
                 setTimeout(function () {
-                    self.clearFields();
-                    self.toggle(2, 1);
+                    login_clear_fields();
+                    login_toggle(2, 1);
                 }, 1000);
             }
             connection.close();
         };
     } else {
-        this.message.innerHTML = "Enter password!";
-        this.message.style.opacity = 1;
+        login_message.innerHTML = "Enter password!";
+        login_message.style.opacity = 1;
     }
 }
 
-login.prototype.toggle = function (num1, num2) {
-    this.progress.style.transform = 'scaleX(' + (num1 % 2) / 2 + ')';
-    this.items[num1 - 1].classList.remove('show');
-    this.items[num2 - 1].classList.add('show');
-    this.items[num2 - 1].querySelector('input').focus();
-    this.message.style.opacity = 0;
-    this.question += num2 - num1;
+function login_toggle(num1, num2) {
+    login_progress.style.transform = 'scaleX(' + (num1 % 2) / 2 + ')';
+    login_items[num1 - 1].classList.remove('show');
+    login_items[num2 - 1].classList.add('show');
+    login_items[num2 - 1].querySelector('input').focus();
+    login_message.style.opacity = 0;
+    login_question += num2 - num1;
 }
 
-login.prototype.nextPage = function (previous, next) {
-    let pre = document.querySelector('section.' + previous);
-    let nxt = document.querySelector('section.' + next);
-
-    if (pre != undefined) {
-        pre.classList.remove('page');
-    }
-    nxt.classList.add('page');
-}
-
-login.prototype.clearFields = function () {
+function login_clear_fields() {
     for (let i = 0; i < 2; i++) {
-        this.inputs[i].value = '';
+        login_inputs[i].value = '';
     }
 }

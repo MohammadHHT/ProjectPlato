@@ -1,5 +1,6 @@
 package main.back.controller;
 
+import main.back.account.Admin;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
@@ -24,7 +25,7 @@ public class Server extends WebSocketServer {
     }
 
     public void onStart() {
-
+        new Admin("admin", "admin", "admin", "admin", "admin@gamil.com", "989120000000");
     }
 
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
