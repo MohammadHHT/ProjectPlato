@@ -37,10 +37,10 @@ public class GameController {
                 break;
             case "DotsAndBoxes":
                 return Long.toString((new DotsAndBoxes(Player.getPlayers().get(username))).getGameID());    // returns game id for further uses (user game commands)
-                break;
             default:
                 throw new GameNotFound();
         }
+        return null;
     }
 
     public void showScoreboard(String gameName) throws GameNotFound {

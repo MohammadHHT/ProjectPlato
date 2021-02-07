@@ -4,7 +4,12 @@ import exception.game.GameNotFound;
 import exception.game.NotYourTurn;
 import model.DotsAndBoxes.DotsAndBoxes;
 
+import model.Game;
+import model.GameLog;
 import model.Player;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 public class DotsAndBoxesController {
     private static final DotsAndBoxesController dotsAndBoxesController = new DotsAndBoxesController();
@@ -148,8 +153,17 @@ public class DotsAndBoxesController {
         DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
         if (dotsAndBoxes != null) {
             if (dotsAndBoxes.isBoardFull()) {
+                GameLog.Result result;
+                if (dotsAndBoxes.judge() == null)
+                    result = GameLog.Result.DRAW;
+                else if (dotsAndBoxes.judge().equals(dotsAndBoxes.getHost()))
+                    result = GameLog.Result.WIN;
+                else
+                    result = GameLog.Result.DEFEAT;
+                new GameLog("dotsandboxes", dotsAndBoxes.getHost(), dotsAndBoxes.getGuest(), LocalDate.now(), result);
                 return "Back to the game menu";
             } else {
+                new GameLog("dotsandboxes", dotsAndBoxes.getHost(), dotsAndBoxes.getGuest(), LocalDate.now(), dotsAndBoxes.winByForfeit().equals(dotsAndBoxes.getHost())? GameLog.Result.WIN: GameLog.Result.DEFEAT);
                 return dotsAndBoxes.winByForfeit().getUsername() + "won by forfeit" + '\n' + "Back to the game menu";
             }
 

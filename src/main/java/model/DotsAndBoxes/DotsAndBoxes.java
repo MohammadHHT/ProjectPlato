@@ -157,6 +157,11 @@ public class DotsAndBoxes extends Game {
         return guest;
     }
 
+    @Override
+    public void setScore() {
+
+    }
+
     public static HashMap<Long, DotsAndBoxes> getDotsAndBoxes() {
         return dotsAndBoxes;
     }
