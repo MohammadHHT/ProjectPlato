@@ -46,7 +46,6 @@ suggestion.prototype.init = function () {
         };
     })
 
-
 }
 
 var isSeaBattleSelected = false;
@@ -72,5 +71,26 @@ function selectDotsAndBoxes() {
         document.getElementById('dots-and-boxes-select').style.backgroundColor = '#ddddd9';
         document.getElementById('DB-select-button').innerHTML = 'Select';
         isDotsAndBoxesSelected = false;
+    }
+}
+
+function sendSuggestion() {
+    if (isSeaBattleSelected || isDotsAndBoxesSelected) {
+        var checkedValue = document.querySelectorAll('.regular-checkbox:checked');
+        console.log(checkedValue);
+    } else {
+        alert("Please select game first!");
+    }
+
+
+
+    const connection = new WebSocket('ws://127.0.0.1:4444');
+
+    connection.onopen = function () {
+        connection.send('user allUsers' + self.username + ' ' + self.token);
+    };
+
+    connection.onmessage = function (e) {
+
     }
 }
