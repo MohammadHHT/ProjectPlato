@@ -3,16 +3,17 @@ package main.back.controller;
 import main.back.account.Player;
 import main.back.game.Game;
 import main.back.game.SeaBattle.SeaBattle;
+import org.java_websocket.WebSocket;
 
 import java.util.Arrays;
 
 public interface GameCommand {
-    static String resolve(String[] tokens) {
+    static String resolve(String[] tokens, WebSocket conn) {
         switch (tokens[0]) {
             case "battle":
-                return BattleCommand.resolve(Arrays.copyOfRange(tokens, 1, tokens.length));
+                return BattleCommand.resolve(Arrays.copyOfRange(tokens, 1, tokens.length), conn);
             case "dots":
-                return DotsCommand.resolve(Arrays.copyOfRange(tokens, 1, tokens.length));
+                return DotsCommand.resolve(Arrays.copyOfRange(tokens, 1, tokens.length), conn);
             default:
                 return "failed command";
         }
@@ -20,12 +21,12 @@ public interface GameCommand {
 }
 
 interface BattleCommand {
-    static String resolve(String[] tokens) {
+    static String resolve(String[] tokens, WebSocket conn) {
         switch (tokens[0]) {
             case "create":
-                return create(tokens[1], tokens[2]);
+                return create(tokens[1], tokens[2], conn);
             case "join":
-                return join(tokens[1], tokens[2], Long.parseLong(tokens[3]));
+                return join(tokens[1], tokens[2], Long.parseLong(tokens[3]), conn);
             case "arrange":
                 arrange(tokens[1], tokens[2], Long.parseLong(tokens[3]), Arrays.stream(Arrays.copyOfRange(tokens, 4, tokens.length)).mapToInt(Integer::parseInt).toArray());
                 return null;
@@ -34,18 +35,24 @@ interface BattleCommand {
         }
     }
 
-    static String create(String username, String token) {
+    static String create(String username, String token, WebSocket conn) {
         Player player = Player.getPlayers().get(username);
         if (player.getToken().equals(token)) {
-
+            Server.getConns().put(username, conn);
+            return String.valueOf(new SeaBattle(player).getGameID());
         }
+        return null;
     }
 
-    static String join(String username, String token, long gameID) {
+    static String join(String username, String token, long gameID, WebSocket conn) {
         Player player = Player.getPlayers().get(username);
+        SeaBattle seaBattle = (SeaBattle) Game.getGames().get(gameID);
         if (player.getToken().equals(token)) {
-
+            Server.getConns().put(username, conn);
+            seaBattle.join(player);
+            return String.valueOf(seaBattle.getGameID());
         }
+        return null;
     }
 
     static void arrange(String username, String token, long gameID, int[] cells) {
@@ -57,22 +64,22 @@ interface BattleCommand {
 }
 
 interface DotsCommand {
-    static String resolve(String[] tokens) {
+    static String resolve(String[] tokens, WebSocket conn) {
         switch (tokens[0]) {
             case "create":
-                return create(tokens[1]);
+                return create(tokens[1], tokens[2], conn);
             case "join":
-                return join(tokens[1], tokens[2]);
+                return join(tokens[1], tokens[2], Long.parseLong(tokens[3]), conn);
             default:
                 return "failed command";
         }
     }
 
-    static String create(String username) {
+    static String create(String username, String token, WebSocket conn) {
         return null;
     }
 
-    static String join(String username, String gameID) {
+    static String join(String username, String token, long gameID, WebSocket conn) {
         return null;
     }
 }
