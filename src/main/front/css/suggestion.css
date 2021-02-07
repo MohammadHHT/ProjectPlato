@@ -83,7 +83,6 @@ section .suggestion {
 }
 
 .select-game:hover {
-    background-color: #34f16e;
     cursor: pointer;
 }
 

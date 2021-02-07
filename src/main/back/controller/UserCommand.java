@@ -1,7 +1,10 @@
 package main.back.controller;
 
+import main.back.account.Admin;
 import main.back.account.Player;
 import main.back.account.User;
+
+import java.util.Map;
 
 public interface UserCommand {
     static String resolve(String[] tokens) {
@@ -14,6 +17,8 @@ public interface UserCommand {
                 }
             case "login":
                 return login(tokens[1], tokens[2]);
+            case "allUsers":
+                return allUsers(tokens[1], tokens[2]);
             default:
                 return "failed command";
         }
@@ -43,8 +48,9 @@ public interface UserCommand {
     }
 
     static String register(String firstName, String lastName, String username, String password, String email, String phone) {
-        new Player(firstName, lastName, username, password, email, phone);
-        return "done";
+        Player player = new Player(firstName, lastName, username, password, email, phone);
+        player.login();
+        return player.getToken();
     }
 
     static String login(String username, String password) {
@@ -52,8 +58,14 @@ public interface UserCommand {
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 if (!user.isLogged()) {
-                    user.setLogged(true);
-                    return "done";
+                    user.login();
+                    if (user instanceof Admin) {
+                        return "admin " + user.getToken() + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
+                                user.getDate().getYear() + " " + user.getDate().getMonthValue() + " " + user.getDate().getDayOfMonth();
+                    } else {
+                        return "player " + user.getToken() + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
+                                user.getDate().getYear() + " " + user.getDate().getMonthValue() + " " + user.getDate().getDayOfMonth() + ((Player) user).getLevel() + " " + ((Player) user).getMoney();
+                    }
                 } else {
                     return "failed logging";
                 }
@@ -62,6 +74,19 @@ public interface UserCommand {
             }
         } else {
             return "failed username";
+        }
+    }
+
+    static String allUsers(String username, String token) {
+        User user = User.getUsers().get(username);
+        String usersInfo = null;
+        if (user.getToken().equals(token)) {
+            for (Map.Entry<String, User> entry : User.getUsers().entrySet()) {
+                 usersInfo += entry.getValue().toString() + ("/");
+            }
+            return usersInfo;
+        } else {
+            return null;
         }
     }
 }

@@ -1,8 +1,10 @@
 package main.back.account;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -10,7 +12,7 @@ public class User {
 
     private static HashMap<String, User> users;
 
-    private long userID;
+    private String token;
     private String firstName;
     private String lastName;
     private String username;
@@ -25,7 +27,7 @@ public class User {
     }
 
     public User(String firstName, String lastName, String username, String password, String email, String phone) {
-        userID = (new Random()).nextLong();
+        token = null;
         users.put(username, this);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,7 +36,12 @@ public class User {
         this.email = email;
         this.phone = phone;
         date = LocalDateTime.now();
-        logged = true;
+    }
+
+    private static String generateToken() {
+        byte[] randomBytes = new byte[24];
+        new SecureRandom().nextBytes(randomBytes);
+        return Base64.getUrlEncoder().encodeToString(randomBytes);
     }
 
     public static void addUsers(ArrayList<User> users) {
@@ -45,6 +52,10 @@ public class User {
 
     public static HashMap<String, User> getUsers() {
         return users;
+    }
+
+    public String getToken() {
+        return token;
     }
 
     public void setFirstName(String firstName) {
@@ -101,6 +112,16 @@ public class User {
 
     public void setLogged(boolean logged) {
         this.logged = logged;
+    }
+
+    public void login() {
+        logged = true;
+        token = generateToken();
+    }
+
+    public void logout() {
+        logged = false;
+        token = null;
     }
 
     public boolean isLogged() {
