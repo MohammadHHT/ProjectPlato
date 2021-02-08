@@ -12,6 +12,7 @@ public class Event {
     private LocalDateTime start;
     private LocalDateTime end;
     private int score;
+    private ArrayList<String> players;
 
     static {
         events = new HashMap<>();
@@ -24,6 +25,7 @@ public class Event {
         this.start = start;
         this.end = end;
         this.score = score;
+        players = new ArrayList<>();
     }
 
     public static void addEvents(ArrayList<Event> events) {
@@ -46,16 +48,18 @@ public class Event {
         return null;
     }
 
-    public LocalDateTime getStart() {
-        return start;
-    }
-
     public LocalDateTime getEnd() {
         return end;
     }
 
     public long getScore() {
         return score;
+    }
+
+    public void join(String player) {
+        if (!players.contains(player)) {
+            players.add(player);
+        }
     }
 
     @Override

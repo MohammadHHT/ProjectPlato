@@ -6,6 +6,8 @@ import main.back.account.Suggestion;
 import main.back.account.User;
 import main.back.game.Event;
 
+import java.time.LocalDateTime;
+
 public interface UserCommand {
     static String resolve(String[] tokens) {
         switch (tokens[0]) {
@@ -23,6 +25,8 @@ public interface UserCommand {
                 return suggestions(tokens[1], tokens[2]);
             case "events":
                 return events(tokens[1], tokens[2]);
+            case "joinevent":
+                return joinEvent(tokens[1], tokens[2], Long.parseLong(tokens[3]));
             default:
                 return "failed command";
         }
@@ -111,10 +115,19 @@ public interface UserCommand {
         Player player = Player.getPlayers().get(username);
         if (player.getToken().equals(token)) {
             StringBuilder events = new StringBuilder();
-            for (Long l : Event.getEvents().keySet()) {
-                events.append(Event.getEvents().get(l).toString()).append("/");
+            for (Event e : Event.getEvents().values()) {
+                if (e.getEnd().isAfter(LocalDateTime.now())) {
+                    events.append(e.toString()).append("/");
+                }
             }
             return events.toString().substring(0, events.toString().length() - 1);
+        }
+        return null;
+    }
+
+    static String joinEvent(String username, String token, long eventID) {
+        if (Player.getPlayers().get(username).getToken().equals(token)) {
+            Event.getEvents().get(eventID).join(username);
         }
         return null;
     }

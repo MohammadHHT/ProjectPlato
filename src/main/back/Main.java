@@ -10,11 +10,6 @@ import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
-        new Server().start();
-    }
-}
-
-/*
         Player p = new Player("player", "player", "player", "player", "player@gamil.com", "989120000001");
         new Player("player", "player", "player1", "player1", "player1@gamil.com", "989120100001");
         new Player("player", "player", "player2", "player2", "player2@gamil.com", "989120200001");
@@ -23,8 +18,14 @@ public class Main {
         new Admin("admin", "admin", "admin", "admin", "admin@gamil.com", "989120000000");
         new Suggestion(p, "dots");
         new Suggestion(p, "battle");
-        new Event("battle", LocalDateTime.now(), LocalDateTime.of(2022, 2, 21, 7, 28, 36), 1277);
-        new Event("dots", LocalDateTime.now(), LocalDateTime.of(2021, 8, 25, 21, 56, 54), 56997);
-        new Event("battle", LocalDateTime.now(), LocalDateTime.of(2022, 2, 21, 7, 28, 36), 1277);
-        new Event("dots", LocalDateTime.now(), LocalDateTime.of(2021, 8, 25, 21, 56, 54), 56997);
+        System.out.println(new Event("battle", LocalDateTime.now(), LocalDateTime.of(2022, 2, 21, 7, 28, 36), 1277).toString());
+        System.out.println(new Event("dots", LocalDateTime.now(), LocalDateTime.of(2021, 8, 25, 21, 56, 54), 56997));
+        System.out.println(new Event("battle", LocalDateTime.now(), LocalDateTime.of(2022, 2, 21, 7, 28, 36), 1277));
+        System.out.println(new Event("dots", LocalDateTime.now(), LocalDateTime.of(2021, 8, 25, 21, 56, 54), 56997));
+        new Server().start();
+    }
+}
+
+/*
+
  */
