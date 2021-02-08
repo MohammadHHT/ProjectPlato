@@ -1,6 +1,5 @@
 package main.back.game;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -13,6 +12,7 @@ public class Event {
     private LocalDateTime start;
     private LocalDateTime end;
     private int score;
+    private ArrayList<String> players;
 
     static {
         events = new HashMap<>();
@@ -25,6 +25,7 @@ public class Event {
         this.start = start;
         this.end = end;
         this.score = score;
+        players = new ArrayList<>();
     }
 
     public static void addEvents(ArrayList<Event> events) {
@@ -47,10 +48,6 @@ public class Event {
         return null;
     }
 
-    public LocalDateTime getStart() {
-        return start;
-    }
-
     public LocalDateTime getEnd() {
         return end;
     }
@@ -59,9 +56,15 @@ public class Event {
         return score;
     }
 
+    public void join(String player) {
+        if (!players.contains(player)) {
+            players.add(player);
+        }
+    }
+
     @Override
     public String toString() {
-        return game + " " + score + " " + start.getYear() + " " + start.getMonth() + " " + start.getDayOfMonth() + start.getHour() + " " + start.getMinute() + " " +
+        return eventID + " " + game + " " + score + " " + start.getYear() + " " + start.getMonth() + " " + start.getDayOfMonth() + " " + start.getHour() + " " + start.getMinute() + " " +
         end.getYear() + " " + end.getMonth() + " " + end.getDayOfMonth() + " " + end.getHour() + " " + end.getMinute();
     }
 }

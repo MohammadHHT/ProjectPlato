@@ -1,6 +1,6 @@
 package main.back.account;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -12,7 +12,7 @@ public class Suggestion {
     private long suggestionID;
     private String game;
     private String player;
-    private LocalDate date;
+    private LocalDateTime date;
 
     static {
         suggestions = new HashMap<>();
@@ -23,7 +23,7 @@ public class Suggestion {
         suggestions.put(suggestionID, this);
         this.game = game;
         this.player = player.getUsername();
-        date = LocalDate.now();
+        date = LocalDateTime.now();
         player.addSuggestion(this.suggestionID);
     }
 

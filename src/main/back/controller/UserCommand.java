@@ -2,10 +2,11 @@ package main.back.controller;
 
 import main.back.account.Admin;
 import main.back.account.Player;
+import main.back.account.Suggestion;
 import main.back.account.User;
-import main.back.game.SeaBattle.SeaBattle;
+import main.back.game.Event;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public interface UserCommand {
     static String resolve(String[] tokens) {
@@ -20,6 +21,12 @@ public interface UserCommand {
                 return login(tokens[1], tokens[2]);
             case "search":
                 return search(tokens[1], tokens[2], tokens[3]);
+            case "suggestions":
+                return suggestions(tokens[1], tokens[2]);
+            case "events":
+                return events(tokens[1], tokens[2]);
+            case "joinevent":
+                return joinEvent(tokens[1], tokens[2], Long.parseLong(tokens[3]));
             default:
                 return "failed command";
         }
@@ -87,9 +94,40 @@ public interface UserCommand {
                     users.append(s).append(" ");
                 }
             }
-            System.out.println(users.toString().trim());
-
             return users.toString().trim();
+        }
+        return null;
+    }
+
+    static String suggestions(String username, String token) {
+        Player player = Player.getPlayers().get(username);
+        if (player.getToken().equals(token)) {
+            String suggestions = "";
+            for (Long l : player.getSuggestions()) {
+                suggestions += Suggestion.getSuggestions().get(l).getGame();
+            }
+            return suggestions;
+        }
+        return null;
+    }
+
+    static String events(String username, String token) {
+        Player player = Player.getPlayers().get(username);
+        if (player.getToken().equals(token)) {
+            StringBuilder events = new StringBuilder();
+            for (Event e : Event.getEvents().values()) {
+                if (e.getEnd().isAfter(LocalDateTime.now())) {
+                    events.append(e.toString()).append("/");
+                }
+            }
+            return events.toString().substring(0, events.toString().length() - 1);
+        }
+        return null;
+    }
+
+    static String joinEvent(String username, String token, long eventID) {
+        if (Player.getPlayers().get(username).getToken().equals(token)) {
+            Event.getEvents().get(eventID).join(username);
         }
         return null;
     }
