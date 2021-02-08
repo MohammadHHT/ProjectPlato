@@ -94,6 +94,7 @@ section.player-message .request::-webkit-scrollbar {
     width: 150px;
     height: 95px;
     border-radius: 8px;
+    display: none;
 }
 
 .battle-sea img:hover, .dots-and-boxes img:hover {

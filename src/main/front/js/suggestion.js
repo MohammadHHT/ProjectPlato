@@ -4,8 +4,8 @@ function loadAllPlayer() {
     const connection = new WebSocket('ws://127.0.0.1:4444');
 
     connection.onopen = function () {
-        connection.send('user allUsers');
-        // + username + ' ' + token
+        connection.send('user allUsers' + username + ' ' + token);
+
     };
 
     connection.onmessage = function (e) {
@@ -64,24 +64,55 @@ function selectDotsAndBoxes() {
 
 function sendSuggestion() {
     let checkedValue;
-    if (isSeaBattleSelected || isDotsAndBoxesSelected) {
-        for (let i = 0; i < 15; i++) {
+    let usernameForSendSuggestion = [];
+
+    if (!(isSeaBattleSelected && isDotsAndBoxesSelected)) {
+        for (let i = 0; i < document.querySelectorAll('.regular-checkbox:checked').length; i++) {
             checkedValue = document.querySelectorAll('.regular-checkbox:checked')[i].value;
-            console.log(checkedValue);
+            usernameForSendSuggestion[i] = checkedValue;
         }
+
+
+
+        for (let i = 0; i < usernameForSendSuggestion.length; i++) {
+            console.log(usernameForSendSuggestion[i]);
+        }
+
     } else {
-        alert("Please select a game first!");
+        alert("Please select one game for suggestion!");
     }
 
 
 
     const connection = new WebSocket('ws://127.0.0.1:4444');
 
-    connection.onopen = function () {
-        connection.send('user allUsers' + self.username + ' ' + self.token);
-    };
+    if (isSeaBattleSelected) {
+        connection.onopen = function () {
+            for (let i = 0; i< usernameForSendSuggestion.length; i++) {
+                connection.send('user sendSuggestion' + self.username + ' ' + self.token + ' ' + usernameForSendSuggestion[i] + ' ' + 'BattleSea');
+
+            }
+        };
+    } else if (isDotsAndBoxesSelected) {
+        connection.onopen = function () {
+            for (let i = 0; i< usernameForSendSuggestion.length; i++) {
+                connection.send('user sendSuggestion' + self.username + ' ' + self.token + ' ' + usernameForSendSuggestion[i] + ' ' + 'DotsAndBoxes');
+
+            }
+        };
+    } else {
+        alert('Please select a game first!');
+    }
+
 
     connection.onmessage = function (e) {
+        let data = e.data.split(' ');
 
+        if (data.length === 2) {
+            alert('All suggestions sent :)');
+        } else {
+            alert('Server can not send suggestion!');
+        }
+        connection.close();
     }
 }

@@ -2,6 +2,7 @@ package main.back.controller;
 
 import main.back.account.Admin;
 import main.back.account.Player;
+import main.back.account.Suggestion;
 import main.back.account.User;
 
 import java.util.Map;
@@ -18,8 +19,9 @@ public interface UserCommand {
             case "login":
                 return login(tokens[1], tokens[2]);
             case "allUsers":
-                return allUsers();
-//            tokens[1], tokens[2]
+                return allUsers(tokens[1], tokens[2]);
+            case "sendSuggestion":
+                return addSuggestion(tokens[1], tokens[2], tokens[3], tokens[4]);
             default:
                 return "failed command";
         }
@@ -78,17 +80,29 @@ public interface UserCommand {
         }
     }
 
-    static String allUsers() {
-//        User user = User.getUsers().get(username);
-//        String usersInfo = null;
-//        if (user.getToken().equals(token)) {
-//            for (Map.Entry<String, User> entry : User.getUsers().entrySet()) {
-//                 usersInfo += entry.getValue().toString() + ("/");
-//            }
-//            return usersInfo;
-            return "amin lotfi aminlotfi 123456 amin@gmail.com 09304087303/mehran khaksar mehrankhaksar 654321 mehran@gmail.com 09122243286";
-//        } else {
-//            return null;
-//        }
+    static String allUsers(String username, String token) {
+        User user = User.getUsers().get(username);
+        String usersInfo = null;
+        if (user.getToken().equals(token)) {
+            for (Map.Entry<String, User> entry : User.getUsers().entrySet()) {
+                 usersInfo += entry.getValue().toString() + ("/");
+            }
+            return usersInfo;
+//            return "amin lotfi aminlotfi 123456 amin@gmail.com 09304087303/mahdi hadi mahdihadiam 567890 mahdi@gmail.com 09126086363/mehran khaksar mehrankhaksar 654321 mehran@gmail.com 09122243286";
+        } else {
+            return null;
+        }
+    }
+
+    static String addSuggestion(String username, String token, String playerUsername, String game) {
+        User user = User.getUsers().get(username);
+        Player player = Player.getPlayers().get(playerUsername);
+        if (user.getToken().equals(token)) {
+            new Suggestion(player, game);
+        System.out.println(playerUsername + " added.");
+            return "send successfully";
+        } else {
+            return "send suggestions unsuccessfully";
+        }
     }
 }
