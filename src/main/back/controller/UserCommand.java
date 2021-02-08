@@ -18,7 +18,8 @@ public interface UserCommand {
             case "login":
                 return login(tokens[1], tokens[2]);
             case "allUsers":
-                return allUsers(tokens[1], tokens[2]);
+                return allUsers();
+//            tokens[1], tokens[2]
             default:
                 return "failed command";
         }
@@ -77,16 +78,17 @@ public interface UserCommand {
         }
     }
 
-    static String allUsers(String username, String token) {
-        User user = User.getUsers().get(username);
-        String usersInfo = null;
-        if (user.getToken().equals(token)) {
-            for (Map.Entry<String, User> entry : User.getUsers().entrySet()) {
-                 usersInfo += entry.getValue().toString() + ("/");
-            }
-            return usersInfo;
-        } else {
-            return null;
-        }
+    static String allUsers() {
+//        User user = User.getUsers().get(username);
+//        String usersInfo = null;
+//        if (user.getToken().equals(token)) {
+//            for (Map.Entry<String, User> entry : User.getUsers().entrySet()) {
+//                 usersInfo += entry.getValue().toString() + ("/");
+//            }
+//            return usersInfo;
+            return "amin lotfi aminlotfi 123456 amin@gmail.com 09304087303/mehran khaksar mehrankhaksar 654321 mehran@gmail.com 09122243286";
+//        } else {
+//            return null;
+//        }
     }
 }
