@@ -1,6 +1,5 @@
 package main.back.game;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -61,7 +60,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return game + " " + score + " " + start.getYear() + " " + start.getMonth() + " " + start.getDayOfMonth() + start.getHour() + " " + start.getMinute() + " " +
+        return eventID + " " + game + " " + score + " " + start.getYear() + " " + start.getMonth() + " " + start.getDayOfMonth() + " " + start.getHour() + " " + start.getMinute() + " " +
         end.getYear() + " " + end.getMonth() + " " + end.getDayOfMonth() + " " + end.getHour() + " " + end.getMinute();
     }
 }

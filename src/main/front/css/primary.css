@@ -146,10 +146,12 @@ section.primary .player .favorites div:hover {
 
 section.primary .player .favorites .battle {
     background-image: url('../jpg/sea\ battle.jpg');
+    visibility: hidden;
 }
 
 section.primary .player .favorites .dots {
     background-image: url('../jpg/dots\ and\ boxes.jpeg');
+    visibility: hidden;
 }
 
 section.primary .player .favorites div div {
@@ -216,15 +218,20 @@ section.primary .player .events section .card {
 
 section.primary .player .events section .card .cover {
     position: absolute;
-    visibility: hidden;
+    opacity: 0;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    transition: visibility ease-in-out 0.1s;
-    backdrop-filter: blur(6px);
+    background-color: rgba(81, 216, 76, 0.7);
+    transition: opacity ease-in-out 0.3s 0s;
+    backdrop-filter: blur(4px);
     border-radius: 5px;
+}
+
+section.primary .player .events section .card .cover:hover {
+    opacity: 1;
+    transition: opacity ease-in-out 0.3s 1s;
 }
 
 section.primary .player .events section .card .cover span {
@@ -236,6 +243,7 @@ section.primary .player .events section .card .cover span {
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     font-weight: bold;
+    text-decoration: underline;
 }
 
 section.primary .player .events .dots .card {
@@ -247,27 +255,27 @@ section.primary .player .events .battle .card {
 }
 
 section.primary .player .events .dots .card:nth-child(1):hover {
-    transform: translateY(-80%) scale(1.1);
+    transform: translateY(-80%);
 }
 
 section.primary .player .events .dots .card:nth-child(2) {
     transform: translateY(-80%);
 }
 
-section.primary .player .events .dots .card:nth-child(2):hover {
-    transform: translateY(-160%) scale(1.1);
+section.primary .player .events .dots .card:last-child:hover {
+    transform: translateY(-90%);
 }
 
 section.primary .player .events .battle .card:nth-child(1):hover {
-    transform: translateY(-80%) scale(1.1);
+    transform: translateY(-80%);
 }
 
 section.primary .player .events .battle .card:nth-child(2) {
     transform: translateY(-80%);
 }
 
-section.primary .player .events .battle .card:nth-child(2):hover {
-    transform: translateY(-160%) scale(1.1);
+section.primary .player .events .battle .card:last-child:hover {
+    transform: translateY(-90%);
 }
 
 section.primary .player .events section .card>span {
