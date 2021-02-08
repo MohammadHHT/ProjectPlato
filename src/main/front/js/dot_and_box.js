@@ -239,10 +239,10 @@ function selectSide() {
 
     if(!isBoxFilled){
         isPlayer1Turn=!isPlayer1Turn;
-        if (document.getElementById("scorebg").style.backgroundColor === 'blue')
-            document.getElementById("scorebg").style.backgroundColor = 'green';
+        if (document.getElementById("scorebg").style.backgroundColor === 'rgba(41, 99, 246, 0.9)')
+            document.getElementById("scorebg").style.backgroundColor = 'rgba(76, 243, 139, 0.9)';
         else
-            document.getElementById("scorebg").style.backgroundColor = 'blue';
+            document.getElementById("scorebg").style.backgroundColor = 'rgba(41, 99, 246, 0.9)';
     }
     
 }

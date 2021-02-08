@@ -14,7 +14,7 @@
 }
 
 section .suggestion {
-    padding: calc(0.03 * 97vh);
+    padding: 0 calc(0.03 * 97vh);
 }
 
 .all-games {
