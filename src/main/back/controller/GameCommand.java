@@ -100,6 +100,7 @@ interface DotsCommand {
         for (Player user : Player.getPlayers().values()) {
             message.append(user.getUsername()).append(" ").append(user.getScore()).append("/");
         }
+      //  return "5 15 2 1200@mamad 12:16am/qoli 05:54pm@ali 254/mahdi 658";
         return message.toString();
     }
 
