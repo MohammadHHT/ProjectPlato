@@ -1,0 +1,421 @@
+@font-face {
+    src: url('../font/Product Sans Bold.ttf');
+    font-family: 'Product Bold';
+}
+
+@font-face {
+    src: url('../font/Product Sans Regular.ttf');
+    font-family: 'Product';
+}
+
+@font-face {
+    src: url('../font/Questrial-Regular.ttf');
+    font-family: 'Questrial';
+}
+
+section .games-menu, section .all-game, section .game-page {
+    padding: calc(0.03 * 97vh);
+}
+
+section .all-game, section .game-page {
+    height: calc(0.690 * 97vh);
+    width: 100%;
+    border-radius: 9.4px;
+    background-color: #f7f7f6;
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    padding: 4px;
+    display: block;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 calc(0.03 * 97vh) 0;
+}
+
+section .all-game {
+    height: auto;
+}
+
+section .game-page {
+    height: calc(0.940 * 97vh);
+    display: none;
+}
+
+
+.history, .leaderboard, .How-to-Play, .availableGames {
+    height: calc(0.600 * 97vh);
+    width: 100%;
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    display: flex;
+    padding: 4px;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow-y: scroll;
+    margin: 0;
+    overflow-x: hidden;
+    width: 100%;
+    background-color: #e7e7e7;
+    border-radius: 0 0 9.4px 9.4px;
+}
+
+.history, .leaderboard, .How-to-Play {
+    display: none;
+}
+
+.availableGames::-webkit-scrollbar, .history::-webkit-scrollbar, .leaderboard::-webkit-scrollbar, .How-to-Play::-webkit-scrollbar {
+    display: none;
+}
+
+.game {
+    display: block;
+    width: 100%;
+}
+
+.battle-sea-photo {
+    margin: 20px auto 30px auto;
+}
+
+.battle-sea-photo:hover {
+    cursor: pointer;
+}
+
+.dots-and-boxes-photo:hover {
+    cursor: pointer;
+}
+
+.battle-sea-photo img, .dots-and-boxes-photo img {
+    width: 80%;
+    height: 130px;
+    border-radius: 8px 8px 0 0;
+}
+
+.battle-sea-photo span, .dots-and-boxes-photo span {
+    width: 100%;
+    display: block;
+}
+
+.battle-sea-photo span, .dots-and-boxes-photo span {
+    width: 80%;
+    height: 27px;
+    margin: auto auto 30px auto;
+    background-color: #cac8c8;
+    border-radius: 0 0 8px 8px;
+    box-sizing: border-box;
+    vertical-align: center;
+    font-size: 20px;
+}
+
+.battle-sea-photo img:hover, .dots-and-boxes-photo img:hover,
+.battle-sea-photo span:hover, .dots-and-boxes-photo span:hover {
+    opacity: 0.9;
+}
+
+.battle-sea-photo span:hover, .dots-and-boxes-photo span:hover {
+    background-color: #f13453;
+    color: #ffffff;
+}
+
+.container {
+    display: block;
+    margin-left: 8px;
+    margin-top: 15px;
+    width: 280px;
+}
+
+.gameLog {
+    display: flex;
+    width: 100%;
+}
+
+.gameLog div:first-child {
+    text-align: left;
+    width: 50%;
+}
+
+.gameLog div:last-child {
+    text-align: right;
+    width: 50%;
+}
+
+.gameLog div span:first-child {
+    color: #f9bf24;
+}
+
+.gameLog div span:last-child {
+    color: #ffffff;
+}
+
+.progress {
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar {
+    height: 18px;
+    background-color: #ee303c;
+    border-radius: 4px;
+    transition: 0.4s linear;
+    transition-property: width, background-color;
+}
+
+.progress-striped .progress-bar {
+    background-color: #FCBC51;
+    width: 60%;
+    background-image: linear-gradient(
+            45deg, rgb(252,163,17) 25%,
+            transparent 25%, transparent 50%,
+            rgb(252,163,17) 50%, rgb(252,163,17) 75%,
+            transparent 75%, transparent);
+    animation: progressAnimationStrike 4s;
+}
+
+@keyframes progressAnimationStrike {
+    from { width: 0 }
+    to   { width: 60% }
+}
+
+.game-level {
+    display: flex;
+    background-color: #cd3700;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.game-level div svg {
+    width: 55px;
+    height: 55px;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+.game-level div img {
+    width: 55px;
+    height: 55px;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+.level-number {
+    display: flex;
+    width: 33px;
+    height: 33px;
+    background-color: #ffd700;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.level-number span {
+    margin-left: 12px;
+    margin-top: 6px;
+}
+
+.ribbon {
+    width: 100%;
+    display: flex;
+    margin-top: 8px;
+    height: 30px;
+}
+
+.ribbon div {
+    width: 100%;
+    height: 25px;
+    margin: 3px;
+    background-color: #122948;
+    border-radius: 8px 8px 0 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+.ribbon div:first-child {
+    background-color: #bb2d44;
+}
+
+.ribbon div:hover {
+    cursor: pointer;
+}
+
+.ribbon div span {
+    display: inline-block;
+    vertical-align: middle;
+    font-family: 'Product Bold';
+    font-size: 12px;
+    color: rgb(239, 233, 224);
+    text-transform: uppercase;
+}
+
+.ribbon div:first-child {
+    margin-left: 0;
+}
+
+.ribbon div:last-child {
+    margin-right: 0;
+}
+
+.SB-game, .DB-game, .game-history, .player-score {
+    display: flex;
+    background-color: #e1aa12;
+    border-radius: 8px;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 8px;
+}
+
+.SB-game, .DB-game {
+    background-color: #0b9cff;
+}
+
+.game-icon {
+    width: 15%;
+}
+
+.availableGames .game-icon img, .history .game-icon img, .player-avatar-rank svg {
+    width: 40px;
+    height: 40px;
+    margin-top: 4px;
+}
+
+.history-info, .game-info {
+    display: block;
+    width: 65%;
+    margin-top: 4px;
+}
+
+.history-info span, .game-info span {
+    display: flex;
+    font-size: 19px;
+}
+
+.history-info div, .game-info div {
+    display: flex;
+    font-family: 'Product';
+    font-size: 16px;
+}
+
+.game-time, .join {
+    width: 20%;
+}
+
+.join {
+    display: block;
+}
+
+.join-button {
+    display: inline-block;
+    vertical-align: middle;
+    width: 85%;
+    height: 2.2em;
+    text-transform: uppercase;
+    margin-top: 9px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ee303c;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.join-button:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.run-game {
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Product Bold';
+    font-size: 3vh;
+    line-height: 1em;
+    padding: 2vh 0;
+    margin-top: 10px;
+    background-color: #34f16e;
+    color: rgb(239, 233, 224);
+    margin-bottom: 1vh;
+}
+
+.run-game:hover {
+    color: #222026;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.player-score {
+    width: 100%;
+    display: flex;
+}
+
+.rank {
+    width: 10%;
+    font-size: 20px;
+    margin-top: 12px;
+}
+
+.player-avatar-rank {
+    width: 70%;
+    display: flex;
+}
+
+.player-avatar-rank span {
+    margin-top: 13px;
+    margin-left: 8px;
+}
+
+.score {
+    width: 20%;
+    margin-top: 14px;
+}
+
+.score span {
+    background-color: #222026;
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 6px;
+}
+
+.DB-content, .SB-content {
+    padding: 8px;
+}
+
+.DB-content div h1, .DB-content div p, .DB-content div img,
+.SB-content div h1,.SB-content div p,.SB-content div img {
+    text-align: left;
+}
+
+.DB-content div h1, .SB-content div h1 {
+    font-family: 'Product Bold';
+    margin-bottom: 6px;
+    font-size: 18px;
+}
+
+.DB-content div p, .SB-content div p {
+    font-family: 'Questrial';
+    width: 100%;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 4px;
+    line-height: 120%;
+}
+
+.DB-content div, .SB-content div {
+    width: 100%;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.DB-content div img {
+    width: 40%;
+    height: 25%;
+    margin-left: 30%;
+    margin-bottom: 4px;
+}
+
+.DB-content div p:last-child, .SB-content div p:last-child {
+    margin-bottom: 12px;
+}
