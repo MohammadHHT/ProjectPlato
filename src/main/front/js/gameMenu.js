@@ -103,3 +103,22 @@ function showDotsAndBoxesHowToPlay() {
     document.getElementById("DB-leaderboardDiv").style.display = "none";
     document.getElementById("DB-HowToPlayDiv").style.display = "flex";
 }
+
+function init(username, token, game) {
+
+    this.username = username;
+    this.token = token;
+    const connection = new WebSocket('ws://127.0.0.1:4444');
+
+    connection.onopen = function () {
+        connection.send("game " + game + " gamelogs " + username + " " + token);
+    };
+    connection.onmessage = function (e) {
+        let user = e.data.split("@")[0];
+        let gameLogs = e.data.split("@")[1].split("/");
+        let leaderBoardUsers = e.data.split("@")[2].split("/");
+
+
+    }
+}
+
