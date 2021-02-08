@@ -1,18 +1,16 @@
-function suggestion(username, token) {
-    this.username = username;
-    this.token = token;
-    this.init();
+function primary(admin) {
+    if (admin) {
+        loadAllPlayer();
+    }
 }
 
-suggestion.prototype.init = function () {
-    const self = this;
-
+function loadAllPlayer() {
     //TODO I can not find suggestion menu button to select it!
     document.querySelector('section.suggestion .all-players .suggestion-buttons .unSend-suggestion').addEventListener('click', function () {
         const connection = new WebSocket('ws://127.0.0.1:4444');
 
         connection.onopen = function () {
-            connection.send('user allUsers' + self.username + ' ' + self.token);
+            connection.send('user allUsers' + username + ' ' + token);
         };
 
         connection.onmessage = function (e) {
@@ -44,8 +42,7 @@ suggestion.prototype.init = function () {
             }
             connection.close();
         };
-    })
-
+    });
 }
 
 var isSeaBattleSelected = false;
@@ -75,11 +72,14 @@ function selectDotsAndBoxes() {
 }
 
 function sendSuggestion() {
+    let checkedValue;
     if (isSeaBattleSelected || isDotsAndBoxesSelected) {
-        var checkedValue = document.querySelectorAll('.regular-checkbox:checked');
-        console.log(checkedValue);
+        for (let i = 0; i < 15; i++) {
+            checkedValue = document.querySelectorAll('.regular-checkbox:checked')[i].value;
+            console.log(checkedValue);
+        }
     } else {
-        alert("Please select game first!");
+        alert("Please select a game first!");
     }
 
 
