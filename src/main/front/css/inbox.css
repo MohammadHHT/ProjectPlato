@@ -13,7 +13,7 @@
     font-family: 'Questrial';
 }
 
-section .inbox {
+section .inbox, section .admin-inbox {
     padding: 0 calc(0.03 * 97vh);
 }
 
@@ -21,7 +21,6 @@ section .inbox {
     height: calc(0.940 * 97vh);
     width: 100%;
     border-radius: 9.4px;
-    /*background-color: #e7e7e7;*/
     background-color: #ffffa5;
     box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
     box-sizing: border-box;
@@ -33,6 +32,15 @@ section .inbox {
     position: relative;
     overflow: hidden;
     margin: calc(0.03 * 97vh) 0;
+}
+
+section .admin-inbox .chatBox {
+    margin: calc(0.0016 * 97vh) 0;
+
+}
+
+.inboxHeader p {
+    margin: 0;
 }
 
 .inboxHeader {
@@ -113,15 +121,14 @@ section .inbox {
 }
 
 .messageField div:first-child textarea {
-    width: 100%;
+    width: 98%;
     border: none;
-    height: 40px;
     resize: none;
     background-color: #cd3700;
     font-size: 16px;
     font-family: 'Questrial';
     margin-top: 5px;
-    padding: 12px;
+    padding: 3px;
     color: #ececec;
     border-radius: 6px 6px 6px 6px;
 }
@@ -129,7 +136,7 @@ section .inbox {
 .messageField div:first-child textarea::-webkit-input-placeholder {
     font-size: 15px;
     color: #d2d2d2;
-    /*padding: 8px;*/
+    padding: 8px;
     font-family: 'Product';
 }
 
@@ -159,14 +166,22 @@ section .inbox {
     margin-top: 12px;
 }
 
-.messageBox div:first-child {
+.admin-avatar-message {
+    display: flex;
+    margin-top: 12px;
+    justify-content: flex-end;
+    align-content: flex-end;
+}
+
+.messageBox div:first-child, .admin-messageBox div:first-child {
     text-align: justify;
     text-justify: inter-word;
 }
 
-.messageBox div p {
+.messageBox div p, .admin-messageBox div p {
     font-family: 'Product';
     font-size: 16px;
+    margin: 0;
 }
 
 .messageBox {
@@ -187,7 +202,25 @@ section .inbox {
     opacity: 0.9;
 }
 
-.messageBox div:last-child {
+.admin-messageBox {
+    height: auto;
+    width: 60%;
+    background-color: #90EE90;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    padding: 4px;
+    display: block;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin-right: 6px;
+    opacity: 0.9;
+    border-radius: 8px 2px 8px 8px;
+}
+
+.messageBox div:last-child, .admin-messageBox div:last-child {
     text-align: right;
     font-family: 'Questrial';
     font-size: 13px;
