@@ -427,7 +427,15 @@ section.primary .admin .players ol .item {
     text-align: left;
     cursor: pointer;
     position: relative;
+    transform: scale(1);
+    transition: transform ease-in-out 0.3s 0s, opacity ease-in-out 0.3s 0s;
 }
+
+section.primary .admin .players ol .item.hide {
+    opacity: 0;
+    transform: scale(0.75);
+}
+
 
 section.primary .admin .players ol .item:hover {
     background-color: #122948;
@@ -527,17 +535,34 @@ section.primary .admin .events .games {
     max-height: 70vh;
 }
 
-
 section.primary .admin .events .template {
     flex-basis: 50%;
     box-sizing: border-box;
-    max-height: 31vh;
+    height: 31vh;
     border-radius: 5px;
     background-color: rgb(208, 208, 208);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.329);
-    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.329); 
     position: relative;
     margin-top: 2vh;
+}
+
+section.primary .admin .events .template .message {
+    position: absolute;
+    left: 5px;
+    top: calc(-40px);
+    font-family: Product;
+    color: rgba(255, 59, 85, 0.8);
+    font-size: calc(0.25 * 0.075 * 97vh);
+    position: absolute;
+    transform: translateY(20px);
+    font-style: italic;
+    transition: opacity 0.4s;
+    text-align: center;
+    opacity: 0;
+}
+
+section.primary .admin .events .template .message.show {
+    opacity: 1;
 }
 
 section.primary .admin .events .template input {
@@ -590,6 +615,7 @@ section.primary .admin .events .template button {
     background-color: rgb(41, 193, 122);
     color: white;
     cursor: pointer;
+    border-radius: 0 0 5px 5px;
 }
 
 section.primary .admin .events .template button:hover {
@@ -639,15 +665,20 @@ section.primary .admin .events .games .card {
 
 section.primary .admin .events .games .card .cover {
     position: absolute;
-    visibility: hidden;
+    opacity: 0;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    transition: visibility ease-in-out 0.1s;
-    backdrop-filter: blur(6px);
+    background-color: rgba(21, 21, 21, 0.7);
+    transition: opacity ease-in-out 0.3s 0s;
+    backdrop-filter: blur(4px);
     border-radius: 5px;
+}
+
+section.primary .admin .events .games .card .cover:hover {
+    opacity: 1;
+    transition: opacity ease-in-out 0.3s 1s;
 }
 
 section.primary .admin .events .games .card .cover span {
@@ -659,6 +690,7 @@ section.primary .admin .events .games .card .cover span {
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     font-weight: bold;
+    text-decoration: underline;
 }
 
 section.primary .admin .events .games .dots {

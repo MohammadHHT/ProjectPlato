@@ -38,14 +38,22 @@ public class Event {
         return events;
     }
 
-    public void deleteEvent(long eventID){
+    public static void deleteEvent(long eventID){
         if (events.containsKey(eventID)) {
             events.remove(eventID);
         }
     }
 
+    public long getEventID() {
+        return eventID;
+    }
+
     public String getGame() {
         return null;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
     }
 
     public LocalDateTime getEnd() {

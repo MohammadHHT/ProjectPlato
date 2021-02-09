@@ -25,8 +25,12 @@ public interface UserCommand {
                 return suggestions(tokens[1], tokens[2]);
             case "events":
                 return events(tokens[1], tokens[2]);
+            case "addevent":
+                return addEvent(tokens[1], tokens[2], tokens[3], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]), Integer.parseInt(tokens[8]), Integer.parseInt(tokens[9]), Integer.parseInt(tokens[10]));
             case "joinevent":
                 return joinEvent(tokens[1], tokens[2], Long.parseLong(tokens[3]));
+            case "users":
+                return users(tokens[1], tokens[2]);
             default:
                 return "failed command";
         }
@@ -86,8 +90,7 @@ public interface UserCommand {
     }
 
     static String search(String username, String token, String input) {
-        User user = User.getUsers().get(username);
-        if (user.getToken().equals(token)) {
+        if (User.getUsers().get(username).getToken().equals(token)) {
             StringBuilder users = new StringBuilder();
             for (String s : User.getUsers().keySet()) {
                 if (s.contains(input)) {
@@ -112,8 +115,7 @@ public interface UserCommand {
     }
 
     static String events(String username, String token) {
-        Player player = Player.getPlayers().get(username);
-        if (player.getToken().equals(token)) {
+        if (User.getUsers().get(username).getToken().equals(token)) {
             StringBuilder events = new StringBuilder();
             for (Event e : Event.getEvents().values()) {
                 if (e.getEnd().isAfter(LocalDateTime.now())) {
@@ -128,6 +130,26 @@ public interface UserCommand {
     static String joinEvent(String username, String token, long eventID) {
         if (Player.getPlayers().get(username).getToken().equals(token)) {
             Event.getEvents().get(eventID).join(username);
+        }
+        return null;
+    }
+
+    static String addEvent(String username, String token, String game, int prize, int sday, int smonth, int syear, int fday, int fmonth, int fyear) {
+        if (Admin.getAdmins().get(username).getToken().equals(token)) {
+            Event event = new Event(game, LocalDateTime.of(syear, smonth, sday, LocalDateTime.now().getHour(), LocalDateTime.now().getMinute()), LocalDateTime.of(fyear, fmonth, fday, LocalDateTime.now().getHour(), LocalDateTime.now().getMinute()), prize);
+            return String.valueOf(event.getEventID() + " " + event.getStart().getMonth() + " " + event.getEnd().getMonth());
+        }
+        return null;
+    }
+
+    static String users(String username, String token) {
+        if (User.getUsers().get(username).getToken().equals(token)) {
+            StringBuilder users = new StringBuilder();
+            for (String s : User.getUsers().keySet()) {
+                users.append(s).append(" ");
+            }
+            System.out.println(users.toString().trim());
+            return users.toString().trim();
         }
         return null;
     }

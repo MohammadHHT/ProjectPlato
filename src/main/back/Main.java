@@ -15,6 +15,14 @@ public class Main {
         new Player("player", "player", "player2", "player2", "player2@gamil.com", "989120200001");
         new Player("player", "player", "player3", "player3", "player3@gamil.com", "989120005001");
         new Player("player", "player", "player4", "player4", "player4@gamil.com", "989120000601");
+        new Player("player", "player", "player5", "player5", "player1@gamil.com", "989120100001");
+        new Player("player", "player", "player6", "player6", "player2@gamil.com", "989120200001");
+        new Player("player", "player", "player7", "player7", "player3@gamil.com", "989120005001");
+        new Player("player", "player", "player8", "player8", "player4@gamil.com", "989120000601");
+        new Player("player", "player", "player9", "player9", "player1@gamil.com", "989120100001");
+        new Player("player", "player", "player10", "player10", "player2@gamil.com", "989120200001");
+        new Player("player", "player", "player11", "player11", "player3@gamil.com", "989120005001");
+        new Player("player", "player", "player12", "player12", "player4@gamil.com", "989120000601");
         new Admin("admin", "admin", "admin", "admin", "admin@gamil.com", "989120000000");
         new Suggestion(p, "dots");
         new Suggestion(p, "battle");
