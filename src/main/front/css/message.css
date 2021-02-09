@@ -1,0 +1,184 @@
+@font-face {
+    src: url('../font/Product Sans Bold.ttf');
+    font-family: 'Product Bold';
+}
+
+@font-face {
+    src: url('../font/Product Sans Regular.ttf');
+    font-family: 'Product';
+}
+
+@font-face {
+    src: url('../font/Questrial-Regular.ttf');
+    font-family: 'Questrial';
+}
+
+section .player-message {
+    padding: 0 calc(0.03 * 97vh);
+}
+
+.player-suggestion {
+    height: calc(0.295 * 97vh);
+    width: 100%;
+    border-radius: 9.4px;
+    background-color: #f7f7f6;
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    padding: 4px;
+    display: block;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 calc(0.03 * 97vh) 0;
+}
+
+.request {
+    height: calc(0.705 * 97vh);
+    width: 100%;
+    border-radius: 9.4px 9.4px 0 0;
+    background-color: #f7f7f6;
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    display: flex;
+    padding: 4px;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow-y: scroll;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.suggestion-title, .request-title, .game-title {
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Product Bold';
+    font-size: 3vh;
+    line-height: 1em;
+    padding: 2vh 0;
+    margin: 0;
+    background-color: #122948;
+    color: rgb(239, 233, 224);
+    margin-bottom: 1vh;
+}
+
+section.player-message .request::-webkit-scrollbar {
+    display: none;
+}
+
+.request-title {
+    margin-bottom: 20px;
+}
+
+.suggestion-title span, .request-title span {
+    display: block;
+    font-family: 'Product Bold';
+    font-size: 20px;
+    vertical-align: center;
+    alignment: center;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.games {
+    display: flex;
+    margin-top: 19px;
+    align-content: center;
+}
+
+.games small {
+    font-family: 'Questrial';
+    margin: auto;
+    font-size: 17px;
+    color: #bb2d44;
+    display: none;
+}
+
+.battle-sea img, .dots-and-boxes img {
+    width: 150px;
+    height: 95px;
+    border-radius: 8px;
+    display: block;
+}
+
+.battle-sea img:hover, .dots-and-boxes img:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.battle-sea img {
+    margin-right: 65px;
+    margin-left: 15px;
+}
+
+.friend-request-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.friend-request {
+    margin-bottom: 8px;
+    margin-left: 6px;
+    display: flex;
+    width: 97%;
+    background-color: #122948;
+    height: 45px;
+    border-radius: 8px;
+}
+
+.friend-avatar {
+    display: flex;
+    width: 55%;
+}
+.request-buttons {
+    display: flex;
+    width: 45%;
+}
+
+.friend-avatar img {
+    width: 40px;
+    height: 40px;
+    margin-top: 4px;
+    margin-left: 8px;
+}
+
+.friend-avatar span {
+    color: #ffffff;
+    font-family: 'Product Bold';
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.request-buttons {
+    display: flex;
+    margin-bottom: 0;
+}
+
+.request-buttons .accept-button, .request-buttons .decline-button {
+    width: 50%;
+    font-family: 'Product Bold';
+    font-size: 16px;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding-top: 13px;
+}
+
+.request-buttons .accept-button {
+    background-color: #34f16e;
+}
+
+.request-buttons .decline-button {
+    background-color: #f13453;
+    border-radius: 0 6px 6px 0;
+}
+
+.request-buttons .accept-button:hover, .request-buttons .decline-button:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}

@@ -13,6 +13,8 @@
     <link rel="stylesheet" type="text/css" href="css/account.css" />
     <link rel="stylesheet" type="text/css" href="css/seabattle.css" />
     <link rel="stylesheet" type="text/css" href="css/gamesPage.css" />
+    <link rel="stylesheet" type="text/css" href="css/suggestion.css" />
+    <link rel="stylesheet" type="text/css" href="css/message.css" />
     <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button,
@@ -765,6 +767,87 @@
                     </div>
                     <div class="run-game">Create Game</div>
                 </section>
+            </section>
+
+            <section class="player-message ">
+                <div class="player-suggestion">
+                    <div class="suggestion-title"><span>suggestions</span></div>
+                    <div class="games">
+                        <small id="suggested-game-situation">No games suggested</small>
+                        <div class="battle-sea">
+                            <img id="sea-battle-suggestion-pic" src="jpg/sea%20battle.jpg" alt="sea Battle">
+                        </div>
+                        <div class="dots-and-boxes">
+                            <img id="dots-and-boxes-suggestion-pic" src="jpg/dots%20and%20boxes.jpeg" alt="Dots And Boxes">
+                        </div>
+                    </div>
+                </div>
+                <div class="request">
+                    <div class="request-title"><span>friend request</span></div>
+                    <div class="friend-request-container">
+                        <div class="friend-request">
+                            <div class="friend-avatar">
+                                <img src="avatar/avatar%20(1).svg">
+                                <span>friend 1</span>
+                            </div>
+                            <div class="request-buttons">
+                                <div class="accept-button"><span>accept</span></div>
+                                <div class="decline-button"><span>decline</span></div>
+                            </div>
+                        </div>
+                        <div class="friend-request">
+                            <div class="friend-avatar">
+                                <img src="avatar/avatar%20(1).svg">
+                                <span>friend 1</span>
+                            </div>
+                            <div class="request-buttons">
+                                <div class="accept-button"><span>accept</span></div>
+                                <div class="decline-button"><span>decline</span></div>
+                            </div>
+                        </div>
+                        <div class="friend-request">
+                            <div class="friend-avatar">
+                                <img src="avatar/avatar%20(1).svg">
+                                <span>friend 1</span>
+                            </div>
+                            <div class="request-buttons">
+                                <div class="accept-button"><span>accept</span></div>
+                                <div class="decline-button"><span>decline</span></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="suggestion ">
+                <div class="all-games">
+                    <div class="games-title"><span>games</span></div>
+                    <div class="games">
+                        <div class="battle-sea-sugg">
+                            <div class="game-pic">
+                                <img src="jpg/sea%20battle.jpg" alt="sea Battle">
+                            </div>
+                            <div class="select-game" id="sea-battle-select" onclick="selectSeaBattle()"><span id="SB-select-button">Select</span></div>
+                        </div>
+                        <div class="dots-and-boxes-sugg">
+                            <div class="game-pic">
+                                <img src="jpg/dots%20and%20boxes.jpeg" alt="Dots And Boxes">
+                            </div>
+                            <div class="select-game" id="dots-and-boxes-select" onclick="selectDotsAndBoxes()"><span id="DB-select-button">Select</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="all-players">
+                    <div class="player-title"><span>Players</span></div>
+                    <div class="suggestion-buttons">
+                        <div class="send-suggestion" id="send-suggestion-button" onclick="sendSuggestion()">Send</div>
+                        <div class="unSend-suggestion" id="unSend-button" onclick="loadAllPlayer()">Unsend</div>
+                    </div>
+                    <div class="players-area">
+
+                    </div>
+                </div>
             </section>
 
             <section class="account">

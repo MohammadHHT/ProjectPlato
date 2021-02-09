@@ -14,7 +14,7 @@
 }
 
 section .games-menu, section .all-game, section .game-page {
-    padding: calc(0.03 * 97vh);
+    padding: 0 calc(0.03 * 97vh);
 }
 
 section .all-game, section .game-page {
