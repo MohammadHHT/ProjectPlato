@@ -31,7 +31,7 @@ section .player-message {
     align-items: center;
     position: relative;
     overflow: hidden;
-    margin: 0 0 calc(0.03 * 97vh) 0;
+    margin: calc(0.03 * 97vh) 0;
 }
 
 .request {

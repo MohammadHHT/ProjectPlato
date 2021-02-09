@@ -80,6 +80,10 @@ public class Player extends User {
         friendRequest.add(username);
     }
 
+    public Set<String> getFriendRequest() {
+        return friendRequest;
+    }
+
     public boolean acceptFriendRequest(String username) {
         if (friendRequest.contains(username)) {
             friendRequest.remove(username);
