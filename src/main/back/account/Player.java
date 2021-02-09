@@ -94,6 +94,10 @@ public class Player extends User {
         return false;
     }
 
+    public Set<String> getFriendRequest() {
+        return friendRequest;
+    }
+
     public void removeFriend(String username) {
         friends.remove(username);
     }

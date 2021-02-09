@@ -5,7 +5,6 @@ function loadAllPlayer() {
 
     connection.onopen = function () {
         connection.send('user allUsers' + username + ' ' + token);
-
     };
 
     connection.onmessage = function (e) {
@@ -113,6 +112,101 @@ function sendSuggestion() {
         } else {
             alert('Server can not send suggestion!');
         }
+        connection.close();
+    }
+}
+
+function loadSuggestedGames() {
+    const connection = new WebSocket('ws://127.0.0.1:4444');
+
+    connection.onopen = function () {
+        connection.send('user loadSuggestedGame' + username + ' ' + token);
+    };
+
+    connection.onmessage = function (e) {
+        let data = e.data.split(' ');
+        if (data.length === 4) {
+            document.getElementById('suggested-game-situation').style.display = 'block';
+        } else if (data.length === 5) {
+            document.getElementById('sea-battle-suggestion-pic').style.display = 'block';
+            document.getElementById('dots-and-boxes-suggestion-pic').style.display = 'block';
+            document.getElementById('suggested-game-situation').style.display = 'none';
+        } else if (data.length === 2) {
+            document.getElementById('sea-battle-suggestion-pic').style.display = 'block';
+            document.getElementById('suggested-game-situation').style.display = 'none';
+        } else if (data.length === 3) {
+            document.getElementById('dots-and-boxes-suggestion-pic').style.display = 'block';
+            document.getElementById('suggested-game-situation').style.display = 'none';
+        }
+        connection.close();
+    }
+
+    loadFriendsRequest();
+}
+
+function loadFriendsRequest() {
+    let friendsRequestList = document.querySelector('.section .player-message .request .friend-request-container');
+    const connection = new WebSocket('ws://127.0.0.1:4444');
+
+    connection.onopen = function () {
+        connection.send('user loadFriendsRequest' + username + ' ' + token);
+    };
+
+    connection.onmessage = function (e) {
+        let friendUsername = e.data.split(' ');
+
+        for (let i = 0; i < friendUsername.length; i++) {
+            friendsRequestList.insertAdjacentHTML('beforeend',
+                '                    <div class="friend-request" id="' + friendUsername[i] +'">\n' +
+                '                        <div class="friend-avatar">\n' +
+                '                            <img src="avatar/avatar%20(1).svg">\n' +
+                '                            <span>' + friendUsername[i] + '</span>\n' +
+                '                        </div>\n' +
+                '                        <div class="request-buttons">\n' +
+                '                            <div onclick="acceptFriend(' + friendUsername[i] + ')" class="accept-button"><span>accept</span></div>\n' +
+                '                            <div onclick="declineFriend(' + friendUsername[i] + ')" class="decline-button"><span>decline</span></div>\n' +
+                '                        </div>\n' +
+                '                    </div>');
+        }
+
+        connection.close();
+    }
+}
+
+function acceptFriend(playerUsername) {
+    const connection = new WebSocket('ws://127.0.0.1:4444');
+
+    connection.onopen = function () {
+        connection.send('user acceptFriend' + username + ' ' + token + ' ' + playerUsername);
+    };
+
+    connection.onmessage = function (e) {
+        let data = e.data.split(' ');
+
+        if (data.length === 2) {
+            document.getElementById(playerUsername).style.display = 'none';
+            alert(playerUsername + ' now is your friend!');
+        }
+
+        connection.close();
+    }
+}
+
+function declineFriend(playerUsername) {
+    const connection = new WebSocket('ws://127.0.0.1:4444');
+
+    connection.onopen = function () {
+        connection.send('user declineFriend' + username + ' ' + token + ' ' + playerUsername);
+    };
+
+    connection.onmessage = function (e) {
+        let data = e.data.split(' ');
+
+        if (data.length === 2) {
+            document.getElementById(playerUsername).style.display = 'none';
+            alert(playerUsername + ' removed from your requests.');
+        }
+
         connection.close();
     }
 }

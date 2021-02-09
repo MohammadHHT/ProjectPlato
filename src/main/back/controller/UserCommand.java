@@ -6,6 +6,7 @@ import main.back.account.Suggestion;
 import main.back.account.User;
 
 import java.util.Map;
+import java.util.Set;
 
 public interface UserCommand {
     static String resolve(String[] tokens) {
@@ -22,6 +23,14 @@ public interface UserCommand {
                 return allUsers(tokens[1], tokens[2]);
             case "sendSuggestion":
                 return addSuggestion(tokens[1], tokens[2], tokens[3], tokens[4]);
+            case "loadSuggestedGame":
+                return loadSuggestedGame(tokens[1], tokens[2]);
+            case "loadFriendsRequest":
+                return loadFriendsRequest(tokens[1], tokens[2]);
+            case "acceptFriend":
+                return acceptFriend(tokens[1], tokens[2], tokens[3]);
+            case "declineFriend":
+                return declineFriend(tokens[1], tokens[2], tokens[3]);
             default:
                 return "failed command";
         }
@@ -103,6 +112,75 @@ public interface UserCommand {
             return "send successfully";
         } else {
             return "send suggestions unsuccessfully";
+        }
+    }
+
+    static String loadSuggestedGame(String username, String token) {
+        boolean isSeaBattle = false;
+        boolean isDotsAndBoxes = false;
+        Set<Long> suggestions = Player.getPlayers().get(username).getSuggestions();
+        User user = User.getUsers().get(username);
+
+        if (user.getToken().equals(token)) {
+            for (Long suggestionID : suggestions) {
+                if (Suggestion.getSuggestions().containsKey(suggestionID)) {
+                    if (Suggestion.getSuggestions().get(suggestionID).getGame().equals("BattleSea")) {
+                        isSeaBattle = true;
+                    } else if (Suggestion.getSuggestions().get(suggestionID).getGame().equals("DotsAndBoxes")) {
+                        isDotsAndBoxes = true;
+                    }
+                } else {
+                    return "fail No game suggested.";
+                }
+            }
+            if (isSeaBattle && isDotsAndBoxes) {
+                return "Battle Sea Dots And Boxes";
+            } else if (isSeaBattle) {
+                return "Battle Sea";
+            } else if (isDotsAndBoxes) {
+                return "Dots And Boxes";
+            } else {
+                return "fail ";
+            }
+        } else {
+            return "";
+        }
+    }
+
+    static String loadFriendsRequest(String username, String token) {
+        User user = User.getUsers().get(username);
+        Set<String> friendsRequestUsername = Player.getPlayers().get(username).getFriendRequest();
+        String allUsernames = null;
+        if (user.getToken().equals(token)) {
+            for (String friendUsername : friendsRequestUsername) {
+                allUsernames += (Player.getPlayers().get(friendUsername).getUsername()) + (" ");
+            }
+            return allUsernames;
+        } else {
+            return "";
+        }
+    }
+
+    static String acceptFriend(String username, String token, String friendUsername) {
+        User user = User.getUsers().get(username);
+        Player player = Player.getPlayers().get(username);
+        if (user.getToken().equals(token)) {
+            player.getFriends().add(friendUsername);
+            player.getFriendRequest().remove(friendUsername);
+            return "accept successfully";
+        } else {
+            return "";
+        }
+    }
+
+    static String declineFriend(String username, String token, String friendUsername) {
+        User user = User.getUsers().get(username);
+        Player player = Player.getPlayers().get(username);
+        if (user.getToken().equals(token)) {
+            player.getFriendRequest().remove(friendUsername);
+            return "decline successfully";
+        } else {
+            return "";
         }
     }
 }

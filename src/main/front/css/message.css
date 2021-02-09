@@ -90,20 +90,35 @@ section.player-message .request::-webkit-scrollbar {
     align-content: center;
 }
 
+.games small {
+    font-family: 'Questrial';
+    margin: auto;
+    font-size: 17px;
+    color: #bb2d44;
+    display: none;
+}
+
 .battle-sea img, .dots-and-boxes img {
     width: 150px;
     height: 95px;
     border-radius: 8px;
-    display: none;
+    display: block;
 }
 
 .battle-sea img:hover, .dots-and-boxes img:hover {
     opacity: 0.9;
+    cursor: pointer;
 }
 
 .battle-sea img {
     margin-right: 65px;
     margin-left: 15px;
+}
+
+.friend-request-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .friend-request {
@@ -125,7 +140,7 @@ section.player-message .request::-webkit-scrollbar {
     width: 45%;
 }
 
-.friend-avatar svg {
+.friend-avatar img {
     width: 40px;
     height: 40px;
     margin-top: 4px;
