@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class GameLog {
 
-    private static HashMap<Long, GameLog> gameLogs;
+    public static HashMap<Long, GameLog> gameLogs;
 
     private long logID;
     private String game;
@@ -33,8 +33,10 @@ public class GameLog {
 
         if (result == Result.WIN) {
             Player.getPlayers().get(host).addWins();
+            Player.getPlayers().get(guest).addDefeats();
         } else if (result == Result.DEFEAT) {
             Player.getPlayers().get(guest).addWins();
+            Player.getPlayers().get(host).addDefeats();
         }
     }
 
@@ -56,6 +58,10 @@ public class GameLog {
         return host;
     }
 
+    public String getGuest() {
+        return guest;
+    }
+
     public LocalDate getDate() {
         return date;
     }
@@ -65,6 +71,3 @@ public class GameLog {
     }
 }
 
-enum Result {
-    WIN, DEFEAT
-}
