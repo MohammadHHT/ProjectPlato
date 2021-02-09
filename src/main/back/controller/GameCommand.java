@@ -5,6 +5,7 @@ import main.back.account.User;
 import main.back.game.DotsAndBoxes.DotsAndBoxes;
 import main.back.game.Game;
 import main.back.game.GameLog;
+import main.back.game.Result;
 import main.back.game.SeaBattle.SeaBattle;
 import org.java_websocket.WebSocket;
 
@@ -82,6 +83,8 @@ interface DotsCommand {
                 return occupy(Long.parseLong(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]));
             case "turn":
                 return turn(Long.parseLong(tokens[1]));
+            case "end" :
+                return end(Long.parseLong(tokens[1]));
             default:
                 return "failed command";
         }
@@ -157,4 +160,20 @@ interface DotsCommand {
         DotsAndBoxes.getDotsAndBoxes().get(gameID).turn();
         return null;
     }
+
+    static String end(long gameID) {
+        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
+        if (dotsAndBoxes != null) {
+            if (dotsAndBoxes.isBoardFull()) {
+                Result result = dotsAndBoxes.judge().equals(dotsAndBoxes.getHost()) ? Result.WIN : Result.DEFEAT;
+                new GameLog("dotsandboxes", dotsAndBoxes.getHost().getUsername(), dotsAndBoxes.getGuest().getUsername(), result);
+                return dotsAndBoxes.judge().getUsername() + " Won!" + '\n' + "Back to the game menu";
+            } else {
+                new GameLog("dotsandboxes", dotsAndBoxes.getHost().getUsername(), dotsAndBoxes.getGuest().getUsername(), dotsAndBoxes.winByForfeit().equals(dotsAndBoxes.getHost()) ? Result.WIN : Result.DEFEAT);
+                return dotsAndBoxes.winByForfeit().getUsername() + " won by forfeit" + '\n' + "Back to the game menu";
+            }
+        }
+        return null;
+    }
+
 }

@@ -2,7 +2,10 @@ package main.back.game.DotsAndBoxes;
 
 import main.back.game.Game;
 import main.back.account.Player;
+import main.back.game.GameLog;
+import main.back.game.Result;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -116,6 +119,7 @@ public class DotsAndBoxes extends Game {
         edges.add(new Edge(new Vertex(x1, y1), new Vertex(x2, y2), turn));
         madeAnyBoxes(x1, y1, x2, y2);
     }
+
 
     /*public String makeTable() {
         int i = 1;

@@ -46,6 +46,7 @@ function dotsAndBoxes(oppUsername) {
 init = function (gameID, oppUsername) {
     const canvas = document.getElementById('DB-canvas'),
         context = canvas.getContext('2d'),
+        backButton = document.getElementById('backButton'),
         // gameId = gameID,
         WIDTH = 0.65 * window.innerHeight * 0.97,
         HEIGHT = 0.65 * window.innerHeight * 0.97 + 50,
@@ -396,12 +397,28 @@ init = function (gameID, oppUsername) {
         }
     }
 
+    function end() {
+        let ans = prompt("Do you want to leave ? " +
+            "If game is not over you'll forfeit the game", "no");
+        if (ans != null && ans === 'yes') {
+            const connection = new WebSocket('ws://127.0.0.1:4444');
+            connection.onopen = function ( ) {
+                connection.send("game dots end " + gameID);
+            };
+            connection.onmessage = function (e) {
+                prompt(e.data);
+            }
+        }
+    }
+
 
 //mouse move event
     canvas.addEventListener('mousemove', mousemove_handler);
 
 //mouse click event
     canvas.addEventListener('click', click_handler);
+
+    backButton.addEventListener('click', end);
 
 //loop function
     function gameLoop() {
