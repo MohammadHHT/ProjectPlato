@@ -14,7 +14,7 @@
 }
 
 section .games-menu, section .all-game, section .game-page {
-    padding: calc(0.03 * 97vh);
+    padding: 0 calc(0.03 * 97vh);
 }
 
 section .all-game, section .game-page {
@@ -31,7 +31,7 @@ section .all-game, section .game-page {
     align-items: center;
     position: relative;
     overflow: hidden;
-    margin: 0 0 calc(0.03 * 97vh) 0;
+    margin: calc(0.03 * 97vh) 0;
 }
 
 section .all-game {
@@ -74,6 +74,10 @@ section .game-page {
 .game {
     display: block;
     width: 100%;
+}
+
+.game span, .gameLog span, .level-number span, .game-info span, .history-info span, .player-avatar-rank span, .game-time {
+    font-family: 'Product Bold';
 }
 
 .battle-sea-photo {
@@ -319,6 +323,7 @@ section .game-page {
     background-color: #ee303c;
     color: #ffffff;
     font-size: 14px;
+    font-family: 'Product Bold';
 }
 
 .join-button:hover {
@@ -365,6 +370,7 @@ section .game-page {
 .player-avatar-rank span {
     margin-top: 13px;
     margin-left: 8px;
+    font-size: 18px;
 }
 
 .score {
@@ -392,6 +398,7 @@ section .game-page {
     font-family: 'Product Bold';
     margin-bottom: 6px;
     font-size: 18px;
+    margin-top: 0;
 }
 
 .DB-content div p, .SB-content div p {
@@ -401,6 +408,7 @@ section .game-page {
     text-justify: inter-word;
     margin-bottom: 4px;
     line-height: 120%;
+    margin-top: 2px;
 }
 
 .DB-content div, .SB-content div {

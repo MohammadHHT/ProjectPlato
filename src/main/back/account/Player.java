@@ -12,6 +12,7 @@ public class Player extends User {
     private int level;
     private int score;
     private int wins;
+    private int defeats;
     private double money;
     private Set<String> friends;
     private Set<String> friendRequest;
@@ -30,6 +31,7 @@ public class Player extends User {
         this.level = 1;
         this.score = 0;
         this.wins = 0;
+        this.defeats = 0;
         this.money = 0;
         this.friends = new HashSet<>();
         this.friendRequest = new HashSet<>();
@@ -44,6 +46,7 @@ public class Player extends User {
             Player.players.put(p.getUsername(), p);
         }
     }
+
 
     public static HashMap<String, Player> getPlayers() {
         return players;
@@ -75,6 +78,10 @@ public class Player extends User {
 
     public void addFriendRequest(String username) {
         friendRequest.add(username);
+    }
+
+    public Set<String> getFriendRequest() {
+        return friendRequest;
     }
 
     public boolean acceptFriendRequest(String username) {
@@ -136,10 +143,21 @@ public class Player extends User {
 
     public void addWins() {
         this.wins++;
+        this.level++;
+        this.score += 10;
+    }
+
+    public void addDefeats() {
+        this.defeats++;
+        this.score -= 7;
     }
 
     public int getWins() {
         return wins;
+    }
+
+    public int getDefeats() {
+        return defeats;
     }
 
     @Override
