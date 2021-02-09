@@ -2,6 +2,7 @@ package main.back.controller;
 
 import main.back.account.Player;
 import main.back.account.User;
+import main.back.game.DotsAndBoxes.DotsAndBoxes;
 import main.back.game.Game;
 import main.back.game.GameLog;
 import main.back.game.SeaBattle.SeaBattle;
@@ -77,6 +78,10 @@ interface DotsCommand {
                 return join(tokens[1], tokens[2], Long.parseLong(tokens[3]), conn);
             case "gamelogs":
                 return gameLogs("dotsandboxes", tokens[1], tokens[2]);
+            case "line":
+                return occupy(Long.parseLong(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]));
+            case "turn":
+                return turn(Long.parseLong(tokens[1]));
             default:
                 return "failed command";
         }
@@ -84,7 +89,7 @@ interface DotsCommand {
 
     static String gameLogs(String game, String username, String token) {
 
-        Player player =Player.getPlayers().get(username);
+        Player player = Player.getPlayers().get(username);
         StringBuilder message = new StringBuilder(player.getLevel() + " " + player.getWins() + " " + player.getDefeats() + " " + player.getScore() + "@");
         for (GameLog log : GameLog.gameLogs.values()) {
             if (log.getGame().equals(game)) {
@@ -105,10 +110,51 @@ interface DotsCommand {
     }
 
     static String create(String username, String token, WebSocket conn) {
+        if (User.getUsers().get(username).getToken().equals(token))
+            return String.valueOf(new DotsAndBoxes(Player.getPlayers().get(username)).getGameID());
         return null;
     }
 
+
     static String join(String username, String token, long gameID, WebSocket conn) {
+        if (User.getUsers().get(username).getToken().equals(token)) {
+            DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
+            if (dotsAndBoxes != null) {
+                dotsAndBoxes.join(Player.getPlayers().get(username));
+                return "joined";
+            }
+        }
+        return null;
+    }
+
+    static String occupy(long gameID, int x1, int y1, int x2, int y2) {
+        /*if (x1 == x2) {
+            if (y1 == y2 + 1) {
+                y1--;
+                y2++;
+            } else if (!(y1 == y2 - 1))
+                return "you can’t draw a line between these two";
+        } else if (y1 == y2) {
+            if (x1 == x2 + 1) {
+                x1--;
+                x2++;
+            } else if (!(x1 == x2 - 1))
+                return "you can’t draw a line between these two";
+        } else
+            return "you can’t draw a line between these two";*/
+
+        DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
+        if (dotsAndBoxes != null) {
+            if (dotsAndBoxes.isEdgeAvailable(x1, y1, x2, y2)) {
+                dotsAndBoxes.occupy(x1, y1, x2, y2);
+            } else
+                return "Line drawn";
+        }
+        return null;
+    }
+
+    static String turn(long gameID) {
+        DotsAndBoxes.getDotsAndBoxes().get(gameID).turn();
         return null;
     }
 }

@@ -31,6 +31,8 @@ public interface UserCommand {
                 return joinEvent(tokens[1], tokens[2], Long.parseLong(tokens[3]));
             case "users":
                 return users(tokens[1], tokens[2]);
+            case "isfriend" :
+                return isFriend(tokens[1], tokens[2], tokens[3]);
             default:
                 return "failed command";
         }
@@ -150,6 +152,15 @@ public interface UserCommand {
             }
             System.out.println(users.toString().trim());
             return users.toString().trim();
+        }
+        return null;
+    }
+
+    static String isFriend(String username, String token, String oppUsername) {
+        if (User.getUsers().get(username).getToken().equals(token)){
+            if (Player.getPlayers().get(username).getFriends().contains(oppUsername)) {
+                return "yes";
+            } else return "no";
         }
         return null;
     }

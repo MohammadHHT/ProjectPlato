@@ -5,7 +5,6 @@ import main.back.account.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class DotsAndBoxes extends Game {
     private static HashMap<Long, DotsAndBoxes> dotsAndBoxes;
@@ -63,7 +62,7 @@ public class DotsAndBoxes extends Game {
         return true;
     }
 
-    public boolean madeAnyBoxes(int x1, int y1, int x2, int y2) {
+    public void madeAnyBoxes(int x1, int y1, int x2, int y2) {
         boolean e1 = false, e2 = false, e3 = false, e4 = false, e5 = false, e6 = false;
         if (x1 == x2) {
             for (Edge edge : edges) {
@@ -108,17 +107,17 @@ public class DotsAndBoxes extends Game {
                 else
                     guestScore++;
             }
-            return true;
+            return;
         }
         playerMovedInThisTurn = true;
-        return false;
     }
 
     public void occupy(int x1, int y1, int x2, int y2) {                                // no need to check that if edge is empty. this will be done in DotsAndBoxesMenu
         edges.add(new Edge(new Vertex(x1, y1), new Vertex(x2, y2), turn));
+        madeAnyBoxes(x1, y1, x2, y2);
     }
 
-    public String makeTable() {
+    /*public String makeTable() {
         int i = 1;
         StringBuilder stringBuilder = new StringBuilder();
         for (Edge edge : edges) {
@@ -126,7 +125,7 @@ public class DotsAndBoxes extends Game {
             i++;
         }
         return stringBuilder.toString();
-    }
+    }*/
 
     public Player winByForfeit() {
         if (turn == guest)
@@ -147,7 +146,7 @@ public class DotsAndBoxes extends Game {
 
     @Override
     public void join(Player guest) {
-
+        this.guest = guest;
     }
 
     public Player getTurn() {

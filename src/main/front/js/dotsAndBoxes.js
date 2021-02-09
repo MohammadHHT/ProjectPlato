@@ -1,27 +1,55 @@
-function DotsAndBoxes() {
+function getOppUsername() {
+
+    let opp = prompt("Please enter your friend username");
+    if (opp != null) {
+        const connection = new WebSocket('ws://127.0.0.1:4444');
+        connection.onopen = function ( ) {
+            connection.send("user isfriend " + username + ' ' + token + ' ' + opp);
+        };
+        connection.onmessage = function (e) {
+            if (e.data === 'yes') {
+                dotsAndBoxes(opp);
+            } else {
+                alert('you dont have ' + opp + ' in your friends');
+            }
+        }
+    }
+
+}
+
+
+
+function dotsAndBoxes(oppUsername) {
 
     const connection = new WebSocket('ws://127.0.0.1:4444');
-
+    let gameID = '0000';
     connection.onopen = function () {
         connection.send('game dots create ' + username + ' ' + token);
     };
     connection.onmessage = function (e) {
-        document.querySelector()
-
-        this.init(e.data);
-    }
-
-
+        document.querySelector('#usernamePlayer1').innerHTML = '<span>' + username + '</span>';
+        document.querySelector('#usernamePlayer2').innerHTML = '<span>' + oppUsername + '</span>';
+        gameID = e.data;
+        connection.close();
+    };
+    connection.onopen = function () {
+        connection.send('game dots join ' + oppUsername);
+    };
+    connection.onopen = function (e) {
+        if (e.data === 'joined') {
+            init(gameID, oppUsername);
+        }
+        connection.close();
+    };
 }
 
-DotsAndBoxes.prototype.init = function (gameID) {
-    const canvas = document.getElementById('DBcanvas'),
+init = function (gameID, oppUsername) {
+    const canvas = document.getElementById('DB-canvas'),
         context = canvas.getContext('2d'),
-        gameId = gameID;
-    // connection = new WebSocket('ws://127.0.0.1:4444'),
-    WIDTH = 0.65 * window.innerHeight * 0.97,
+        // gameId = gameID,
+        WIDTH = 0.65 * window.innerHeight * 0.97,
         HEIGHT = 0.65 * window.innerHeight * 0.97 + 50,
-        GRID_SIZE = 8,
+        GRID_SIZE = 7,
         CELL_SIZE = WIDTH / GRID_SIZE;
     canvas.width = WIDTH;
     canvas.height = HEIGHT - 50;
@@ -113,7 +141,7 @@ DotsAndBoxes.prototype.init = function (gameID) {
             if (this.sideBot.isSelected) {
                 this.drawBoxSide(boxSides.BOT, getPlayerColor(this.sideBot.owner));
             }
-        }
+        };
 
         this.drawBoxSide = function (side, sideColor) {
 
@@ -137,23 +165,57 @@ DotsAndBoxes.prototype.init = function (gameID) {
             if (this.highLight == null) {
                 return;
             }
-
+            const connection = new WebSocket('ws://127.0.0.1:4444');
+            const self = this;
             switch (this.highLight) {
                 case boxSides.TOP:
-                    this.sideTop.owner = isPlayer1Turn;
-                    this.sideTop.isSelected = true;
+
+                    connection.onopen = function () {
+                        connection.send('game dots line ' + gameID + ' ' + String(this.row) + ' ' + String(this.col) + ' ' + String(this.row) + ' ' + String(this.col++));
+                    };
+                    connection.onmessage = function (e) {
+                        if (e.data === 'Line drawn') {
+                            self.sideTop.owner = isPlayer1Turn;
+                            self.sideTop.isSelected = true;
+                        }
+                    };
+
                     break;
                 case boxSides.LEFT:
-                    this.sideLeft.owner = isPlayer1Turn;
-                    this.sideLeft.isSelected = true;
+                    connection.onopen = function () {
+                        connection.send('game dots line ' + gameID + ' ' + String(this.row) + ' ' + String(this.col) + ' ' + String(this.row++) + ' ' + String(this.col));
+                    };
+                    connection.onmessage = function (e) {
+                        if (e.data === 'Line drawn') {
+                            self.sideLeft.owner = isPlayer1Turn;
+                            self.sideLeft.isSelected = true;
+                        }
+                    };
+
                     break;
                 case boxSides.RIGHT:
-                    this.sideRight.owner = isPlayer1Turn;
-                    this.sideRight.isSelected = true;
+                    connection.onopen = function () {
+                        connection.send('game dots line ' + gameID + ' ' + String(this.row) + ' ' + String(this.col++) + ' ' + String(this.row++) + ' ' + String(this.col++));
+                    };
+                    connection.onmessage = function (e) {
+                        if (e.data === 'Line drawn') {
+                            self.sideRight.owner = isPlayer1Turn;
+                            self.sideRight.isSelected = true;
+                        }
+                    };
+
                     break;
                 case boxSides.BOT:
-                    this.sideBot.owner = isPlayer1Turn;
-                    this.sideBot.isSelected = true;
+                    connection.onopen = function () {
+                        connection.send('game dots line ' + gameID + ' ' + String(this.row++) + ' ' + String(this.col) + ' ' + String(this.row++) + ' ' + String(this.col++));
+                    };
+                    connection.onmessage = function (e) {
+                        if (e.data === 'Line drawn') {
+                            self.sideBot.owner = isPlayer1Turn;
+                            self.sideBot.isSelected = true;
+                        }
+                    };
+
                     break;
             }
             this.highLight = null;
@@ -257,6 +319,13 @@ DotsAndBoxes.prototype.init = function (gameID) {
 
         if (!isBoxFilled) {
             isPlayer1Turn = !isPlayer1Turn;
+
+            const connection = new WebSocket('ws://127.0.0.1:4444');
+            connection.onopen = function () {
+                connection.send('game dots turn');
+            };
+            connection.close();
+
             if (document.getElementById("scorebg").style.backgroundColor === 'blue')
                 document.getElementById("scorebg").style.backgroundColor = 'green';
             else
@@ -347,4 +416,4 @@ DotsAndBoxes.prototype.init = function (gameID) {
 
     gameLoop();
 
-}
+};
