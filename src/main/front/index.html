@@ -14,6 +14,9 @@
     <link rel="stylesheet" type="text/css" href="css/seabattle.css" />
     <link rel="stylesheet" type="text/css" href="css/dotsAndBoxes.css" />
     <link rel="stylesheet" type="text/css" href="css/gamesPage.css" />
+    <link rel="stylesheet" type="text/css" href="css/inbox.css" />
+    <link rel="stylesheet" type="text/css" href="css/message.css" />
+    <link rel="stylesheet" type="text/css" href="css/suggestion.css" />
     <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button,
@@ -142,7 +145,7 @@
                 </form>
             </section>
 
-            <section class="login page">
+            <section class="login">
                 <h1>SIGN IN</h1>
                 <form action="" method="get" autocomplete="off">
                     <ol>
@@ -324,6 +327,57 @@
                 </section>
             </section>
 
+            <section class="suggestion">
+                <div class="all-games">
+                    <div class="games-title"><span>games</span></div>
+                    <div class="games">
+                        <div class="battle-sea-sugg">
+                            <div class="game-pic">
+                                <img src="jpg/sea%20battle.jpg" alt="sea Battle">
+                            </div>
+                            <div class="select-game" id="sea-battle-select" onclick="selectSeaBattle()"><span id="SB-select-button">Select</span></div>
+                        </div>
+                        <div class="dots-and-boxes-sugg">
+                            <div class="game-pic">
+                                <img src="jpg/dots%20and%20boxes.jpeg" alt="Dots And Boxes">
+                            </div>
+                            <div class="select-game" id="dots-and-boxes-select" onclick="selectDotsAndBoxes()"><span id="DB-select-button">Select</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="all-players">
+                    <div class="player-title"><span>Players</span></div>
+                    <div class="suggestion-buttons">
+                        <div class="send-suggestion" id="send-suggestion-button" onclick="sendSuggestion()">Send</div>
+                        <div class="unSend-suggestion" id="unSend-button" onclick="loadAllPlayer()">Unsend</div>
+                    </div>
+                    <div class="players-area">
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="player-message">
+                <div class="player-suggestion">
+                    <div class="suggestion-title"><span>suggestions</span></div>
+                    <div class="games">
+                        <small id="suggested-game-situation">No games suggested</small>
+                        <div class="battle-sea">
+                            <img id="sea-battle-suggestion-pic" src="jpg/sea%20battle.jpg" alt="sea Battle">
+                        </div>
+                        <div class="dots-and-boxes">
+                            <img id="dots-and-boxes-suggestion-pic" src="jpg/dots%20and%20boxes.jpeg" alt="Dots And Boxes">
+                        </div>
+                    </div>
+                </div>
+                <div class="request">
+                    <div class="request-title"><span>friend request</span></div>
+                    <div class="friend-request-container">
+
+                    </div>
+                </div>
+            </section>
+
             <section class="battle">
                 <img src="jpg/sea battle wallpaper.jpg" width="110%" height="110%"
                     style="filter: blur(12px); position: absolute; left: calc(-0.035 * 97vh); top: calc(-0.05 * 97vh);">
@@ -486,7 +540,7 @@
                 <div><canvas id="DB-canvas"></canvas></div>
             </section>
 
-            <section class="games-menu">
+            <section class="games-menu page">
                 <section class="all-game" id="allGameMenu">
                     <div class="game-title"><span>games</span></div>
                     <div class="game">
@@ -574,7 +628,7 @@
                             <div class="history-info">
                                 <span>Sea Battle</span>
                                 <div>
-                                    <div class="opponent-name">' + username[i]</div>
+                                    <div class="opponent-name">Friend 1</div>
                                     <div class="game-result">&nbsp; Won!</div>
                                 </div>
                             </div>
@@ -836,6 +890,60 @@
                     <div class="run-game" onclick="getOppUsername()">Create Game</div>
                 </section>
             </section>
+
+            <section class="admin-inbox">
+                <div class="chatBox">
+                    <div  class="inboxHeader">
+                        <p id="chat-username">Player 1</p>
+                    </div>
+                    <div class="messageArea">
+                        <div class="messageHistory">
+                            <div id="messageDate">
+                                <span id="month">January</span>
+                                <span id="day">24</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="messageField">
+                        <div>
+                            <textarea id="text-area" placeholder="Say hello..."></textarea>
+                        </div>
+                        <div id="send-button">
+                            <svg height="512pt" viewBox="0 -18 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m0 475.445312 59.078125-237.714843-59.078125-237.730469 512 237.730469zm0 0" fill="#ffcb5a"/><path d="m0 475.445312 512-237.714843h-452.921875zm0 0" fill="#fba61f"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="inbox">
+                <div class="chatBox">
+                    <div class="inboxHeader">
+                        <p>PlatoBot</p>
+                    </div>
+                    <div class="messageArea">
+                        <div class="messageHistory">
+                            <div id="message-date">
+                                <span id="p-month">January</span>
+                                <span id="p-day">24</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="messageField">
+                        <div>
+                            <textarea id="message-content" placeholder="Say hello..."></textarea>
+                        </div>
+                        <div id="send">
+                            <svg height="512pt" viewBox="0 -18 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m0 475.445312 59.078125-237.714843-59.078125-237.730469 512 237.730469zm0 0" fill="#ffcb5a"/><path d="m0 475.445312 512-237.714843h-452.921875zm0 0" fill="#fba61f"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </section>
     <script src="js/seabattle.js"></script>
@@ -846,6 +954,7 @@
     <script src="js/common.js"></script>
     <script src="js/dotsAndBoxes.js"></script>
     <script src="js/gameMenu.js"></script>
+    <script src="js/suggestion.js"></script>
     <script>
         var header = document.querySelector('.account header');
         var second = document.querySelector('.account header .second');

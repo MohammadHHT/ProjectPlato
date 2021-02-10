@@ -71,6 +71,21 @@ section .game-page {
     display: none;
 }
 
+.game-title {
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Product Bold';
+    font-size: 3vh;
+    line-height: 1em;
+    padding: 2vh 0;
+    margin: 0;
+    background-color: #122948;
+    color: rgb(239, 233, 224);
+    margin-bottom: 1vh;
+    text-transform: uppercase;
+}
+
 .game {
     display: block;
     width: 100%;

@@ -52,7 +52,7 @@ section .player-message {
     overflow-x: hidden;
 }
 
-.suggestion-title, .request-title, .game-title {
+.suggestion-title, .request-title {
     border-radius: 6px;
     width: 100%;
     box-sizing: border-box;
@@ -95,14 +95,14 @@ section.player-message .request::-webkit-scrollbar {
     margin: auto;
     font-size: 17px;
     color: #bb2d44;
-    display: none;
+    display: block;
 }
 
 .battle-sea img, .dots-and-boxes img {
     width: 150px;
     height: 95px;
     border-radius: 8px;
-    display: block;
+    display: none;
 }
 
 .battle-sea img:hover, .dots-and-boxes img:hover {

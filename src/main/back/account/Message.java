@@ -1,6 +1,7 @@
 package main.back.account;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -12,7 +13,7 @@ public class Message {
     private long messageID;
     private String player;
     private String message;
-    private LocalDate date;
+    private LocalDateTime date;
 
     static {
         messages = new HashMap<>();
@@ -23,7 +24,8 @@ public class Message {
         messages.put(messageID, this);
         this.player = player;
         this.message = message;
-        date = LocalDate.now();
+        date = LocalDateTime.now();
+        Player.getPlayers().get(player).getMessages().add(messageID);
     }
 
     public void addMessages(ArrayList<Message> messages) {
@@ -42,5 +44,9 @@ public class Message {
 
     public String getMessage() {
         return message;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
     }
 }
