@@ -86,13 +86,6 @@ function sendSuggestion() {
             checkedValue = document.querySelectorAll('.regular-checkbox:checked')[i].value;
             usernameForSendSuggestion[i] = checkedValue;
         }
-
-
-
-        for (let i = 0; i < usernameForSendSuggestion.length; i++) {
-            console.log(usernameForSendSuggestion[i]);
-        }
-
     } else {
         alert("Please select one game for suggestion!");
     }
@@ -127,6 +120,52 @@ function sendSuggestion() {
             alert('All suggestions sent :)');
         } else {
             alert('Server can not send suggestion!');
+        }
+        connection.close();
+    }
+}
+
+function unSendSuggestion() {
+    let selectedPlayer;
+    let usernameForUnSendSuggestion = [];
+
+    if (!(isSeaBattleSelected && isDotsAndBoxesSelected)) {
+        for (let i = 0; i < document.querySelectorAll('.regular-checkbox:checked').length; i++) {
+            selectedPlayer = document.querySelectorAll('.regular-checkbox:checked')[i].value;
+            usernameForUnSendSuggestion[i] = selectedPlayer;
+        }
+    } else {
+        alert("Please select one game for suggestion!");
+    }
+
+    const connection = new WebSocket('ws://127.0.0.1:4444');
+
+    if (isSeaBattleSelected) {
+        connection.onopen = function () {
+            for (let i = 0; i< usernameForUnSendSuggestion.length; i++) {
+                connection.send('user sendSuggestion ' + self.username + ' ' + self.token + ' ' + usernameForUnSendSuggestion[i] + ' ' + 'BattleSea');
+
+            }
+        };
+    } else if (isDotsAndBoxesSelected) {
+        connection.onopen = function () {
+            for (let i = 0; i< usernameForUnSendSuggestion.length; i++) {
+                connection.send('user sendSuggestion ' + self.username + ' ' + self.token + ' ' + usernameForUnSendSuggestion[i] + ' ' + 'DotsAndBoxes');
+
+            }
+        };
+    } else {
+        alert('Please select a game first!');
+    }
+
+
+    connection.onmessage = function (e) {
+        let data = e.data.split(' ');
+
+        if (data.length === 2) {
+            alert('All suggestions unsent :)');
+        } else {
+            alert('Server can not unSend suggestion!');
         }
         connection.close();
     }

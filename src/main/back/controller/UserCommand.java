@@ -42,6 +42,8 @@ public interface UserCommand {
                 return allUsers(tokens[1], tokens[2]);
             case "sendSuggestion":
                 return addSuggestion(tokens[1], tokens[2], tokens[3], tokens[4]);
+            case "unSendSuggestion":
+                return deleteSendSuggestion(tokens[1], tokens[2], tokens[3], tokens[4]);
             case "loadSuggestedGame":
                 return loadSuggestedGame(tokens[1], tokens[2]);
             case "loadFriendsRequest":
@@ -268,6 +270,23 @@ public interface UserCommand {
             return "send successfully";
         } else {
             return "send suggestions unsuccessfully";
+        }
+    }
+
+    static String deleteSendSuggestion(String username, String token, String playerUsername, String game) {
+        User user = User.getUsers().get(username);
+        Player player = Player.getPlayers().get(playerUsername);
+        if (user.getToken().equals(token)) {
+            for (Long suggestionID : player.getSuggestions()) {
+                if (Suggestion.getSuggestions().containsKey(suggestionID)) {
+                    if (Suggestion.getSuggestions().get(suggestionID).getGame().equals(game)) {
+                        player.getSuggestions().remove(suggestionID);
+                    }
+                }
+            }
+            return "unSend successfully";
+        } else {
+            return "unSend suggestions unsuccessfully";
         }
     }
 
