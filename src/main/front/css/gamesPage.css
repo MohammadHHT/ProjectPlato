@@ -13,11 +13,11 @@
     font-family: 'Questrial';
 }
 
-section .games-menu, section .all-game, section .game-page {
+section .games-menu, section .all-game, section .SB-game-page, section .DB-game-page {
     padding: 0 calc(0.03 * 97vh);
 }
 
-section .all-game, section .game-page {
+section .all-game, section .SB-game-page, section .DB-game-page {
     height: calc(0.690 * 97vh);
     width: 100%;
     border-radius: 9.4px;
@@ -38,13 +38,16 @@ section .all-game {
     height: auto;
 }
 
-section .game-page {
+section .DB-game-page, section .SB-game-page {
     height: calc(0.940 * 97vh);
     display: none;
 }
 
 
-.history, .leaderboard, .How-to-Play, .availableGames {
+section .games-menu .SB-game-page .history, section .games-menu .DB-game-page .history,
+section .games-menu .SB-game-page .leaderboard, section .games-menu .DB-game-page .leaderboard,
+section .games-menu .SB-game-page .How-to-Play, section .games-menu .DB-game-page .How-to-Play,
+section .games-menu .SB-game-page .availableGames, section .games-menu .DB-game-page .availableGames {
     height: calc(0.600 * 97vh);
     width: 100%;
     box-shadow: 0 5px 20px rgb(0, 0, 0, 0.08);
@@ -63,7 +66,9 @@ section .game-page {
     border-radius: 0 0 9.4px 9.4px;
 }
 
-.history, .leaderboard, .How-to-Play {
+section .games-menu .SB-game-page .history, section .games-menu .DB-game-page .history,
+section .games-menu .SB-game-page .leaderboard, section .games-menu .DB-game-page .leaderboard,
+section .games-menu .SB-game-page .How-to-Play, section .games-menu .DB-game-page .How-to-Play {
     display: none;
 }
 
@@ -86,12 +91,12 @@ section .game-page {
     text-transform: uppercase;
 }
 
-.game {
+section .all-game .game {
     display: block;
     width: 100%;
 }
 
-.game span, .gameLog span, .level-number span, .game-info span, .history-info span, .player-avatar-rank span, .game-time {
+section .all-game .game span, .gameLog span, .level-number span, .game-info span, .history-info span, .player-avatar-rank span, .game-time {
     font-family: 'Product Bold';
 }
 
@@ -139,7 +144,7 @@ section .game-page {
     color: #ffffff;
 }
 
-.container {
+section .DB-game-page .container, section .SB-game-page .container {
     display: block;
     margin-left: 8px;
     margin-top: 15px;
@@ -169,14 +174,14 @@ section .game-page {
     color: #ffffff;
 }
 
-.progress {
+section .DB-game-page .container .progress, section .SB-game-page .container .progress {
     padding: 6px;
     background: rgba(0, 0, 0, 0.25);
     border-radius: 6px;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
 }
 
-.progress-bar {
+section .DB-game-page .container .progress-bar, section .SB-game-page .container .progress-bar {
     height: 18px;
     background-color: #ee303c;
     border-radius: 4px;
@@ -184,7 +189,7 @@ section .game-page {
     transition-property: width, background-color;
 }
 
-.progress-striped .progress-bar {
+section .DB-game-page .container .progress-striped .progress-bar, section .SB-game-page .container .progress-striped .progress-bar {
     background-color: #FCBC51;
     width: 60%;
     background-image: linear-gradient(
