@@ -36,8 +36,14 @@ public interface UserCommand {
                 return joinEvent(tokens[1], tokens[2], Long.parseLong(tokens[3]));
             case "users":
                 return users(tokens[1], tokens[2]);
+            case "user":
+                return user(tokens[1], tokens[2], tokens[3]);
             case "friends":
-                return friends(tokens[1], tokens[2]);
+                return friends(tokens[1], tokens[2], tokens[3]);
+            case "addfriend":
+                return addFriend(tokens[1], tokens[2], tokens[3]);
+            case "deletefriend":
+                return deleteFriend(tokens[1], tokens[2], tokens[3]);
             case "isfriend" :
                 return isFriend(tokens[1], tokens[2], tokens[3]);
             case "allUsers":
@@ -156,8 +162,11 @@ public interface UserCommand {
         }
     }
 
-    static String reload(String username, String password) {
-        User.getUsers().get(username).logout();
+    static String reload(String username, String token) {
+        User user = User.getUsers().get(username);
+        if (user.getToken().equals(token)) {
+            user.logout();
+        }
         return null;
     }
 
@@ -233,14 +242,36 @@ public interface UserCommand {
         return null;
     }
 
-    static String friends(String username, String token) {
-        Player player = Player.getPlayers().get(username);
-        if (player.getToken().equals(token)) {
+    static String user(String username, String token, String player) {
+        Player p = Player.getPlayers().get(player);
+        if (User.getUsers().get(username).getToken().equals(token)) {
+            return p.toString() + " " + (Player.getPlayers().get(username).getFriends().contains(player) ? "REQUESTED" : "REQUEST");
+        }
+        return null;
+    }
+
+    static String friends(String username, String token, String user) {
+        if (Player.getPlayers().get(username).getToken().equals(token)) {
             StringBuilder friends = new StringBuilder();
-            for (String s : player.getFriends()) {
+            for (String s : Player.getPlayers().get(user).getFriends()) {
                 friends.append(s).append(" ");
             }
             return friends.toString().trim();
+        }
+        return null;
+    }
+
+    static String addFriend(String username, String token, String friend) {
+        if (Player.getPlayers().get(username).getToken().equals(token)) {
+            Player.getPlayers().get(friend).addFriendRequest(username);
+        }
+        return null;
+    }
+
+    static String deleteFriend(String username, String token, String friend) {
+        Player player = Player.getPlayers().get(username);
+        if (player.getToken().equals(token)) {
+            player.getFriends().remove(friend);
         }
         return null;
     }

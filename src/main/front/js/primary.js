@@ -3,6 +3,7 @@ navigation[4].addEventListener('click', function () {
     navigation[3].classList.add('show');
     navigation[5].classList.remove('show');
     navigation[6].classList.add('show');
+    account(true, username);
     next_page('primary', 'account');
 });
 
@@ -59,7 +60,7 @@ function update_list(value) {
 
         for (let i = 0; i < users.length; i++) {
             if (users[i].length > 0) {
-                list.insertAdjacentHTML('beforeend', '<li class="item" name="' + users[i] + '"><img src = "avatar/avatar (' + Math.floor(Math.random() * 50 + 1) + ').svg"><h2>' + users[i] + '</h2></li>');
+                list.insertAdjacentHTML('beforeend', '<li class="item" onclick="go_to_account(\'' + users[i] + '\')" name="' + users[i] + '"><img src = "avatar/avatar (' + Math.floor(Math.random() * 50 + 1) + ').svg"><h2>' + users[i] + '</h2></li>');
             }
         }
         if (users.length == 1 && users[0].length > 0) {
@@ -75,6 +76,11 @@ function update_list(value) {
     }, 300);
         connection.close();
     }
+}
+
+function go_to_account(username) {
+    account(false, username);
+    next_page('primary', 'account');
 }
 
 function update_suggestions() {
