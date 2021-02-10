@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Player extends User {
+public class Player extends User implements Comparable<Player>{
 
     private static HashMap<String, Player> players;
 
@@ -163,5 +163,10 @@ public class Player extends User {
     @Override
     public String toString() {
         return super.toString() + " " + gameLogs.size() + " " + wins;
+    }
+
+    @Override
+    public int compareTo(Player player) {
+        return this.score-player.score;
     }
 }

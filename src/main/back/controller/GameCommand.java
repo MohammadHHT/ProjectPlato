@@ -9,7 +9,7 @@ import main.back.game.Result;
 import main.back.game.SeaBattle.SeaBattle;
 import org.java_websocket.WebSocket;
 
-import java.util.Arrays;
+import java.util.*;
 
 public interface GameCommand {
     static String resolve(String[] tokens, WebSocket conn) {
@@ -91,25 +91,29 @@ interface DotsCommand {
     }
 
     static String gameLogs(String game, String username, String token) {
-
-        Player player = Player.getPlayers().get(username);
-        StringBuilder message = new StringBuilder(player.getLevel() + " " + player.getWins() + " " + player.getDefeats() + " " + player.getScore() + "@");
-        for (GameLog log : GameLog.gameLogs.values()) {
-            if (log.getGame().equals(game)) {
-                switch (log.getResult()) {
-                    case WIN:
-                        message.append(log.getHost()).append(" ").append(log.getDate()).append("/");
-                    case DEFEAT:
-                        message.append(log.getGuest()).append(" ").append(log.getDate()).append("/");
+        if (User.getUsers().get(username).getToken().equals(token)) {
+            Player player = Player.getPlayers().get(username);
+            StringBuilder message = new StringBuilder(player.getLevel() + " " + player.getWins() + " " + player.getDefeats() + " " + player.getScore() + "@");
+            for (GameLog log : GameLog.gameLogs.values()) {
+                if (log.getGame().equals(game)) {
+                    switch (log.getResult()) {
+                        case WIN:
+                            message.append(log.getHost()).append(" ").append(log.getDate()).append("/");
+                        case DEFEAT:
+                            message.append(log.getGuest()).append(" ").append(log.getDate()).append("/");
+                    }
                 }
             }
+            List<Player> players = (List<Player>) Player.getPlayers().values();
+            Collections.sort(players);
+
+            for (Player user : players) {
+                message.append(user.getUsername()).append(" ").append(user.getScore()).append("/");
+            }
+            return message.toString();
         }
-        message.append("@");
-        for (Player user : Player.getPlayers().values()) {
-            message.append(user.getUsername()).append(" ").append(user.getScore()).append("/");
-        }
+        return null;
 //        return "5 15 2 1200@mamad 12:16am/qoli 05:54pm@ali 254/mahdi 658";
-        return message.toString();
     }
 
     static String create(String username, String token, WebSocket conn) {
