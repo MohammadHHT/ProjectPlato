@@ -1,4 +1,8 @@
-document.querySelectorAll('aside nav')[5].addEventListener('click', function () {
+navigation[5].addEventListener('click', function () {
+    navigation[5].classList.remove('show');
+    navigation[3].classList.remove('show');
+    navigation[4].classList.add('show');
+    navigation[6].classList.add('show');
     if (player) {
         loadSuggestedGames();
         next_page('primary', 'player-message');

@@ -1,7 +1,7 @@
 navigation[4].addEventListener('click', function () {
     navigation[4].classList.remove('show');
     navigation[3].classList.add('show');
-    navigation[5].classList.add('show');
+    navigation[5].classList.remove('show');
     navigation[6].classList.add('show');
     next_page('primary', 'account');
 });

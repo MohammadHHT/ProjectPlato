@@ -186,10 +186,12 @@ function gameMenuInit(game) {
 }
 
 
-document.querySelectorAll('aside nav')[3].addEventListener('click', function () {
-    document.querySelectorAll('aside nav')[1].classList.remove('show');
-    document.querySelectorAll('aside nav')[2].classList.remove('show');
-    document.querySelectorAll('aside nav')[3].classList.remove('show');
+navigation[3].addEventListener('click', function () {
+    navigation[1].classList.remove('show');
+    navigation[2].classList.remove('show');
+    navigation[3].classList.remove('show');
+    navigation[5].classList.remove('show');
+    navigation[6].classList.add('show');
 
     next_page('primary', 'games-menu');
 });
