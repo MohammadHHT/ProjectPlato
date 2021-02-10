@@ -72,6 +72,7 @@ section .admin-inbox .chatBox {
     border-radius: 10px;
     opacity: 0.75;
     color: white;
+    display: none;
 }
 
 .messageHistory div span {
@@ -153,6 +154,7 @@ section .admin-inbox .chatBox {
 
 .messageField div svg:hover {
     opacity: 0.7;
+    cursor: pointer;
 }
 
 .messageArea div svg {
@@ -164,6 +166,13 @@ section .admin-inbox .chatBox {
 .avatar-message {
     display: flex;
     margin-top: 12px;
+}
+
+.player-avatar-message {
+    display: flex;
+    margin-top: 12px;
+    justify-content: flex-end;
+    align-content: flex-end;
 }
 
 .admin-avatar-message {
@@ -200,6 +209,12 @@ section .admin-inbox .chatBox {
     overflow: hidden;
     margin-left: 6px;
     opacity: 0.9;
+}
+
+.player-messageBox {
+    border-radius: 8px 2px 8px 8px;
+    margin-left: 0;
+    margin-right: 6px;
 }
 
 .admin-messageBox {

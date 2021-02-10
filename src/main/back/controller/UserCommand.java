@@ -1,9 +1,6 @@
 package main.back.controller;
 
-import main.back.account.Admin;
-import main.back.account.Player;
-import main.back.account.Suggestion;
-import main.back.account.User;
+import main.back.account.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -31,6 +28,12 @@ public interface UserCommand {
                 return acceptFriend(tokens[1], tokens[2], tokens[3]);
             case "declineFriend":
                 return declineFriend(tokens[1], tokens[2], tokens[3]);
+            case "loadChatHistory":
+                return loadChatHistory(tokens[1], tokens[2], tokens[3]);
+            case "sendMessage":
+                return sendMessage(tokens[1], tokens[2], tokens[3], tokens[4]);
+            case "loadPlatoBotMessage":
+                return loadPlatoBotMessage(tokens[1], tokens[2]);
             default:
                 return "failed command";
         }
@@ -181,6 +184,53 @@ public interface UserCommand {
             return "decline successfully";
         } else {
             return "";
+        }
+    }
+
+    static String loadChatHistory(String username, String token, String PlayerUsername) {
+        User user = User.getUsers().get(username);
+        Player player = Player.getPlayers().get(PlayerUsername);
+        String allMessages = null;
+        if (user.getToken().equals(token)) {
+            for (Long messageID : player.getMessages()) {
+                allMessages += Message.getMessages().get(messageID).getMessage() + "@" +
+                        Message.getMessages().get(messageID).getDate().getHour() + ":" +
+                        Message.getMessages().get(messageID).getDate().getMinute() + "/" +
+                        Message.getMessages().get(messageID).getDate().getMonthValue() + "/" +
+                        Message.getMessages().get(messageID).getDate().getDayOfMonth();
+            }
+            return allMessages;
+        } else {
+            return null;
+        }
+    }
+
+    static String sendMessage(String username, String token, String playerUsername, String messageContent) {
+        User user = User.getUsers().get(username);
+        if (user.getToken().equals(token)) {
+            Message message = new Message(playerUsername, messageContent);
+            return messageContent + "/" + message.getDate().getHour() + ":" + message.getDate().getMinute() + "/" +
+                    message.getDate().getMonthValue() + "/" + message.getDate().getDayOfMonth();
+        } else {
+            return null;
+        }
+    }
+
+    static String loadPlatoBotMessage( String username, String token) {
+        Player player = Player.getPlayers().get(username);
+        User user = User.getUsers().get(username);
+        String allMessages = null;
+        if (user.getToken().equals(token)) {
+            for (Long messageID : player.getMessages()) {
+                allMessages += Message.getMessages().get(messageID).getMessage() + "@" +
+                        Message.getMessages().get(messageID).getDate().getHour() + ":" +
+                        Message.getMessages().get(messageID).getDate().getMinute() + "/" +
+                        Message.getMessages().get(messageID).getDate().getMonthValue() + "/" +
+                        Message.getMessages().get(messageID).getDate().getDayOfMonth();
+            }
+            return allMessages;
+        } else {
+            return null;
         }
     }
 }
