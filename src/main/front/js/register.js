@@ -113,7 +113,7 @@ function register_username() {
             connection.send('user register username ' + register_inputs[2].value);
         };
 
-        connection.onregister_message = function (e) {
+        connection.onmessage = function (e) {
             if (e.data.localeCompare('true') == 0) {
                 register_toggle(3);
             } else {
@@ -145,7 +145,7 @@ function register_phone() {
             connection.send('user register phone ' + register_inputs[4].value);
         };
 
-        connection.onregister_message = function (e) {
+        connection.onmessage = function (e) {
             if (e.data.localeCompare('true') == 0) {
                 register_toggle(5);
             } else {
@@ -234,7 +234,7 @@ function submit() {
         day = date.getDate();
         level = 1;
         money = 0.0;
-        account();
+        account(true);
         register_clear_fields();
         connection.close();
     }

@@ -86,12 +86,15 @@ section.account header .second .name {
     outline: none;
 }
 
-section.account header .second span {
+section.account header .second>span {
     font-family: 'Questrial';
     font-size: 1.8vh;
     line-height: 1em;
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 6px
+}
+
+section.account header .second>span>span {
     outline: none;
 }
 
@@ -127,20 +130,20 @@ section.account header .third div {
 }
 
 section.account header .third .apply {
-    background-color: rgb(72, 251, 127);
+    background-color: rgba(72, 251, 126, 0);
     margin-bottom: 4px;
 }
 
 section.account header .third .apply:hover {
-    background-color: rgb(52, 206, 98);
+    background-color: rgba(52, 206, 98, 0.2);
 }
 
 section.account header .third .ignore {
-    background-color: rgb(241, 52, 83);
+    background-color: rgba(241, 52, 84, 0);
 }
 
 section.account header .third .ignore:hover {
-    background-color: rgb(211, 46, 73);
+    background-color: rgba(211, 46, 73, 0.2);
 }
 
 section.account header .third .apply svg, section.account header .third .ignore svg {
@@ -232,6 +235,7 @@ section.account .friends ol {
     box-sizing: border-box;
     padding: 1vh 1vh 0 1vh;
     width: 100%;
+    transition: height ease-in-out 0.3s 0s;
 }
 
 section.account .friends ol .item {
@@ -248,8 +252,15 @@ section.account .friends ol .item {
     align-items: center;
     border-radius: 6px;
     text-align: left;
+    opacity: 1;
     cursor: pointer;
     position: relative;
+    transition: height ease-in-out 0.3s 0s, opacity ease-in-out 0.2s 0s;
+}
+
+section.account .friends ol .item.hide {
+    height: 0;
+    opacity: 0;
 }
 
 section.account .friends ol .item:hover {

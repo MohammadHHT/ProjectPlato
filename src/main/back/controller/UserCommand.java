@@ -16,6 +16,8 @@ public interface UserCommand {
                 } else {
                     return register(tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6]);
                 }
+            case "edit":
+                return edit(tokens[1], tokens[2], tokens[3], tokens[4]);
             case "login":
                 return login(tokens[1], tokens[2]);
             case "search":
@@ -32,6 +34,8 @@ public interface UserCommand {
                 return joinEvent(tokens[1], tokens[2], Long.parseLong(tokens[3]));
             case "users":
                 return users(tokens[1], tokens[2]);
+            case "friends":
+                return friends(tokens[1], tokens[2]);
             case "isfriend" :
                 return isFriend(tokens[1], tokens[2], tokens[3]);
             case "allUsers":
@@ -93,6 +97,37 @@ public interface UserCommand {
         return player.getToken();
     }
 
+    static String edit(String username, String token, String field, String value) {
+        User user = User.getUsers().get(username);
+        if (user.getToken().equals(token)) {
+            switch (field) {
+                case "firstname":
+                    user.setFirstName(value);
+                    return "true";
+                case "lastname":
+                    user.setLastName(value);
+                    return "true";
+                case "username":
+                    if (User.getUsers().containsKey(value)) {
+                        return "false username";
+                    }
+                    user.setUsername(value);
+                    return "true";
+                case "email":
+                    for (User u : User.getUsers().values()) {
+                        if (u.getUsername().equalsIgnoreCase(value)) {
+                            return "false email";
+                        }
+                    }
+                    user.setEmail(value);
+                    return "true";
+                    default:
+                        return "true";
+            }
+        }
+        return "true";
+    }
+
     static String login(String username, String password) {
         User user = User.getUsers().get(username);
         if (user != null) {
@@ -100,7 +135,7 @@ public interface UserCommand {
                 if (!user.isLogged()) {
                     user.login();
                     if (user instanceof Admin) {
-                        return "admin " + user.getUsername() + " " + user.getToken() + " " + user.getFirstName() + " " + user.getLastName() + " " + user.getUsername() + " " + user.getPhone() + " " + user.getEmail() + " " +
+                        return "admin " + user.getUsername() + " " + user.getToken() + " " + user.getFirstName() + " " + user.getLastName() + " " + user.getPhone() + " " + user.getEmail() + " " +
                                 user.getDate().getYear() + " " + user.getDate().getMonthValue() + " " + user.getDate().getDayOfMonth();
                     } else {
                         return "player " + user.getUsername() + " " + user.getToken() + " " + user.getFirstName() + " " + user.getLastName() + " " + user.getPhone() + " " + user.getEmail() + " " +
@@ -184,8 +219,19 @@ public interface UserCommand {
             for (String s : User.getUsers().keySet()) {
                 users.append(s).append(" ");
             }
-            System.out.println(users.toString().trim());
             return users.toString().trim();
+        }
+        return null;
+    }
+
+    static String friends(String username, String token) {
+        Player player = Player.getPlayers().get(username);
+        if (player.getToken().equals(token)) {
+            StringBuilder friends = new StringBuilder();
+            for (String s : player.getFriends()) {
+                friends.append(s).append(" ");
+            }
+            return friends.toString().trim();
         }
         return null;
     }

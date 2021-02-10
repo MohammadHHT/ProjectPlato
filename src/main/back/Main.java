@@ -26,13 +26,31 @@ public class Main {
         new Admin("admin", "admin", "admin", "admin", "admin@gamil.com", "989120000000");
         new Suggestion(p, "dots");
         new Suggestion(p, "battle");
-        System.out.println(new Event("battle", LocalDateTime.now(), LocalDateTime.of(2022, 2, 21, 7, 28, 36), 1277).toString());
-        System.out.println(new Event("dots", LocalDateTime.now(), LocalDateTime.of(2021, 8, 25, 21, 56, 54), 56997));
-        System.out.println(new Event("battle", LocalDateTime.now(), LocalDateTime.of(2022, 2, 21, 7, 28, 36), 1277));
-        System.out.println(new Event("dots", LocalDateTime.now(), LocalDateTime.of(2021, 8, 25, 21, 56, 54), 56997));
+        new Event("battle", LocalDateTime.now(), LocalDateTime.of(2022, 2, 21, 7, 28, 36), 1277);
+        new Event("dots", LocalDateTime.now(), LocalDateTime.of(2021, 8, 25, 21, 56, 54), 56997);
+        new Event("battle", LocalDateTime.now(), LocalDateTime.of(2022, 2, 21, 7, 28, 36), 1277);
+        new Event("dots", LocalDateTime.now(), LocalDateTime.of(2021, 8, 25, 21, 56, 54), 56997);
 
         Player.getPlayers().get("player").addFriendRequest("player2");
         Player.getPlayers().get("player").acceptFriendRequest("player2");
+        Player.getPlayers().get("player").addFriendRequest("player1");
+        Player.getPlayers().get("player").acceptFriendRequest("player1");
+        Player.getPlayers().get("player").addFriendRequest("player3");
+        Player.getPlayers().get("player").acceptFriendRequest("player3");
+        Player.getPlayers().get("player").addFriendRequest("player4");
+        Player.getPlayers().get("player").acceptFriendRequest("player4");
+        Player.getPlayers().get("player").addFriendRequest("player5");
+        Player.getPlayers().get("player").acceptFriendRequest("player5");
+        Player.getPlayers().get("player").addFriendRequest("player6");
+        Player.getPlayers().get("player").acceptFriendRequest("player6");
+        Player.getPlayers().get("player").addFriendRequest("player7");
+        Player.getPlayers().get("player").acceptFriendRequest("player7");
+        Player.getPlayers().get("player").addFriendRequest("player8");
+        Player.getPlayers().get("player").acceptFriendRequest("player8");
+        Player.getPlayers().get("player").addFriendRequest("player9");
+        Player.getPlayers().get("player").acceptFriendRequest("player9");
+        Player.getPlayers().get("player").addFriendRequest("player10");
+        Player.getPlayers().get("player").acceptFriendRequest("player10");
         new Server().start();
     }
 }

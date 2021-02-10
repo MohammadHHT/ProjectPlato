@@ -75,15 +75,13 @@ public class User {
     }
 
     public void setUsername(String username) {
+        users.remove(this.username);
         this.username = username;
+        users.put(username, this);
     }
 
     public String getUsername() {
         return username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPassword() {
