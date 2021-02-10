@@ -267,10 +267,16 @@ function declineFriend(playerUsername) {
 }
 
 function chatWithPlayer(playerUsername) {
-    next_page('suggestion', 'admin-inbox');
-
     document.getElementById('chat-username').innerHTML = playerUsername;
     let messageArea = document.querySelector('section.admin-inbox .chatBox .messageArea');
+    messageArea.innerHTML = '';
+    messageArea.insertAdjacentHTML('beforeend', '<div class="messageHistory">\n' +
+        '                            <div id="messageDate">\n' +
+        '                                <span id="month">January</span>\n' +
+        '                                <span id="day">24</span>\n' +
+        '                            </div>\n' +
+        '                        </div>');
+    next_page('suggestion', 'admin-inbox');
 
 
     const connection = new WebSocket('ws://127.0.0.1:4444');
@@ -280,25 +286,22 @@ function chatWithPlayer(playerUsername) {
     };
 
     connection.onmessage = function (e) {
-        let message = e.data.split('/')[0].split('@')[0];
-        let time = e.data.split('/')[0].split('@')[1];
-        let month = e.data.split('/')[1];
-        let day = e.data.split('/')[2];
+        let messages = e.data.split('-');
 
-        if (message.length > 0) {
-            document.getElementById('month').innerHTML = month;
-            document.getElementById('day').innerHTML = day;
+        if (messages.length > 0) {
+            document.getElementById('month').innerHTML = messages[messages.length - 1].split('/')[0];
+            document.getElementById('day').innerHTML = messages[messages.length - 1].split('/')[1];
             document.getElementById('messageDate').style.display = 'block';
         }
 
-        for (let i = 0; i < message.length; i++) {
+        for (let i = 0; i < messages.length - 1; i++) {
             messageArea.insertAdjacentHTML('beforeend',
                 '                    <div class="admin-avatar-message">\n' +
                 '                        <div class="admin-messageBox">\n' +
                 '                            <div>\n' +
-                '                                <p>' + message[i] + '</p>\n' +
+                '                                <p>' + messages[i].split('/')[0] + '</p>\n' +
                 '                            </div>\n' +
-                '                            <div>' + time[i] + '</div>\n' +
+                '                            <div>' + messages[i].split('/')[1] + '</div>\n' +
                 '                        </div>\n' +
                 '                        <div>\n' +
                 '                            <svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><g><path d="m41.725 300.851h32.39v-125.824h-32.39c-15.825 0-28.653 12.828-28.653 28.653v68.518c0 15.825 12.828 28.653 28.653 28.653z" fill="#96b4eb"/>\n' +

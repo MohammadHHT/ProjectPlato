@@ -20,6 +20,8 @@ public interface UserCommand {
                 return edit(tokens[1], tokens[2], tokens[3], tokens[4]);
             case "login":
                 return login(tokens[1], tokens[2]);
+            case "reload":
+                return reload(tokens[1], tokens[2]);
             case "search":
                 return search(tokens[1], tokens[2], tokens[3]);
             case "suggestions":
@@ -154,6 +156,11 @@ public interface UserCommand {
         }
     }
 
+    static String reload(String username, String password) {
+        User.getUsers().get(username).logout();
+        return null;
+    }
+
     static String search(String username, String token, String input) {
         if (User.getUsers().get(username).getToken().equals(token)) {
             StringBuilder users = new StringBuilder();
@@ -254,7 +261,7 @@ public interface UserCommand {
             for (Map.Entry<String, User> entry : User.getUsers().entrySet()) {
                 usersInfo += entry.getValue().toString() + ("/");
             }
-            return usersInfo;
+            return usersInfo.substring(0, usersInfo.length() - 1);
 //            return "amin lotfi aminlotfi 123456 amin@gmail.com 09304087303/mahdi hadi mahdihadiam 567890 mahdi@gmail.com 09126086363/mehran khaksar mehrankhaksar 654321 mehran@gmail.com 09122243286";
         } else {
             return null;
@@ -370,13 +377,13 @@ public interface UserCommand {
         String allMessages = null;
         if (user.getToken().equals(token)) {
             for (Long messageID : player.getMessages()) {
-                allMessages += Message.getMessages().get(messageID).getMessage() + "@" +
+                allMessages += Message.getMessages().get(messageID).getMessage() + "/" +
                         Message.getMessages().get(messageID).getDate().getHour() + ":" +
-                        Message.getMessages().get(messageID).getDate().getMinute() + "/" +
-                        Message.getMessages().get(messageID).getDate().getMonthValue() + "/" +
-                        Message.getMessages().get(messageID).getDate().getDayOfMonth();
+                        Message.getMessages().get(messageID).getDate().getMinute() + "-";
             }
-            return allMessages;
+            return allMessages +
+                    ((Message) Message.getMessages().values().toArray()[0]).getDate().getMonth() + "/" +
+                    ((Message) Message.getMessages().values().toArray()[0]).getDate().getDayOfMonth();
         } else {
             return null;
         }
@@ -387,7 +394,7 @@ public interface UserCommand {
         if (user.getToken().equals(token)) {
             Message message = new Message(playerUsername, messageContent);
             return messageContent + "/" + message.getDate().getHour() + ":" + message.getDate().getMinute() + "/" +
-                    message.getDate().getMonthValue() + "/" + message.getDate().getDayOfMonth();
+                    message.getDate().getMonth() + "/" + message.getDate().getDayOfMonth();
         } else {
             return null;
         }
