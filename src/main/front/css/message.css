@@ -66,6 +66,12 @@ section .player-message {
     margin-bottom: 1vh;
 }
 
+.suggestion-title {
+    display: flex;
+    line-height: 40px;
+    padding: 1vh 0;
+}
+
 section.player-message .request::-webkit-scrollbar {
     display: none;
 }
@@ -181,4 +187,14 @@ section.player-message .request::-webkit-scrollbar {
 .request-buttons .accept-button:hover, .request-buttons .decline-button:hover {
     cursor: pointer;
     opacity: 0.9;
+}
+
+.botMessageIcon {
+    width: 40px;
+    height: 40px;
+    margin : 0 105px 0 5px;
+}
+.botMessageIcon :hover {
+    opacity: 0.9;
+    cursor: pointer;
 }

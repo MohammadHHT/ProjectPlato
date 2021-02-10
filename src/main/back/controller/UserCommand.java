@@ -47,6 +47,13 @@ public interface UserCommand {
             case "loadChatHistory":
                 return loadChatHistory(tokens[1], tokens[2], tokens[3]);
             case "sendMessage":
+                if (tokens.length > 5) {
+                    String msg = "";
+                    for (int i = 4; i < tokens.length; i++) {
+                        msg = msg.concat(tokens[i]).concat(" ");
+                    }
+                    return sendMessage(tokens[1], tokens[2], tokens[3], msg);
+                }
                 return sendMessage(tokens[1], tokens[2], tokens[3], tokens[4]);
             case "loadPlatoBotMessage":
                 return loadPlatoBotMessage(tokens[1], tokens[2]);
@@ -311,19 +318,15 @@ public interface UserCommand {
         }
     }
 
-    static String loadPlatoBotMessage( String username, String token) {
+    static String loadPlatoBotMessage(String username, String token) {
         Player player = Player.getPlayers().get(username);
-        User user = User.getUsers().get(username);
-        String allMessages = null;
-        if (user.getToken().equals(token)) {
+        StringBuilder allMessages = new StringBuilder();
+        if (player.getToken().equals(token)) {
             for (Long messageID : player.getMessages()) {
-                allMessages += Message.getMessages().get(messageID).getMessage() + "@" +
-                        Message.getMessages().get(messageID).getDate().getHour() + ":" +
-                        Message.getMessages().get(messageID).getDate().getMinute() + "/" +
-                        Message.getMessages().get(messageID).getDate().getMonthValue() + "/" +
-                        Message.getMessages().get(messageID).getDate().getDayOfMonth();
+                allMessages.append(Message.getMessages().get(messageID).getMessage()).append("@").append(Message.getMessages().get(messageID).getDate().getHour()).append(":").append(Message.getMessages().get(messageID).getDate().getMinute()).append("/").append(Message.getMessages().get(messageID).getDate().getMonthValue()).append("/").append(Message.getMessages().get(messageID).getDate().getDayOfMonth()).append("-");
             }
-            return allMessages;
+            allMessages.delete(allMessages.length()-1, allMessages.length());
+            return allMessages.toString();
         } else {
             return null;
         }

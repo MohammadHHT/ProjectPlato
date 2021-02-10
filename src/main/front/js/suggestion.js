@@ -1,10 +1,21 @@
+document.querySelectorAll('aside nav')[5].addEventListener('click', function () {
+    if (player) {
+        loadSuggestedGames();
+        next_page('primary', 'player-message');
+    } else {
+        loadAllPlayer();
+        next_page('primary', 'suggestion');
+    }
+});
+
+
 function loadAllPlayer() {
     let playerList = document.querySelector('section.suggestion .all-players .players-area');
 
     const connection = new WebSocket('ws://127.0.0.1:4444');
 
     connection.onopen = function () {
-        connection.send('user allUsers' + username + ' ' + token);
+        connection.send('user allUsers ' + username + ' ' + token);
     };
 
     connection.onmessage = function (e) {
@@ -19,7 +30,7 @@ function loadAllPlayer() {
         for (let i = 0; i < users.length; i++) {
             playerList.insertAdjacentHTML('beforeend',
                 '                    <div class="player-box">\n' +
-                '                        <div onclick="chatWithPlayer(\' + ' + usernames[i] + ' + \')" class="message-icon">\n' +
+                '                        <div onclick=chatWithPlayer(' +'\"' + usernames[i] +'\"' + ') class="message-icon">\n' +
                 '                            <img src="jpg/message.png" alt="message icon">\n' +
                 '                        </div>\n' +
                 '                        <div class="player-avatar">\n' +
@@ -89,14 +100,14 @@ function sendSuggestion() {
     if (isSeaBattleSelected) {
         connection.onopen = function () {
             for (let i = 0; i< usernameForSendSuggestion.length; i++) {
-                connection.send('user sendSuggestion' + self.username + ' ' + self.token + ' ' + usernameForSendSuggestion[i] + ' ' + 'BattleSea');
+                connection.send('user sendSuggestion ' + self.username + ' ' + self.token + ' ' + usernameForSendSuggestion[i] + ' ' + 'BattleSea');
 
             }
         };
     } else if (isDotsAndBoxesSelected) {
         connection.onopen = function () {
             for (let i = 0; i< usernameForSendSuggestion.length; i++) {
-                connection.send('user sendSuggestion' + self.username + ' ' + self.token + ' ' + usernameForSendSuggestion[i] + ' ' + 'DotsAndBoxes');
+                connection.send('user sendSuggestion ' + self.username + ' ' + self.token + ' ' + usernameForSendSuggestion[i] + ' ' + 'DotsAndBoxes');
 
             }
         };
@@ -121,7 +132,7 @@ function loadSuggestedGames() {
     const connection = new WebSocket('ws://127.0.0.1:4444');
 
     connection.onopen = function () {
-        connection.send('user loadSuggestedGame' + username + ' ' + token);
+        connection.send('user loadSuggestedGame ' + username + ' ' + token);
     };
 
     connection.onmessage = function (e) {
@@ -150,7 +161,7 @@ function loadFriendsRequest() {
     const connection = new WebSocket('ws://127.0.0.1:4444');
 
     connection.onopen = function () {
-        connection.send('user loadFriendsRequest' + username + ' ' + token);
+        connection.send('user loadFriendsRequest ' + username + ' ' + token);
     };
 
     connection.onmessage = function (e) {
@@ -178,7 +189,7 @@ function acceptFriend(playerUsername) {
     const connection = new WebSocket('ws://127.0.0.1:4444');
 
     connection.onopen = function () {
-        connection.send('user acceptFriend' + username + ' ' + token + ' ' + playerUsername);
+        connection.send('user acceptFriend ' + username + ' ' + token + ' ' + playerUsername);
     };
 
     connection.onmessage = function (e) {
@@ -197,7 +208,7 @@ function declineFriend(playerUsername) {
     const connection = new WebSocket('ws://127.0.0.1:4444');
 
     connection.onopen = function () {
-        connection.send('user declineFriend' + username + ' ' + token + ' ' + playerUsername);
+        connection.send('user declineFriend ' + username + ' ' + token + ' ' + playerUsername);
     };
 
     connection.onmessage = function (e) {
@@ -213,7 +224,7 @@ function declineFriend(playerUsername) {
 }
 
 function chatWithPlayer(playerUsername) {
-    //TODO load admin-inbox Section
+    next_page('suggestion', 'admin-inbox');
 
     document.getElementById('chat-username').innerHTML = playerUsername;
     let messageArea = document.querySelector('section.admin-inbox .chatBox .messageArea');
@@ -222,7 +233,7 @@ function chatWithPlayer(playerUsername) {
     const connection = new WebSocket('ws://127.0.0.1:4444');
 
     connection.onopen = function () {
-        connection.send('user loadChatHistory' + username + ' ' + token + ' ' + playerUsername);
+        connection.send('user loadChatHistory ' + username + ' ' + token + ' ' + playerUsername);
     };
 
     connection.onmessage = function (e) {
@@ -232,8 +243,8 @@ function chatWithPlayer(playerUsername) {
         let day = e.data.split('/')[2];
 
         if (message.length > 0) {
-            document.getElementById('month').innerHTML = month[0];
-            document.getElementById('day').innerHTML = day[0];
+            document.getElementById('month').innerHTML = month;
+            document.getElementById('day').innerHTML = day;
             document.getElementById('messageDate').style.display = 'block';
         }
 
@@ -266,7 +277,7 @@ function chatWithPlayer(playerUsername) {
         const connection = new WebSocket('ws://127.0.0.1:4444');
 
         connection.onopen = function () {
-            connection.send('user sendMessage' + username + ' ' + token + ' ' + playerUsername + ' ' + messageFromTextArea);
+            connection.send('user sendMessage ' + username + ' ' + token + ' ' + playerUsername + ' ' + messageFromTextArea);
         };
 
         connection.onmessage = function (e) {
@@ -301,28 +312,30 @@ function chatWithPlayer(playerUsername) {
 }
 
 function loadPlatoBotMessage() {
-    //TODO load inbox section
+    next_page('player-message', 'inbox');
 
     let messageArea = document.querySelector('section .inbox .chatBox .messageArea');
 
     const connection = new WebSocket('ws://127.0.0.1:4444');
 
     connection.onopen = function () {
-        connection.send('user loadPlatoBotMessage' + username + ' ' + token);
+        connection.send('user loadPlatoBotMessage ' + username + ' ' + token);
     };
 
     connection.onmessage = function (e) {
-        let message = e.data.split('/')[0].split('@')[0];
-        let time = e.data.split('/')[0].split('@')[1];
-        let month = e.data.split('/')[1];
-        let day = e.data.split('/')[2];
+        let allMessages = e.data.split('-');
 
-        document.getElementById('p-month').innerHTML = month[0];
-        document.getElementById('p-day').innerHTML = day[0];
+        let month = allMessages[0].split('/')[1];
+        let day = allMessages[0].split('/')[2];
+
+        document.getElementById('p-month').innerHTML = month;
+        document.getElementById('p-day').innerHTML = day;
         document.getElementById('message-date').style.display = 'block';
 
 
-        for (let i = 0; i < message.length; i++) {
+        for (let i = 0; i < allMessages.length; i++) {
+            let message = allMessages[i].split('/')[0].split('@')[0];
+            let time = allMessages[i].split('/')[0].split('@')[1];
             messageArea.insertAdjacentHTML('beforeend',
                 '                    <div class="avatar-message">\n' +
                 '                        <div>\n' +
@@ -332,14 +345,14 @@ function loadPlatoBotMessage() {
                 '                        </div>\n' +
                 '                        <div class="messageBox">\n' +
                 '                            <div>\n' +
-                '                                <p>' + message[i] + '</p>\n' +
+                '                                <p>' + message + '</p>\n' +
                 '                            </div>\n' +
-                '                            <div>' + time[i] + '</div>\n' +
+                '                            <div>' + time + '</div>\n' +
                 '                        </div>\n' +
                 '                    </div>');
         }
         connection.close();
-    }
+    };
 
     let sendButton = document.getElementById('send');
 
