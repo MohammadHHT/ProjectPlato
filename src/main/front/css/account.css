@@ -47,6 +47,15 @@ section.account header .first {
 #avatar {
     width: 75%;
     margin-bottom: 10%;
+    opacity: 0;
+    cursor: pointer;
+    transform: scale(0.75);
+    transition: transform ease-in-out 0.3s 0s, opacity ease-in-out 0.3s 0s;
+}
+
+#avatar.show {
+    transform: scale(1);
+    opacity: 1;
 }
 
 .money {
@@ -74,6 +83,7 @@ section.account header .second .name {
     line-height: 1em;
     padding: 5% 0 0 0;
     margin: 0;
+    outline: none;
 }
 
 section.account header .second span {
@@ -82,6 +92,7 @@ section.account header .second span {
     line-height: 1em;
     display: block;
     margin-bottom: 6px;
+    outline: none;
 }
 
 section.account header .second .level {
@@ -99,8 +110,12 @@ section.account header .second .level {
 section.account header .third {
     flex-basis: calc(0.25 * 0.5 * 0.94 * 97vh - 2px);
     padding-left: 4px;
-    transition: visibility ease-in-out 0.1s;
-    visibility: hidden;
+    transition: opacity ease-in-out 0.3s;
+    opacity: 0;
+}
+
+section.account header .third.show {
+    opacity: 1;
 }
 
 section.account header .third div {
@@ -116,8 +131,16 @@ section.account header .third .apply {
     margin-bottom: 4px;
 }
 
+section.account header .third .apply:hover {
+    background-color: rgb(52, 206, 98);
+}
+
 section.account header .third .ignore {
     background-color: rgb(241, 52, 83);
+}
+
+section.account header .third .ignore:hover {
+    background-color: rgb(211, 46, 73);
 }
 
 section.account header .third .apply svg, section.account header .third .ignore svg {
@@ -140,7 +163,7 @@ section.account header .third .apply svg, section.account header .third .ignore 
     opacity: 0.5;
 }
 
-#edit {
+section.account header .edit {
     width: calc(0.05 * 97vh);
     height: calc(0.05 * 97vh);
     background: transparent;
@@ -152,12 +175,18 @@ section.account header .third .apply svg, section.account header .third .ignore 
     cursor: pointer;
     border-radius: 0 0 9.4px 0;
     border: none;
-    transition: opacity 0.1s;
+    transform: scale(1);
+    transition: opacity ease-in-out 0.1s, transform ease-in-out 0.1s;
     outline: none;
 }
 
-#edit:hover {
+section.account header .edit:hover {
     opacity: 1;
+}
+
+section.account header .edit.hide {
+    opacity: 0;
+    transform: scale(0);
 }
 
 section.account .friends {

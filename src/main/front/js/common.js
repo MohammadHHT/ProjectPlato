@@ -1,3 +1,6 @@
+var navigation = document.querySelectorAll('aside nav');
+var player, username, token, first_name, last_name, phone, email, year, month, day, level, money;
+
 let menus = [], thisMenu;
 
 
