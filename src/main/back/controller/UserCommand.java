@@ -26,6 +26,8 @@ public interface UserCommand {
                 return events(tokens[1], tokens[2]);
             case "addevent":
                 return addEvent(tokens[1], tokens[2], tokens[3], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]), Integer.parseInt(tokens[8]), Integer.parseInt(tokens[9]), Integer.parseInt(tokens[10]));
+            case "deleteevent":
+                return deleteEvent(tokens[1], tokens[2], Long.parseLong(tokens[3]));
             case "joinevent":
                 return joinEvent(tokens[1], tokens[2], Long.parseLong(tokens[3]));
             case "users":
@@ -157,6 +159,14 @@ public interface UserCommand {
         if (Admin.getAdmins().get(username).getToken().equals(token)) {
             Event event = new Event(game, LocalDateTime.of(syear, smonth, sday, LocalDateTime.now().getHour(), LocalDateTime.now().getMinute()), LocalDateTime.of(fyear, fmonth, fday, LocalDateTime.now().getHour(), LocalDateTime.now().getMinute()), prize);
             return String.valueOf(event.getEventID() + " " + event.getStart().getMonth() + " " + event.getEnd().getMonth());
+        }
+        return null;
+    }
+
+    static String deleteEvent(String username, String token, long eventID) {
+        if (Admin.getAdmins().get(username).getToken().equals(token)) {
+            Event.deleteEvent(eventID);
+            return null;
         }
         return null;
     }

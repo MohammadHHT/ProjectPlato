@@ -5,9 +5,9 @@ var login_next = document.querySelector('section.login form .next');
 var login_progress = document.querySelector('section.login form .progress');
 var login_message = document.querySelector('section.login form .message');
 
-document.querySelectorAll('aside nav')[2].addEventListener('click', function () {
-    document.querySelectorAll('aside nav')[2].classList.remove('show');
-    document.querySelectorAll('aside nav')[1].classList.add('show');
+navigation[2].addEventListener('click', function () {
+    navigation[2].classList.remove('show');
+    navigation[1].classList.add('show');
     next_page('login', 'register');
 
     login_clear_fields();
@@ -73,12 +73,12 @@ function login_password() {
                 login_message.style.opacity = 0;
                 login_next.classList.remove('show');
 
-                document.querySelectorAll('aside nav')[2].classList.remove('show');
-                document.querySelectorAll('aside nav')[3].classList.add('show');
-                document.querySelectorAll('aside nav')[4].classList.add('show');
-                document.querySelectorAll('aside nav')[5].classList.add('show');
+                navigation[2].classList.remove('show');
+                navigation[3].classList.add('show');
+                navigation[4].classList.add('show');
+                navigation[5].classList.add('show');
                 setTimeout(function () {
-                    document.querySelectorAll('aside nav')[2].classList.remove('show');
+                    navigation[2].classList.remove('show');
                     primary(data[0].localeCompare('admin') != 0);
                     next_page('login', 'primary');
                     login_items[1].classList.remove('show');
@@ -97,6 +97,7 @@ function login_password() {
                 day = parseInt(data[9]);
                 level = player ? 0 : parseInt(data[10]);
                 money = player ? 0.0 : parseFloat(data[11]);
+                account();
             } else {
                 if (data[1].localeCompare('username') == 0) {
                     login_message.innerHTML = "Username doesn't exist!";

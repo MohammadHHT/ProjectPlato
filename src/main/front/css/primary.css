@@ -224,7 +224,7 @@ section.primary .player .events section .card .cover {
     bottom: 0;
     left: 0;
     background-color: rgba(81, 216, 76, 0.7);
-    transition: opacity ease-in-out 0.3s 0s;
+    transition: opacity ease-in-out 0.3s 0s, background-color ease-in-out 0.3s 0s;
     backdrop-filter: blur(4px);
     border-radius: 5px;
 }
@@ -252,6 +252,10 @@ section.primary .player .events .dots .card {
 
 section.primary .player .events .battle .card {
     background-color: #f55a5a;
+}
+
+section.primary .player .events section .card.selected {
+    background-color: rgb(50, 197, 99);
 }
 
 section.primary .player .events .dots .card:nth-child(1):hover {

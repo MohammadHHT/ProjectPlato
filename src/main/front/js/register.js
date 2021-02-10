@@ -5,9 +5,9 @@ var register_next = document.querySelector('section.register form .next');
 var register_progress = document.querySelector('section.register form .progress');
 var register_message = document.querySelector('section.register form .message');
 
-document.querySelectorAll('aside nav')[1].addEventListener('click', function () {
-    document.querySelectorAll('aside nav')[1].classList.remove('show');
-    document.querySelectorAll('aside nav')[2].classList.add('show');
+navigation[1].addEventListener('click', function () {
+    navigation[1].classList.remove('show');
+    navigation[2].classList.add('show');
     next_page('register', 'login');
 
     register_clear_fields();
@@ -175,12 +175,12 @@ function register_email() {
                 register_message.style.opacity = 0;
                 register_next.classList.remove('show');
 
-                document.querySelectorAll('aside nav')[1].classList.remove('show');
-                document.querySelectorAll('aside nav')[3].classList.add('show');
-                document.querySelectorAll('aside nav')[4].classList.add('show');
-                document.querySelectorAll('aside nav')[5].classList.add('show');
+                navigation[1].classList.remove('show');
+                navigation[3].classList.add('show');
+                navigation[4].classList.add('show');
+                navigation[5].classList.add('show');
                 setTimeout(function () {
-                    document.querySelectorAll('aside nav')[1].classList.remove('show');
+                    navigation[1].classList.remove('show');
                     primary(true);
                     next_page('register', 'primary');
                     register_items[5].classList.remove('show');
@@ -234,6 +234,7 @@ function submit() {
         day = date.getDate();
         level = 1;
         money = 0.0;
+        account();
         register_clear_fields();
         connection.close();
     }
