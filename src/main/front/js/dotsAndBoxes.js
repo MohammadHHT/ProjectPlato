@@ -3,12 +3,12 @@ function getOppUsername() {
     let opp = prompt("Please enter your friend username");
     if (opp != null) {
         const connection = new WebSocket('ws://127.0.0.1:4444');
-        connection.onopen = function ( ) {
+        connection.onopen = function () {
             connection.send("user isfriend " + username + ' ' + token + ' ' + opp);
         };
         connection.onmessage = function (e) {
             if (e.data === 'yes') {
-                dotsAndBoxes(opp);
+                creat(opp);
             } else {
                 alert('you dont have ' + opp + ' in your friends');
             }
@@ -18,8 +18,7 @@ function getOppUsername() {
 }
 
 
-
-function dotsAndBoxes(oppUsername) {
+function creat(oppUsername) {
 
     const connection = new WebSocket('ws://127.0.0.1:4444');
     let gameID = '0000';
@@ -30,24 +29,31 @@ function dotsAndBoxes(oppUsername) {
         document.querySelector('#usernamePlayer1').innerHTML = '<span>' + username + '</span>';
         document.querySelector('#usernamePlayer2').innerHTML = '<span>' + oppUsername + '</span>';
         gameID = e.data;
+        join(gameID, oppUsername);
         connection.close();
     };
+
+
+}
+
+function join(gameID, oppUsername) {
+    const connection = new WebSocket('ws://127.0.0.1:4444');
     connection.onopen = function () {
-        connection.send('game dots join ' + oppUsername);
+        connection.send('game dots join ' + username + ' ' + token + ' ' + gameID + ' ' + oppUsername);
     };
-    connection.onopen = function (e) {
+    connection.onmessage = function (e) {
         if (e.data === 'joined') {
+            next_page('games-menu', 'dots-and-boxes-page');
             init(gameID, oppUsername);
         }
         connection.close();
     };
 }
 
-init = function (gameID, oppUsername) {
+function init(gameID, oppUsername) {
     const canvas = document.getElementById('DB-canvas'),
         context = canvas.getContext('2d'),
         backButton = document.getElementById('backButton'),
-        // gameId = gameID,
         WIDTH = 0.65 * window.innerHeight * 0.97,
         HEIGHT = 0.65 * window.innerHeight * 0.97 + 50,
         GRID_SIZE = 7,
@@ -64,6 +70,7 @@ init = function (gameID, oppUsername) {
             TOP: 3
         },
         isPlayer1Turn,
+        gameId = gameID,
         currentBox,
         Player = {
             player1Score: 0,
@@ -166,59 +173,48 @@ init = function (gameID, oppUsername) {
             if (this.highLight == null) {
                 return;
             }
-            const connection = new WebSocket('ws://127.0.0.1:4444');
-            const self = this;
+            let x1, y1, x2, y2;
             switch (this.highLight) {
                 case boxSides.TOP:
-
-                    connection.onopen = function () {
-                        connection.send('game dots line ' + gameID + ' ' + String(this.row) + ' ' + String(this.col) + ' ' + String(this.row) + ' ' + String(this.col++));
-                    };
-                    connection.onmessage = function (e) {
-                        if (e.data === 'Line drawn') {
-                            self.sideTop.owner = isPlayer1Turn;
-                            self.sideTop.isSelected = true;
-                        }
-                    };
-
+                    this.sideTop.owner = isPlayer1Turn;
+                    this.sideTop.isSelected = true;
+                    x1 = this.top / CELL_SIZE;
+                    y1 = this.left / CELL_SIZE;
+                    x2 = this.top / CELL_SIZE;
+                    y2 = this.right / CELL_SIZE;
                     break;
                 case boxSides.LEFT:
-                    connection.onopen = function () {
-                        connection.send('game dots line ' + gameID + ' ' + String(this.row) + ' ' + String(this.col) + ' ' + String(this.row++) + ' ' + String(this.col));
-                    };
-                    connection.onmessage = function (e) {
-                        if (e.data === 'Line drawn') {
-                            self.sideLeft.owner = isPlayer1Turn;
-                            self.sideLeft.isSelected = true;
-                        }
-                    };
-
+                    this.sideLeft.owner = isPlayer1Turn;
+                    this.sideLeft.isSelected = true;
+                    x1 = this.top / CELL_SIZE;
+                    y1 = this.left / CELL_SIZE;
+                    x2 = this.bottom / CELL_SIZE;
+                    y2 = this.left / CELL_SIZE;
                     break;
                 case boxSides.RIGHT:
-                    connection.onopen = function () {
-                        connection.send('game dots line ' + gameID + ' ' + String(this.row) + ' ' + String(this.col++) + ' ' + String(this.row++) + ' ' + String(this.col++));
-                    };
-                    connection.onmessage = function (e) {
-                        if (e.data === 'Line drawn') {
-                            self.sideRight.owner = isPlayer1Turn;
-                            self.sideRight.isSelected = true;
-                        }
-                    };
-
+                    this.sideRight.owner = isPlayer1Turn;
+                    this.sideRight.isSelected = true;
+                    x1 = this.top / CELL_SIZE;
+                    y1 = this.right / CELL_SIZE;
+                    x2 = this.bottom / CELL_SIZE;
+                    y2 = this.right / CELL_SIZE;
                     break;
                 case boxSides.BOT:
-                    connection.onopen = function () {
-                        connection.send('game dots line ' + gameID + ' ' + String(this.row++) + ' ' + String(this.col) + ' ' + String(this.row++) + ' ' + String(this.col++));
-                    };
-                    connection.onmessage = function (e) {
-                        if (e.data === 'Line drawn') {
-                            self.sideBot.owner = isPlayer1Turn;
-                            self.sideBot.isSelected = true;
-                        }
-                    };
-
+                    this.sideBot.owner = isPlayer1Turn;
+                    this.sideBot.isSelected = true;
+                    x1 = this.bottom / CELL_SIZE;
+                    y1 = this.left / CELL_SIZE;
+                    x2 = this.bottom / CELL_SIZE;
+                    y2 = this.right / CELL_SIZE;
                     break;
             }
+            const connection = new WebSocket('ws://127.0.0.1:4444');
+            connection.onopen = function () {
+                connection.send('game dots line ' + gameId + ' ' + x1 + ' ' + y1 + ' ' + x2 + ' ' + y2);
+            };
+            connection.onmessage = function () {
+                connection.close();
+            };
             this.highLight = null;
             this.numOfSideSelected++;
             if (this.numOfSideSelected === 4) {
@@ -398,15 +394,22 @@ init = function (gameID, oppUsername) {
     }
 
     function end() {
-        let ans = prompt("Do you want to leave ? " +
-            "If game is not over you'll forfeit the game", "no");
-        if (ans != null && ans === 'yes') {
-            const connection = new WebSocket('ws://127.0.0.1:4444');
-            connection.onopen = function ( ) {
-                connection.send("game dots end " + gameID);
-            };
-            connection.onmessage = function (e) {
-                prompt(e.data);
+        if (gameId != null) {
+
+            let ans = prompt("Do you want to leave ? " +
+                "If game is not over you'll forfeit the game", "no");
+            if (ans != null && ans == 'yes') {
+                const connection = new WebSocket('ws://127.0.0.1:4444');
+                connection.onopen = function () {
+                    connection.send("game dots end " + gameId);
+                };
+                connection.onmessage = function (e) {
+                    gameId = null;
+                    alert(e.data);
+                };
+                document.getElementById("dotsAndBoxesGamePage").style.display = "none";
+                document.getElementById("allGameMenu").style.display = "block";
+                next_page('dots-and-boxes-page', 'games-menu');
             }
         }
     }

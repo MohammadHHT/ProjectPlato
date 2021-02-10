@@ -42,7 +42,7 @@ public class Server extends WebSocketServer {
     }
 
     public void onError(WebSocket conn, Exception e) {
-        System.out.println("ERROR from " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
+//        System.out.println("ERROR from " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
     }
 
     private String resolve(String[] tokens, WebSocket conn) {
@@ -50,7 +50,9 @@ public class Server extends WebSocketServer {
             case "user":
                 return UserCommand.resolve(Arrays.copyOfRange(tokens, 1, tokens.length));
             case "game":
-                return GameCommand.resolve(Arrays.copyOfRange(tokens, 1, tokens.length), conn);
+                String ans = GameCommand.resolve(Arrays.copyOfRange(tokens, 1, tokens.length), conn);
+                System.out.println(ans);
+                return ans;
             default:
                 return "failed command";
         }

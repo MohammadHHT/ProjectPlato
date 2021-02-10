@@ -76,7 +76,7 @@ interface DotsCommand {
             case "create":
                 return create(tokens[1], tokens[2], conn);
             case "join":
-                return join(tokens[1], tokens[2], Long.parseLong(tokens[3]), conn);
+                return join(tokens[1], tokens[2], Long.parseLong(tokens[3]), tokens[4], conn);
             case "gamelogs":
                 return gameLogs("dotsandboxes", tokens[1], tokens[2]);
             case "line":
@@ -98,21 +98,24 @@ interface DotsCommand {
                 if (log.getGame().equals(game)) {
                     switch (log.getResult()) {
                         case WIN:
-                            message.append(log.getHost()).append(" ").append(log.getDate()).append("/");
+                            message.append(log.getHost()).append("-").append(log.getDate()).append("/");
                         case DEFEAT:
-                            message.append(log.getGuest()).append(" ").append(log.getDate()).append("/");
+                            message.append(log.getGuest()).append("-").append(log.getDate()).append("/");
                     }
                 }
             }
+            message.append("@");
             List<Player> players = (List<Player>) Player.getPlayers().values();
             Collections.sort(players);
 
             for (Player user : players) {
                 message.append(user.getUsername()).append(" ").append(user.getScore()).append("/");
             }
-            return message.toString();
+//            return message.toString();
+            return "5 15 2 1200@mamad 12:16am/qoli 05:54pm@ali 254/mahdi 658";
+
         }
-        return null;
+        return "token invalid";
 //        return "5 15 2 1200@mamad 12:16am/qoli 05:54pm@ali 254/mahdi 658";
     }
 
@@ -123,15 +126,15 @@ interface DotsCommand {
     }
 
 
-    static String join(String username, String token, long gameID, WebSocket conn) {
+    static String join(String username, String token, long gameID,String oppUsername, WebSocket conn) {
         if (User.getUsers().get(username).getToken().equals(token)) {
             DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
             if (dotsAndBoxes != null) {
-                dotsAndBoxes.join(Player.getPlayers().get(username));
+                dotsAndBoxes.join(Player.getPlayers().get(oppUsername));
                 return "joined";
-            }
+            } else return "game not found";
         }
-        return null;
+        return "token not valid";
     }
 
     static String occupy(long gameID, int x1, int y1, int x2, int y2) {
@@ -154,10 +157,11 @@ interface DotsCommand {
         if (dotsAndBoxes != null) {
             if (dotsAndBoxes.isEdgeAvailable(x1, y1, x2, y2)) {
                 dotsAndBoxes.occupy(x1, y1, x2, y2);
-            } else
                 return "Line drawn";
+            } else
+                return "edge not available";
         }
-        return null;
+        return "game not found";
     }
 
     static String turn(long gameID) {
@@ -173,9 +177,11 @@ interface DotsCommand {
                 new GameLog("dotsandboxes", dotsAndBoxes.getHost().getUsername(), dotsAndBoxes.getGuest().getUsername(), result);
                 return dotsAndBoxes.judge().getUsername() + " Won!" + '\n' + "Back to the game menu";
             } else {
-                new GameLog("dotsandboxes", dotsAndBoxes.getHost().getUsername(), dotsAndBoxes.getGuest().getUsername(), dotsAndBoxes.winByForfeit().equals(dotsAndBoxes.getHost()) ? Result.WIN : Result.DEFEAT);
+                Result result = dotsAndBoxes.winByForfeit().equals(dotsAndBoxes.getHost()) ? Result.WIN : Result.DEFEAT;
+                new GameLog("dotsandboxes", dotsAndBoxes.getHost().getUsername(), dotsAndBoxes.getGuest().getUsername(), result);
                 return dotsAndBoxes.winByForfeit().getUsername() + " won by forfeit" + '\n' + "Back to the game menu";
             }
+
         }
         return null;
     }

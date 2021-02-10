@@ -30,6 +30,9 @@ public class Main {
         System.out.println(new Event("dots", LocalDateTime.now(), LocalDateTime.of(2021, 8, 25, 21, 56, 54), 56997));
         System.out.println(new Event("battle", LocalDateTime.now(), LocalDateTime.of(2022, 2, 21, 7, 28, 36), 1277));
         System.out.println(new Event("dots", LocalDateTime.now(), LocalDateTime.of(2021, 8, 25, 21, 56, 54), 56997));
+
+        Player.getPlayers().get("player").addFriendRequest("player2");
+        Player.getPlayers().get("player").acceptFriendRequest("player2");
         new Server().start();
     }
 }

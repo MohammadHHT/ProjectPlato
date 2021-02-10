@@ -2,12 +2,10 @@ package main.back.game.DotsAndBoxes;
 
 import main.back.game.Game;
 import main.back.account.Player;
-import main.back.game.GameLog;
-import main.back.game.Result;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class DotsAndBoxes extends Game {
     private static HashMap<Long, DotsAndBoxes> dotsAndBoxes;
@@ -65,7 +63,7 @@ public class DotsAndBoxes extends Game {
         return true;
     }
 
-    public void madeAnyBoxes(int x1, int y1, int x2, int y2) {
+    public boolean madeAnyBoxes(int x1, int y1, int x2, int y2) {
         boolean e1 = false, e2 = false, e3 = false, e4 = false, e5 = false, e6 = false;
         if (x1 == x2) {
             for (Edge edge : edges) {
@@ -110,16 +108,18 @@ public class DotsAndBoxes extends Game {
                 else
                     guestScore++;
             }
-            return;
+            return true;
         }
         playerMovedInThisTurn = true;
+        return false;
     }
 
     public void occupy(int x1, int y1, int x2, int y2) {                                // no need to check that if edge is empty. this will be done in DotsAndBoxesMenu
         edges.add(new Edge(new Vertex(x1, y1), new Vertex(x2, y2), turn));
-        madeAnyBoxes(x1, y1, x2, y2);
+        if (!madeAnyBoxes(x1, y1, x2, y2)) {
+            turn();
+        }
     }
-
 
     /*public String makeTable() {
         int i = 1;

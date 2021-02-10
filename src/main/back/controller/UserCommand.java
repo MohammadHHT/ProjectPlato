@@ -162,6 +162,6 @@ public interface UserCommand {
                 return "yes";
             } else return "no";
         }
-        return null;
+        return "token invalid";
     }
 }
