@@ -3,6 +3,7 @@ package main.back.game;
 import main.back.account.Player;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -15,7 +16,7 @@ public class GameLog {
     private String game;
     private String host;
     private String guest;
-    private LocalDate date;
+    private LocalDateTime date;
     private Result result;            //result of host player
 
     static {
@@ -29,7 +30,7 @@ public class GameLog {
         this.host = host;
         this.guest = guest;
         this.result = result;
-        date = LocalDate.now();
+        date = LocalDateTime.now();
 
         if (result == Result.WIN) {
             Player.getPlayers().get(host).addWins();
@@ -62,7 +63,7 @@ public class GameLog {
         return guest;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 

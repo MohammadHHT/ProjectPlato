@@ -167,6 +167,6 @@ public class Player extends User implements Comparable<Player>{
 
     @Override
     public int compareTo(Player player) {
-        return this.score-player.score;
+        return (this.score-player.score);
     }
 }

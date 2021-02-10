@@ -83,7 +83,7 @@ interface DotsCommand {
                 return occupy(Long.parseLong(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]));
             case "turn":
                 return turn(Long.parseLong(tokens[1]));
-            case "end" :
+            case "end":
                 return end(Long.parseLong(tokens[1]));
             default:
                 return "failed command";
@@ -92,27 +92,48 @@ interface DotsCommand {
 
     static String gameLogs(String game, String username, String token) {
         if (User.getUsers().get(username).getToken().equals(token)) {
+
             Player player = Player.getPlayers().get(username);
             StringBuilder message = new StringBuilder(player.getLevel() + " " + player.getWins() + " " + player.getDefeats() + " " + player.getScore() + "@");
-            for (GameLog log : GameLog.gameLogs.values()) {
-                if (log.getGame().equals(game)) {
-                    switch (log.getResult()) {
-                        case WIN:
-                            message.append(log.getHost()).append("-").append(log.getDate()).append("/");
-                        case DEFEAT:
-                            message.append(log.getGuest()).append("-").append(log.getDate()).append("/");
+
+
+            HashMap<String, Long> players = new HashMap<>();
+            for (Player user : Player.getPlayers().values()) {
+                players.put(user.getUsername(), user.getScore());
+            }
+            Object[] a = players.entrySet().toArray();
+            Arrays.sort(a, new Comparator() {
+                public int compare(Object o1, Object o2) {
+                    return ((Map.Entry<String, Long>) o2).getValue()
+                            .compareTo(((Map.Entry<String, Long>) o1).getValue());
+                }
+            });
+            for (Object o : a) {
+                message.append(((Map.Entry<String, Long>) o).getKey()).append(" ").append(((Map.Entry<String, Long>) o).getValue()).append("/");
+            }
+            /*List<Player> players = new ArrayList<>(Player.getPlayers().values());
+            Collections.sort(players);*/
+            /*for (Player user : players) {
+                message.append(user.getUsername()).append(" ").append(user.getScore()).append("/");
+            }*/
+            message.replace(message.length()-1, message.length(), "@");
+
+            if (!GameLog.getGameLogs().isEmpty()) {
+                for (GameLog log : GameLog.getGameLogs().values()) {
+                    if (log.getGame().equals(game)) {
+                        switch (log.getResult()) {
+                            case WIN:
+                                message.append(log.getHost()).append("-").append(log.getDate().getHour()).append(":").append(log.getDate().getMinute()).append("/");
+                            case DEFEAT:
+                                message.append(log.getGuest()).append("-").append(log.getDate().getHour()).append(":").append(log.getDate().getMinute()).append("/");
+                        }
                     }
                 }
             }
-            message.append("@");
-            List<Player> players = (List<Player>) Player.getPlayers().values();
-            Collections.sort(players);
+//            message.append("@");
 
-            for (Player user : players) {
-                message.append(user.getUsername()).append(" ").append(user.getScore()).append("/");
-            }
-//            return message.toString();
-            return "5 15 2 1200@mamad 12:16am/qoli 05:54pm@ali 254/mahdi 658";
+            message.delete(message.length()-1,message.length());
+            return message.toString();
 
         }
         return "token invalid";
@@ -126,7 +147,7 @@ interface DotsCommand {
     }
 
 
-    static String join(String username, String token, long gameID,String oppUsername, WebSocket conn) {
+    static String join(String username, String token, long gameID, String oppUsername, WebSocket conn) {
         if (User.getUsers().get(username).getToken().equals(token)) {
             DotsAndBoxes dotsAndBoxes = DotsAndBoxes.getDotsAndBoxes().get(gameID);
             if (dotsAndBoxes != null) {

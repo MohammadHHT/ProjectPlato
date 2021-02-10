@@ -317,16 +317,10 @@ function init(gameID, oppUsername) {
         if (!isBoxFilled) {
             isPlayer1Turn = !isPlayer1Turn;
 
-            const connection = new WebSocket('ws://127.0.0.1:4444');
-            connection.onopen = function () {
-                connection.send('game dots turn');
-            };
-            connection.close();
-
-            if (document.getElementById("scorebg").style.backgroundColor === 'blue')
-                document.getElementById("scorebg").style.backgroundColor = 'green';
+            if (document.getElementById("scorebg").style.backgroundColor === 'rgba(41, 99, 246, 0.9)')
+                document.getElementById("scorebg").style.backgroundColor = 'rgba(76, 243, 139, 0.9)';
             else
-                document.getElementById("scorebg").style.backgroundColor = 'blue';
+                document.getElementById("scorebg").style.backgroundColor = 'rgba(41, 99, 246, 0.9)';
         }
 
     }
@@ -348,7 +342,7 @@ function init(gameID, oppUsername) {
 //function draw circle
     function drawCircle(x, y) {
         context.beginPath();
-        context.fillStyle = '#000000';
+        context.fillStyle = '#ffffff';
         context.arc(x, y, CELL_SIZE / 12, 0, 2 * Math.PI);
         context.fill();
         context.closePath();
