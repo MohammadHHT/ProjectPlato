@@ -50,13 +50,19 @@ section.battle>section .host.turn .timer {
     left: 0;
     top: 0;
     bottom: 0;
-    right: 40%;
+    right: 100%;
     background-color: rgba(130, 255, 46, 0.2);
+    transition: right linear 0.3s 0s;
+}
+
+section.battle>section .host.turn .timer.start {
+    right: 0;
+    transition: right linear 5s 0s;
 }
 
 section.battle>section .guest.turn .timer {
     position: absolute;
-    left: 40%;
+    left: 100%;
     top: 0;
     bottom: 0;
     right: 0;
@@ -89,38 +95,53 @@ section.battle>section .guest span {
 }
 
 section.battle .board {
-    width: calc(0.560 * 97.0vh);
+    width: calc(0.380 * 97.0vh);
+    opacity: 0;
     display: flex;
     flex-flow: row wrap;
     border: 1px solid white;
     position: absolute;
-    left: calc(50% - 0.28 * 97.0vh);
-    transform-origin: bottom;
-    transform: rotateX(57deg);
-    bottom: calc(0.07 * 97.0vh);
+    left: calc(50% - 0.19 * 97.0vh);
+    transform: scale(0.75);
+    transition: opacity ease-in-out 0.3s 0s, transform ease-in-out 0.3s 0s;
+    bottom: calc(0.42 * 97.0vh);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0);
+}
+
+section.battle .board.me {
+    width: calc(0.560 * 97.0vh);
+    opacity: 1;
     perspective: 400px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    transform-origin: bottom;
+    left: calc(50% - 0.28 * 97.0vh);
+    bottom: calc(0.07 * 97.0vh);
+    transform: rotateX(0deg);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-section.battle .board.arrange {
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0);
-    transform: rotateX(0);
+section.battle .board.show {
+    opacity: 1;
+    transform: scale(1);
 }
 
 section.battle .board .cell {
-    flex-basis: calc(0.0550 * 97.0vh);
-    max-width: calc(0.0560 * 97.0vh);
-    height: calc(0.0630 * 97.0vh);
+    flex-basis: calc(0.0370 * 97.0vh);
+    max-width: calc(0.0380 * 97.0vh);
+    height: calc(0.0380 * 97.0vh);
     box-sizing: border-box;
     flex-grow: 1;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.919);
     border: 1px solid white;
     transition: background-color 0.3s, height 0.3s;
+    cursor: pointer;
 }
 
-section.battle .board.arrange .cell {
+section.battle .board.me .cell {
+    background-color: rgba(255, 255, 255, 0.6);
+    flex-basis: calc(0.0550 * 97.0vh);
+    max-width: calc(0.0560 * 97.0vh);
     height: calc(0.0560 * 97.0vh);
+    cursor: default;
 }
 
 section.battle .board .cell.selected {
@@ -206,9 +227,15 @@ section.battle .board .start span {
 section.battle .board img {
     position: absolute;
     visibility: hidden;
+    opacity: 0;
     transition: visibility 0.1s;
     bottom: 0;
     left: 0;
+    transition: opacity ease-in-out 0.3s 0s;
+}
+
+section.battle .board img.show {
+    opacity: 1;
 }
 
 section.battle .board img.xl {

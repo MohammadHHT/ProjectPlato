@@ -34,7 +34,9 @@ interface BattleCommand {
             case "arrange":
                 arrange(tokens[1], tokens[2], Long.parseLong(tokens[3]), Arrays.stream(Arrays.copyOfRange(tokens, 4, tokens.length)).mapToInt(Integer::parseInt).toArray());
                 return null;
-            case "gamelogs":
+            case "shot":
+                return shot(tokens[1], tokens[2], Long.parseLong(tokens[3]), Integer.parseInt(tokens[4]));
+                case "gamelogs":
                 return DotsCommand.gameLogs("seebattle", tokens[1], tokens[2]);
             default:
                 return "failed command";
@@ -45,7 +47,7 @@ interface BattleCommand {
         Player player = Player.getPlayers().get(username);
         if (player.getToken().equals(token)) {
             Server.getConns().put(username, conn);
-            return String.valueOf(new SeaBattle(player).getGameID());
+            return "created " + String.valueOf(new SeaBattle(player).getGameID());
         }
         return null;
     }
@@ -56,7 +58,7 @@ interface BattleCommand {
         if (player.getToken().equals(token)) {
             Server.getConns().put(username, conn);
             seaBattle.join(player);
-            return String.valueOf(seaBattle.getGameID());
+            return "joined " + String.valueOf(seaBattle.getGameID());
         }
         return null;
     }
@@ -68,6 +70,31 @@ interface BattleCommand {
         }
     }
 
+    static String shot(String username, String token, long gameID, int cell) {
+        SeaBattle seaBattle = (SeaBattle) SeaBattle.getGames().get(gameID);
+        Player player1 = Player.getPlayers().get(username);
+        Player player2 = (seaBattle.getHost().equals(username) ? seaBattle.getGuest() : seaBattle.getHost());
+        if (player1.getToken().equals(token)) {
+            String ship = seaBattle.getGrids().get(player2).mark(cell);
+            if (ship == null) {
+                Server.getConns().get(player2.getUsername()).send("emptyme " + cell);
+                Player p = seaBattle.judge();
+                if (p.equals(player1)) {
+                    player1.addWins();
+                    player2.addDefeats();
+                    player1.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.WIN).getLogID());
+                    player2.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.DEFEAT).getLogID());
+                } else if (p.equals(player2)) {
+                    player2.addWins();
+                    player1.addDefeats();
+                    player2.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.WIN).getLogID());
+                    player1.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.DEFEAT).getLogID());
+                }
+                return "empty " + cell;
+            }
+        }
+        return null;
+    }
 }
 
 interface DotsCommand {

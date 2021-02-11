@@ -51,6 +51,10 @@ public class GameLog {
         return gameLogs;
     }
 
+    public long getLogID() {
+        return logID;
+    }
+
     public String getGame() {
         return game;
     }
