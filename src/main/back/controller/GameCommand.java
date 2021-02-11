@@ -34,7 +34,9 @@ interface BattleCommand {
             case "arrange":
                 arrange(tokens[1], tokens[2], Long.parseLong(tokens[3]), Arrays.stream(Arrays.copyOfRange(tokens, 4, tokens.length)).mapToInt(Integer::parseInt).toArray());
                 return null;
-            case "gamelogs":
+            case "shot":
+                return shot(tokens[1], tokens[2], Long.parseLong(tokens[3]), Integer.parseInt(tokens[4]));
+                case "gamelogs":
                 return DotsCommand.gameLogs("seebattle", tokens[1], tokens[2]);
             default:
                 return "failed command";
@@ -80,13 +82,13 @@ interface BattleCommand {
                 if (p.equals(player1)) {
                     player1.addWins();
                     player2.addDefeats();
-                    player1.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.WIN));
-                    player2.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.DEFEAT));
+                    player1.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.WIN).getLogID());
+                    player2.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.DEFEAT).getLogID());
                 } else if (p.equals(player2)) {
                     player2.addWins();
                     player1.addDefeats();
-                    player2.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.WIN));
-                    player1.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.DEFEAT));
+                    player2.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.WIN).getLogID());
+                    player1.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.DEFEAT).getLogID());
                 }
                 return "empty " + cell;
             }
