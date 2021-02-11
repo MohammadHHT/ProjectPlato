@@ -304,7 +304,6 @@ public interface UserCommand {
         Player player = Player.getPlayers().get(playerUsername);
         if (user.getToken().equals(token)) {
             new Suggestion(player, game);
-            System.out.println(playerUsername + " added.");
             return "send successfully";
         } else {
             return "send suggestions unsuccessfully";
@@ -433,13 +432,16 @@ public interface UserCommand {
 
     static String loadPlatoBotMessage(String username, String token) {
         Player player = Player.getPlayers().get(username);
-        StringBuilder allMessages = new StringBuilder();
+        String allMessages = "";
         if (player.getToken().equals(token)) {
             for (Long messageID : player.getMessages()) {
-                allMessages.append(Message.getMessages().get(messageID).getMessage()).append("@").append(Message.getMessages().get(messageID).getDate().getHour()).append(":").append(Message.getMessages().get(messageID).getDate().getMinute()).append("/").append(Message.getMessages().get(messageID).getDate().getMonthValue()).append("/").append(Message.getMessages().get(messageID).getDate().getDayOfMonth()).append("-");
+                allMessages += Message.getMessages().get(messageID).getMessage() + "@" +
+                        Message.getMessages().get(messageID).getDate().getHour() + ":" +
+                        Message.getMessages().get(messageID).getDate().getMinute() + "/" +
+                        Message.getMessages().get(messageID).getDate().getMonth() + "/" +
+                        Message.getMessages().get(messageID).getDate().getDayOfMonth() + "-";
             }
-            allMessages.delete(allMessages.length()-1, allMessages.length());
-            return allMessages.toString();
+            return allMessages.substring(0, allMessages.length() - 1);
         } else {
             return null;
         }

@@ -34,7 +34,7 @@ section .player-message {
     margin: calc(0.03 * 97vh) 0;
 }
 
-.request {
+section .player-message .request {
     height: calc(0.705 * 97vh);
     width: 100%;
     border-radius: 9.4px 9.4px 0 0;
@@ -88,15 +88,16 @@ section.player-message .request::-webkit-scrollbar {
     alignment: center;
     color: #ffffff;
     text-transform: uppercase;
+    margin-left: 0;
 }
 
-.games {
+section .player-message .games {
     display: flex;
     margin-top: 19px;
     align-content: center;
 }
 
-.games small {
+section .player-message .games small {
     font-family: 'Questrial';
     margin: auto;
     font-size: 17px;
@@ -192,7 +193,7 @@ section.player-message .request::-webkit-scrollbar {
 .botMessageIcon {
     width: 40px;
     height: 40px;
-    margin : 0 105px 0 5px;
+    margin : 0 90px 0 5px;
 }
 .botMessageIcon :hover {
     opacity: 0.9;

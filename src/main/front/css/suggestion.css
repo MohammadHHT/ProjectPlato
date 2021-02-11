@@ -49,7 +49,7 @@ section .suggestion {
     margin-bottom: 1vh;
 }
 
-.games {
+section .suggestion .games {
     width: 100%;
     display: flex;
 }

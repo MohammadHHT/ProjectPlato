@@ -385,10 +385,10 @@
                     <div class="games">
                         <small id="suggested-game-situation">No games suggested</small>
                         <div class="battle-sea">
-                            <img id="sea-battle-suggestion-pic" src="jpg/sea%20battle.jpg" alt="sea Battle">
+                            <img onclick="playSeaBattleGameFromSuggestion()" id="sea-battle-suggestion-pic" src="jpg/sea%20battle.jpg" alt="sea Battle">
                         </div>
                         <div class="dots-and-boxes">
-                            <img id="dots-and-boxes-suggestion-pic" src="jpg/dots%20and%20boxes.jpeg"
+                            <img onclick="playDotsAndBoxesGameFromSuggestion()" id="dots-and-boxes-suggestion-pic" src="jpg/dots%20and%20boxes.jpeg"
                                 alt="Dots And Boxes">
                         </div>
                     </div>
@@ -1402,24 +1402,7 @@
 
             <section class="admin-inbox">
                 <div class="chatBox">
-                    <div class="inboxHeader">
-                        <p id="chat-username">Player 1</p>
-                    </div>
-                    <div class="messageArea">
-                    </div>
-                    <div class="messageField">
-                        <div>
-                            <textarea id="text-area" placeholder="Say hello..."></textarea>
-                        </div>
-                        <div id="send-button">
-                            <svg height="512pt" viewBox="0 -18 512 512" width="512pt"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="m0 475.445312 59.078125-237.714843-59.078125-237.730469 512 237.730469zm0 0"
-                                    fill="#ffcb5a" />
-                                <path d="m0 475.445312 512-237.714843h-452.921875zm0 0" fill="#fba61f" />
-                            </svg>
-                        </div>
-                    </div>
+
                 </div>
             </section>
 
@@ -1439,7 +1422,7 @@
                     </div>
                     <div class="messageField">
                         <div>
-                            <textarea id="message-content" placeholder="Say hello..."></textarea>
+                            <textarea id="message-content" placeholder="you can not chat with Bot!"></textarea>
                         </div>
                         <div id="send">
                             <svg height="512pt" viewBox="0 -18 512 512" width="512pt"
