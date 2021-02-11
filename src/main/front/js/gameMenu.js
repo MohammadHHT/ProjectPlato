@@ -1,3 +1,4 @@
+var audio = document.getElementById('click-button-audio');
 function showBattleSeaGamePage() {
     document.getElementById("allGameMenu").style.display = "none";
     document.getElementById("seaBattleGamePage").style.display = "block";
@@ -11,6 +12,7 @@ function showDotsAndBoxesGamePage() {
 }
 
 function showSeaBattleGamesDiv() {
+    audio.play();
     document.getElementById("SB-HistoryRibbon").style.backgroundColor = "#122948";
     document.getElementById("SB-HowToPlayRibbon").style.backgroundColor = "#122948";
     document.getElementById("SB-LeaderboardRibbon").style.backgroundColor = "#122948";
@@ -23,6 +25,7 @@ function showSeaBattleGamesDiv() {
 }
 
 function showSeaBattleHistoryDiv() {
+    audio.play();
     document.getElementById("SB-GamesRibbon").style.backgroundColor = "#122948";
     document.getElementById("SB-HistoryRibbon").style.backgroundColor = "#bb2d44";
     document.getElementById("SB-HowToPlayRibbon").style.backgroundColor = "#122948";
@@ -35,6 +38,7 @@ function showSeaBattleHistoryDiv() {
 }
 
 function showSeaBattleLeaderboardDiv() {
+    audio.play();
     document.getElementById("SB-GamesRibbon").style.backgroundColor = "#122948";
     document.getElementById("SB-HistoryRibbon").style.backgroundColor = "#122948";
     document.getElementById("SB-HowToPlayRibbon").style.backgroundColor = "#122948";
@@ -47,6 +51,7 @@ function showSeaBattleLeaderboardDiv() {
 }
 
 function showSeaBattleHowToPlayDiv() {
+    audio.play();
     document.getElementById("SB-GamesRibbon").style.backgroundColor = "#122948";
     document.getElementById("SB-HistoryRibbon").style.backgroundColor = "#122948";
     document.getElementById("SB-HowToPlayRibbon").style.backgroundColor = "#bb2d44";
@@ -59,6 +64,7 @@ function showSeaBattleHowToPlayDiv() {
 }
 
 function showDotsAndBoxesGamesDiv() {
+    audio.play();
     document.getElementById("GamesRibbon").style.backgroundColor = "#bb2d44";
     document.getElementById("HistoryRibbon").style.backgroundColor = "#122948";
     document.getElementById("HowToPlayRibbon").style.backgroundColor = "#122948";
@@ -71,6 +77,7 @@ function showDotsAndBoxesGamesDiv() {
 }
 
 function showDotsAndBoxesHistoryDiv() {
+    audio.play();
     document.getElementById("GamesRibbon").style.backgroundColor = "#122948";
     document.getElementById("HistoryRibbon").style.backgroundColor = "#bb2d44";
     document.getElementById("HowToPlayRibbon").style.backgroundColor = "#122948";
@@ -83,6 +90,7 @@ function showDotsAndBoxesHistoryDiv() {
 }
 
 function showDotsAndBoxesLeaderboardDiv() {
+    audio.play();
     document.getElementById("GamesRibbon").style.backgroundColor = "#122948";
     document.getElementById("HistoryRibbon").style.backgroundColor = "#122948";
     document.getElementById("HowToPlayRibbon").style.backgroundColor = "#122948";
@@ -95,6 +103,7 @@ function showDotsAndBoxesLeaderboardDiv() {
 }
 
 function showDotsAndBoxesHowToPlay() {
+    audio.play();
     document.getElementById("GamesRibbon").style.backgroundColor = "#122948";
     document.getElementById("HistoryRibbon").style.backgroundColor = "#122948";
     document.getElementById("HowToPlayRibbon").style.backgroundColor = "#bb2d44";
