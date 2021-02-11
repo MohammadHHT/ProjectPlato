@@ -234,7 +234,7 @@ function submit() {
         day = date.getDate();
         level = 1;
         money = 0.0;
-        account(true);
+        account(true, username);
         register_clear_fields();
         connection.close();
     }

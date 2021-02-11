@@ -20,6 +20,8 @@ public interface UserCommand {
                 return edit(tokens[1], tokens[2], tokens[3], tokens[4]);
             case "login":
                 return login(tokens[1], tokens[2]);
+            case "reload":
+                return reload(tokens[1], tokens[2]);
             case "search":
                 return search(tokens[1], tokens[2], tokens[3]);
             case "suggestions":
@@ -34,14 +36,22 @@ public interface UserCommand {
                 return joinEvent(tokens[1], tokens[2], Long.parseLong(tokens[3]));
             case "users":
                 return users(tokens[1], tokens[2]);
+            case "user":
+                return user(tokens[1], tokens[2], tokens[3]);
             case "friends":
-                return friends(tokens[1], tokens[2]);
+                return friends(tokens[1], tokens[2], tokens[3]);
+            case "addfriend":
+                return addFriend(tokens[1], tokens[2], tokens[3]);
+            case "deletefriend":
+                return deleteFriend(tokens[1], tokens[2], tokens[3]);
             case "isfriend" :
                 return isFriend(tokens[1], tokens[2], tokens[3]);
             case "allUsers":
                 return allUsers(tokens[1], tokens[2]);
             case "sendSuggestion":
                 return addSuggestion(tokens[1], tokens[2], tokens[3], tokens[4]);
+            case "unSendSuggestion":
+                return deleteSendSuggestion(tokens[1], tokens[2], tokens[3], tokens[4]);
             case "loadSuggestedGame":
                 return loadSuggestedGame(tokens[1], tokens[2]);
             case "loadFriendsRequest":
@@ -152,6 +162,14 @@ public interface UserCommand {
         }
     }
 
+    static String reload(String username, String token) {
+        User user = User.getUsers().get(username);
+        if (user.getToken().equals(token)) {
+            user.logout();
+        }
+        return null;
+    }
+
     static String search(String username, String token, String input) {
         if (User.getUsers().get(username).getToken().equals(token)) {
             StringBuilder users = new StringBuilder();
@@ -224,14 +242,36 @@ public interface UserCommand {
         return null;
     }
 
-    static String friends(String username, String token) {
-        Player player = Player.getPlayers().get(username);
-        if (player.getToken().equals(token)) {
+    static String user(String username, String token, String player) {
+        Player p = Player.getPlayers().get(player);
+        if (User.getUsers().get(username).getToken().equals(token)) {
+            return p.toString() + " " + (Player.getPlayers().get(username).getFriends().contains(player) ? "REQUESTED" : "REQUEST");
+        }
+        return null;
+    }
+
+    static String friends(String username, String token, String user) {
+        if (Player.getPlayers().get(username).getToken().equals(token)) {
             StringBuilder friends = new StringBuilder();
-            for (String s : player.getFriends()) {
+            for (String s : Player.getPlayers().get(user).getFriends()) {
                 friends.append(s).append(" ");
             }
             return friends.toString().trim();
+        }
+        return null;
+    }
+
+    static String addFriend(String username, String token, String friend) {
+        if (Player.getPlayers().get(username).getToken().equals(token)) {
+            Player.getPlayers().get(friend).addFriendRequest(username);
+        }
+        return null;
+    }
+
+    static String deleteFriend(String username, String token, String friend) {
+        Player player = Player.getPlayers().get(username);
+        if (player.getToken().equals(token)) {
+            player.getFriends().remove(friend);
         }
         return null;
     }
@@ -247,13 +287,12 @@ public interface UserCommand {
 
     static String allUsers(String username, String token) {
         User user = User.getUsers().get(username);
-        String usersInfo = null;
+        String usersInfo = "";
         if (user.getToken().equals(token)) {
             for (Map.Entry<String, User> entry : User.getUsers().entrySet()) {
                 usersInfo += entry.getValue().toString() + ("/");
             }
-            return usersInfo;
-//            return "amin lotfi aminlotfi 123456 amin@gmail.com 09304087303/mahdi hadi mahdihadiam 567890 mahdi@gmail.com 09126086363/mehran khaksar mehrankhaksar 654321 mehran@gmail.com 09122243286";
+            return usersInfo.substring(0, usersInfo.length() - 1);
         } else {
             return null;
         }
@@ -264,10 +303,26 @@ public interface UserCommand {
         Player player = Player.getPlayers().get(playerUsername);
         if (user.getToken().equals(token)) {
             new Suggestion(player, game);
-            System.out.println(playerUsername + " added.");
             return "send successfully";
         } else {
             return "send suggestions unsuccessfully";
+        }
+    }
+
+    static String deleteSendSuggestion(String username, String token, String playerUsername, String game) {
+        User user = User.getUsers().get(username);
+        Player player = Player.getPlayers().get(playerUsername);
+        if (user.getToken().equals(token)) {
+            for (Long suggestionID : player.getSuggestions()) {
+                if (Suggestion.getSuggestions().containsKey(suggestionID)) {
+                    if (Suggestion.getSuggestions().get(suggestionID).getGame().equals(game)) {
+                        player.getSuggestions().remove(suggestionID);
+                    }
+                }
+            }
+            return "unSend successfully";
+        } else {
+            return "unSend suggestions unsuccessfully";
         }
     }
 
@@ -306,21 +361,20 @@ public interface UserCommand {
     static String loadFriendsRequest(String username, String token) {
         User user = User.getUsers().get(username);
         Set<String> friendsRequestUsername = Player.getPlayers().get(username).getFriendRequest();
-        String allUsernames = null;
+        String allUsernames = "";
         if (user.getToken().equals(token)) {
             for (String friendUsername : friendsRequestUsername) {
                 allUsernames += (Player.getPlayers().get(friendUsername).getUsername()) + (" ");
             }
-            return allUsernames;
+            return allUsernames.trim();
         } else {
             return null;
         }
     }
 
     static String acceptFriend(String username, String token, String friendUsername) {
-        User user = User.getUsers().get(username);
         Player player = Player.getPlayers().get(username);
-        if (user.getToken().equals(token)) {
+        if (player.getToken().equals(token)) {
             if (player.acceptFriendRequest(friendUsername)) {
                 return "accept successfully";
             } else {
@@ -332,9 +386,8 @@ public interface UserCommand {
     }
 
     static String declineFriend(String username, String token, String friendUsername) {
-        User user = User.getUsers().get(username);
         Player player = Player.getPlayers().get(username);
-        if (user.getToken().equals(token)) {
+        if (player.getToken().equals(token)) {
             if (player.declineFriendRequest(friendUsername)) {
                 return "decline successfully";
             } else {
@@ -348,16 +401,16 @@ public interface UserCommand {
     static String loadChatHistory(String username, String token, String PlayerUsername) {
         User user = User.getUsers().get(username);
         Player player = Player.getPlayers().get(PlayerUsername);
-        String allMessages = null;
+        String allMessages = "";
         if (user.getToken().equals(token)) {
             for (Long messageID : player.getMessages()) {
-                allMessages += Message.getMessages().get(messageID).getMessage() + "@" +
+                allMessages += Message.getMessages().get(messageID).getMessage() + "/" +
                         Message.getMessages().get(messageID).getDate().getHour() + ":" +
-                        Message.getMessages().get(messageID).getDate().getMinute() + "/" +
-                        Message.getMessages().get(messageID).getDate().getMonthValue() + "/" +
-                        Message.getMessages().get(messageID).getDate().getDayOfMonth();
+                        Message.getMessages().get(messageID).getDate().getMinute() + "-";
             }
-            return allMessages;
+            return allMessages +
+                    ((Message) Message.getMessages().values().toArray()[0]).getDate().getMonth() + "/" +
+                    ((Message) Message.getMessages().values().toArray()[0]).getDate().getDayOfMonth();
         } else {
             return null;
         }
@@ -368,7 +421,7 @@ public interface UserCommand {
         if (user.getToken().equals(token)) {
             Message message = new Message(playerUsername, messageContent);
             return messageContent + "/" + message.getDate().getHour() + ":" + message.getDate().getMinute() + "/" +
-                    message.getDate().getMonthValue() + "/" + message.getDate().getDayOfMonth();
+                    message.getDate().getMonth() + "/" + message.getDate().getDayOfMonth();
         } else {
             return null;
         }
@@ -376,13 +429,16 @@ public interface UserCommand {
 
     static String loadPlatoBotMessage(String username, String token) {
         Player player = Player.getPlayers().get(username);
-        StringBuilder allMessages = new StringBuilder();
+        String allMessages = "";
         if (player.getToken().equals(token)) {
             for (Long messageID : player.getMessages()) {
-                allMessages.append(Message.getMessages().get(messageID).getMessage()).append("@").append(Message.getMessages().get(messageID).getDate().getHour()).append(":").append(Message.getMessages().get(messageID).getDate().getMinute()).append("/").append(Message.getMessages().get(messageID).getDate().getMonthValue()).append("/").append(Message.getMessages().get(messageID).getDate().getDayOfMonth()).append("-");
+                allMessages += Message.getMessages().get(messageID).getMessage() + "@" +
+                        Message.getMessages().get(messageID).getDate().getHour() + ":" +
+                        Message.getMessages().get(messageID).getDate().getMinute() + "/" +
+                        Message.getMessages().get(messageID).getDate().getMonth() + "/" +
+                        Message.getMessages().get(messageID).getDate().getDayOfMonth() + "-";
             }
-            allMessages.delete(allMessages.length()-1, allMessages.length());
-            return allMessages.toString();
+            return allMessages.substring(0, allMessages.length() - 1);
         } else {
             return null;
         }

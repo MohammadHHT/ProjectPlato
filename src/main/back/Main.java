@@ -47,10 +47,6 @@ public class Main {
         Player.getPlayers().get("player").acceptFriendRequest("player7");
         Player.getPlayers().get("player").addFriendRequest("player8");
         Player.getPlayers().get("player").acceptFriendRequest("player8");
-        Player.getPlayers().get("player").addFriendRequest("player9");
-        Player.getPlayers().get("player").acceptFriendRequest("player9");
-        Player.getPlayers().get("player").addFriendRequest("player10");
-        Player.getPlayers().get("player").acceptFriendRequest("player10");
         new Server().start();
     }
 }

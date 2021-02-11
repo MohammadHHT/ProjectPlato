@@ -97,7 +97,7 @@ function login_password() {
                 day = parseInt(data[9]);
                 level = player ? 0 : parseInt(data[10]);
                 money = player ? 0.0 : parseFloat(data[11]);
-                account(true);
+                account(true, username);
             } else {
                 if (data[1].localeCompare('username') == 0) {
                     login_message.innerHTML = "Username doesn't exist!";

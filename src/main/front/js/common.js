@@ -16,6 +16,20 @@ function next_page(previous, next) {
     nxt.classList.add('page');
 }
 
+window.onload = function(e) {
+    e.preventDefault();
+    const connection = new WebSocket('ws://127.0.0.1:4444');
+
+    connection.onopen = function () {
+        connection.send('user reload ' + username + ' ' + token);
+    };
+
+    connection.onmessage = function (e) {
+
+        connection.close();
+    }
+}
+
 /*
 function back() {
 

@@ -193,6 +193,10 @@ navigation[3].addEventListener('click', function () {
     navigation[5].classList.remove('show');
     navigation[6].classList.add('show');
 
+    document.getElementById("allGameMenu").style.display = "block";
+    document.getElementById("seaBattleGamePage").style.display = "none";
+    document.getElementById("dotsAndBoxesGamePage").style.display = "none";
+
     next_page('primary', 'games-menu');
 });
 

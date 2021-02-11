@@ -115,6 +115,7 @@ section.account header .third {
     padding-left: 4px;
     transition: opacity ease-in-out 0.3s;
     opacity: 0;
+    visibility: hidden;
 }
 
 section.account header .third.show {
@@ -190,6 +191,29 @@ section.account header .edit:hover {
 section.account header .edit.hide {
     opacity: 0;
     transform: scale(0);
+}
+
+section.account header .request {
+    /*padding: 8px 10px;*/
+    background-color: #0b9cff;
+    color: white;
+    border-radius: 6px;
+    position: absolute;
+    height: 30px;
+    width: 18%;
+    font-weight: bold;
+    right: 15px;
+    border: none;
+    top: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    visibility: hidden;
+    outline: none;
+    font-size: 10px;
+}
+
+section.account header .request:hover {
+    background-color: #0d89e0;
 }
 
 section.account .friends {

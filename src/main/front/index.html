@@ -163,7 +163,7 @@
                 </form>
             </section>
 
-            <section class="login ">
+            <section class="login">
                 <h1>SIGN IN</h1>
                 <form action="" method="get" autocomplete="off">
                     <ol>
@@ -316,6 +316,7 @@
                             </svg>
                         </div>
                     </div>
+                    <button class="request">REQUEST</button>
                     <span id="age"></span>
                     <button class="edit" title="edit">
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 477.873 477.873"
@@ -367,7 +368,7 @@
                     <div class="player-title"><span>Players</span></div>
                     <div class="suggestion-buttons">
                         <div class="send-suggestion" id="send-suggestion-button" onclick="sendSuggestion()">Send</div>
-                        <div class="unSend-suggestion" id="unSend-button">Unsend</div>
+                        <div class="unSend-suggestion" id="unSend-button" onclick="unSendSuggestion()">Unsend</div>
                     </div>
                     <div class="players-area">
 
@@ -384,10 +385,10 @@
                     <div class="games">
                         <small id="suggested-game-situation">No games suggested</small>
                         <div class="battle-sea">
-                            <img id="sea-battle-suggestion-pic" src="jpg/sea%20battle.jpg" alt="sea Battle">
+                            <img onclick="playSeaBattleGameFromSuggestion()" id="sea-battle-suggestion-pic" src="jpg/sea%20battle.jpg" alt="sea Battle">
                         </div>
                         <div class="dots-and-boxes">
-                            <img id="dots-and-boxes-suggestion-pic" src="jpg/dots%20and%20boxes.jpeg"
+                            <img onclick="playDotsAndBoxesGameFromSuggestion()" id="dots-and-boxes-suggestion-pic" src="jpg/dots%20and%20boxes.jpeg"
                                 alt="Dots And Boxes">
                         </div>
                     </div>
@@ -1147,12 +1148,7 @@
                     </div>
                     <div class="run-game">Create Game</div>
                 </section>
-<<<<<<< HEAD
-                <section class="game-page" id="dotsAndBoxesGamePage">
-=======
-
                 <section class="DB-game-page" id="dotsAndBoxesGamePage">
->>>>>>> origin/main
                     <div class="game-title"><span>Dots & Boxes</span></div>
                     <div class="game-level">
                         <div>
@@ -1192,7 +1188,6 @@
 
                     </div>
                     <div class="leaderboard" id="DB-leaderboardDiv">
-<<<<<<< HEAD
                         <div class="player-score">
                             <div class="rank"><span>1.</span></div>
                             <div class="player-avatar-rank">
@@ -1459,9 +1454,6 @@
                             </div>
                             <div class="score"><span>1200</span></div>
                         </div>
-=======
-
->>>>>>> origin/main
                     </div>
                     <div class="How-to-Play" id="DB-HowToPlayDiv">
                         <div class="DB-content">
@@ -1492,31 +1484,7 @@
 
             <section class="admin-inbox">
                 <div class="chatBox">
-                    <div class="inboxHeader">
-                        <p id="chat-username">Player 1</p>
-                    </div>
-                    <div class="messageArea">
-                        <div class="messageHistory">
-                            <div id="messageDate">
-                                <span id="month">January</span>
-                                <span id="day">24</span>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="messageField">
-                        <div>
-                            <textarea id="text-area" placeholder="Say hello..."></textarea>
-                        </div>
-                        <div id="send-button">
-                            <svg height="512pt" viewBox="0 -18 512 512" width="512pt"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="m0 475.445312 59.078125-237.714843-59.078125-237.730469 512 237.730469zm0 0"
-                                    fill="#ffcb5a" />
-                                <path d="m0 475.445312 512-237.714843h-452.921875zm0 0" fill="#fba61f" />
-                            </svg>
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -1536,7 +1504,7 @@
                     </div>
                     <div class="messageField">
                         <div>
-                            <textarea id="message-content" placeholder="Say hello..."></textarea>
+                            <textarea id="message-content" placeholder="you can not chat with Bot!"></textarea>
                         </div>
                         <div id="send">
                             <svg height="512pt" viewBox="0 -18 512 512" width="512pt"

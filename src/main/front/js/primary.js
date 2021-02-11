@@ -3,6 +3,7 @@ navigation[4].addEventListener('click', function () {
     navigation[3].classList.add('show');
     navigation[5].classList.remove('show');
     navigation[6].classList.add('show');
+    account(true, username);
     next_page('primary', 'account');
 });
 
@@ -59,7 +60,7 @@ function update_list(value) {
 
         for (let i = 0; i < users.length; i++) {
             if (users[i].length > 0) {
-                list.insertAdjacentHTML('beforeend', '<li class="item" name="' + users[i] + '"><img src = "avatar/avatar (' + Math.floor(Math.random() * 50 + 1) + ').svg"><h2>' + users[i] + '</h2></li>');
+                list.insertAdjacentHTML('beforeend', '<li class="item" onclick="go_to_account(\'' + users[i] + '\')" name="' + users[i] + '"><img src = "avatar/avatar (' + Math.floor(Math.random() * 50 + 1) + ').svg"><h2>' + users[i] + '</h2></li>');
             }
         }
         if (users.length == 1 && users[0].length > 0) {
@@ -75,6 +76,11 @@ function update_list(value) {
     }, 300);
         connection.close();
     }
+}
+
+function go_to_account(username) {
+    account(false, username);
+    next_page('primary', 'account');
 }
 
 function update_suggestions() {
@@ -206,9 +212,9 @@ document.querySelector('section.primary .admin .events .template').querySelector
                         let fmonth = e.data.split(' ')[2];
                         let date = new Date();
                         if (document.querySelector('section.primary .admin .events .template').querySelector('.game').value.localeCompare('dots') == 0) {
-                            games.insertAdjacentHTML('beforeend', '<div class="card dots" eventID="' + eventid + '" onclick="delete_event(\'' + eventid + '\')"><span>Dots & Boxes</span><div class="info"><span>+' + prize.value + '</span><div><span class="start"><span>' + sday.value + ' ' + smonth + ' ' + syear.value + '</span><span>' + date.getHours() + ':' + date.getMinutes() + '</span></span><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"viewBox="0 0 447.243 447.243"><g><path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160C418.542,265.382,418.577,245.121,406.101,232.603z" /></g></svg><span class="finish"><span>' + fday.value + ' ' + fmonth + ' ' + fyear.value + '</span><span>' + date.getHours() + ':' + date.getMinutes() + '</span></span></div></div><div class="cover"><span>DELETE</span></div></div>');
+                            document.querySelector('section.primary .admin .events .games').insertAdjacentHTML('beforeend', '<div class="card dots" eventID="' + eventid + '" onclick="delete_event(\'' + eventid + '\')"><span>Dots & Boxes</span><div class="info"><span>+' + prize.value + '</span><div><span class="start"><span>' + sday.value + ' ' + smonth + ' ' + syear.value + '</span><span>' + date.getHours() + ':' + date.getMinutes() + '</span></span><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"viewBox="0 0 447.243 447.243"><g><path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160C418.542,265.382,418.577,245.121,406.101,232.603z" /></g></svg><span class="finish"><span>' + fday.value + ' ' + fmonth + ' ' + fyear.value + '</span><span>' + date.getHours() + ':' + date.getMinutes() + '</span></span></div></div><div class="cover"><span>DELETE</span></div></div>');
                         } else {
-                            games.insertAdjacentHTML('beforeend', '<div class="card battle" eventID="' + eventid + '" onclick="delete_event(\'' + eventid + '\')"><span>Sea Battle</span><div class="info"><span>+' + prize.value + '</span><div><span class="start"><span>' + sday.value + ' ' + smonth + ' ' + syear.value + '</span><span>' + date.getHours() + ':' + date.getMinutes() + '</span></span><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"viewBox="0 0 447.243 447.243"><g><path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160C418.542,265.382,418.577,245.121,406.101,232.603z" /></g></svg><span class="finish"><span>' + fday.value + ' ' + fmonth + ' ' + fyear.value + '</span><span>' + date.getHours() + ':' + date.getMinutes() + '</span></span></div></div><div class="cover"><span>DELETE</span></div></div>');
+                            document.querySelector('section.primary .admin .events .games').insertAdjacentHTML('beforeend', '<div class="card battle" eventID="' + eventid + '" onclick="delete_event(\'' + eventid + '\')"><span>Sea Battle</span><div class="info"><span>+' + prize.value + '</span><div><span class="start"><span>' + sday.value + ' ' + smonth + ' ' + syear.value + '</span><span>' + date.getHours() + ':' + date.getMinutes() + '</span></span><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"viewBox="0 0 447.243 447.243"><g><path d="M406.101,232.603c-0.978-0.982-2.019-1.899-3.116-2.745c-13.381-8.971-31.276-7.013-42.4,4.64l-88.64,88.32c-4.7,4.695-8.641,10.093-11.68,16l-5.12,9.76v-314.4c0.677-16.099-10.332-30.349-26.08-33.76c-17.445-2.829-33.881,9.019-36.71,26.465c-0.297,1.83-0.434,3.682-0.41,5.535v315.52l-3.2-6.88c-3.183-6.725-7.515-12.843-12.8-18.08l-88.64-88.48c-11.124-11.653-29.019-13.611-42.4-4.64c-14.259,10.441-17.355,30.464-6.914,44.724c0.844,1.152,1.764,2.247,2.754,3.276l160,160c12.49,12.504,32.751,12.515,45.255,0.025c0.008-0.008,0.017-0.017,0.025-0.025l160-160C418.542,265.382,418.577,245.121,406.101,232.603z" /></g></svg><span class="finish"><span>' + fday.value + ' ' + fmonth + ' ' + fyear.value + '</span><span>' + date.getHours() + ':' + date.getMinutes() + '</span></span></div></div><div class="cover"><span>DELETE</span></div></div>');
                         }
                         connection.close();
                     }

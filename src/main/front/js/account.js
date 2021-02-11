@@ -11,8 +11,6 @@ navigation[6].addEventListener('click', function () {
     next_page('account', 'primary');
 });
 
-document.querySelector('section.account .first #avatar').src = 'avatar/avatar (' + Math.floor(Math.random() * 50 + 1) + ').svg';
-
 function avatar_change() {
     document.querySelector('section.account .first #avatar').classList.remove('show');
     setTimeout(function () {
@@ -21,11 +19,49 @@ function avatar_change() {
     }, 300);
 }
 
-document.querySelector('section.account .first #avatar').addEventListener('click', avatar_change);
+function update_friends(user) {
+    const connection = new WebSocket('ws://127.0.0.1:4444');
 
-document.querySelector('section.account header .second .level').style.top = (document.querySelector('.account header').offsetWidth / 50 + document.querySelector('section.account header .second').offsetHeight / 20) + 'px';
-document.querySelector('section.account header .second .level').style.right = document.querySelector('.account header').offsetWidth / 10 + 'px';
-document.querySelector('section.account header .second .level').style.transform = 'translateX(100%) scale(' + window.innerHeight * 0.03 / document.querySelector('section.account header .second .level').offsetHeight + ')';
+    connection.onopen = function () {
+        connection.send('user friends ' + username + " " + token + " " + user);
+    };
+
+    connection.onmessage = function (e) {
+        let list = document.querySelector('section.account .friends ol');
+        let friends = e.data.split(' ');
+        list.innerHTML = '';
+        for (let i = 0; i < friends.length; i++) {
+            if (friends[i].length > 0) {
+                list.insertAdjacentHTML('beforeend', '<li class="item" name="' + friends[i] + '"><img src="avatar/avatar (' + Math.floor(Math.random() * 50 + 1) + ').svg"><h2>' + friends[i] + '</h2><div class="delete" onclick="delete_friend(\'' + friends[i] + '\')"><div><span>DELETE</span></div></div></li>')
+            }
+        }
+        if (friends[0].length > 0) {
+            document.querySelector('section.account .friends h1').innerHTML = 'FRIENDS (' + friends.length + ')';
+        } else {
+            document.querySelector('section.account .friends h1').innerHTML = 'FRIENDS (' + 0 + ')';
+        }
+        connection.close();
+    }
+}
+
+function delete_friend(friend) {
+    const connection = new WebSocket('ws://127.0.0.1:4444');
+
+    connection.onopen = function () {
+        connection.send('user deletefriend ' + username + " " + token + " " + friend);
+    };
+
+    let items = document.querySelectorAll('section.account .friends ol li');
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].getAttribute('name').localeCompare(friend) == 0) {
+            items[i].classList.add('hide');
+            setTimeout(function () {
+                items[i].parentNode.removeChild(items[i]);
+            }, 300);
+            break;
+        }
+    }
+}
 
 document.querySelector('section.account header .edit').addEventListener('click', function () {
     if (document.querySelector('section.account header .second .name').contentEditable.localeCompare('false') == 0) {
@@ -33,6 +69,7 @@ document.querySelector('section.account header .edit').addEventListener('click',
         document.querySelector('section.account header .second .username span').contentEditable = 'true';
         document.querySelector('section.account header .second .email span').contentEditable = 'true';
         document.querySelector('section.account header .edit').classList.add('hide');
+        document.querySelector('section.account header .third').style.visibility = 'visible';
         document.querySelector('section.account header .third').classList.add('show');
     }
 });
@@ -88,54 +125,17 @@ document.querySelector('section.account header .third .ignore').addEventListener
     document.querySelector('section.account header .third').classList.remove('show');
 });
 
-function update_friends() {
+document.querySelector('section.account header .request').addEventListener('click', function () {
     const connection = new WebSocket('ws://127.0.0.1:4444');
 
     connection.onopen = function () {
-        connection.send('user friends ' + username + " " + token);
-    };
-
-    connection.onmessage = function (e) {
-        let list = document.querySelector('section.account .friends ol');
-        let friends = e.data.split(' ');
-
-        for (let i = 0; i < friends.length; i++) {
-            if (friends[i].length > 0) {
-                list.insertAdjacentHTML('beforeend', '<li class="item" name="' + friends[i] + '"><img src="avatar/avatar (' + Math.floor(Math.random() * 50 + 1) + ').svg"><h2>' + friends[i] + '</h2><div class="delete" onclick="delete_friend(\'' + friends[i] + '\')"><div><span>DELETE</span></div></div></li>')
-            }
-        }
-        document.querySelector('section.account .friends h1').innerHTML = 'FRIENDS (' + friends.length + ')';
+        connection.send('user addfriend ' + username + " " + token + " " + document.querySelector('section.account header .second .username span').textContent);
+        document.querySelector('section.account header .request').textContent = 'REQUESTED';
         connection.close();
-    }
-}
-
-function delete_friend(friend) {
-    console.log(friend);
-    const connection = new WebSocket('ws://127.0.0.1:4444');
-
-    connection.onopen = function () {
-        connection.send('user deletefriend ' + username + " " + token + " " + friend);
     };
+});
 
-    let items = document.querySelectorAll('section.account .friends ol li');
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].getAttribute('name').localeCompare(friend) == 0) {
-            items[i].classList.add('hide');
-            setTimeout(function () {
-                items[i].parentNode.removeChild(items[i]);
-            }, 300);
-            break;
-        }
-    }
-}
-
-function account(self) {
-    if (!self) {
-        document.querySelector('section.account header .edit').classList.add('hide');
-        document.querySelector('section.account .first #avatar').removeEventListener('click', avatar_change);
-        document.querySelector('section.account .first #avatar').style.cursor = 'default';
-    }
-
+function hosted() {
     first_name_tmp = first_name;
     last_name_tmp = last_name;
     username_tmp = username;
@@ -148,11 +148,73 @@ function account(self) {
     document.querySelector('section.account header .second .level').innerHTML = level;
     document.querySelector('section.account header #age').textContent = 'since ' + day + ' / ' + month + ' / ' + year;
 
-    update_friends();
+    update_friends(username);
 
     if (!player) {
         document.querySelector('section.account header .second .level').style.display = 'none';
         document.querySelector('section.account header .first .money').style.display = 'none';
         document.querySelector('section.account .friends').style.display = 'none';
+    }
+
+    document.querySelector('section.account .first #avatar').src = 'avatar/avatar (' + Math.floor(Math.random() * 50 + 1) + ').svg';
+    document.querySelector('section.account .first #avatar').addEventListener('click', avatar_change);
+    document.querySelector('section.account header .second .level').style.top = (document.querySelector('.account header').offsetWidth / 50 + document.querySelector('section.account header .second').offsetHeight / 20) + 'px';
+    document.querySelector('section.account header .second .level').style.right = document.querySelector('.account header').offsetWidth / 10 + 'px';
+    document.querySelector('section.account header .second .level').style.transform = 'translateX(100%) scale(' + window.innerHeight * 0.03 / document.querySelector('section.account header .second .level').offsetHeight + ')';
+}
+
+function visit(user) {
+    const connection = new WebSocket('ws://127.0.0.1:4444');
+
+    connection.onopen = function () {
+        connection.send('user user ' + username + " " + token + " " + user);
+    };
+
+    connection.onmessage = function (e) {
+        let details = e.data.split(' ');
+        document.querySelector('section.account header .first .money span').textContent = details[4];
+        document.querySelector('section.account header .second .name').textContent = details[0] + ' ' + details[1];
+        document.querySelector('section.account header .second .username span').textContent = details[2];
+        document.querySelector('section.account header .second .email span').textContent = details[3];
+        document.querySelector('section.account header .second .level').innerHTML = details[5];
+        document.querySelector('section.account header #age').textContent = 'since ' + details[6] + ' / ' + details[7] + ' / ' + details[8];
+        document.querySelector('section.account header .request').textContent = details[9];
+        console.log(details[9]);
+
+        update_friends(user);
+
+        document.querySelector('section.account .first #avatar').src = 'avatar/avatar (' + Math.floor(Math.random() * 50 + 1) + ').svg';
+        document.querySelector('section.account .first #avatar').addEventListener('click', avatar_change);
+        document.querySelector('section.account header .second .level').style.top = (document.querySelector('.account header').offsetWidth / 50 + document.querySelector('section.account header .second').offsetHeight / 20) + 'px';
+        document.querySelector('section.account header .second .level').style.right = document.querySelector('.account header').offsetWidth / 10 + 'px';
+        document.querySelector('section.account header .second .level').style.transform = 'translateX(100%) scale(' + window.innerHeight * 0.03 / document.querySelector('section.account header .second .level').offsetHeight + ')';
+
+        connection.close();
+    }
+
+}
+
+function account(self, user) {
+    if (!self) {
+        document.querySelector('section.account header .third').classList.add('hide');
+        document.querySelector('section.account header .third').style.visibility = 'hidden';
+        document.querySelector('section.account header .edit').classList.remove('show');
+        setTimeout(function () {
+            document.querySelector('section.account header .edit').style.visibility = 'hidden';
+        }, 300);
+        document.querySelector('section.account .first #avatar').removeEventListener('click', avatar_change);
+        document.querySelector('section.account .first #avatar').style.cursor = 'default';
+        document.querySelector('section.account header .request').style.visibility = 'visible';
+        visit(user);
+    } else {
+        document.querySelector('section.account header .third').style.visibility = 'visible';
+        document.querySelector('section.account header .edit').style.visibility = 'visible';
+        setTimeout(function () {
+            document.querySelector('section.account header .edit').classList.remove('hide');
+        }, 300);
+        document.querySelector('section.account .first #avatar').addEventListener('click', avatar_change);
+        document.querySelector('section.account .first #avatar').style.cursor = 'pointer';
+        document.querySelector('section.account header .request').style.visibility = 'hidden';
+        hosted();
     }
 }

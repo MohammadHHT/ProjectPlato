@@ -162,7 +162,7 @@ public class Player extends User implements Comparable<Player>{
 
     @Override
     public String toString() {
-        return super.toString() + " " + gameLogs.size() + " " + wins;
+        return super.getFirstName() + " " + super.getLastName() + " " + super.getUsername() + " " + super.getEmail() + " " + money + " " + level + " " + super.getDate().getDayOfMonth() + " " + super.getDate().getMonthValue()+ " " + super.getDate().getYear();
     }
 
     @Override
