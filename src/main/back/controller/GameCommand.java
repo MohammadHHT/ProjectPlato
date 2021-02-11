@@ -45,7 +45,7 @@ interface BattleCommand {
         Player player = Player.getPlayers().get(username);
         if (player.getToken().equals(token)) {
             Server.getConns().put(username, conn);
-            return String.valueOf(new SeaBattle(player).getGameID());
+            return "created " + String.valueOf(new SeaBattle(player).getGameID());
         }
         return null;
     }
@@ -56,7 +56,7 @@ interface BattleCommand {
         if (player.getToken().equals(token)) {
             Server.getConns().put(username, conn);
             seaBattle.join(player);
-            return String.valueOf(seaBattle.getGameID());
+            return "joined " + String.valueOf(seaBattle.getGameID());
         }
         return null;
     }
@@ -68,6 +68,19 @@ interface BattleCommand {
         }
     }
 
+    static String shot(String username, String token, long gameID, int cell) {
+        SeaBattle seaBattle = (SeaBattle) SeaBattle.getGames().get(gameID);
+        Player player1 = Player.getPlayers().get(username);
+        Player player2 = (seaBattle.getHost().equals(username) ? seaBattle.getGuest() : seaBattle.getHost());
+        if (player1.getToken().equals(token)) {
+            String ship = seaBattle.getGrids().get(player2).mark(cell);
+            if (ship == null) {
+                Server.getConns().get(player2.getUsername()).send("emptyme " + cell);
+                return "empty " + cell;
+            }
+        }
+        return null;
+    }
 }
 
 interface DotsCommand {

@@ -113,7 +113,7 @@
         </aside>
 
         <main>
-            <section class="register page">
+            <section class="register">
                 <h1>SIGN UP</h1>
                 <form autocomplete="off">
                     <ol>
@@ -400,7 +400,7 @@
                 </div>
             </section>
 
-            <section class="battle">
+            <section class="battle page">
                 <img src="jpg/sea battle wallpaper.jpg" width="110%" height="110%"
                     style="filter: blur(12px); position: absolute; left: calc(-0.035 * 97vh); top: calc(-0.05 * 97vh);">
                 <section>
@@ -415,7 +415,7 @@
                         <img src="avatar/avatar (41).svg">
                     </div>
                 </section>
-                <div class="board arrange">
+                <div class="board me">
                     <div class="cell" num="1"></div>
                     <div class="cell" num="2"></div>
                     <div class="cell" num="3"></div>
@@ -525,27 +525,109 @@
                     <img src="ship/2x1.svg" class="s">
                     <img src="ship/2x1.svg" class="s">
                 </div>
-                <div class="control">
-                    <span id="rearrange">Rearrange</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span>•</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="area">4&nbsp;x&nbsp;2</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="area">3&nbsp;x&nbsp;2</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="area">4&nbsp;x&nbsp;1</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="area">2&nbsp;x&nbsp;1</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="area">2&nbsp;x&nbsp;1</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span>•</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span id="randomarrange">Random</span>
+                <div class="board notme" style="visibility: hidden;">
+                    <div class="cell" num="1" onclick="shot(1)"></div>
+                    <div class="cell" num="2" onclick="shot(2)"></div>
+                    <div class="cell" num="3" onclick="shot(3)"></div>
+                    <div class="cell" num="4" onclick="shot(4)"></div>
+                    <div class="cell" num="5" onclick="shot(5)"></div>
+                    <div class="cell" num="6" onclick="shot(6)"></div>
+                    <div class="cell" num="7" onclick="shot(7)"></div>
+                    <div class="cell" num="8" onclick="shot(8)"></div>
+                    <div class="cell" num="9" onclick="shot(9)"></div>
+                    <div class="cell" num="10" onclick="shot(10)"></div>
+                    <div class="cell" num="11" onclick="shot(11)"></div>
+                    <div class="cell" num="12" onclick="shot(12)"></div>
+                    <div class="cell" num="13" onclick="shot(13)"></div>
+                    <div class="cell" num="14" onclick="shot(14)"></div>
+                    <div class="cell" num="15" onclick="shot(15)"></div>
+                    <div class="cell" num="16" onclick="shot(16)"></div>
+                    <div class="cell" num="17" onclick="shot(17)"></div>
+                    <div class="cell" num="18" onclick="shot(18)"></div>
+                    <div class="cell" num="19" onclick="shot(19)"></div>
+                    <div class="cell" num="20" onclick="shot(20)"></div>
+                    <div class="cell" num="21" onclick="shot(21)"></div>
+                    <div class="cell" num="22" onclick="shot(22)"></div>
+                    <div class="cell" num="23" onclick="shot(23)"></div>
+                    <div class="cell" num="24" onclick="shot(24)"></div>
+                    <div class="cell" num="25" onclick="shot(25)"></div>
+                    <div class="cell" num="26" onclick="shot(26)"></div>
+                    <div class="cell" num="27" onclick="shot(27)"></div>
+                    <div class="cell" num="28" onclick="shot(28)"></div>
+                    <div class="cell" num="29" onclick="shot(29)"></div>
+                    <div class="cell" num="30" onclick="shot(30)"></div>
+                    <div class="cell" num="31" onclick="shot(31)"></div>
+                    <div class="cell" num="32" onclick="shot(32)"></div>
+                    <div class="cell" num="33" onclick="shot(33)"></div>
+                    <div class="cell" num="34" onclick="shot(34)"></div>
+                    <div class="cell" num="35" onclick="shot(35)"></div>
+                    <div class="cell" num="36" onclick="shot(36)"></div>
+                    <div class="cell" num="37" onclick="shot(37)"></div>
+                    <div class="cell" num="38" onclick="shot(38)"></div>
+                    <div class="cell" num="39" onclick="shot(39)"></div>
+                    <div class="cell" num="40" onclick="shot(40)"></div>
+                    <div class="cell" num="41" onclick="shot(41)"></div>
+                    <div class="cell" num="42" onclick="shot(42)"></div>
+                    <div class="cell" num="43" onclick="shot(43)"></div>
+                    <div class="cell" num="44" onclick="shot(44)"></div>
+                    <div class="cell" num="45" onclick="shot(45)"></div>
+                    <div class="cell" num="46" onclick="shot(46)"></div>
+                    <div class="cell" num="47" onclick="shot(47)"></div>
+                    <div class="cell" num="48" onclick="shot(48)"></div>
+                    <div class="cell" num="49" onclick="shot(49)"></div>
+                    <div class="cell" num="50" onclick="shot(50)"></div>
+                    <div class="cell" num="51" onclick="shot(51)"></div>
+                    <div class="cell" num="52" onclick="shot(52)"></div>
+                    <div class="cell" num="53" onclick="shot(53)"></div>
+                    <div class="cell" num="54" onclick="shot(54)"></div>
+                    <div class="cell" num="55" onclick="shot(55)"></div>
+                    <div class="cell" num="56" onclick="shot(56)"></div>
+                    <div class="cell" num="57" onclick="shot(57)"></div>
+                    <div class="cell" num="58" onclick="shot(58)"></div>
+                    <div class="cell" num="59" onclick="shot(59)"></div>
+                    <div class="cell" num="60" onclick="shot(60)"></div>
+                    <div class="cell" num="61" onclick="shot(61)"></div>
+                    <div class="cell" num="62" onclick="shot(62)"></div>
+                    <div class="cell" num="63" onclick="shot(63)"></div>
+                    <div class="cell" num="64" onclick="shot(64)"></div>
+                    <div class="cell" num="65" onclick="shot(65)"></div>
+                    <div class="cell" num="66" onclick="shot(66)"></div>
+                    <div class="cell" num="67" onclick="shot(67)"></div>
+                    <div class="cell" num="68" onclick="shot(68)"></div>
+                    <div class="cell" num="69" onclick="shot(69)"></div>
+                    <div class="cell" num="70" onclick="shot(70)"></div>
+                    <div class="cell" num="71" onclick="shot(71)"></div>
+                    <div class="cell" num="72" onclick="shot(72)"></div>
+                    <div class="cell" num="73" onclick="shot(73)"></div>
+                    <div class="cell" num="74" onclick="shot(74)"></div>
+                    <div class="cell" num="75" onclick="shot(75)"></div>
+                    <div class="cell" num="76" onclick="shot(76)"></div>
+                    <div class="cell" num="77" onclick="shot(77)"></div>
+                    <div class="cell" num="78" onclick="shot(78)"></div>
+                    <div class="cell" num="79" onclick="shot(79)"></div>
+                    <div class="cell" num="80" onclick="shot(80)"></div>
+                    <div class="cell" num="81" onclick="shot(81)"></div>
+                    <div class="cell" num="82" onclick="shot(82)"></div>
+                    <div class="cell" num="83" onclick="shot(83)"></div>
+                    <div class="cell" num="84" onclick="shot(84)"></div>
+                    <div class="cell" num="85" onclick="shot(85)"></div>
+                    <div class="cell" num="86" onclick="shot(86)"></div>
+                    <div class="cell" num="87" onclick="shot(87)"></div>
+                    <div class="cell" num="88" onclick="shot(88)"></div>
+                    <div class="cell" num="89" onclick="shot(89)"></div>
+                    <div class="cell" num="90" onclick="shot(90)"></div>
+                    <div class="cell" num="91" onclick="shot(91)"></div>
+                    <div class="cell" num="92" onclick="shot(92)"></div>
+                    <div class="cell" num="93" onclick="shot(93)"></div>
+                    <div class="cell" num="94" onclick="shot(94)"></div>
+                    <div class="cell" num="95" onclick="shot(95)"></div>
+                    <div class="cell" num="96" onclick="shot(96)"></div>
+                    <div class="cell" num="97" onclick="shot(97)"></div>
+                    <div class="cell" num="98" onclick="shot(98)"></div>
+                    <div class="cell" num="99" onclick="shot(99)"></div>
+                    <div class="cell" num="100" onclick="shot(100)"></div>
                 </div>
             </section>
-
             <section class="dots-and-boxes-page">
                 <div class="players-score">
                     <div class="user1-score" id="usernamePlayer1">
