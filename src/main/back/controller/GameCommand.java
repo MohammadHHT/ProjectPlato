@@ -76,6 +76,18 @@ interface BattleCommand {
             String ship = seaBattle.getGrids().get(player2).mark(cell);
             if (ship == null) {
                 Server.getConns().get(player2.getUsername()).send("emptyme " + cell);
+                Player p = seaBattle.judge();
+                if (p.equals(player1)) {
+                    player1.addWins();
+                    player2.addDefeats();
+                    player1.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.WIN));
+                    player2.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.DEFEAT));
+                } else if (p.equals(player2)) {
+                    player2.addWins();
+                    player1.addDefeats();
+                    player2.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.WIN));
+                    player1.addGameLog(new GameLog("battle", seaBattle.getHost().getUsername(), seaBattle.getGuest().getUsername(), Result.DEFEAT));
+                }
                 return "empty " + cell;
             }
         }
