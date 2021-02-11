@@ -208,6 +208,8 @@ function loadSuggestedGames() {
 
 function loadFriendsRequest() {
     let friendsRequestList = document.querySelector('.section .player-message .request .friend-request-container');
+    friendsRequestList.innerHTML = '';
+
     const connection = new WebSocket('ws://127.0.0.1:4444');
 
     connection.onopen = function () {

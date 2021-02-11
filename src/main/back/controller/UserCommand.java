@@ -287,13 +287,12 @@ public interface UserCommand {
 
     static String allUsers(String username, String token) {
         User user = User.getUsers().get(username);
-        String usersInfo = null;
+        String usersInfo = "";
         if (user.getToken().equals(token)) {
             for (Map.Entry<String, User> entry : User.getUsers().entrySet()) {
                 usersInfo += entry.getValue().toString() + ("/");
             }
             return usersInfo.substring(0, usersInfo.length() - 1);
-//            return "amin lotfi aminlotfi 123456 amin@gmail.com 09304087303/mahdi hadi mahdihadiam 567890 mahdi@gmail.com 09126086363/mehran khaksar mehrankhaksar 654321 mehran@gmail.com 09122243286";
         } else {
             return null;
         }
@@ -362,21 +361,20 @@ public interface UserCommand {
     static String loadFriendsRequest(String username, String token) {
         User user = User.getUsers().get(username);
         Set<String> friendsRequestUsername = Player.getPlayers().get(username).getFriendRequest();
-        String allUsernames = null;
+        String allUsernames = "";
         if (user.getToken().equals(token)) {
             for (String friendUsername : friendsRequestUsername) {
                 allUsernames += (Player.getPlayers().get(friendUsername).getUsername()) + (" ");
             }
-            return allUsernames;
+            return allUsernames.trim();
         } else {
             return null;
         }
     }
 
     static String acceptFriend(String username, String token, String friendUsername) {
-        User user = User.getUsers().get(username);
         Player player = Player.getPlayers().get(username);
-        if (user.getToken().equals(token)) {
+        if (player.getToken().equals(token)) {
             if (player.acceptFriendRequest(friendUsername)) {
                 return "accept successfully";
             } else {
@@ -388,9 +386,8 @@ public interface UserCommand {
     }
 
     static String declineFriend(String username, String token, String friendUsername) {
-        User user = User.getUsers().get(username);
         Player player = Player.getPlayers().get(username);
-        if (user.getToken().equals(token)) {
+        if (player.getToken().equals(token)) {
             if (player.declineFriendRequest(friendUsername)) {
                 return "decline successfully";
             } else {
@@ -404,7 +401,7 @@ public interface UserCommand {
     static String loadChatHistory(String username, String token, String PlayerUsername) {
         User user = User.getUsers().get(username);
         Player player = Player.getPlayers().get(PlayerUsername);
-        String allMessages = null;
+        String allMessages = "";
         if (user.getToken().equals(token)) {
             for (Long messageID : player.getMessages()) {
                 allMessages += Message.getMessages().get(messageID).getMessage() + "/" +
