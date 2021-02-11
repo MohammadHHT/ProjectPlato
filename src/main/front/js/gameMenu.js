@@ -1,11 +1,14 @@
 var audio = document.getElementById('click-button-audio');
+var mainAudio = document.getElementById('back-ground-audio');
 function showBattleSeaGamePage() {
+    mainAudio.play();
     document.getElementById("allGameMenu").style.display = "none";
     document.getElementById("seaBattleGamePage").style.display = "block";
     gameMenuInit('battle');
 }
 
 function showDotsAndBoxesGamePage() {
+    mainAudio.play();
     document.getElementById("allGameMenu").style.display = "none";
     document.getElementById("dotsAndBoxesGamePage").style.display = "block";
     gameMenuInit('dots');
