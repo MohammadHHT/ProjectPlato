@@ -300,7 +300,7 @@ section .DB-game-page .container .progress-striped .progress-bar, section .SB-ga
     width: 15%;
 }
 
-.availableGames .game-icon img, .history .game-icon img, .player-avatar-rank svg {
+.availableGames .game-icon img, .history .game-icon img, .player-avatar-rank img {
     width: 40px;
     height: 40px;
     margin-top: 4px;
